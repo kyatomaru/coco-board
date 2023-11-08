@@ -1,8 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiResponse } from 'next';
 import { db } from '@/app/firebase-admin';
 
 export async function POST(
-    req: NextApiRequest,
+    req: Request,
     res: NextApiResponse
 ) {
     const COLLECTION_NAME = 'game';
