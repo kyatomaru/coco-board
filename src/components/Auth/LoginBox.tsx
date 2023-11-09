@@ -3,15 +3,27 @@
 import * as React from 'react';
 import GoogleSignInButton from './GoogleSignInButton';
 import GoogleSignOutButton from './GoogleSignOutButton';
-import { auth } from "@/app/firebase"
+import { useRouter } from 'next/navigation'
+import { onAuthStateChanged, getAuth } from "firebase/auth"
 
 export default function LoginBox() {
-    const user = auth.currentUser;
-    console.log(user)
+    const router = useRouter()
+
+    const auth = getAuth();
+    const user = auth.currentUser
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            router.push('/notes/2023-06-27')
+        }
+    })
 
     return (
         <div>
-            {user ? (<GoogleSignOutButton />) : (<GoogleSignInButton />)}
+            {user !== null
+                ? (<GoogleSignOutButton />)
+                : (<GoogleSignInButton />)
+            }
         </div>
     );
 }
