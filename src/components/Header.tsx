@@ -11,6 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import LoginBox from './auth/LoginBox';
 
 export default function Hrader() {
     const [auth, setAuth] = React.useState(true);
@@ -35,6 +36,7 @@ export default function Hrader() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Soccer Note
                     </Typography>
+                    <LoginBox />
                     {auth && (
                         <div>
                             <IconButton

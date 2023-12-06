@@ -1,10 +1,9 @@
 "use client"
 
 import * as React from 'react';
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { auth } from '@/app/firebase';
-import type { GameContentsType } from '@/types/GameContents';
-import { GameContentsModel } from '@/types/GameContents';
+import { useGetIdPractice } from '@/hooks/practice/useGetPractice';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import MenuSelectBox from "@/components/createpage/MenuSelectBox"
@@ -16,34 +15,37 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import GameForm from "@/components/createpage/GameForm"
+import PracticeForm from "@/components/createpage/PracticeForm"
 import Button from '@mui/material/Button';
 import Footer from "@/components/Footer";
-import { log } from 'console';
 
 export default function Home() {
   const router = useRouter()
-
+  const params = useParams()
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [dateValue, setDateValue] = React.useState<Date | null>(new Date());
-  const [contents, setContents] = React.useState(new GameContentsModel());
+
+  const gameContents = useGetIdPractice(setIsLoading, setDateValue)
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const data = Object.fromEntries(formData)
+    const updateData = Object.fromEntries(formData)
+
+    const data = { updateData: updateData, contentsId: params.contentsId }
 
     const uid = await auth.currentUser?.uid;
     if (uid) {
-      data.uid = uid;
+      data.updateData.uid = uid;
 
-      if (dateValue) data.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
+      if (dateValue) data.updateData.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
 
       const date = new Date();
-      data.createDate = String(date);
-      data.updateDate = String(date);
+      data.updateData.createDate = String(date);
+      data.updateData.updateDate = String(date);
 
       const response = await fetch('/api/game/', {
-        method: 'POST',
+        method: 'PATCH',
         body: JSON.stringify(data),
         headers: {
           'content-type': 'application/json'
@@ -51,7 +53,7 @@ export default function Home() {
       }).then((res) => {
         if (res.ok) {
           try {
-            router.push('/notes/' + dayjs(String(data.date)).format('YYYY-MM-DD'));
+            router.push('/notes/' + dayjs(String(data.updateData.date)).format('YYYY-MM-DD'));
           } catch (error) {
             console.log(error)
           }
@@ -63,19 +65,23 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Header />
-      <TitleBox title="Create Page" />
-      <MenuSelectBox />
+      <TitleBox title="Edit Page" />
+      {isLoading ?
+        <></>
+        :
+        <>
+          <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
+            <DemoContainer components={['DatePicker']}>
+              <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDateValue(newValue)} />
+            </DemoContainer>
+          </LocalizationProvider>
 
-      <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
-        <DemoContainer components={['DatePicker']}>
-          <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDateValue(newValue)} />
-        </DemoContainer>
-      </LocalizationProvider>
-
-      <form onSubmit={onSubmit} method='POST'>
-        <GameForm contents={contents} />
-        <Button type='submit'>決定</Button>
-      </form>
+          <form onSubmit={onSubmit} method='POST'>
+            <PracticeForm contents={gameContents} />
+            <Button type='submit'>決定</Button>
+          </form>
+        </>
+      }
       <Footer />
     </main >
   )
