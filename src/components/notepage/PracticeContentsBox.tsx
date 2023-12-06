@@ -5,14 +5,14 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import type { GameContentsType } from '@/types/GameContents';
+import type { PracticeContentsType } from '@/types/PracticeContents';
 import PracticeContents from "./PracticeContents"
 
 type PageProps = {
-    contents: Array<GameContentsType | null>
+    contents: Array<PracticeContentsType | null>
 }
 
-export default function GameContentsBox({ contents }: PageProps) {
+export default function PracticeContentsBox({ contents }: PageProps) {
     const [contentsId, setcontentsId] = React.useState(0);
 
     const clickLeftButton = () => {

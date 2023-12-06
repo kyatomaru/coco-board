@@ -9,8 +9,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 export default function MenuSelectBox() {
-    const pathName = usePathname().split('/')
-    const [alignment, setAlignment] = pathName[1] === "game" ? React.useState(0) : React.useState(1)
+    const [alignment, setAlignment] = React.useState(0)
 
     const handleAlignment = (
         event: React.MouseEvent<HTMLElement>,
@@ -19,9 +18,9 @@ export default function MenuSelectBox() {
         if (newAlignment !== null) {
             setAlignment(newAlignment);
             if (newAlignment == 0) {
-                clickGameButton()
+                ClickGameButton()
             } else if (newAlignment == 1) {
-                clickPracticeButton()
+                ClickPracticeButton()
             }
         }
     }
@@ -30,11 +29,21 @@ export default function MenuSelectBox() {
     const auth = getAuth();
     const user = auth.currentUser
 
-    const clickGameButton = () => {
+    const pathName = usePathname().split('/')
+
+    React.useEffect(() => {
+        if (pathName[0] == "game") {
+            setAlignment(0);
+        } else {
+            setAlignment(1);
+        }
+    }, [pathName])
+
+    const ClickGameButton = () => {
         router.push('/game/create')
     }
 
-    const clickPracticeButton = () => {
+    const ClickPracticeButton = () => {
         router.push('/practice/create')
     }
 

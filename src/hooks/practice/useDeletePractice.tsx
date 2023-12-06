@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import type { User } from 'firebase/auth';
 
 export const useDeletePractice = () => {
@@ -8,7 +8,7 @@ export const useDeletePractice = () => {
     const [token, setToken] = React.useState<string | null>(null);
     const [contents, setContents] = React.useState<string | null>(null);
 
-    const deleteContents = async (uid: string | undefined) => {
+    const DeleteContents = async (uid: string | undefined) => {
         const params = useParams()
         const contents_id = String(params.contents_id)
         if (contents_id && uid) {
@@ -33,7 +33,7 @@ export const useDeletePractice = () => {
                 user.getIdToken().then((token) => {
                     setToken(token);
                 });
-                deleteContents(auth.currentUser?.uid)
+                DeleteContents(auth.currentUser?.uid)
             } else {
                 setUser(null);
                 setToken(null);

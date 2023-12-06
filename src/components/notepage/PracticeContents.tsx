@@ -4,13 +4,13 @@ import * as React from 'react';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import type { GameContentsType } from '@/types/GameContents';
+import type { PracticeContentsType } from '@/types/PracticeContents';
 
 type PageProps = {
-    contents: GameContentsType
+    contents: PracticeContentsType
 }
 
-export default function GameContents({ contents }: PageProps) {
+export default function PracticeContents({ contents }: PageProps) {
     const editContents = () => {
 
     }

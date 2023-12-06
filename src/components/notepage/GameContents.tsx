@@ -15,12 +15,12 @@ type PageProps = {
 export default function GameContents({ contents }: PageProps) {
     const router = useRouter()
 
-    const editButtonClick = () => {
+    const EditButtonClick = () => {
         console.log(contents.docId)
         router.replace(`/game/edit/${contents.docId}`)
     }
 
-    const deleteButtonClick = () => {
+    const DeleteButtonClick = () => {
         console.log(contents.docId)
         useDeleteGame(contents.docId)
         router.replace(`/notes/game/2023-12-02`)
@@ -30,8 +30,8 @@ export default function GameContents({ contents }: PageProps) {
             {contents
                 ?
                 <Box sx={{ bgcolor: '#eee', height: '70vh' }} >
-                    <Button onClick={editButtonClick}>編集</Button>
-                    <Button onClick={deleteButtonClick}>削除</Button>
+                    <Button onClick={EditButtonClick}>編集</Button>
+                    <Button onClick={DeleteButtonClick}>削除</Button>
                     <div>{String(contents.title)}</div>
                 </Box>
                 :

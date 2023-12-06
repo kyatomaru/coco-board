@@ -11,24 +11,24 @@ export const useGetIdGame = (setIsLoading, setDateValue) => {
 
     const params = useParams()
 
-    const getContents = async (uid: string | undefined) => {
-        console.log(params.docId)
-        if (uid && params.docId) {
-            const getParams = { uid: uid, docId: String(params.docId) };
-            const query = new URLSearchParams(getParams);
-
-            fetch(`/api/game/?${query}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data)
-                    setContents(data)
-                    setDateValue(new Date(data.date))
-                    setIsLoading(false)
-                })
-        }
-    }
-
     React.useEffect(() => {
+        const GetContents = async (uid: string | undefined) => {
+            console.log(params.docId)
+            if (uid && params.docId) {
+                const getParams = { uid: uid, docId: String(params.docId) };
+                const query = new URLSearchParams(getParams);
+
+                fetch(`/api/game/?${query}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data)
+                        setContents(data)
+                        setDateValue(new Date(data.date))
+                        setIsLoading(false)
+                    })
+            }
+        }
+
         setIsLoading(true)
         const auth = getAuth();
         return onAuthStateChanged(auth, (user) => {
@@ -37,13 +37,13 @@ export const useGetIdGame = (setIsLoading, setDateValue) => {
                 user.getIdToken().then((token) => {
                     setToken(token);
                 });
-                getContents(auth.currentUser?.uid)
+                GetContents(auth.currentUser?.uid)
             } else {
                 setUser(null);
                 setToken(null);
             }
         });
-    }, [])
+    }, [params.docId, setDateValue, setIsLoading])
 
     return contents
 }
@@ -55,21 +55,22 @@ export const useGetDateGame = () => {
 
     const params = useParams()
 
-    const getContents = async (uid: string | undefined) => {
-        console.log(uid)
-        if (uid) {
-            const getParams = { uid: uid, date: String(params.date) };
-            const query = new URLSearchParams(getParams);
-
-            fetch(`/api/game/?${query}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    setContents(data)
-                })
-        }
-    }
 
     React.useEffect(() => {
+        const GetContents = async (uid: string | undefined) => {
+            console.log(uid)
+            if (uid) {
+                const getParams = { uid: uid, date: String(params.date) };
+                const query = new URLSearchParams(getParams);
+
+                fetch(`/api/game/?${query}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setContents(data)
+                    })
+            }
+        }
+
         const auth = getAuth();
         return onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -77,13 +78,13 @@ export const useGetDateGame = () => {
                 user.getIdToken().then((token) => {
                     setToken(token);
                 });
-                getContents(auth.currentUser?.uid)
+                GetContents(auth.currentUser?.uid)
             } else {
                 setUser(null);
                 setToken(null);
             }
         });
-    }, [])
+    }, [params.date])
 
     return contents
 }
