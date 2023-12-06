@@ -15,7 +15,6 @@ export default function LoginBox() {
 
     React.useEffect(() => {
         const auth = getAuth();
-        // const user = auth.currentUser
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
