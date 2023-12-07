@@ -1,7 +1,7 @@
 "use client"
 
 import TitleBox from "@/components/TitleBox";
-import LoginBox from "@/components/auth/LoginBox";
+import LoginBox from "@/components/auths/LoginBox";
 
 
 export default function Home() {
