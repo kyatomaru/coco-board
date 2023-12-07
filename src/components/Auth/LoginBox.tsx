@@ -24,7 +24,6 @@ export default function LoginBox() {
         })
     });
 
-
     return (
         <div>
             {user !== null

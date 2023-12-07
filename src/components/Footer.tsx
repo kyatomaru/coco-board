@@ -12,14 +12,18 @@ export default function Footer() {
     const pathName = usePathname().split('/')
 
     const setLabel = () => {
-        if (pathName[2] === "create") {
+        if (pathName[1] === "target") {
             return 0
         }
         else if (pathName[1] === "notes") {
             return 1
         }
-        else if (pathName[1] === "calendar") {
+        else if (pathName[2] === "create") {
             return 2
+        }
+
+        else if (pathName[1] === "calendar") {
+            return 3
         }
     }
 
@@ -27,12 +31,20 @@ export default function Footer() {
 
     const router = useRouter()
 
-    const clickMakeButton = () => {
+    const ClickTargetButton = () => {
+        router.push("/target")
+    };
+
+    const ClickMakeButton = () => {
         router.push("/game/create")
     };
 
-    const clickViewButton = () => {
+    const ClickViewButton = () => {
         router.push('/notes/' + dayjs().format('YYYY-MM-DD'))
+    };
+
+    const ClickCalendarButton = () => {
+        router.push('/calendar/' + dayjs().format('YYYY-MM-DD'))
     };
 
     return (
@@ -43,9 +55,10 @@ export default function Footer() {
                 onChange={(event, newValue) => {
                     setValue(newValue);
                 }}>
-                <BottomNavigationAction label="Make" onClick={clickMakeButton} />
-                <BottomNavigationAction label="View" onClick={clickViewButton} />
-                <BottomNavigationAction label="Calendar" onClick={clickViewButton} />
+                <BottomNavigationAction label="Target" onClick={ClickTargetButton} />
+                <BottomNavigationAction label="Note" onClick={ClickViewButton} />
+                <BottomNavigationAction label="Make" onClick={ClickMakeButton} />
+                {/* <BottomNavigationAction label="Calendar" onClick={ClickCalendarButton} /> */}
             </BottomNavigation >
         </Box>
     );

@@ -32,12 +32,16 @@ export default function MenuSelectBox() {
     const pathName = usePathname().split('/')
 
     React.useEffect(() => {
-        if (pathName[0] == "game") {
+        console.log(pathName[1]);
+
+        if (pathName[1] == "game") {
             setAlignment(0);
-        } else {
+            ClickGameButton()
+        } else if (pathName[1] == "practice") {
             setAlignment(1);
+            ClickPracticeButton()
         }
-    }, [pathName])
+    }, [])
 
     const ClickGameButton = () => {
         router.push('/game/create')
