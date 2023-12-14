@@ -30,18 +30,20 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Header />
-      <DateBox date={String(params.date)} />
-      <MenuSelectBox menu={menu} handleMenuChange={handleMenuChange} />
-      <Container fixed maxWidth="sm" sx={{ mb: "80px" }}>
-        {menu == 0 &&
-          <GameContentsBox contents={gameContents} />
-        }
-        {menu == 1 &&
-          <GameContentsBox contents={gameContents} />
-        }
-        {menu == 2 &&
-          <PracticeContentsBox contents={practiceContents} />
-        }
+      <Container fixed sx={{ mt: "80px", mb: "80px" }}>
+        <DateBox date={String(params.date)} />
+        <MenuSelectBox menu={menu} handleMenuChange={handleMenuChange} />
+        <Container maxWidth="sm" sx={{ mb: "80px" }}>
+          {menu == 0 &&
+            <GameContentsBox contents={gameContents} />
+          }
+          {menu == 1 &&
+            <GameContentsBox contents={gameContents} />
+          }
+          {menu == 2 &&
+            <PracticeContentsBox contents={practiceContents} />
+          }
+        </Container>
       </Container>
       <Footer />
     </main>
