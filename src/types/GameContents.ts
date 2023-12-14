@@ -1,12 +1,14 @@
+import type { SolutionType } from "./Problem"
+
 export interface GameContentsType {
     date: Date,
     updateDate: Date,
     score2: Number,
-    badPoint: String,
+    badPoints: Array<String>,
     title: String,
-    goodPoint: String,
+    goodPoints: Array<String>,
     uid: string,
-    problem: String,
+    problems: Array<SolutionType>,
     weather: String,
     place: String,
     score1: Number,
@@ -17,15 +19,16 @@ export interface GameContentsType {
     docId: String
 }
 
+
 export class GameContentsModel implements GameContentsType {
     date: Date
     updateDate: Date
     score2: Number
-    badPoint: String
+    badPoints: Array<String>
     title: String
-    goodPoint: String
+    goodPoints: Array<String>
     uid: string
-    problem: String
+    problems: Array<SolutionType>
     weather: String
     place: String
     score1: Number
@@ -40,12 +43,12 @@ export class GameContentsModel implements GameContentsType {
             date: new Date(),
             updateDate: new Date(),
             score2: 0,
-            badPoint: undefined,
+            badPoints: [undefined],
             title: undefined,
-            goodPoint: undefined,
+            goodPoints: [undefined],
             uid: undefined,
-            problem: undefined,
-            weather: undefined,
+            problems: [{ problem: undefined, solution: [undefined] }],
+            weather: "",
             place: undefined,
             score1: 0,
             position: undefined,

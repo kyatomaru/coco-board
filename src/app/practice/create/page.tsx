@@ -18,7 +18,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import PracticeForm from "@/components/createpage/PracticeForm"
 import Button from '@mui/material/Button';
-import { format } from 'date-fns'
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 export default function Home() {
   const router = useRouter()
@@ -70,19 +71,30 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Header />
-      <TitleBox title="Create Page" />
-      <MenuSelectBox />
+      <Container sx={{ mt: 10, mb: 10 }}>
+        <MenuSelectBox />
 
-      <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
-        <DemoContainer components={['DatePicker']}>
-          <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDateValue(newValue)} />
-        </DemoContainer>
-      </LocalizationProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
+          <DemoContainer components={['DatePicker']}>
+            <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDateValue(newValue)} />
+          </DemoContainer>
+        </LocalizationProvider>
 
-      <form onSubmit={onSubmit} method='POST'>
-        <PracticeForm contents={contents} />
-        <Button type='submit'>決定</Button>
-      </form>
+        <Box
+          component="form"
+          onSubmit={onSubmit}
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+          method='POST'
+
+        >
+          <PracticeForm contents={contents} />
+          <Button type='submit'>決定</Button>
+        </Box>
+      </Container>
       <Footer />
     </main >
   )

@@ -26,19 +26,19 @@ export default function GameContents({ contents }: PageProps) {
         router.replace(`/notes/game/2023-12-02`)
     }
     return (
-        <Container maxWidth="sm" sx={{ marginTop: "15px" }}>
+        <Box sx={{ width: '100%', m: "10px", bgcolor: 'background.paper' }}>
             {contents
                 ?
-                <Box sx={{ bgcolor: '#eee', height: '70vh' }} >
+                <Box sx={{ height: '70vh' }} >
                     <Button onClick={EditButtonClick}>編集</Button>
                     <Button onClick={DeleteButtonClick}>削除</Button>
                     <div>{String(contents.title)}</div>
                 </Box>
                 :
-                <Box sx={{ bgcolor: '#eee', height: '70vh' }} >
+                <Box sx={{ height: '70vh' }} >
                     <div>データがありません</div>
                 </Box>
             }
-        </Container>
+        </Box>
     )
 }

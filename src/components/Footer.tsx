@@ -4,6 +4,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import AppBar from '@mui/material/AppBar';
 import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
@@ -48,18 +49,20 @@ export default function Footer() {
     };
 
     return (
-        <Box sx={{ width: "100%", backgroundColor: "#FFFFFF" }}>
-            <BottomNavigation
-                showLabels
-                value={value}
-                onChange={(event, newValue) => {
-                    setValue(newValue);
-                }}>
-                <BottomNavigationAction label="Target" onClick={ClickTargetButton} />
-                <BottomNavigationAction label="Note" onClick={ClickViewButton} />
-                <BottomNavigationAction label="Make" onClick={ClickMakeButton} />
-                {/* <BottomNavigationAction label="Calendar" onClick={ClickCalendarButton} /> */}
-            </BottomNavigation >
+        <Box  >
+            <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }}>
+                <BottomNavigation
+                    showLabels
+                    value={value}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                    }}>
+                    <BottomNavigationAction label="Target" onClick={ClickTargetButton} />
+                    <BottomNavigationAction label="Note" onClick={ClickViewButton} />
+                    <BottomNavigationAction label="Make" onClick={ClickMakeButton} />
+                    {/* <BottomNavigationAction label="Calendar" onClick={ClickCalendarButton} /> */}
+                </BottomNavigation >
+            </AppBar>
         </Box>
     );
 }

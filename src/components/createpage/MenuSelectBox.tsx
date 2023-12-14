@@ -59,10 +59,10 @@ export default function MenuSelectBox() {
             aria-label="text alignment"
         >
             <ToggleButton value={0} >
-                Game
+                試合
             </ToggleButton>
             <ToggleButton value={1} >
-                Practice
+                練習
             </ToggleButton>
         </ToggleButtonGroup>
     );

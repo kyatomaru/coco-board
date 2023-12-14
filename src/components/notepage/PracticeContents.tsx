@@ -20,19 +20,19 @@ export default function PracticeContents({ contents }: PageProps) {
     }
 
     return (
-        <Container maxWidth="sm" sx={{ marginTop: "15px" }}>
+        <Box sx={{ width: '100%', m: "10px", bgcolor: 'background.paper' }}>
             {contents
                 ?
-                <Box sx={{ bgcolor: '#eee', height: '70vh' }} >
-                    <Button onClick={editContents}>編集</Button>
-                    <Button onClick={deleteContents}>削除</Button>
+                <Box sx={{ height: '70vh' }} >
+                    <Button onClick={EditButtonClick}>編集</Button>
+                    <Button onClick={DeleteButtonClick}>削除</Button>
                     <div>{String(contents.title)}</div>
                 </Box>
                 :
-                <Box sx={{ bgcolor: '#eee', height: '70vh' }} >
+                <Box sx={{ height: '70vh' }} >
                     <div>データがありません</div>
                 </Box>
             }
-        </Container>
+        </Box>
     )
 }

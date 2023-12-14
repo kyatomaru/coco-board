@@ -11,6 +11,7 @@ import DateBox from "@/components/notepage/DateBox"
 import MenuSelectBox from "@/components/notepage/MenuSelectBox"
 import GameContentsBox from '@/components/notepage/GameContentsBox';
 import PracticeContentsBox from '@/components/notepage/PracticeContentsBox';
+import Container from '@mui/material/Container';
 
 
 
@@ -29,13 +30,19 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Header />
-      <TitleBox title="View Page" />
       <DateBox date={String(params.date)} />
       <MenuSelectBox menu={menu} handleMenuChange={handleMenuChange} />
-      {menu == 0
-        ? <GameContentsBox contents={gameContents} />
-        : <PracticeContentsBox contents={practiceContents} />
-      }
+      <Container maxWidth="sm" sx={{ mb: "80px" }}>
+        {menu == 0 &&
+          <GameContentsBox contents={gameContents} />
+        }
+        {menu == 1 &&
+          <GameContentsBox contents={gameContents} />
+        }
+        {menu == 2 &&
+          <PracticeContentsBox contents={practiceContents} />
+        }
+      </Container>
       <Footer />
     </main>
   )

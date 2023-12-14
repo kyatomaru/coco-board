@@ -22,15 +22,18 @@ export default function PracticeContentsBox({ contents }: PageProps) {
     const clickRightButton = () => {
         setcontentsId(contentsId + 1)
     }
+
     return (
-        <Container maxWidth="sm" sx={{ marginTop: "15px" }}>
-            <Box  >
-                <Stack spacing={2} direction="row">
-                    <Button onClick={clickLeftButton} disabled={contentsId == 0}>《</Button>
-                    <PracticeContents contents={contents[contentsId]} />
-                    <Button onClick={clickRightButton} disabled={contentsId == contents.length - 1 || contents.length == 0}>》</Button>
-                </Stack >
-            </Box>
-        </Container>
+        <Box>
+            <Stack sx={{ width: "100%" }} justifyContent="center" alignItems="center" direction="row">
+                <Button sx={{ width: "100%" }} onClick={clickLeftButton} disabled={contentsId == 0}>《</Button>
+                <Button sx={{ width: "100%" }} onClick={clickRightButton} disabled={contentsId == contents.length - 1 || contents.length == 0}>》</Button>
+            </Stack >
+            <PracticeContents contents={contents[contentsId]} />
+            <Stack sx={{ width: "100%" }} justifyContent="center" alignItems="center" direction="row">
+                <Button sx={{ width: "100%" }} onClick={clickLeftButton} disabled={contentsId == 0}>《</Button>
+                <Button sx={{ width: "100%" }} onClick={clickRightButton} disabled={contentsId == contents.length - 1 || contents.length == 0}>》</Button>
+            </Stack >
+        </Box>
     )
 }

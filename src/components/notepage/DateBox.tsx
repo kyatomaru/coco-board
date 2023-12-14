@@ -48,14 +48,14 @@ export default function DateBox({ date }: PageProps) {
     }
 
     return (
-        <Box>
-            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
+        <Box sx={{ mt: "75px", mb: "20px", textAlign: "center" }}>
+            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja} >
                 <DemoContainer components={['DatePicker']}>
                     <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDate(newValue)} />
                 </DemoContainer>
             </LocalizationProvider>
 
-            <Stack spacing={2} direction="row">
+            <Stack spacing={2} direction="row" sx={{ justifyContent: "center" }}>
                 <Button onClick={clickLeftButton}>《</Button>
                 <h2>{date}</h2>
                 <Button onClick={clickRightButton} disabled={disableFuture()}>》</Button>

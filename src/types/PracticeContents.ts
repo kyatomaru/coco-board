@@ -1,10 +1,12 @@
+import type { SolutionType } from "./Problem"
+
 export interface PracticeContentsType {
     date: Date,
     updateDate: Date,
     title: String,
-    detail: Text,
+    details: Array<String>,
     uid: string,
-    problem: Text,
+    problems: Array<SolutionType>,
     weather: String,
     place: String,
     createDate: Date
@@ -14,9 +16,9 @@ export class PracticeContentsModel implements PracticeContentsType {
     date: Date
     updateDate: Date
     title: String
-    detail: Text
+    details: Array<String>
     uid: string
-    problem: Text
+    problems: Array<SolutionType>
     weather: String
     place: String
     createDate: Date
@@ -25,11 +27,11 @@ export class PracticeContentsModel implements PracticeContentsType {
         return {
             date: new Date(),
             updateDate: new Date(),
-            detail: undefined,
-            title: "undefined",
+            details: [undefined],
+            title: undefined,
             uid: undefined,
             weather: undefined,
-            problem: undefined,
+            problems: [{ problem: undefined, solution: [undefined] }],
             place: undefined,
             createDate: new Date()
         }

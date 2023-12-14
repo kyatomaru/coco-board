@@ -34,10 +34,13 @@ export default function MenuSelectBox({ menu, handleMenuChange }: PageProps) {
             aria-label="text alignment"
         >
             <ToggleButton value={0} >
-                Game
+                課題
             </ToggleButton>
             <ToggleButton value={1} >
-                Practice
+                試合
+            </ToggleButton>
+            <ToggleButton value={2} >
+                練習
             </ToggleButton>
         </ToggleButtonGroup>
     );
