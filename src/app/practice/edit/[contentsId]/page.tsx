@@ -15,7 +15,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import PracticeForm from "@/components/practice/PracticeForm"
+import PracticeForm from "@/components/createpage/PracticeForm"
 import Button from '@mui/material/Button';
 import Footer from "@/components/Footer";
 
