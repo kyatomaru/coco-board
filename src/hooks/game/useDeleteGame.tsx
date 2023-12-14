@@ -1,6 +1,6 @@
-export const useDeleteGame = (docId) => {
-    if (docId) {
-        const getParams = { docId: docId };
+export const useDeleteGame = (contentsId) => {
+    if (contentsId) {
+        const getParams = { contentsId: contentsId };
         const query = new URLSearchParams(getParams);
 
         fetch(`/api/game/?${query}`, {

@@ -16,7 +16,7 @@ export interface GameContentsType {
     name2: String,
     name1: String,
     createDate: Date
-    docId: String
+    contentsId: String
 }
 
 
@@ -36,7 +36,7 @@ export class GameContentsModel implements GameContentsType {
     name2: String
     name1: String
     createDate: Date
-    docId: String
+    contentsId: String
 
     constructor() {
         return {
@@ -55,7 +55,7 @@ export class GameContentsModel implements GameContentsType {
             name2: undefined,
             name1: undefined,
             createDate: new Date(),
-            docId: undefined
+            contentsId: undefined
         }
     }
 }

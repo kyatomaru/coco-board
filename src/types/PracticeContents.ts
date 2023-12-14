@@ -9,7 +9,8 @@ export interface PracticeContentsType {
     problems: Array<SolutionType>,
     weather: String,
     place: String,
-    createDate: Date
+    createDate: Date,
+    contentsId: String
 }
 
 export class PracticeContentsModel implements PracticeContentsType {
@@ -22,6 +23,7 @@ export class PracticeContentsModel implements PracticeContentsType {
     weather: String
     place: String
     createDate: Date
+    contentsId: String
 
     constructor() {
         return {
@@ -33,7 +35,8 @@ export class PracticeContentsModel implements PracticeContentsType {
             weather: undefined,
             problems: [{ problem: undefined, solution: [undefined] }],
             place: undefined,
-            createDate: new Date()
+            createDate: new Date(),
+            contentsId: undefined
         }
     }
 }

@@ -16,15 +16,16 @@ export default function GameContents({ contents }: PageProps) {
     const router = useRouter()
 
     const EditButtonClick = () => {
-        console.log(contents.docId)
-        router.replace(`/game/edit/${contents.docId}`)
+        console.log(contents.contentsId)
+        router.replace(`/game/edit/${contents.contentsId}`)
     }
 
     const DeleteButtonClick = () => {
-        console.log(contents.docId)
-        useDeleteGame(contents.docId)
+        console.log(contents.contentsId)
+        useDeleteGame(contents.contentsId)
         router.replace(`/notes/game/2023-12-02`)
     }
+
     return (
         <Box sx={{ width: '100%', m: "10px", bgcolor: 'background.paper' }}>
             {contents
