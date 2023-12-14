@@ -32,7 +32,7 @@ export default function Home() {
       <Header />
       <DateBox date={String(params.date)} />
       <MenuSelectBox menu={menu} handleMenuChange={handleMenuChange} />
-      <Container maxWidth="sm" sx={{ mb: "80px" }}>
+      <Container fixed maxWidth="sm" sx={{ mb: "80px" }}>
         {menu == 0 &&
           <GameContentsBox contents={gameContents} />
         }

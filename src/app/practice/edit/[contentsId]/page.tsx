@@ -23,6 +23,7 @@ export default function Home() {
   const router = useRouter()
   const params = useParams()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [titleError, setTitleError] = React.useState(false);
   const [dateValue, setDateValue] = React.useState<Date | null>(new Date());
 
   const gameContents = useGetIdPractice(setIsLoading, setDateValue)
@@ -77,7 +78,7 @@ export default function Home() {
           </LocalizationProvider>
 
           <form onSubmit={onSubmit} method='POST'>
-            <PracticeForm contents={gameContents} />
+            <PracticeForm contents={gameContents} titleError={titleError} />
             <Button type='submit'>決定</Button>
           </form>
         </>

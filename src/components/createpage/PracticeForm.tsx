@@ -14,9 +14,10 @@ import type { PracticeContentsType } from '@/types/PracticeContents';
 
 type PageProps = {
     contents: PracticeContentsType,
+    titleError: boolean,
 }
 
-export default function PracticeForm({ contents }: PageProps) {
+export default function PracticeForm({ contents, titleError }: PageProps) {
     const [title, setTitle] = React.useState(contents.title);
     const [place, setPlace] = React.useState(contents.place);
     const [weather, setWeather] = React.useState(contents.weather);
