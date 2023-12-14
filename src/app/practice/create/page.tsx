@@ -25,6 +25,7 @@ export default function Home() {
   const router = useRouter()
 
   const [dateValue, setDateValue] = React.useState<Date | null>(new Date());
+  const [titleError, setTitleError] = React.useState(false);
   const [contents, setContents] = React.useState(new PracticeContentsModel());
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -91,7 +92,7 @@ export default function Home() {
           method='POST'
 
         >
-          <PracticeForm contents={contents} />
+          <PracticeForm contents={contents} titleError={titleError} />
           <Button type='submit'>決定</Button>
         </Box>
       </Container>
