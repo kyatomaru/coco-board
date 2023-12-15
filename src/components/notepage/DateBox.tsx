@@ -48,9 +48,9 @@ export default function DateBox({ date }: PageProps) {
     }
 
     return (
-        <Box sx={{ mt: "75px", mb: "20px", textAlign: "center" }}>
-            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja} >
-                <DemoContainer components={['DatePicker']}>
+        <Box sx={{ mt: "75px", mb: "20px", justifyContent: "center" }}>
+            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}  >
+                <DemoContainer components={['DatePicker']} sx={{ justifyContent: "center" }}>
                     <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDate(newValue)} />
                 </DemoContainer>
             </LocalizationProvider>
@@ -60,6 +60,6 @@ export default function DateBox({ date }: PageProps) {
                 <h2>{date}</h2>
                 <Button onClick={clickRightButton} disabled={disableFuture()}>》</Button>
             </Stack >
-        </Box>
+        </Box >
     );
 }

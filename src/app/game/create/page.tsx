@@ -32,7 +32,8 @@ export default function Home() {
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const data = Object.fromEntries(formData)
+    // const data = Object.fromEntries(formData)
+    const data = contents
 
     if (!data.title) {
       setTitleError(true)
@@ -45,8 +46,8 @@ export default function Home() {
         if (dateValue) data.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
 
         const date = new Date();
-        data.createDate = String(date);
-        data.updateDate = String(date);
+        data.createDate = date;
+        data.updateDate = date;
 
         const response = await fetch('/api/game/', {
           method: 'POST',
@@ -70,7 +71,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Header />
-      <Container fixed sx={{ mt: "80px", mb: "80px" }}>
+      <Container fixed sx={{ mt: "80px", mb: "80px", p: 10 }}>
         <MenuSelectBox />
 
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>

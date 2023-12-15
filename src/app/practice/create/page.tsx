@@ -31,33 +31,39 @@ export default function Home() {
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const data = Object.fromEntries(formData)
+    const data = contents
+    // const data = Object.fromEntries(formData)
 
-    if (dateValue) data.date = String(dateValue);
+    if (!data.title) {
+      setTitleError(true)
+    }
+    else {
+      const uid = await auth.currentUser?.uid;
+      if (uid) {
+        data.uid = uid;
 
-    const uid = await auth.currentUser?.uid;
-    if (uid) {
-      data.uid = uid;
+        if (dateValue) data.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
 
-      const date = new Date();
-      data.createDate = String(date);
-      data.updateDate = String(date);
+        const date = new Date();
+        data.createDate = date;
+        data.updateDate = date;
 
-      const response = await fetch('/api/practice/create', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'content-type': 'application/json'
-        }
-      }).then((res) => {
-        if (res.ok) {
-          try {
-            router.push('/notes/' + dayjs(String(data.date)).format('YYYY-MM-DD'));
-          } catch (error) {
-            console.log(error)
+        const response = await fetch('/api/practice/', {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'content-type': 'application/json'
           }
-        }
-      })
+        }).then((res) => {
+          if (res.ok) {
+            try {
+              router.push('/notes/' + dayjs(String(data.date)).format('YYYY-MM-DD'));
+            } catch (error) {
+              console.log(error)
+            }
+          }
+        })
+      }
     }
   }
 
@@ -72,7 +78,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Header />
-      <Container sx={{ mt: 10, mb: 10 }}>
+      <Container sx={{ mt: "80px", mb: "80px", p: 10 }}>
         <MenuSelectBox />
 
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>

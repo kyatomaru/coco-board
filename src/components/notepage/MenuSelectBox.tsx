@@ -27,21 +27,23 @@ export default function MenuSelectBox({ menu, handleMenuChange }: PageProps) {
     }
 
     return (
-        <ToggleButtonGroup
-            value={alignment}
-            exclusive
-            onChange={handleAlignment}
-            aria-label="text alignment"
-        >
-            <ToggleButton value={0} >
-                課題
-            </ToggleButton>
-            <ToggleButton value={1} >
-                試合
-            </ToggleButton>
-            <ToggleButton value={2} >
-                練習
-            </ToggleButton>
-        </ToggleButtonGroup>
+        <Box sx={{ textAlign: "center" }}>
+            <ToggleButtonGroup
+                value={alignment}
+                exclusive
+                onChange={handleAlignment}
+                aria-label="text alignment"
+            >
+                <ToggleButton value={0} >
+                    課題
+                </ToggleButton>
+                <ToggleButton value={1} >
+                    試合
+                </ToggleButton>
+                <ToggleButton value={2} >
+                    練習
+                </ToggleButton>
+            </ToggleButtonGroup>
+        </Box>
     );
 }

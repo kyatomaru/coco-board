@@ -33,7 +33,7 @@ export default function Home() {
     const formData = new FormData(event.currentTarget)
     const updateData = Object.fromEntries(formData)
 
-    const data = { updateData: updateData, docId: params.docId }
+    const data = { updateData: updateData, contentsId: params.contentsId }
 
     const uid = await auth.currentUser?.uid;
     if (uid) {

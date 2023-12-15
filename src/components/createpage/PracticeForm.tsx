@@ -25,12 +25,13 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
     const [problems, setProblems] = React.useState(contents.problems);
 
     const ChangeDetails = (newValue, index) => {
-        const goodPoint = []
+        const detail = []
         details.forEach((item) => {
-            goodPoint.push(item)
+            detail.push(item)
         })
-        goodPoint[index] = newValue
-        setDetails(goodPoint)
+        detail[index] = newValue
+        setDetails(detail)
+        contents.details = detail
     }
 
     const AddDetail = () => {
@@ -40,6 +41,7 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
         })
         detail.push([undefined])
         setDetails(detail)
+        contents.details = details
     }
 
     const ChangeProblem = (newValue, index) => {
@@ -47,8 +49,9 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
         problems.forEach((item) => {
             problem.push(item)
         })
-        problem[index] = newValue
+        problem[index].problem = newValue
         setProblems(problem)
+        contents.problems = problem
     }
 
     const AddProblem = () => {
@@ -58,6 +61,7 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
         })
         problem.push({ problem: undefined, solution: [undefined] })
         setProblems(problem)
+        contents.problems = problem
     }
 
     const ChangeSolution = (newValue, index, index2) => {
@@ -67,6 +71,7 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
         })
         problem[index].solution[index2] = newValue
         setProblems(problem)
+        contents.problems = problem
     }
 
     const AddSolution = (index) => {
@@ -76,11 +81,12 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
         })
         problem[index].solution.push(undefined)
         setProblems(problem)
+        contents.problems = problem
     }
 
     return (
         <Box>
-            <div>
+            <Box sx={{ mt: 3, mb: 3 }}>
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-title">タイトル</InputLabel>
                     {/* <OutlinedInput
@@ -96,7 +102,10 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                         id="outlined-adornment-title"
                         value={title}
                         label="タイトル"
-                        onChange={newValue => setTitle(newValue.target.value)}
+                        onChange={newValue => {
+                            setTitle(newValue.target.value)
+                            contents.title = newValue.target.value
+                        }}
                     >
                         <MenuItem value="自主練習">自主練習</MenuItem>
                         <MenuItem value="チーム練習">チーム練習</MenuItem>
@@ -111,7 +120,10 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                         aria-describedby="outlined-place-helper-text"
                         label="場所"
                         value={place}
-                        onChange={newValue => setPlace(newValue.target.value)}
+                        onChange={newValue => {
+                            setPlace(newValue.target.value)
+                            contents.place = newValue.target.value
+                        }}
                     />
                 </FormControl>
 
@@ -123,7 +135,10 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                         id="outlined-adornment-weather"
                         value={weather}
                         label="天気"
-                        onChange={newValue => setWeather(newValue.target.value)}
+                        onChange={newValue => {
+                            setWeather(newValue.target.value)
+                            contents.weather = newValue.target.value
+                        }}
                     >
                         <MenuItem value="晴れ">晴れ</MenuItem>
                         <MenuItem value="曇り">曇り</MenuItem>
@@ -131,10 +146,10 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                         <MenuItem value="雪">雪</MenuItem>
                     </Select>
                 </FormControl>
-            </div>
+            </Box>
 
-            <Box>
-                <div>
+            <Box sx={{ mt: 3, mb: 3 }}>
+                <Box>
                     <Stack spacing={2} direction="row">
                         <InputLabel>練習メニュー</InputLabel>
                         <Button onClick={AddDetail}>追加</Button>
@@ -151,16 +166,16 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                             />
                         </FormControl>
                     ))}
-                </div>
+                </Box>
             </Box>
 
-            <Box>
+            <Box sx={{ mt: 3, mb: 3 }}>
                 <Stack spacing={2} direction="row">
                     <InputLabel >課題と解決策</InputLabel>
                     <Button onClick={AddProblem}>追加</Button>
                 </Stack>
                 {problems.map((item, index1) => (
-                    <Box key={index1}>
+                    <Box sx={{ mt: 2, mb: 2 }} key={index1}>
                         <InputLabel >課題{index1 + 1}</InputLabel>
                         <FormControl fullWidth sx={{ m: 1 }}>
                             <OutlinedInput
@@ -191,8 +206,6 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                                 </Box>
                             ))}
                         </Box>
-                        {/* {SolutionInput(index)} */}
-
                     </Box>
                 ))}
             </Box>

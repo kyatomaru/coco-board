@@ -24,14 +24,14 @@ export async function GET(
 ) {
     const uid = req.nextUrl.searchParams.get("uid")
     const date = req.nextUrl.searchParams.get("date")
-    const docId = req.nextUrl.searchParams.get("docId")
+    const contentsId = req.nextUrl.searchParams.get("contentsId")
     if (uid && date) {
         const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).get()
             .then(snapshot => {
                 const data = Array()
                 snapshot.forEach((doc) => {
                     const ob = doc.data()
-                    ob.docId = doc.id
+                    ob.contentsId = doc.id
                     data.push(ob)
                 })
                 return data
@@ -42,11 +42,11 @@ export async function GET(
         console.log(docRef)
         return NextResponse.json(docRef, { status: 200 })
     }
-    if (docId) {
-        const docRef = await db.collection(COLLECTION_NAME).doc(docId).get()
+    if (contentsId) {
+        const docRef = await db.collection(COLLECTION_NAME).doc(contentsId).get()
             .then(snapshot => {
                 const data = snapshot.data()
-                data.docId = docId
+                data.contentsId = contentsId
 
                 return data
             })
@@ -66,12 +66,12 @@ export async function PATCH(
     const reqData = await req.json();
 
     const updateData = reqData.updateData
-    const docId = reqData.docId
+    const contentsId = reqData.contentsId
 
     console.log(updateData)
 
-    if (updateData && docId) {
-        const docRef = db.collection(COLLECTION_NAME).doc(docId).update(updateData)
+    if (updateData && contentsId) {
+        const docRef = db.collection(COLLECTION_NAME).doc(contentsId).update(updateData)
             .then(() => {
                 console.log("Document successfully updated!");
             })
@@ -106,9 +106,9 @@ export async function DELETE(
     req: NextRequest,
     res: NextResponse
 ) {
-    const docId = req.nextUrl.searchParams.get("docId")
-    if (docId) {
-        await db.collection(COLLECTION_NAME).doc(docId).delete();
+    const contentsId = req.nextUrl.searchParams.get("contentsId")
+    if (contentsId) {
+        await db.collection(COLLECTION_NAME).doc(contentsId).delete();
     }
     return NextResponse.json({ status: 200 })
 }

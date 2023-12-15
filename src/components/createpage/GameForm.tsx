@@ -38,6 +38,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
         })
         goodPoint[index] = newValue
         setGoodPoints(goodPoint)
+        contents.goodPoints = goodPoint
     }
 
     const AddGoodPoint = () => {
@@ -47,6 +48,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
         })
         goodPoint.push([undefined])
         setGoodPoints(goodPoint)
+        contents.goodPoints = goodPoint
     }
 
     const ChangebadPoint = (newValue, index) => {
@@ -56,6 +58,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
         })
         badPoint[index] = newValue
         setBadPoints(badPoint)
+        contents.badPoints = badPoint
     }
 
     const AddBadPoint = () => {
@@ -65,6 +68,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
         })
         badPoint.push([undefined])
         setBadPoints(badPoint)
+        contents.badPoints = badPoint
     }
 
     const ChangeProblem = (newValue, index) => {
@@ -72,8 +76,9 @@ export default function GameForm({ contents, titleError }: PageProps) {
         problems.forEach((item) => {
             problem.push(item)
         })
-        problem[index] = newValue
+        problem[index].problem = newValue
         setProblems(problem)
+        contents.problems = problem
     }
 
     const AddProblem = () => {
@@ -83,6 +88,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
         })
         problem.push({ problem: undefined, solution: [undefined] })
         setProblems(problem)
+        contents.problems = problem
     }
 
     const ChangeSolution = (newValue, index, index2) => {
@@ -92,6 +98,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
         })
         problem[index].solution[index2] = newValue
         setProblems(problem)
+        contents.problems = problem
     }
 
     const AddSolution = (index) => {
@@ -101,131 +108,158 @@ export default function GameForm({ contents, titleError }: PageProps) {
         })
         problem[index].solution.push(undefined)
         setProblems(problem)
+        contents.problems = problem
     }
 
     return (
         <Box>
-            <div>
+            <Box sx={{ mt: 3, mb: 3 }}>
+                <Box sx={{ mt: 2, mb: 2 }}>
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <InputLabel error={titleError} htmlFor="outlined-adornment-title">タイトル</InputLabel>
+                        <OutlinedInput
+                            required
+                            id="outlined-adornment-title"
+                            name="title"
+                            aria-describedby="outlined-title-helper-text"
+                            label="タイトル"
+                            value={title}
+                            error={titleError}
+                            // helperText="入力してください。"
+                            onSelect={() => { titleError = false }}
+                            onChange={newValue => {
+                                setTitle(newValue.target.value)
+                                contents.title = newValue.target.value
+                            }}
+                        />
+                        {!!titleError && (
+                            <FormHelperText error id="accountId-error">
+                                {"入力してください。"}
+                            </FormHelperText>
+                        )}
+                    </FormControl>
+
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-place">場所</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-place"
+                            name="place"
+                            aria-describedby="outlined-place-helper-text"
+                            label="場所"
+                            value={place}
+                            onChange={newValue => {
+                                setPlace(newValue.target.value)
+                                contents.place = newValue.target.value
+                            }}
+                        />
+                    </FormControl>
+
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-weather">天気</InputLabel>
+                        <Select
+                            labelId="outlined-adornment-weather-label"
+                            name="weather"
+                            id="outlined-adornment-weather"
+                            value={weather}
+                            label="天気"
+                            onChange={newValue => {
+                                setWeather(newValue.target.value)
+                                contents.weather = newValue.target.value
+                            }}
+                        >
+                            <MenuItem value="晴れ">晴れ</MenuItem>
+                            <MenuItem value="曇り">曇り</MenuItem>
+                            <MenuItem value="雨">雨</MenuItem>
+                            <MenuItem value="雪">雪</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+
+                <Box sx={{ mt: 2, mb: 2 }}>
+                    <InputLabel >チーム1</InputLabel>
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-name1">チーム名</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-name1"
+                            name="name1"
+                            aria-describedby="outlined-name1-helper-text"
+                            label="チーム名"
+                            value={name1}
+                            onChange={newValue => {
+                                setName1(newValue.target.value)
+                                contents.name1 = newValue.target.value
+                            }}
+
+                        />
+                    </FormControl>
+
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-score1">点数</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-score1"
+                            name="score1"
+                            aria-describedby="outlined-score1-helper-text"
+                            label="点数"
+                            value={score1}
+                            onChange={newValue => {
+                                setScore1(Number(newValue.target.value))
+                                contents.score1 = Number(newValue.target.value)
+                            }}
+                        />
+                    </FormControl>
+                </Box>
+
+                <Box sx={{ mt: 2, mb: 2 }}>
+                    <InputLabel >チーム2</InputLabel>
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-name2">チーム名</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-name2"
+                            name="name2"
+                            aria-describedby="outlined-name2-helper-text"
+                            label="チーム"
+                            value={name2}
+                            onChange={newValue => {
+                                setName2(newValue.target.value)
+                                contents.name2 = newValue.target.value
+                            }}
+                        />
+                    </FormControl>
+
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-score2">点数</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-score2"
+                            name="score2"
+                            aria-describedby="outlined-score2-helper-text"
+                            label="点数"
+                            value={score2}
+                            onChange={newValue => {
+                                setScore2(Number(newValue.target.value))
+                                contents.score2 = Number(newValue.target.value)
+                            }}
+                        />
+                    </FormControl>
+                </Box>
+
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel error={titleError} htmlFor="outlined-adornment-title">タイトル</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-position">ポジション</InputLabel>
                     <OutlinedInput
-                        required
-                        id="outlined-adornment-title"
-                        name="title"
-                        aria-describedby="outlined-title-helper-text"
-                        label="タイトル"
-                        value={title}
-                        error={titleError}
-                        // helperText="入力してください。"
-                        onSelect={() => { titleError = false }}
-                        onChange={newValue => setTitle(newValue.target.value)}
-                    />
-                    {!!titleError && (
-                        <FormHelperText error id="accountId-error">
-                            {"入力してください。"}
-                        </FormHelperText>
-                    )}
-                </FormControl>
-
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-place">場所</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-place"
-                        name="place"
-                        aria-describedby="outlined-place-helper-text"
-                        label="場所"
-                        value={place}
-                        onChange={newValue => setPlace(newValue.target.value)}
+                        id="outlined-adornment-position"
+                        name="position"
+                        aria-describedby="outlined-weight-helper-text"
+                        label="ポジション"
+                        value={position}
+                        onChange={newValue => {
+                            setPosition(newValue.target.value)
+                            contents.position = newValue.target.value
+                        }}
                     />
                 </FormControl>
+            </Box>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-weather">天気</InputLabel>
-                    <Select
-                        labelId="outlined-adornment-weather-label"
-                        name="weather"
-                        id="outlined-adornment-weather"
-                        value={weather}
-                        label="天気"
-                        onChange={newValue => setWeather(newValue.target.value)}
-                    >
-                        <MenuItem value="晴れ">晴れ</MenuItem>
-                        <MenuItem value="曇り">曇り</MenuItem>
-                        <MenuItem value="雨">雨</MenuItem>
-                        <MenuItem value="雪">雪</MenuItem>
-                    </Select>
-                </FormControl>
-            </div>
-
-            <div>
-                <InputLabel >チーム1</InputLabel>
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-name1">チーム名</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-name1"
-                        name="name1"
-                        aria-describedby="outlined-name1-helper-text"
-                        label="チーム名"
-                        value={name1}
-                        onChange={newValue => setName1(newValue.target.value)}
-
-                    />
-                </FormControl>
-
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-score1">点数</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-score1"
-                        name="score1"
-                        aria-describedby="outlined-score1-helper-text"
-                        label="点数"
-                        value={score1}
-                        onChange={newValue => setScore1(Number(newValue.target.value))}
-                    />
-                </FormControl>
-            </div>
-
-            <div>
-                <InputLabel >チーム2</InputLabel>
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-name2">チーム名</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-name2"
-                        name="name2"
-                        aria-describedby="outlined-name2-helper-text"
-                        label="チーム"
-                        value={name2}
-                        onChange={newValue => setName2(newValue.target.value)}
-                    />
-                </FormControl>
-
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-score2">点数</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-score2"
-                        name="score2"
-                        aria-describedby="outlined-score2-helper-text"
-                        label="点数"
-                        value={score2}
-                        onChange={newValue => setScore2(Number(newValue.target.value))}
-                    />
-                </FormControl>
-            </div>
-
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-position">ポジション</InputLabel>
-                <OutlinedInput
-                    id="outlined-adornment-position"
-                    name="position"
-                    aria-describedby="outlined-weight-helper-text"
-                    label="ポジション"
-                    value={position}
-                    onChange={newValue => setPosition(newValue.target.value)}
-                />
-            </FormControl>
-
-            <Box>
-                <div>
+            <Box sx={{ mt: 3, mb: 3 }}>
+                <Box sx={{ mt: 1, mb: 1 }}>
                     <Stack spacing={2} direction="row">
                         <InputLabel>良かった点</InputLabel>
                         <Button onClick={AddGoodPoint}>追加</Button>
@@ -242,9 +276,9 @@ export default function GameForm({ contents, titleError }: PageProps) {
                             />
                         </FormControl>
                     ))}
-                </div>
+                </Box>
 
-                <div>
+                <Box sx={{ mt: 1, mb: 1 }}>
                     <Stack spacing={2} direction="row">
                         <InputLabel >悪かった点</InputLabel>
                         <Button onClick={AddBadPoint}>追加</Button>
@@ -261,16 +295,16 @@ export default function GameForm({ contents, titleError }: PageProps) {
                             />
                         </FormControl>
                     ))}
-                </div>
+                </Box>
             </Box>
 
-            <Box>
+            <Box sx={{ mt: 3, mb: 3 }}>
                 <Stack spacing={2} direction="row">
                     <InputLabel >課題と解決策</InputLabel>
                     <Button onClick={AddProblem}>追加</Button>
                 </Stack>
                 {problems.map((item, index1) => (
-                    <Box key={index1}>
+                    <Box sx={{ mt: 2, mb: 2 }} key={index1}>
                         <InputLabel >課題{index1 + 1}</InputLabel>
                         <FormControl fullWidth sx={{ m: 1 }}>
                             <OutlinedInput
@@ -304,6 +338,6 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     </Box>
                 ))}
             </Box>
-        </Box>
+        </Box >
     );
 }

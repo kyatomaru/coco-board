@@ -1,7 +1,7 @@
 import type { SolutionType } from "./Problem"
 
 export interface GameContentsType {
-    date: Date,
+    date: String,
     updateDate: Date,
     score2: Number,
     badPoints: Array<String>,
@@ -21,7 +21,7 @@ export interface GameContentsType {
 
 
 export class GameContentsModel implements GameContentsType {
-    date: Date
+    date: String
     updateDate: Date
     score2: Number
     badPoints: Array<String>
@@ -40,7 +40,7 @@ export class GameContentsModel implements GameContentsType {
 
     constructor() {
         return {
-            date: new Date(),
+            date: undefined,
             updateDate: new Date(),
             score2: 0,
             badPoints: [undefined],

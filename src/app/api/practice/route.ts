@@ -4,13 +4,6 @@ import { FieldValue } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { NextRequest, NextResponse } from 'next/server';
 
-async function streamToString(stream: any) {
-    const chunks = [];
-    for await (const chunk of stream) {
-        chunks.push(chunk);
-    }
-    return Buffer.concat(chunks).toString('utf8');
-}
 
 type Data = {
     data: Object
@@ -22,26 +15,41 @@ export async function GET(
     req: NextRequest,
     res: NextResponse
 ) {
-
     const uid = req.nextUrl.searchParams.get("uid")
     const date = req.nextUrl.searchParams.get("date")
-    const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).get()
-        .then(snapshot => {
-            const data = Array()
-            snapshot.forEach((doc) => {
-                data.push(doc.data())
+    const contentsId = req.nextUrl.searchParams.get("contentsId")
+    if (uid && date) {
+        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).get()
+            .then(snapshot => {
+                const data = Array()
+                snapshot.forEach((doc) => {
+                    const ob = doc.data()
+                    ob.contentsId = doc.id
+                    data.push(ob)
+                })
+                return data
+
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        console.log(docRef)
+        return NextResponse.json(docRef, { status: 200 })
+    }
+    if (contentsId) {
+        const docRef = await db.collection(COLLECTION_NAME).doc(contentsId).get()
+            .then(snapshot => {
+                const data = snapshot.data()
+                data.contentsId = contentsId
+
+                return data
             })
-            return data
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        console.log(docRef)
 
-        }).catch((error) => {
-            console.log("Error getting documents: ", error);
-        });
-
-    // const docRef = { data: "test" }
-
-    console.log(docRef)
-
-    return NextResponse.json(docRef, { status: 200 })
+        return NextResponse.json(docRef, { status: 200 })
+    }
 }
 
 export async function PATCH(
@@ -51,12 +59,12 @@ export async function PATCH(
     const reqData = await req.json();
 
     const updateData = reqData.updateData
-    const doc = reqData.doc
+    const contentsId = reqData.contentsId
 
     console.log(updateData)
 
-    if (updateData && doc) {
-        const docRef = db.collection(COLLECTION_NAME).doc(doc).update(updateData)
+    if (updateData && contentsId) {
+        const docRef = db.collection(COLLECTION_NAME).doc(contentsId).update(updateData)
             .then(() => {
                 console.log("Document successfully updated!");
             })
@@ -91,9 +99,9 @@ export async function DELETE(
     req: NextRequest,
     res: NextResponse
 ) {
-    const doc = req.nextUrl.searchParams.get("doc")
-    if (doc) {
-        await db.collection(COLLECTION_NAME).doc(doc).delete();
+    const contentsId = req.nextUrl.searchParams.get("contentsId")
+    if (contentsId) {
+        await db.collection(COLLECTION_NAME).doc(contentsId).delete();
     }
     return NextResponse.json({ status: 200 })
 }

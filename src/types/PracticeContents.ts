@@ -1,7 +1,7 @@
 import type { SolutionType } from "./Problem"
 
 export interface PracticeContentsType {
-    date: Date,
+    date: String,
     updateDate: Date,
     title: String,
     details: Array<String>,
@@ -14,7 +14,7 @@ export interface PracticeContentsType {
 }
 
 export class PracticeContentsModel implements PracticeContentsType {
-    date: Date
+    date: String
     updateDate: Date
     title: String
     details: Array<String>
@@ -27,12 +27,12 @@ export class PracticeContentsModel implements PracticeContentsType {
 
     constructor() {
         return {
-            date: new Date(),
+            date: undefined,
             updateDate: new Date(),
             details: [undefined],
-            title: undefined,
+            title: "",
             uid: undefined,
-            weather: undefined,
+            weather: "",
             problems: [{ problem: undefined, solution: [undefined] }],
             place: undefined,
             createDate: new Date(),
