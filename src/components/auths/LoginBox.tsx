@@ -11,7 +11,7 @@ import type { User } from "firebase/auth"
 
 export default function LoginBox() {
     const router = useRouter()
-    const [user, setUser] = React.useState<User | null>()
+    const [user, setUser] = React.useState<User | undefined>()
 
     React.useEffect(() => {
         const auth = getAuth();
