@@ -60,7 +60,7 @@ export default function Footer() {
                     <BottomNavigationAction label="Target" onClick={ClickTargetButton} />
                     <BottomNavigationAction label="Note" onClick={ClickViewButton} />
                     <BottomNavigationAction label="Make" onClick={ClickMakeButton} />
-                    {/* <BottomNavigationAction label="Calendar" onClick={ClickCalendarButton} /> */}
+                    <BottomNavigationAction label="Board" onClick={ClickCalendarButton} />
                 </BottomNavigation >
             </AppBar>
         </Box>
