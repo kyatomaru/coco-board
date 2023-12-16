@@ -3,7 +3,7 @@
 import * as React from 'react';
 // import "./GoogleButton.module.scss"
 import { useRouter } from 'next/navigation'
-import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth"
+import { signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { auth } from "@/app/firebase"
 
 export default function GoogleSignInButton() {
@@ -12,8 +12,8 @@ export default function GoogleSignInButton() {
     GoogleProvider.setCustomParameters({
         prompt: "select_account"
     });
-    const GoogleSignIn = () => {
-        signInWithRedirect(auth, GoogleProvider)
+    const GoogleSignIn = async () => {
+        const user = await signInWithPopup(auth, GoogleProvider)
     }
 
     return (
