@@ -91,8 +91,8 @@ export default function GameContents({ contents }: PageProps) {
                                 良かった点
                             </ListSubheader>
                         }>
-                            {contents.goodPoints.map((goodPoint) => (
-                                <ListItem sx={{ pl: 4 }}>
+                            {contents.goodPoints.map((goodPoint, index) => (
+                                <ListItem key={index} sx={{ pl: 4 }}>
                                     <ListItemText>
                                         {goodPoint}
                                     </ListItemText>
@@ -109,8 +109,8 @@ export default function GameContents({ contents }: PageProps) {
                                 悪かった点
                             </ListSubheader>
                         }>
-                            {contents.badPoints.map((badPoint) => (
-                                <ListItem sx={{ pl: 4 }}>
+                            {contents.badPoints.map((badPoint, index) => (
+                                <ListItem key={index} sx={{ pl: 4 }}>
                                     <ListItemText>
                                         {badPoint}
                                     </ListItemText>
@@ -127,17 +127,17 @@ export default function GameContents({ contents }: PageProps) {
                                 課題と解決策
                             </ListSubheader>
                         }>
-                            {contents.problems.map((problem, index) => (
-                                <List subheader={
+                            {contents.problems.map((problem, index1) => (
+                                <List key={index1} subheader={
                                     <ListSubheader component="div">
-                                        課題{index + 1}と解決策
+                                        課題{index1 + 1}と解決策
                                     </ListSubheader>}>
                                     <ListItem sx={{ pl: 4 }}>
                                         <ListItemText>
                                             {problem.problem}
                                             <List>
-                                                {problem.solution.map((solution) => (
-                                                    <ListItem sx={{ px: 2 }}>
+                                                {problem.solution.map((solution, index2) => (
+                                                    <ListItem key={index2} sx={{ px: 2 }}>
                                                         <ListItemText>
                                                             {solution}
                                                         </ListItemText>
