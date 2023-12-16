@@ -13,18 +13,18 @@ export default function Footer() {
     const pathName = usePathname().split('/')
 
     const setLabel = () => {
-        if (pathName[1] === "target") {
+        // if (pathName[1] === "target") {
+        //     return 0
+        // }
+        if (pathName[1] === "notes") {
             return 0
         }
-        else if (pathName[1] === "notes") {
+        else if (pathName[2] === "create") {
             return 1
         }
-        else if (pathName[2] === "create") {
-            return 2
-        }
 
-        else if (pathName[1] === "calendar") {
-            return 3
+        else if (pathName[1] === "board") {
+            return 2
         }
     }
 
@@ -60,7 +60,7 @@ export default function Footer() {
                     {/* <BottomNavigationAction label="Target" onClick={ClickTargetButton} /> */}
                     <BottomNavigationAction label="Note" onClick={ClickViewButton} />
                     <BottomNavigationAction label="Make" onClick={ClickMakeButton} />
-                    <BottomNavigationAction label="Board" onClick={ClickCalendarButton} />
+                    {/* <BottomNavigationAction label="Board" onClick={ClickCalendarButton} /> */}
                 </BottomNavigation >
             </AppBar>
         </Box>

@@ -113,9 +113,9 @@ export default function GameForm({ contents, titleError }: PageProps) {
 
     return (
         <Box>
-            <Box sx={{ mt: 3, mb: 3 }}>
-                <Box sx={{ mt: 2, mb: 2 }}>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+            <Box sx={{ my: 3 }}>
+                <Box sx={{ my: 2 }}>
+                    <FormControl sx={{ p: 1, width: '25ch' }} variant="outlined">
                         <InputLabel error={titleError} htmlFor="outlined-adornment-title">タイトル</InputLabel>
                         <OutlinedInput
                             required
@@ -139,7 +139,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
                         )}
                     </FormControl>
 
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                    <FormControl sx={{ p: 1, width: '25ch' }} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-place">場所</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-place"
@@ -154,7 +154,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
                         />
                     </FormControl>
 
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                    <FormControl sx={{ p: 1, width: '25ch' }} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-weather">天気</InputLabel>
                         <Select
                             labelId="outlined-adornment-weather-label"
@@ -175,9 +175,9 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     </FormControl>
                 </Box>
 
-                <Box sx={{ mt: 2, mb: 2 }}>
-                    <InputLabel >チーム1</InputLabel>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                <Box sx={{ my: 2 }}>
+                    <InputLabel sx={{ mb: 2 }}>チーム1</InputLabel>
+                    <FormControl sx={{ mb: 1, p: 1, width: '25ch' }} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-name1">チーム名</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-name1"
@@ -193,7 +193,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
                         />
                     </FormControl>
 
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                    <FormControl sx={{ mb: 1, p: 1, width: '25ch' }} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-score1">点数</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-score1"
@@ -209,9 +209,9 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     </FormControl>
                 </Box>
 
-                <Box sx={{ mt: 2, mb: 2 }}>
-                    <InputLabel >チーム2</InputLabel>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                <Box sx={{ my: 2 }}>
+                    <InputLabel sx={{ mb: 2 }}>チーム2</InputLabel>
+                    <FormControl sx={{ mb: 1, p: 1, width: '25ch' }} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-name2">チーム名</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-name2"
@@ -226,7 +226,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
                         />
                     </FormControl>
 
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                    <FormControl sx={{ mb: 1, p: 1, width: '25ch' }} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-score2">点数</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-score2"
@@ -242,7 +242,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     </FormControl>
                 </Box>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                <FormControl sx={{ p: 1, width: '25ch' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-position">ポジション</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-position"
@@ -258,14 +258,14 @@ export default function GameForm({ contents, titleError }: PageProps) {
                 </FormControl>
             </Box>
 
-            <Box sx={{ mt: 3, mb: 3 }}>
-                <Box sx={{ mt: 1, mb: 1 }}>
+            <Box sx={{ my: 3 }}>
+                <Box sx={{ my: 1 }}>
                     <Stack spacing={2} direction="row">
                         <InputLabel>良かった点</InputLabel>
                         <Button onClick={AddGoodPoint}>追加</Button>
                     </Stack>
                     {goodPoints.map((goodPoint, index) => (
-                        <FormControl key={index} fullWidth sx={{ m: 1 }}>
+                        <FormControl key={index} fullWidth sx={{ p: 1 }}>
                             {/* <InputLabel htmlFor="outlined-adornment-goodpoint">Good point</InputLabel> */}
                             <OutlinedInput
                                 id="outlined-adornment-goodpoint"
@@ -278,13 +278,13 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     ))}
                 </Box>
 
-                <Box sx={{ mt: 1, mb: 1 }}>
+                <Box sx={{ my: 1 }}>
                     <Stack spacing={2} direction="row">
                         <InputLabel >悪かった点</InputLabel>
                         <Button onClick={AddBadPoint}>追加</Button>
                     </Stack>
                     {badPoints.map((badPoint, index) => (
-                        <FormControl key={index} fullWidth sx={{ m: 1 }}>
+                        <FormControl key={index} fullWidth sx={{ p: 1 }}>
                             {/* <InputLabel htmlFor="outlined-adornment-goodpoint">Good point</InputLabel> */}
                             <OutlinedInput
                                 id="outlined-adornment-badPoint"
@@ -298,15 +298,15 @@ export default function GameForm({ contents, titleError }: PageProps) {
                 </Box>
             </Box>
 
-            <Box sx={{ mt: 3, mb: 3 }}>
+            <Box sx={{ my: 3 }}>
                 <Stack spacing={2} direction="row">
                     <InputLabel >課題と解決策</InputLabel>
                     <Button onClick={AddProblem}>追加</Button>
                 </Stack>
                 {problems.map((item, index1) => (
-                    <Box sx={{ mt: 2, mb: 2 }} key={index1}>
+                    <Box sx={{ my: 2 }} key={index1}>
                         <InputLabel >課題{index1 + 1}</InputLabel>
-                        <FormControl fullWidth sx={{ m: 1 }}>
+                        <FormControl fullWidth sx={{ p: 1 }}>
                             <OutlinedInput
                                 id="outlined-adornment-badPoint"
                                 name="badPoint"
@@ -323,7 +323,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
                             </Stack>
                             {problems[index1].solution.map((solution, index2) => (
                                 <Box key={index2}>
-                                    <FormControl fullWidth sx={{ m: 1 }}>
+                                    <FormControl fullWidth sx={{ p: 1 }}>
                                         <OutlinedInput
                                             id="outlined-adornment-badPoint"
                                             name="badPoint"

@@ -13,15 +13,13 @@ export const useGetIdGame = (setIsLoading, setDateValue) => {
 
     React.useEffect(() => {
         const GetContents = async (uid: string | undefined) => {
-            console.log(params.docId)
-            if (uid && params.docId) {
-                const getParams = { uid: uid, docId: String(params.docId) };
+            if (uid && params.contentsId) {
+                const getParams = { uid: uid, contentsId: String(params.contentsId) };
                 const query = new URLSearchParams(getParams);
 
                 fetch(`/api/game/?${query}`)
                     .then((response) => response.json())
                     .then((data) => {
-                        console.log(data)
                         setContents(data)
                         setDateValue(new Date(data.date))
                         setIsLoading(false)
@@ -43,12 +41,12 @@ export const useGetIdGame = (setIsLoading, setDateValue) => {
                 setToken(null);
             }
         });
-    }, [params.docId, setDateValue, setIsLoading])
+    }, [params.contentsId, setDateValue, setIsLoading])
 
     return contents
 }
 
-export const useGetDateGame = () => {
+export const useGetDateGame = (setIsLoading) => {
     const [user, setUser] = React.useState<User | null>(null);
     const [token, setToken] = React.useState<string | null>(null);
     const [contents, setContents] = React.useState<Array<GameContentsType | null>>([null]);
@@ -58,7 +56,6 @@ export const useGetDateGame = () => {
 
     React.useEffect(() => {
         const GetContents = async (uid: string | undefined) => {
-            console.log(uid)
             if (uid) {
                 const getParams = { uid: uid, date: String(params.date) };
                 const query = new URLSearchParams(getParams);
@@ -67,10 +64,12 @@ export const useGetDateGame = () => {
                     .then((response) => response.json())
                     .then((data) => {
                         setContents(data)
+                        setIsLoading(false)
                     })
             }
         }
 
+        setIsLoading(true)
         const auth = getAuth();
         return onAuthStateChanged(auth, (user) => {
             if (user) {

@@ -21,6 +21,5 @@ export const useGetProblem = (gameContents: Array<GameContentsType>, practiceCon
             });
         }
     });
-
     return problem
 }
