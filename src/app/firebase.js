@@ -4,8 +4,8 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAMuTnEQE6oD67cVhgyaZ2Ffdqf3mOQrxI",
-    authDomain: "soccer-note-714d1.firebaseapp.com",
-    // authDomain: "https://soccer-note.vercel.app/__/auth/handler",
+    // authDomain: "soccer-note-714d1.firebaseapp.com",
+    authDomain: "soccer-note.vercel.app",
     projectId: "soccer-note-714d1",
     storageBucket: "soccer-note-714d1.appspot.com",
     messagingSenderId: "789270839877",
