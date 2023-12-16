@@ -57,7 +57,7 @@ export default function Footer() {
                     onChange={(event, newValue) => {
                         setValue(newValue);
                     }}>
-                    <BottomNavigationAction label="Target" onClick={ClickTargetButton} />
+                    {/* <BottomNavigationAction label="Target" onClick={ClickTargetButton} /> */}
                     <BottomNavigationAction label="Note" onClick={ClickViewButton} />
                     <BottomNavigationAction label="Make" onClick={ClickMakeButton} />
                     <BottomNavigationAction label="Board" onClick={ClickCalendarButton} />

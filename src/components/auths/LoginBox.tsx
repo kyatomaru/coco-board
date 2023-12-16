@@ -28,7 +28,7 @@ export default function LoginBox() {
 
     return (
         <div>
-
+            {String(user)}
             {user !== undefined
                 ? (<GoogleSignOutButton />)
                 : (<GoogleSignInButton />)
