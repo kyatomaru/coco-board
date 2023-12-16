@@ -24,9 +24,12 @@ export default function LoginBox() {
         })
     });
 
+    console.log(user)
+
     return (
         <div>
-            {user !== null
+
+            {user !== undefined
                 ? (<GoogleSignOutButton />)
                 : (<GoogleSignInButton />)
             }
