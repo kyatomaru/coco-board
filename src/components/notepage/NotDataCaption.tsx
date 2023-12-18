@@ -17,7 +17,7 @@ export default function NotDataCaption({ url }: PageProps) {
     }
 
     return (
-        <Box sx={{ p: 5, height: '40vh', textAlign: "center" }} >
+        <Box sx={{ py: 5, height: '40vh', textAlign: "center" }} >
             <Typography variant="body1" gutterBottom>
                 データがありません。
             </Typography>

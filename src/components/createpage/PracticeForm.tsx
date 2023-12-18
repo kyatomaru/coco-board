@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import type { PracticeContentsType } from '@/types/PracticeContents';
+import { theme } from '@/components/style/Thema'
 
 
 type PageProps = {
@@ -85,9 +86,9 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
     }
 
     return (
-        <Box>
+        <Box >
             <Box sx={{ my: 3 }}>
-                <FormControl sx={{ p: 1, width: '25ch' }} variant="outlined">
+                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-title">タイトル</InputLabel>
                     {/* <OutlinedInput
                         id="outlined-adornment-title"
@@ -106,13 +107,14 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                             setTitle(newValue.target.value)
                             contents.title = newValue.target.value
                         }}
+
                     >
                         <MenuItem value="自主練習">自主練習</MenuItem>
                         <MenuItem value="チーム練習">チーム練習</MenuItem>
                     </Select>
                 </FormControl>
 
-                <FormControl sx={{ p: 1, width: '25ch' }} variant="outlined">
+                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-place">場所</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-place"
@@ -124,10 +126,11 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                             setPlace(newValue.target.value)
                             contents.place = newValue.target.value
                         }}
+
                     />
                 </FormControl>
 
-                <FormControl sx={{ p: 1, width: '25ch' }} variant="outlined">
+                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-weather">天気</InputLabel>
                     <Select
                         labelId="outlined-adornment-weather-label"
@@ -149,13 +152,13 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
             </Box>
 
             <Box sx={{ my: 3 }}>
-                <Box>
+                <Box sx={{ m: 1 }}>
                     <Stack spacing={2} direction="row">
                         <InputLabel>練習メニュー</InputLabel>
                         <Button onClick={AddDetail}>追加</Button>
                     </Stack>
                     {details.map((detail, index) => (
-                        <FormControl key={index} fullWidth sx={{ p: 1 }}>
+                        <FormControl key={index} fullWidth sx={{ mb: 1 }}>
                             {/* <InputLabel htmlFor="outlined-adornment-goodpoint">Good point</InputLabel> */}
                             <OutlinedInput
                                 id="outlined-adornment-detail"
@@ -169,15 +172,15 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                 </Box>
             </Box>
 
-            <Box sx={{ my: 3 }}>
+            <Box sx={{ my: 3, mx: 1 }}>
                 <Stack spacing={2} direction="row">
-                    <InputLabel >課題と解決策</InputLabel>
+                    <InputLabel sx={{ mx: 1 }}>課題と解決策</InputLabel>
                     <Button onClick={AddProblem}>追加</Button>
                 </Stack>
                 {problems.map((item, index1) => (
-                    <Box sx={{ my: 2 }} key={index1}>
+                    <Box sx={{ my: 3 }} key={index1}>
                         <InputLabel >課題{index1 + 1}</InputLabel>
-                        <FormControl fullWidth sx={{ p: 1 }}>
+                        <FormControl fullWidth sx={{ my: 1 }}>
                             <OutlinedInput
                                 id="outlined-adornment-badPoint"
                                 name="badPoint"
@@ -187,14 +190,14 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                             />
                         </FormControl>
 
-                        <Box>
+                        <Box sx={{ my: 1 }}>
                             <Stack spacing={2} direction="row">
                                 <InputLabel >課題{index1 + 1}の解決策</InputLabel>
                                 <Button onClick={event => AddSolution(index1)}>追加</Button>
                             </Stack>
                             {problems[index1].solution.map((solution, index2) => (
                                 <Box key={index2}>
-                                    <FormControl fullWidth sx={{ p: 1 }}>
+                                    <FormControl fullWidth sx={{ mb: 1 }}>
                                         <OutlinedInput
                                             id="outlined-adornment-badPoint"
                                             name="badPoint"

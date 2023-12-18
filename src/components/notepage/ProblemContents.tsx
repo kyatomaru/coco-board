@@ -16,6 +16,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Divider from '@mui/material/Divider';
 import type { SolutionType } from '@/types/Problem';
+import NotDataCaption from './NotDataCaption';
 
 type PageProps = {
     contents: Array<SolutionType>
@@ -38,8 +39,8 @@ export default function ProblemContents({ contents }: PageProps) {
     console.log(contents)
 
     return (
-        <Box sx={{ width: '100%', m: "10px", bgcolor: 'background.paper' }}>
-            {contents
+        <Box sx={{ width: '100%', my: "10px", bgcolor: 'background.paper' }}>
+            {contents[0]
                 ?
                 <Box sx={{ px: 2 }}>
                     <List subheader={
@@ -71,9 +72,7 @@ export default function ProblemContents({ contents }: PageProps) {
                     </List>
                 </Box>
                 :
-                <Box sx={{ height: '70vh' }} >
-                    <div>データがありません</div>
-                </Box>
+                <NotDataCaption url='/practice/create' />
             }
         </Box >
     )

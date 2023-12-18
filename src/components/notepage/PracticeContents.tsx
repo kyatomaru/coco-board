@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import dayjs from 'dayjs';
 import Button from '@mui/material/Button';
 import type { PracticeContentsType } from '@/types/PracticeContents';
 import { useDeletePractice } from '@/hooks/practice/useDeletePractice';
@@ -17,6 +18,9 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Divider from '@mui/material/Divider';
 import NotDataCaption from './NotDataCaption';
+import DeleteModal from './DeleteModal';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 type PageProps = {
@@ -24,6 +28,7 @@ type PageProps = {
 }
 
 export default function PracticeContents({ contents }: PageProps) {
+    const [open, setOpen] = React.useState(false);
     const router = useRouter()
 
     const EditButtonClick = () => {
@@ -32,13 +37,17 @@ export default function PracticeContents({ contents }: PageProps) {
     }
 
     const DeleteButtonClick = () => {
-        console.log(contents.contentsId)
+        setOpen(true)
+    }
+
+    const DeleteContents = () => {
         useDeletePractice(contents.contentsId)
-        router.replace(`/notes/practice/2023-12-02`)
+        router.replace('/notes/' + (dayjs(String(new Date())).format('YYYY-MM-DD')));
     }
 
     return (
-        <Box sx={{ width: '100%', m: "10px", bgcolor: 'background.paper' }}>
+        <Box sx={{ width: '100%', my: "10px", bgcolor: 'background.paper' }}>
+            <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeleteContents} />
             {contents
                 ?
                 <Box sx={{ minHeight: '70vh', py: 1 }} >
@@ -48,8 +57,8 @@ export default function PracticeContents({ contents }: PageProps) {
                                 {String(contents.title)}
                             </Typography>
                         </Box>
-                        <Button onClick={EditButtonClick}>編集</Button>
-                        <Button onClick={DeleteButtonClick}>削除</Button>
+                        <Button sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></Button>
+                        <Button sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></Button>
                     </Stack>
 
                     <Divider />

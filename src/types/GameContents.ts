@@ -3,7 +3,7 @@ import type { SolutionType } from "./Problem"
 export interface GameContentsType {
     date: String,
     updateDate: Date,
-    score2: Number,
+    score2: String,
     badPoints: Array<String>,
     title: String,
     goodPoints: Array<String>,
@@ -11,7 +11,7 @@ export interface GameContentsType {
     problems: Array<SolutionType>,
     weather: String,
     place: String,
-    score1: Number,
+    score1: String,
     position: String,
     name2: String,
     name1: String,
@@ -23,7 +23,7 @@ export interface GameContentsType {
 export class GameContentsModel implements GameContentsType {
     date: String
     updateDate: Date
-    score2: Number
+    score2: String
     badPoints: Array<String>
     title: String
     goodPoints: Array<String>
@@ -31,7 +31,7 @@ export class GameContentsModel implements GameContentsType {
     problems: Array<SolutionType>
     weather: String
     place: String
-    score1: Number
+    score1: String
     position: String
     name2: String
     name1: String
@@ -42,7 +42,7 @@ export class GameContentsModel implements GameContentsType {
         return {
             date: undefined,
             updateDate: new Date(),
-            score2: 0,
+            score2: "0",
             badPoints: [undefined],
             title: undefined,
             goodPoints: [undefined],
@@ -50,7 +50,7 @@ export class GameContentsModel implements GameContentsType {
             problems: [{ problem: undefined, solution: [undefined] }],
             weather: "",
             place: undefined,
-            score1: 0,
+            score1: "0",
             position: undefined,
             name2: undefined,
             name1: undefined,

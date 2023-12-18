@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from 'react';
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import dayjs from 'dayjs';
 import ja from 'date-fns/locale/ja'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -11,7 +11,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { useParams } from 'next/navigation'
 
 type PageProps = {
     date: string
@@ -55,11 +54,11 @@ export default function DateBox({ date }: PageProps) {
                 </DemoContainer>
             </LocalizationProvider>
 
-            <Stack spacing={2} direction="row" sx={{ justifyContent: "center" }}>
+            {/* <Stack spacing={2} direction="row" sx={{ mt: 3, justifyContent: "center" }}>
                 <Button onClick={clickLeftButton}>《</Button>
                 <h2>{date}</h2>
                 <Button onClick={clickRightButton} disabled={disableFuture()}>》</Button>
-            </Stack >
+            </Stack > */}
         </Box >
     );
 }

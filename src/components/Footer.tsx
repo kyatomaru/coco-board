@@ -8,6 +8,9 @@ import AppBar from '@mui/material/AppBar';
 import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 
 export default function Footer() {
     const pathName = usePathname().split('/')
@@ -58,8 +61,8 @@ export default function Footer() {
                         setValue(newValue);
                     }}>
                     {/* <BottomNavigationAction label="Target" onClick={ClickTargetButton} /> */}
-                    <BottomNavigationAction label="Note" onClick={ClickViewButton} />
-                    <BottomNavigationAction label="Make" onClick={ClickMakeButton} />
+                    <BottomNavigationAction label="閲覧" icon={<StickyNote2Icon />} onClick={ClickViewButton} />
+                    <BottomNavigationAction label="作成" icon={<AddBoxIcon />} onClick={ClickMakeButton} ></BottomNavigationAction>
                     {/* <BottomNavigationAction label="Board" onClick={ClickCalendarButton} /> */}
                 </BottomNavigation >
             </AppBar>
