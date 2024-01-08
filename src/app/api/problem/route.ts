@@ -4,19 +4,12 @@ import { FieldValue } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { NextRequest, NextResponse } from 'next/server';
 
-async function streamToString(stream: any) {
-    const chunks = [];
-    for await (const chunk of stream) {
-        chunks.push(chunk);
-    }
-    return Buffer.concat(chunks).toString('utf8');
-}
 
 type Data = {
     data: Object
 }
 
-const COLLECTION_NAME = 'game';
+const COLLECTION_NAME = 'problem';
 
 export async function GET(
     req: NextRequest,
@@ -88,19 +81,18 @@ export async function POST(
     res: NextResponse
 ) {
     const insertData = await req.json();
-    let docRef
 
     if (insertData) {
-        db.collection(COLLECTION_NAME).add(insertData)
-            .then((res) => {
-                docRef = res
+        const docRef = db.collection(COLLECTION_NAME).add(insertData)
+            .then(() => {
                 console.log("Document successfully created!");
             })
             .catch((error) => {
                 console.log("Error getting documents: ", error);
             });
     }
-    return NextResponse.json(docRef, { status: 200 })
+
+    return NextResponse.json({ status: 200 })
 }
 
 export async function DELETE(

@@ -11,9 +11,10 @@ type PageProps = {
 }
 
 export default function NotDataCaption({ url }: PageProps) {
+    const router = useRouter();
+
     const ClickButton = () => {
-        const router = useRouter()
-        router.replace(url)
+        router.push(url);
     }
 
     return (

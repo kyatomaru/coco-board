@@ -9,6 +9,7 @@ import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import EditNoteIcon from '@mui/icons-material/EditNote';
+import HomeIcon from '@mui/icons-material/Home';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 
@@ -16,18 +17,19 @@ export default function Footer() {
     const pathName = usePathname().split('/')
 
     const setLabel = () => {
-        // if (pathName[1] === "target") {
-        //     return 0
-        // }
-        if (pathName[1] === "notes") {
+
+        if (pathName[1] === "") {
             return 0
         }
-        else if (pathName[2] === "create") {
+        else if (pathName[1] === "notes") {
             return 1
+        }
+        else if (pathName[2] === "create") {
+            return 2
         }
 
         else if (pathName[1] === "board") {
-            return 2
+            return 3
         }
     }
 
@@ -35,8 +37,8 @@ export default function Footer() {
 
     const router = useRouter()
 
-    const ClickTargetButton = () => {
-        router.push("/target")
+    const ClickHomeButton = () => {
+        router.push("/")
     };
 
     const ClickMakeButton = () => {
@@ -60,7 +62,7 @@ export default function Footer() {
                     onChange={(event, newValue) => {
                         setValue(newValue);
                     }}>
-                    {/* <BottomNavigationAction label="Target" onClick={ClickTargetButton} /> */}
+                    <BottomNavigationAction label="ホーム" icon={<HomeIcon />} onClick={ClickHomeButton} />
                     <BottomNavigationAction label="閲覧" icon={<StickyNote2Icon />} onClick={ClickViewButton} />
                     <BottomNavigationAction label="作成" icon={<AddBoxIcon />} onClick={ClickMakeButton} ></BottomNavigationAction>
                     {/* <BottomNavigationAction label="Board" onClick={ClickCalendarButton} /> */}

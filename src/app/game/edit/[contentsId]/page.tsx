@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useRouter, useParams } from 'next/navigation'
 import { auth } from '@/app/firebase';
 import { useGetIdGame } from '@/hooks/game/useGetGame';
+import { HomeProblemModel } from '@/types/Problem';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import MenuSelectBox from "@/components/createpage/MenuSelectBox"
@@ -49,9 +50,20 @@ export default function Home() {
       data.updateData.createDate = date;
       data.updateData.updateDate = date;
 
-      const response = await fetch('/api/game/', {
+      await fetch('/api/game/', {
         method: 'PATCH',
         body: JSON.stringify(data),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+
+      const problemContents = new HomeProblemModel(params.contentsId, contents.problems, contents.date, date, date)
+      const problemData = { updateData: problemContents, contentsId: params.contentsId }
+
+      const response = await fetch('/api/problem/', {
+        method: 'PATCH',
+        body: JSON.stringify(problemData),
         headers: {
           'content-type': 'application/json'
         }

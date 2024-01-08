@@ -1,20 +1,15 @@
 "use client"
 
 import * as React from 'react';
-import TitleBox from "@/components/TitleBox";
-import LoginBox from "@/components/auths/LoginBox";
-import dayjs from 'dayjs';
-import { useRouter } from 'next/navigation'
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Home() {
-  React.useEffect(() => {
-    const router = useRouter()
-    router.replace('/notes/' + (dayjs(String(new Date())).format('YYYY-MM-DD')));
-  }, [])
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
-      <TitleBox title="Login Page" />
+      <Header />
+      {/* <HomeContentsBox></HomeContentsBox> */}
+      <Footer />
     </main>
   )
 }

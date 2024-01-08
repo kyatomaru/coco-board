@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase';
 import type { GameContentsType } from '@/types/GameContents';
 import { GameContentsModel } from '@/types/GameContents';
+import { HomeProblemModel } from '@/types/Problem';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import MenuSelectBox from "@/components/createpage/MenuSelectBox"
@@ -31,7 +32,7 @@ export default function Home() {
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const formData = new FormData(event.currentTarget)
+    // const formData = new FormData(event.currentTarget)
     // const data = Object.fromEntries(formData)
     const data = contents
 
@@ -52,6 +53,20 @@ export default function Home() {
         const response = await fetch('/api/game/', {
           method: 'POST',
           body: JSON.stringify(data),
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+
+        console.log(response.json())
+
+        const contentsId = response.json()
+
+        const problemContents = new HomeProblemModel(contentsId, contents.problems, contents.date, date, date)
+
+        await fetch('/api/problem/', {
+          method: 'POST',
+          body: JSON.stringify(problemContents),
           headers: {
             'content-type': 'application/json'
           }
