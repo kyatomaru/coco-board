@@ -44,7 +44,7 @@ export default function HomeContents({ contents }: PageProps) {
 
     return (
         <Box sx={{ width: '100%', my: "10px", bgcolor: 'background.paper' }}>
-            <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeleteContents} />
+            {/* <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeleteContents} /> */}
             {contents
                 ?
                 <Box sx={{ minHeight: '70vh', py: 1 }} >
@@ -159,7 +159,8 @@ export default function HomeContents({ contents }: PageProps) {
                     </Box>
                 </Box >
                 :
-                <NotDataCaption url='/game/create' />
+                // <NotDataCaption url='/game/create' />
+                <></>
             }
         </Box>
     )
