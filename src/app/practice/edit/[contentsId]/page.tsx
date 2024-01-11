@@ -68,7 +68,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <Header />
       {isLoading ?
         <Container fixed sx={{ my: "50%", textAlign: "center" }}>

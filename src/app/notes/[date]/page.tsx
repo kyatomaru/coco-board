@@ -21,7 +21,7 @@ import Box from '@mui/material/Box';
 export default function Home() {
   const params = useParams()
   // const [contents, setContents] = React.useState<string | null>(null);
-  const [menu, setMenu] = React.useState(0);
+  const [menu, setMenu] = React.useState(1);
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
 
   const gameContents = useGetDateGame(setIsLoading)
@@ -36,7 +36,7 @@ export default function Home() {
   console.log(gameContents)
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <Header />
       {isLoading ?
         <Container fixed sx={{ my: "50%", textAlign: "center" }}>
@@ -48,10 +48,10 @@ export default function Home() {
           <MenuSelectBox menu={menu} handleMenuChange={handleMenuChange} />
           <Container maxWidth="sm" sx={{ mb: "80px" }}>
 
-            {menu == 0 &&
+            {/* {menu == 0 &&
               // <></>
               <ProblemContentsBox contents={problemContents} />
-            }
+            } */}
             {menu == 1 &&
               <GameContentsBox contents={gameContents} />
             }

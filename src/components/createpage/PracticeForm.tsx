@@ -107,7 +107,6 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                             setTitle(newValue.target.value)
                             contents.title = newValue.target.value
                         }}
-
                     >
                         <MenuItem value="自主練習">自主練習</MenuItem>
                         <MenuItem value="チーム練習">チーム練習</MenuItem>
@@ -126,7 +125,6 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                             setPlace(newValue.target.value)
                             contents.place = newValue.target.value
                         }}
-
                     />
                 </FormControl>
 
