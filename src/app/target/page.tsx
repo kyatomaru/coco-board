@@ -9,7 +9,7 @@ import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import Footer from "@/components/Footer";
 import dayjs from 'dayjs';
-import TargetForm from "@/components/form/target/TargetForm"
+// import TargetForm from "@/components/form/target/TargetForm"
 import Button from '@mui/material/Button';
 
 export default function Home() {
@@ -58,7 +58,7 @@ export default function Home() {
       <TitleBox title="Target Page" />
 
       <form onSubmit={onSubmit} method='POST'>
-        <TargetForm targetProp={target} problemProp={problem} />
+        {/* <TargetForm targetProp={target} problemProp={problem} /> */}
         <Button type='submit'>決定</Button>
       </form>
       <Footer />

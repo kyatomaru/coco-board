@@ -92,11 +92,22 @@ export default function PracticeContents({ contents }: PageProps) {
                         }
 
                         {contents.details.length > 0 &&
+<<<<<<< HEAD
                             <>
                                 <Divider />
                                 <Box sx={{ px: 2, my: 1 }}>
                                     <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                         練習メニュー
+=======
+                            <Box sx={{ px: 2, my: 1 }}>
+                                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                    練習メニュー
+                                </Typography>
+
+                                {contents.details.map((detail, index) => (
+                                    <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
+                                        {detail}
+>>>>>>> origin/main
                                     </Typography>
 
                                     {contents.details.map((detail, index) => (
