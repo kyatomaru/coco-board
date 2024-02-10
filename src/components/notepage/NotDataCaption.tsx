@@ -18,9 +18,9 @@ export default function NotDataCaption({ url }: PageProps) {
     }
 
     return (
-        <Box sx={{ py: 5, height: '40vh', textAlign: "center" }} >
-            <Typography variant="body1" gutterBottom>
-                データがありません。
+        <Box sx={{ py: 5, height: '200px', textAlign: "center" }} >
+            <Typography variant="body2" gutterBottom>
+                記録がありません。
             </Typography>
             <Button onClick={ClickButton}>
                 記録する

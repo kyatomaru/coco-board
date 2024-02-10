@@ -8,14 +8,15 @@ import { useGetDatePractice } from '@/hooks/practice/useGetPractice';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TitleBox from "@/components/TitleBox";
-import DateBox from "@/components/notepage/DateBox"
+import DateBox from "@/components/form/DateBox"
 import MenuSelectBox from "@/components/notepage/MenuSelectBox"
-import ProblemContentsBox from '@/components/notepage/ProblemContentsBox';
-import GameContentsBox from '@/components/notepage/GameContentsBox';
-import PracticeContentsBox from '@/components/notepage/PracticeContentsBox';
+import ProblemContentsBox from '@/components/notepage/contents/ProblemContentsBox';
+import GameContentsBox from '@/components/notepage/contents/GameContentsBox';
+import PracticeContentsBox from '@/components/notepage/contents/PracticeContentsBox';
 import Container from '@mui/material/Container';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 
 export default function Home() {
@@ -39,13 +40,15 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <Header />
       {isLoading ?
-        <Container fixed sx={{ my: "50%", textAlign: "center" }}>
-          <CircularProgress />
+        <Container fixed sx={{ width: "100vh", height: "100vh", position: "relative", textAlign: "center" }} >
+          <CircularProgress sx={{ position: "absolute", top: "50%", bottom: "50%", my: "auto" }} />
         </Container>
         :
-        <Container fixed>
-          <DateBox date={String(params.date)} />
-          <MenuSelectBox menu={menu} handleMenuChange={handleMenuChange} />
+        <Container sx={{ my: "70px" }}>
+          <Stack direction="row" sx={{ p: 1, justifyContent: "center", alignItems: "center" }}>
+            <DateBox date={String(params.date)} />
+            <MenuSelectBox menu={menu} handleMenuChange={handleMenuChange} />
+          </Stack>
           <Container maxWidth="sm" sx={{ mb: "80px" }}>
 
             {/* {menu == 0 &&

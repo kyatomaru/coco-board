@@ -16,7 +16,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Divider from '@mui/material/Divider';
 import type { SolutionType } from '@/types/Problem';
-import NotDataCaption from './NotDataCaption';
+import NotDataCaption from '../NotDataCaption';
 
 type PageProps = {
     contents: Array<SolutionType>

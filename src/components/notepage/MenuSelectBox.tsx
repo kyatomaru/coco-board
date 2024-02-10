@@ -27,7 +27,7 @@ export default function MenuSelectBox({ menu, handleMenuChange }: PageProps) {
     }
 
     return (
-        <Box sx={{ textAlign: "center" }}>
+        <Box sx={{ textAlign: "center", mx: 1 }}>
             <ToggleButtonGroup
                 value={alignment}
                 exclusive
@@ -37,10 +37,10 @@ export default function MenuSelectBox({ menu, handleMenuChange }: PageProps) {
                 {/* <ToggleButton value={0} >
                     課題
                 </ToggleButton> */}
-                <ToggleButton value={1} >
+                <ToggleButton sx={{ minWidth: "60px" }} value={1} >
                     試合
                 </ToggleButton>
-                <ToggleButton value={2} >
+                <ToggleButton sx={{ minWidth: "60px" }} value={2} >
                     練習
                 </ToggleButton>
             </ToggleButtonGroup>

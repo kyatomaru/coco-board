@@ -16,10 +16,10 @@ export async function GET(
     res: NextResponse
 ) {
     const uid = req.nextUrl.searchParams.get("uid")
-    const date = req.nextUrl.searchParams.get("date")
     const contentsId = req.nextUrl.searchParams.get("contentsId")
-    if (uid && date) {
-        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).get()
+
+    if (uid && !contentsId) {
+        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).get()
             .then(snapshot => {
                 const data = Array()
                 snapshot.forEach((doc) => {
@@ -35,6 +35,7 @@ export async function GET(
         console.log(docRef)
         return NextResponse.json(docRef, { status: 200 })
     }
+
     if (contentsId) {
         const docRef = await db.collection(COLLECTION_NAME).doc(contentsId).get()
             .then(snapshot => {

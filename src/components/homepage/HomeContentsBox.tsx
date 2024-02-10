@@ -7,15 +7,17 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import type { GameContentsType } from '@/types/GameContents';
+import type { ProblemContentsType } from '@/types/ProblemContents';
 import GameContents from "./HomeContents"
+import HomeContents from './HomeContents';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 type PageProps = {
-    contents: Array<GameContentsType | null>
+    problemContents: Array<ProblemContentsType | null>
 }
 
-export default function HomeContentsBox({ contents }: PageProps) {
+export default function HomeContentsBox({ problemContents }: PageProps) {
     const [contentsId, setcontentsId] = React.useState(0);
 
     const clickLeftButton = () => {
@@ -27,16 +29,8 @@ export default function HomeContentsBox({ contents }: PageProps) {
     }
 
     return (
-        <Box>
-            <Stack sx={{ width: "100%" }} justifyContent="center" alignItems="center" direction="row">
-                <Button sx={{ width: "100%" }} onClick={clickLeftButton} disabled={contentsId == 0}><ArrowBackIosIcon /></Button>
-                <Button sx={{ width: "100%" }} onClick={clickRightButton} disabled={contentsId == contents.length - 1 || contents.length == 0}><ArrowForwardIosIcon /></Button>
-            </Stack >
-            <GameContents contents={contents[contentsId]} />
-            <Stack sx={{ width: "100%" }} justifyContent="center" alignItems="center" direction="row">
-                <Button sx={{ width: "100%" }} onClick={clickLeftButton} disabled={contentsId == 0}><ArrowBackIosIcon /></Button>
-                <Button sx={{ width: "100%" }} onClick={clickRightButton} disabled={contentsId == contents.length - 1 || contents.length == 0}><ArrowForwardIosIcon /></Button>
-            </Stack >
-        </Box>
+        <Container sx={{ mt: "80px", mb: "80px" }}>
+            <HomeContents problemContents={problemContents} />
+        </Container>
     )
 }

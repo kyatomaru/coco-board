@@ -6,7 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import type { TargetType } from '@/types/Target';
 import type { ProblemType } from '@/types/Problem';
-import ProblemForm from '@/components/createpage/ProblemForm';
+import ProblemForm from '@/components/form/problem/ProblemForm';
 
 type PageProps = {
     targetProp: TargetType,

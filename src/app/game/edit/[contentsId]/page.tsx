@@ -7,7 +7,7 @@ import { useGetIdGame } from '@/hooks/game/useGetGame';
 import { HomeProblemModel } from '@/types/Problem';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
-import MenuSelectBox from "@/components/createpage/MenuSelectBox"
+import MenuSelectBox from "@/components/form/MenuSelectBox"
 import { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import ja from 'date-fns/locale/ja'
@@ -16,7 +16,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import GameForm from "@/components/createpage/GameForm"
+import GameForm from "@/components/form/game/GameForm"
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';

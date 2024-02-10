@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import type { PracticeContentsType } from '@/types/PracticeContents';
 import { theme } from '@/components/style/Thema'
+import AddInputBox from './inputBox/AddInputBox';
 
 
 type PageProps = {
@@ -24,26 +25,6 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
     const [weather, setWeather] = React.useState(contents.weather);
     const [details, setDetails] = React.useState(contents.details);
     const [problems, setProblems] = React.useState(contents.problems);
-
-    const ChangeDetails = (newValue, index) => {
-        const detail = []
-        details.forEach((item) => {
-            detail.push(item)
-        })
-        detail[index] = newValue
-        setDetails(detail)
-        contents.details = detail
-    }
-
-    const AddDetail = () => {
-        const detail = []
-        details.forEach((item) => {
-            detail.push(item)
-        })
-        detail.push([undefined])
-        setDetails(detail)
-        contents.details = details
-    }
 
     const ChangeProblem = (newValue, index) => {
         const problem = []
@@ -150,24 +131,7 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
             </Box>
 
             <Box sx={{ my: 3 }}>
-                <Box sx={{ m: 1 }}>
-                    <Stack spacing={2} direction="row">
-                        <InputLabel>練習メニュー</InputLabel>
-                        <Button onClick={AddDetail}>追加</Button>
-                    </Stack>
-                    {details.map((detail, index) => (
-                        <FormControl key={index} fullWidth sx={{ mb: 1 }}>
-                            {/* <InputLabel htmlFor="outlined-adornment-goodpoint">Good point</InputLabel> */}
-                            <OutlinedInput
-                                id="outlined-adornment-detail"
-                                name="detail"
-                                // label="good point"
-                                value={detail}
-                                onChange={newValue => ChangeDetails(newValue.target.value, index)}
-                            />
-                        </FormControl>
-                    ))}
-                </Box>
+                <AddInputBox title="練習メニュー" contents={contents.details} />
             </Box>
 
             <Box sx={{ my: 3, mx: 1 }}>

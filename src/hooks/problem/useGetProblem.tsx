@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import type { User } from 'firebase/auth';
 import type { GameContentsType } from "@/types/GameContents";
 import type { PracticeContentsType } from "@/types/PracticeContents";
-import { ProblemModel, ProblemType } from '@/types/Problem';
+import { ProblemContentsModel, ProblemContentsType } from '@/types/ProblemContents';
 
 export const useGetProblem = (gameContents: Array<GameContentsType>, practiceContents: Array<PracticeContentsType>) => {
     const problem = []
@@ -27,10 +27,50 @@ export const useGetProblem = (gameContents: Array<GameContentsType>, practiceCon
     return problem
 }
 
+export const useGetAllProblem = (setIsLoading) => {
+    const [user, setUser] = React.useState<User | null>(null);
+    const [token, setToken] = React.useState<string | null>(null);
+    const [contents, setContents] = React.useState<[ProblemContentsType]>([new ProblemContentsModel()]);
+
+    const params = useParams()
+
+    React.useEffect(() => {
+        const GetContents = async (uid: string) => {
+            if (uid) {
+                const getParams = { uid: uid };
+                const query = new URLSearchParams(getParams);
+
+                fetch(`/api/problem/?${query}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setContents(data)
+                        setIsLoading(false)
+                    })
+            }
+        }
+        setIsLoading(true)
+        const auth = getAuth();
+        return onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(auth.currentUser);
+                user.getIdToken().then((token) => {
+                    setToken(token);
+                });
+                GetContents(auth.currentUser?.uid)
+            } else {
+                setUser(null);
+                setToken(null);
+            }
+        });
+    }, [setIsLoading])
+
+    return contents
+}
+
 export const useGetIdProblem = (setIsLoading) => {
     const [user, setUser] = React.useState<User | null>(null);
     const [token, setToken] = React.useState<string | null>(null);
-    const [contents, setContents] = React.useState<ProblemType>(new ProblemModel());
+    const [contents, setContents] = React.useState<ProblemContentsType>(new ProblemContentsModel());
 
     const params = useParams()
 
@@ -40,7 +80,7 @@ export const useGetIdProblem = (setIsLoading) => {
                 const getParams = { uid: uid, contentsId: String(params.contentsId) };
                 const query = new URLSearchParams(getParams);
 
-                fetch(`/api/game/?${query}`)
+                fetch(`/api/problem/?${query}`)
                     .then((response) => response.json())
                     .then((data) => {
                         setContents(data)
@@ -64,6 +104,46 @@ export const useGetIdProblem = (setIsLoading) => {
             }
         });
     }, [params.contentsId, setIsLoading])
+
+    return contents
+}
+
+export const useGetDisplayProblem = (setIsLoading) => {
+    const [user, setUser] = React.useState<User | null>(null);
+    const [token, setToken] = React.useState<string | null>(null);
+    const [contents, setContents] = React.useState<[ProblemContentsType]>([new ProblemContentsModel()]);
+
+    const params = useParams()
+
+    React.useEffect(() => {
+        const GetContents = async (uid: string) => {
+            if (uid) {
+                const getParams = { uid: uid };
+                const query = new URLSearchParams(getParams);
+
+                fetch(`/api/problem/?${query}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setContents(data)
+                        setIsLoading(false)
+                    })
+            }
+        }
+        setIsLoading(true)
+        const auth = getAuth();
+        return onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(auth.currentUser);
+                user.getIdToken().then((token) => {
+                    setToken(token);
+                });
+                GetContents(auth.currentUser?.uid)
+            } else {
+                setUser(null);
+                setToken(null);
+            }
+        });
+    }, [setIsLoading])
 
     return contents
 }

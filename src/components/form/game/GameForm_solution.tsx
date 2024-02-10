@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
+import AddInputBox from '../inputBox/AddInputBox';
 
 
 type PageProps = {
@@ -30,46 +31,6 @@ export default function GameForm({ contents, titleError }: PageProps) {
     const [goodPoints, setGoodPoints] = React.useState(contents.goodPoints);
     const [badPoints, setBadPoints] = React.useState(contents.badPoints);
     const [problems, setProblems] = React.useState(contents.problems);
-
-    const ChangeGoodPoint = (newValue, index) => {
-        const goodPoint = []
-        goodPoints.forEach((item) => {
-            goodPoint.push(item)
-        })
-        goodPoint[index] = newValue
-        setGoodPoints(goodPoint)
-        contents.goodPoints = goodPoint
-    }
-
-    const AddGoodPoint = () => {
-        const goodPoint = []
-        goodPoints.forEach((item) => {
-            goodPoint.push(item)
-        })
-        goodPoint.push([undefined])
-        setGoodPoints(goodPoint)
-        contents.goodPoints = goodPoint
-    }
-
-    const ChangebadPoint = (newValue, index) => {
-        const badPoint = []
-        badPoints.forEach((item) => {
-            badPoint.push(item)
-        })
-        badPoint[index] = newValue
-        setBadPoints(badPoint)
-        contents.badPoints = badPoint
-    }
-
-    const AddBadPoint = () => {
-        const badPoint = []
-        badPoints.forEach((item) => {
-            badPoint.push(item)
-        })
-        badPoint.push([undefined])
-        setBadPoints(badPoint)
-        contents.badPoints = badPoint
-    }
 
     const ChangeProblem = (newValue, index) => {
         const problem = []
@@ -259,43 +220,8 @@ export default function GameForm({ contents, titleError }: PageProps) {
             </Box>
 
             <Box sx={{ my: 3 }}>
-                <Box sx={{ m: 1 }}>
-                    <Stack spacing={2} direction="row">
-                        <InputLabel sx={{ mx: 1 }}>良かった点</InputLabel>
-                        <Button onClick={AddGoodPoint}>追加</Button>
-                    </Stack>
-                    {goodPoints.map((goodPoint, index) => (
-                        <FormControl key={index} fullWidth sx={{ mb: 1 }}>
-                            {/* <InputLabel htmlFor="outlined-adornment-goodpoint">Good point</InputLabel> */}
-                            <OutlinedInput
-                                id="outlined-adornment-goodpoint"
-                                name="goodPoint"
-                                // label="good point"
-                                value={goodPoint}
-                                onChange={newValue => ChangeGoodPoint(newValue.target.value, index)}
-                            />
-                        </FormControl>
-                    ))}
-                </Box>
-
-                <Box sx={{ m: 1 }}>
-                    <Stack spacing={2} direction="row">
-                        <InputLabel sx={{ mx: 1 }}>悪かった点</InputLabel>
-                        <Button onClick={AddBadPoint}>追加</Button>
-                    </Stack>
-                    {badPoints.map((badPoint, index) => (
-                        <FormControl key={index} fullWidth sx={{ mb: 1 }}>
-                            {/* <InputLabel htmlFor="outlined-adornment-goodpoint">Good point</InputLabel> */}
-                            <OutlinedInput
-                                id="outlined-adornment-badPoint"
-                                name="badPoint"
-                                // label="good point"
-                                value={badPoint}
-                                onChange={newValue => ChangebadPoint(newValue.target.value, index)}
-                            />
-                        </FormControl>
-                    ))}
-                </Box>
+                <AddInputBox title="良かった点" contents={contents.goodPoints} />
+                <AddInputBox title="悪かった点" contents={contents.badPoints} />
             </Box>
 
             <Box sx={{ my: 3, mx: 1 }}>

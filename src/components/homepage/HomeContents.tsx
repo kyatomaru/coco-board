@@ -1,167 +1,83 @@
-"use client"
-
 import * as React from 'react';
-import { useRouter } from 'next/navigation';
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import dayjs from 'dayjs';
-import type { GameContentsType } from '@/types/GameContents';
-import { useDeleteGame } from '@/hooks/game/useDeleteGame';
-import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
+import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+import CommentIcon from '@mui/icons-material/Comment';
+import type { ProblemContentsType } from '@/types/ProblemContents';
+import { contentsCheckModel } from '@/types/ProblemContents';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-
 type PageProps = {
-    contents: GameContentsType
+    problemContents: Array<ProblemContentsType | null>
 }
 
-export default function HomeContents({ contents }: PageProps) {
-    const [open, setOpen] = React.useState(false);
-    const router = useRouter()
+export default function HomeContents({ problemContents }: PageProps) {
+    const EditButtonClick = (index) => {
 
-    const EditButtonClick = () => {
-        router.replace(`/game/edit/${contents.contentsId}`)
     }
 
     const DeleteButtonClick = () => {
-        setOpen(true)
-    }
 
-    const DeleteContents = () => {
-        useDeleteGame(contents.contentsId)
-        router.replace('/notes/' + (dayjs(String(new Date())).format('YYYY-MM-DD')));
     }
 
     return (
-        <Box sx={{ width: '100%', my: "10px", bgcolor: 'background.paper' }}>
-            {/* <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeleteContents} /> */}
-            {contents
-                ?
-                <Box sx={{ minHeight: '70vh', py: 1 }} >
-                    <Stack direction="row" sx={{ p: 1 }} >
-                        <Box sx={{ width: "100%", px: 2 }}>
-                            <Typography variant="h6" component="div">
-                                {String(contents.title)}
-                            </Typography>
-                        </Box>
-                        <Button sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></Button>
-                        <Button sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></Button>
-                    </Stack>
+        <List sx={{ width: '100%', maxWidth: 600, bgcolor: 'background.paper', margin: "auto" }}>
+            {problemContents.map((value, index) => {
+                const labelId = `checkbox-list-problem-${value}`;
 
-                    <Divider />
+                return (
+                    <ListItem
+                        key={index}
+                        // disablePadding
+                        sx={{ display: "block", margin: "auto" }}
+                    >
+                        <ListItemButton
+                            role={undefined}
+                            dense
+                            sx={{ width: "100%" }}>
+                            <Stack direction="row" sx={{ width: "100%", p: 1 }} >
+                                <Box sx={{ width: "100%" }}>
+                                    <ListItemText id={labelId} primary={value.problem} />
+                                </Box>
+                                <Button sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></Button>
+                                <Button sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></Button>
 
-                    <Stack direction="row" sx={{ p: 2 }} >
-                        <Box sx={{ width: "100%", px: 2 }}>
-                            <Box component="p">
-                                {String(contents.name1)}
-                            </Box>
-                            <Box component="p">
-                                {String(contents.score1)}
-                            </Box>
-                        </Box>
-                        <Box sx={{ width: "100%", px: 2 }}>
-                            <Box component="p">
-                                {String(contents.name2)}
-                            </Box>
-                            <Box component="p">
-                                {String(contents.score2)}
-                            </Box>
-                        </Box>
-                    </Stack>
+                            </Stack>
+                        </ListItemButton>
 
-                    <Divider />
 
-                    <Stack direction="row" sx={{ p: 2 }} >
-                        <Box sx={{ width: "100%", px: 2 }}>
-                            {String(contents.place)}
-                        </Box>
-                        <Box sx={{ width: "100%", px: 2 }}>
-                            {String(contents.weather)}
-                        </Box>
-                    </Stack>
+                        <List sx={{ display: "block", width: '100%', bgcolor: 'background.paper' }}>
+                            {value.solutions.map((value2, index2) => {
+                                const labelId2 = `checkbox-list-label-${value2}`;
+                                return (
+                                    <ListItem
+                                        key={index2}
+                                        disablePadding
+                                    >
+                                        <ListItemButton
+                                            sx={{ pl: 5 }}
+                                            role={undefined}
+                                            dense>
+                                            <ListItemText id={labelId2} primary={value2} />
 
-                    <Divider />
-
-                    <Box sx={{ px: 2 }}>
-                        <List subheader={
-                            <ListSubheader component="div" >
-                                良かった点
-                            </ListSubheader>
-                        }>
-                            {contents.goodPoints.map((goodPoint, index) => (
-                                <ListItem key={index} sx={{ pl: 4 }}>
-                                    <ListItemText>
-                                        {goodPoint}
-                                    </ListItemText>
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Box>
-
-                    <Divider />
-
-                    <Box sx={{ px: 2 }}>
-                        <List subheader={
-                            <ListSubheader component="div" >
-                                悪かった点
-                            </ListSubheader>
-                        }>
-                            {contents.badPoints.map((badPoint, index) => (
-                                <ListItem key={index} sx={{ pl: 4 }}>
-                                    <ListItemText>
-                                        {badPoint}
-                                    </ListItemText>
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Box>
-
-                    <Divider />
-
-                    <Box sx={{ px: 2 }}>
-                        <List subheader={
-                            <ListSubheader component="div">
-                                課題と解決策
-                            </ListSubheader>
-                        }>
-                            {contents.problems.map((problem, index1) => (
-                                <List key={index1} subheader={
-                                    <ListSubheader component="div">
-                                        課題{index1 + 1}と解決策
-                                    </ListSubheader>}>
-                                    <ListItem sx={{ pl: 4 }}>
-                                        <ListItemText>
-                                            {problem.problem}
-                                            <List>
-                                                {problem.solution.map((solution, index2) => (
-                                                    <ListItem key={index2} sx={{ px: 2 }}>
-                                                        <ListItemText>
-                                                            {solution}
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                ))}
-                                            </List>
-                                        </ListItemText>
+                                        </ListItemButton>
                                     </ListItem>
-                                </List>
-                            ))}
+                                );
+                            })}
                         </List>
-                    </Box>
-                </Box >
-                :
-                // <NotDataCaption url='/game/create' />
-                <></>
-            }
-        </Box>
-    )
+                        <Divider />
+                    </ListItem>
+                );
+            })}
+        </List >
+    );
 }

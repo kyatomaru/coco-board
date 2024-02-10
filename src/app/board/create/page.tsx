@@ -17,10 +17,10 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import GameForm from "@/components/form/game/GameForm"
+import GameForm from "@/components/form/game/GameForm_solution"
+import TacticalBoard from '@/components/tacticalBoard/TacticalBoard';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Footer from "@/components/Footer";
 import { Container } from '@mui/material';
 
@@ -88,14 +88,13 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <Header />
       <Container fixed sx={{ mt: "80px", mb: "80px" }}>
-        <Stack direction="row" sx={{ p: 1, justifyContent: "center", alignItems: "center" }}>
-          <MenuSelectBox />
-          <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
-            <DemoContainer components={['DatePicker']}>
-              <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDateValue(newValue)} />
-            </DemoContainer>
-          </LocalizationProvider>
-        </Stack>
+        <MenuSelectBox />
+
+        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
+          <DemoContainer components={['DatePicker']}>
+            <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDateValue(newValue)} />
+          </DemoContainer>
+        </LocalizationProvider>
 
         <Box
           component="form"
@@ -108,7 +107,7 @@ export default function Home() {
           method='POST'
 
         >
-          <GameForm contents={contents} titleError={titleError} />
+          <TacticalBoard />
           <Button type='submit'>決定</Button>
         </Box>
       </Container>

@@ -21,6 +21,8 @@ export default function MenuSelectBox() {
                 ClickGameButton()
             } else if (newAlignment == 1) {
                 ClickPracticeButton()
+            } else if (newAlignment == 2) {
+                ClickBoardButton()
             }
         }
     }
@@ -40,7 +42,11 @@ export default function MenuSelectBox() {
         } else if (pathName[1] == "practice") {
             setAlignment(1);
             ClickPracticeButton()
+        } else if (pathName[1] == "board") {
+            setAlignment(2);
+            ClickBoardButton()
         }
+
     }, [])
 
     const ClickGameButton = () => {
@@ -51,19 +57,28 @@ export default function MenuSelectBox() {
         router.push('/practice/create')
     }
 
+    const ClickBoardButton = () => {
+        router.push('/board/create')
+    }
+
     return (
-        <ToggleButtonGroup
-            value={alignment}
-            exclusive
-            onChange={handleAlignment}
-            aria-label="text alignment"
-        >
-            <ToggleButton value={0} >
-                試合
-            </ToggleButton>
-            <ToggleButton value={1} >
-                練習
-            </ToggleButton>
-        </ToggleButtonGroup>
+        <Box sx={{ textAlign: "center", mx: 1 }}>
+            <ToggleButtonGroup
+                value={alignment}
+                exclusive
+                onChange={handleAlignment}
+                aria-label="text alignment"
+            >
+                <ToggleButton value={0} >
+                    試合
+                </ToggleButton>
+                <ToggleButton value={1} >
+                    練習
+                </ToggleButton>
+                {/* <ToggleButton value={2} >
+                ボード
+            </ToggleButton> */}
+            </ToggleButtonGroup>
+        </Box>
     );
 }

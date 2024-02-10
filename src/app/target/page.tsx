@@ -9,7 +9,7 @@ import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import Footer from "@/components/Footer";
 import dayjs from 'dayjs';
-import TargetForm from "@/components/createpage/TargetForm"
+import TargetForm from "@/components/form/target/TargetForm"
 import Button from '@mui/material/Button';
 
 export default function Home() {

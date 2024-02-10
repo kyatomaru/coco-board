@@ -11,6 +11,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { PickersActionBar } from '@mui/x-date-pickers';
 
 type PageProps = {
     date: string
@@ -47,18 +49,31 @@ export default function DateBox({ date }: PageProps) {
     }
 
     return (
-        <Box sx={{ mt: "75px", mb: "20px", justifyContent: "center" }}>
-            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}  >
+        <Box sx={{ justifyContent: "center", mx: 1, lineHeight: "30px" }}>
+            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}
+                localeText={{
+                    previousMonth: "前月を表示",
+                    nextMonth: "次月を表示",
+                    cancelButtonLabel: "キャンセル",
+                    okButtonLabel: "選択",
+                }} >
                 <DemoContainer components={['DatePicker']} sx={{ justifyContent: "center" }}>
-                    <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDate(newValue)} />
+                    <DatePicker format='yyyy年MM月dd日'
+                        slotProps={{
+                            actionBar: {
+                                actions: ['cancel', "accept"],
+                            },
+                        }}
+                        sx={{
+                            fontSize: 10
+                        }}
+                        closeOnSelect={false}
+                        value={dateValue}
+                        disableFuture
+                        onAccept={(newValue) => setDate(newValue)}
+                    />
                 </DemoContainer>
             </LocalizationProvider>
-
-            {/* <Stack spacing={2} direction="row" sx={{ mt: 3, justifyContent: "center" }}>
-                <Button onClick={clickLeftButton}>《</Button>
-                <h2>{date}</h2>
-                <Button onClick={clickRightButton} disabled={disableFuture()}>》</Button>
-            </Stack > */}
         </Box >
     );
 }

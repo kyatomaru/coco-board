@@ -11,7 +11,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import GameForm from "@/components/createpage/GameForm";
+import GameForm from "@/components/form/game/GameForm_solution";
 import { useParams } from 'next/navigation';
 
 type PageProps = {

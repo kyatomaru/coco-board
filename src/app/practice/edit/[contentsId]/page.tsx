@@ -6,7 +6,7 @@ import { auth } from '@/app/firebase';
 import { useGetIdPractice } from '@/hooks/practice/useGetPractice';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
-import MenuSelectBox from "@/components/createpage/MenuSelectBox"
+import MenuSelectBox from "@/components/form/MenuSelectBox"
 import { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import ja from 'date-fns/locale/ja'
@@ -15,7 +15,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import PracticeForm from "@/components/createpage/PracticeForm"
+import PracticeForm from "@/components/form/practice/PracticeForm"
 import Button from '@mui/material/Button';
 import Footer from "@/components/Footer";
 import Box from '@mui/material/Box';
