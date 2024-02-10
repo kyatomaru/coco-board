@@ -51,7 +51,7 @@ export default function GameContents({ contents }: PageProps) {
                 <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeleteContents} />
                 {contents
                     ?
-                    <Box sx={{ minHeight: '70vh', py: 1 }} >
+                    <Box sx={{ py: 1 }}  >
                         <Stack direction="row" sx={{ p: 1 }} >
                             <Box sx={{ width: "100%", px: 2 }}>
                                 <Typography variant="h6" component="div">
@@ -64,71 +64,94 @@ export default function GameContents({ contents }: PageProps) {
 
                         <Divider />
 
-                        <Stack direction="row" sx={{ p: 2 }} >
-                            <Box sx={{ width: "100%", px: 2 }}>
-                                <Box component="p">
-                                    {String(contents.name1)}
+                        <Box sx={{ width: "100%", px: 2, my: 1 }}>
+                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                チーム
+                            </Typography>
+                            <Stack direction="row" sx={{ px: 1 }} >
+                                <Box sx={{ width: "100%" }}>
+                                    <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                        {String(contents.name1)}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ px: 1 }}>
+                                        {String(contents.score1)}
+                                    </Typography>
                                 </Box>
-                                <Box component="p">
-                                    {String(contents.score1)}
+                                <Box sx={{ width: "100%" }}>
+                                    <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                        {String(contents.name2)}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ px: 1 }}>
+                                        {String(contents.score2)}
+                                    </Typography>
                                 </Box>
-                            </Box>
-                            <Box sx={{ width: "100%", px: 2 }}>
-                                <Box component="p">
-                                    {String(contents.name2)}
+                            </Stack>
+                        </Box>
+
+                        {contents.place &&
+                            <>
+                                <Divider />
+                                <Box sx={{ px: 2, my: 1 }}>
+                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                        場所
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ px: 1 }}>
+                                        {String(contents.place)}
+                                    </Typography>
                                 </Box>
-                                <Box component="p">
-                                    {String(contents.score2)}
+                            </>
+                        }
+
+
+                        {contents.weather &&
+                            <>
+                                <Divider />
+                                <Box sx={{ px: 2, my: 1 }}>
+                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                        天気
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ px: 1 }}>
+                                        {String(contents.weather)}
+                                    </Typography>
                                 </Box>
-                            </Box>
-                        </Stack>
+                            </>
+                        }
 
-                        <Divider />
+                        {contents.goodPoints.length > 0 &&
+                            <>
+                                <Divider />
+                                <Box sx={{ px: 2, my: 1 }}>
+                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                        良かったところ
+                                    </Typography>
 
-                        <Stack direction="row" sx={{ p: 2 }} >
-                            <Box sx={{ width: "100%", px: 2 }}>
-                                {String(contents.place)}
-                            </Box>
-                            <Box sx={{ width: "100%", px: 2 }}>
-                                {String(contents.weather)}
-                            </Box>
-                        </Stack>
-
-                        <Divider />
-
-                        <Box sx={{ px: 2 }}>
-                            <List subheader={
-                                <ListSubheader component="div" >
-                                    良かった点
-                                </ListSubheader>
-                            }>
-                                {contents.goodPoints.map((goodPoint, index) => (
-                                    <ListItem key={index} sx={{ pl: 4 }}>
-                                        <ListItemText>
+                                    {contents.goodPoints.map((goodPoint, index) => (
+                                        <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
                                             {goodPoint}
-                                        </ListItemText>
-                                    </ListItem>
-                                ))}
-                            </List>
-                        </Box>
+                                        </Typography>
+                                    ))}
+                                </Box>
+                            </>
+                        }
 
-                        <Divider />
 
-                        <Box sx={{ px: 2 }}>
-                            <List subheader={
-                                <ListSubheader component="div" >
-                                    悪かった点
-                                </ListSubheader>
-                            }>
-                                {contents.badPoints.map((badPoint, index) => (
-                                    <ListItem key={index} sx={{ pl: 4 }}>
-                                        <ListItemText>
+
+                        {contents.badPoints.length > 0 &&
+                            <>
+                                <Divider />
+                                <Box sx={{ px: 2, my: 1 }}>
+                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                        悪かったところ
+                                    </Typography>
+
+                                    {contents.badPoints.map((badPoint, index) => (
+                                        <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
                                             {badPoint}
-                                        </ListItemText>
-                                    </ListItem>
-                                ))}
-                            </List>
-                        </Box>
+                                        </Typography>
+                                    ))}
+                                </Box>
+                            </>
+                        }
                     </Box >
                     :
                     <NotDataCaption url='/game/create' />

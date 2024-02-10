@@ -32,7 +32,7 @@ export default function PracticeContentsBox({ contents }: PageProps) {
                 <Button sx={{ width: "100%" }} onClick={clickRightButton} disabled={contentsId == contents.length - 1 || contents.length == 0}><ArrowForwardIosIcon /></Button>
             </Stack >
             <PracticeContents contents={contents[contentsId]} />
-            
+
         </Box>
     )
 }
