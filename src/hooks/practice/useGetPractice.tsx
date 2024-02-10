@@ -83,7 +83,7 @@ export const useGetDatePractice = (setIsLoading) => {
                 setToken(null);
             }
         });
-    }, [params.date])
+    }, [params.date, setIsLoading])
 
     return contents
 }

@@ -34,8 +34,6 @@ export default function MenuSelectBox() {
     const pathName = usePathname().split('/')
 
     React.useEffect(() => {
-        console.log(pathName[1]);
-
         if (pathName[1] == "game") {
             setAlignment(0);
             ClickGameButton()

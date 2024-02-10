@@ -83,7 +83,7 @@ export const useGetDateGame = (setIsLoading) => {
                 setToken(null);
             }
         });
-    }, [params.date])
+    }, [params.date, setIsLoading])
 
     return contents
 }
