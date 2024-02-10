@@ -98,7 +98,7 @@ export default function PracticeContents({ contents }: PageProps) {
                                 </Typography>
 
                                 {contents.details.map((detail, index) => (
-                                    <Typography variant="body2" sx={{ px: 1, pb: 1 }}>
+                                    <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
                                         {detail}
                                     </Typography>
                                 ))}
