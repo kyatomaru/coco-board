@@ -126,7 +126,7 @@ export default function GameContents({ contents }: PageProps) {
                                     </Typography>
 
                                     {contents.goodPoints.map((goodPoint, index) => (
-                                        <Typography variant="body2" sx={{ px: 1, pb: 1 }}>
+                                        <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
                                             {goodPoint}
                                         </Typography>
                                     ))}
@@ -145,7 +145,7 @@ export default function GameContents({ contents }: PageProps) {
                                     </Typography>
 
                                     {contents.badPoints.map((badPoint, index) => (
-                                        <Typography variant="body2" sx={{ px: 1, pb: 1 }}>
+                                        <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
                                             {badPoint}
                                         </Typography>
                                     ))}

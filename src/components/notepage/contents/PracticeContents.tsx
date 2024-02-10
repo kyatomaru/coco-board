@@ -63,46 +63,49 @@ export default function PracticeContents({ contents }: PageProps) {
                             <Button sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></Button>
                         </Stack>
 
-                        <Divider />
-
                         {contents.place &&
-                            <Box sx={{ px: 2, my: 1 }}>
-                                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                    場所
-                                </Typography>
-                                <Typography variant="body2" sx={{ px: 1 }}>
-                                    {String(contents.place)}
-                                </Typography>
-                            </Box>
+                            <>
+                                <Divider />
+                                <Box sx={{ px: 2, my: 1 }}>
+                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                        場所
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ px: 1 }}>
+                                        {String(contents.place)}
+                                    </Typography>
+                                </Box>
+                            </>
                         }
-
-                        <Divider />
 
                         {contents.weather &&
-                            <Box sx={{ px: 2, my: 1 }}>
-                                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                    天気
-                                </Typography>
-                                <Typography variant="body2" sx={{ px: 1 }}>
-                                    {String(contents.weather)}
-                                </Typography>
-                            </Box>
+                            <>
+                                <Divider />
+                                <Box sx={{ px: 2, my: 1 }}>
+                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                        天気
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ px: 1 }}>
+                                        {String(contents.weather)}
+                                    </Typography>
+                                </Box>
+                            </>
                         }
 
-                        <Divider />
-
                         {contents.details.length > 0 &&
-                            <Box sx={{ px: 2, my: 1 }}>
-                                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                    練習メニュー
-                                </Typography>
-
-                                {contents.details.map((detail, index) => (
-                                    <Typography variant="body2" sx={{ px: 1, pb: 1 }}>
-                                        {detail}
+                            <>
+                                <Divider />
+                                <Box sx={{ px: 2, my: 1 }}>
+                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                        練習メニュー
                                     </Typography>
-                                ))}
-                            </Box>
+
+                                    {contents.details.map((detail, index) => (
+                                        <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
+                                            {detail}
+                                        </Typography>
+                                    ))}
+                                </Box>
+                            </>
                         }
                     </Box >
                     :
