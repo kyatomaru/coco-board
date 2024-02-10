@@ -17,7 +17,6 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import GameForm from "@/components/form/game/GameForm_solution"
 import TacticalBoard from '@/components/tacticalBoard/TacticalBoard';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
