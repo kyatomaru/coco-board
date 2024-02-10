@@ -60,17 +60,17 @@ export default function MenuSelectBox() {
     }
 
     return (
-        <Box sx={{ textAlign: "center", mx: 1 }}>
+        <Box sx={{ textAlign: "center", mx: 1, mt: 1 }}>
             <ToggleButtonGroup
                 value={alignment}
                 exclusive
                 onChange={handleAlignment}
                 aria-label="text alignment"
             >
-                <ToggleButton value={0} >
+                <ToggleButton sx={{ minWidth: "60px" }} value={0} >
                     試合
                 </ToggleButton>
-                <ToggleButton value={1} >
+                <ToggleButton sx={{ minWidth: "60px" }} value={1} >
                     練習
                 </ToggleButton>
                 {/* <ToggleButton value={2} >
