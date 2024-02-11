@@ -76,7 +76,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
             <Box sx={{ my: 3 }}>
                 <Box sx={{ my: 2 }}>
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel error={titleError} htmlFor="outlined-adornment-title">タイトル</InputLabel>
+                        <InputLabel sx={{ fontSize: 14 }} error={titleError} htmlFor="outlined-adornment-title">タイトル</InputLabel>
                         <OutlinedInput
                             required
                             id="outlined-adornment-title"
@@ -91,6 +91,7 @@ export default function GameForm({ contents, titleError }: PageProps) {
                                 setTitle(newValue.target.value)
                                 contents.title = newValue.target.value
                             }}
+                            sx={{ fontSize: 14 }}
                         />
                         {!!titleError && (
                             <FormHelperText error id="accountId-error">
@@ -100,8 +101,8 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     </FormControl>
 
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-place">場所</InputLabel>
-                        <OutlinedInput
+                        <InputLabel sx={{ fontSize: 14 }}htmlFor="outlined-adornment-place">場所</InputLabel>
+                        <OutlinedInput sx={{ fontSize: 14 }}
                             id="outlined-adornment-place"
                             name="place"
                             aria-describedby="outlined-place-helper-text"
@@ -115,8 +116,8 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     </FormControl>
 
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-weather">天気</InputLabel>
-                        <Select
+                        <InputLabel sx={{ fontSize: 14 }}htmlFor="outlined-adornment-weather">天気</InputLabel>
+                        <Select sx={{ fontSize: 14 }}
                             labelId="outlined-adornment-weather-label"
                             name="weather"
                             id="outlined-adornment-weather"
@@ -127,19 +128,19 @@ export default function GameForm({ contents, titleError }: PageProps) {
                                 contents.weather = newValue.target.value
                             }}
                         >
-                            <MenuItem value="晴れ">晴れ</MenuItem>
-                            <MenuItem value="曇り">曇り</MenuItem>
-                            <MenuItem value="雨">雨</MenuItem>
-                            <MenuItem value="雪">雪</MenuItem>
+                            <MenuItem  sx={{ fontSize: 14 }} value="晴れ">晴れ</MenuItem>
+                            <MenuItem  sx={{ fontSize: 14 }} value="曇り">曇り</MenuItem>
+                            <MenuItem  sx={{ fontSize: 14 }} value="雨">雨</MenuItem>
+                            <MenuItem  sx={{ fontSize: 14 }} value="雪">雪</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>
 
                 <Box sx={{ my: 2 }}>
-                    <InputLabel sx={{ mx: 1 }} >チーム1</InputLabel>
+                    <InputLabel sx={{ mx: 1,fontSize: 14  }} >チーム1</InputLabel>
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-name1">チーム名</InputLabel>
-                        <OutlinedInput
+                        <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-name1">チーム名</InputLabel>
+                        <OutlinedInput sx={{ fontSize: 14 }}
                             id="outlined-adornment-name1"
                             name="name1"
                             aria-describedby="outlined-name1-helper-text"
@@ -154,8 +155,8 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     </FormControl>
 
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-score1">点数</InputLabel>
-                        <OutlinedInput
+                        <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-score1">点数</InputLabel>
+                        <OutlinedInput sx={{ fontSize: 14 }}
                             id="outlined-adornment-score1"
                             name="score1"
                             aria-describedby="outlined-score1-helper-text"
@@ -170,14 +171,15 @@ export default function GameForm({ contents, titleError }: PageProps) {
                 </Box>
 
                 <Box sx={{ my: 2 }}>
-                    <InputLabel sx={{ mx: 1 }} >チーム2</InputLabel>
+                    <InputLabel sx={{ mx: 1, fontSize:14  }} >チーム2</InputLabel>
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-name2">チーム名</InputLabel>
-                        <OutlinedInput
+                        <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-name2">チーム名</InputLabel>
+                        <OutlinedInput 
+                            sx={{ fontSize: 14 }}
                             id="outlined-adornment-name2"
                             name="name2"
                             aria-describedby="outlined-name2-helper-text"
-                            label="チーム"
+                            label="チーム名"
                             value={name2}
                             onChange={newValue => {
                                 setName2(newValue.target.value)
@@ -187,8 +189,9 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     </FormControl>
 
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-score2">点数</InputLabel>
-                        <OutlinedInput
+                        <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-score2">点数</InputLabel>
+                        <OutlinedInput 
+                            sx={{ fontSize: 14 }}
                             id="outlined-adornment-score2"
                             name="score2"
                             aria-describedby="outlined-score2-helper-text"
@@ -203,8 +206,8 @@ export default function GameForm({ contents, titleError }: PageProps) {
                 </Box>
 
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-position">ポジション</InputLabel>
-                    <OutlinedInput
+                    <InputLabel sx={{ fontSize: 14 }}htmlFor="outlined-adornment-position">ポジション</InputLabel>
+                    <OutlinedInput sx={{ fontSize: 14 }}
                         id="outlined-adornment-position"
                         name="position"
                         aria-describedby="outlined-weight-helper-text"
