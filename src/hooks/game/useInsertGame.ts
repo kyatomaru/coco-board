@@ -7,14 +7,35 @@ import { useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase';
 import dayjs from 'dayjs';
 
-export const useInsertGame = async (data) => {
+export const useInsertGame = async (event, contents, dateValue) => {
+    event.preventDefault()
+    // const formData = new FormData(event.currentTarget)
+    // const data = Object.fromEntries(formData)
+    const data = contents
 
-    const res = await fetch('/api/game/', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'content-type': 'application/json'
+    // if (!data.title) {
+    //     setTitleError(true)
+    // }
+    if (false) {
+
+    }
+    else {
+        const uid = await auth.currentUser?.uid;
+        if (uid) {
+            data.uid = uid;
+            if (dateValue) data.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
+
+            const date = new Date();
+            data.createDate = date;
+            data.updateDate = date;
+
+            const res = fetch('/api/game/', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
         }
-    })
-    return res
+    }
 }

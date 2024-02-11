@@ -24,6 +24,31 @@ import Footer from "@/components/Footer";
 import CircularProgress from '@mui/material/CircularProgress';
 import { usePatchGame } from '@/hooks/game/usePatchGame';
 
+async function updateData(event: React.FormEvent<HTMLFormElement>, data, dateValue) {
+  event.preventDefault()
+  // const formData = new FormData(event.currentTarget)
+  // const updateData = Object.fromEntries(formData)
+
+  const uid = await auth.currentUser?.uid;
+  if (uid) {
+    data.updateData.uid = uid;
+
+    if (dateValue) data.updateData.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
+
+    const date = new Date();
+    data.updateData.createDate = date;
+    data.updateData.updateDate = date;
+
+    fetch('/api/game/', {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+  }
+}
+
 export default function Home() {
   const router = useRouter()
   const params = useParams()
@@ -33,34 +58,12 @@ export default function Home() {
 
   const contents = useGetIdGame(setIsLoading, setDateValue)
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    // const formData = new FormData(event.currentTarget)
-    // const updateData = Object.fromEntries(formData)
-    const updateData = contents
-
-    const data = { updateData: updateData, contentsId: params.contentsId }
-
-    const uid = await auth.currentUser?.uid;
-    if (uid) {
-      data.updateData.uid = uid;
-
-      if (dateValue) data.updateData.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
-
-      const date = new Date();
-      data.updateData.createDate = date;
-      data.updateData.updateDate = date;
-
-      const response = await usePatchGame(data).then((res) => {
-        if (res.ok) {
-          try {
-            router.push('/notes/' + dayjs(String(data.updateData.date)).format('YYYY-MM-DD'));
-          } catch (error) {
-            console.log(error)
-          }
-        }
-      })
-    }
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true)
+    const data = { updateData: contents, contentsId: params.contentsId }
+    updateData(event, data, dateValue).then(() => {
+      router.push('/notes/' + dayjs(String(dateValue)).format('YYYY-MM-DD'));
+    })
   }
 
   return (

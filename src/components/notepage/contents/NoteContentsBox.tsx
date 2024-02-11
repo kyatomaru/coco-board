@@ -24,7 +24,7 @@ export default function NoteContentsBox({ contents }: PageProps) {
         <Box>
             {contents.map((value, index) => {
                 return (
-                    <NoteContents contents={value} />
+                    <NoteContents key={index} contents={value} />
                 )
             })}
         </Box >
