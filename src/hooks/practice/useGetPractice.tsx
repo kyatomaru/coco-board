@@ -4,6 +4,48 @@ import { useParams } from 'next/navigation';
 import type { User } from 'firebase/auth';
 import { PracticeContentsModel, type PracticeContentsType } from '@/types/PracticeContents';
 
+export const useGetAllPractice = (setIsLoading) => {
+    const [user, setUser] = React.useState<User | null>(null);
+    const [token, setToken] = React.useState<string | null>(null);
+    const [contents, setContents] = React.useState<Array<PracticeContentsType | null>>([null]);
+
+    const params = useParams()
+
+
+    React.useEffect(() => {
+        const GetContents = async (uid: string | undefined) => {
+            if (uid) {
+                const getParams = { uid: uid };
+                const query = new URLSearchParams(getParams);
+
+                fetch(`/api/practice/?${query}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setContents(data)
+                        setIsLoading(false)
+                    })
+            }
+        }
+
+        setIsLoading(true)
+        const auth = getAuth();
+        return onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(auth.currentUser);
+                user.getIdToken().then((token) => {
+                    setToken(token);
+                });
+                GetContents(auth.currentUser?.uid)
+            } else {
+                setUser(null);
+                setToken(null);
+            }
+        });
+    }, [setIsLoading])
+
+    return contents
+}
+
 export const useGetIdPractice = (setIsLoading, setDateValue) => {
     const [user, setUser] = React.useState<User | null>(null);
     const [token, setToken] = React.useState<string | null>(null);

@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
 import { useGetProblem } from '@/hooks/problem/useGetProblem';
-import { useGetAllGame, useGetDateGame } from '@/hooks/game/useGetGame';
-import { useGetDatePractice } from '@/hooks/practice/useGetPractice';
+import { useGetAllGame } from '@/hooks/game/useGetGame';
+import { useGetAllPractice } from '@/hooks/practice/useGetPractice';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TitleBox from "@/components/TitleBox";
@@ -56,7 +56,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
 
   const gameContents = useGetAllGame(setIsLoading)
-  const practiceContents = useGetDatePractice(setIsLoading)
+  const practiceContents = useGetAllPractice(setIsLoading)
   // const problemContents = useGetProblem(gameContents, practiceContents)
 
   // if (gameContents.length > 0 || practiceContents.length > 0) {

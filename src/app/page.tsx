@@ -21,6 +21,7 @@ import Container from '@mui/material/Container';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Fab from '@mui/material/Fab';
 
 export default function Home() {
   const router = useRouter()
@@ -88,14 +89,16 @@ export default function Home() {
           <CircularProgress sx={{ position: "absolute", top: "50%", bottom: "50%", my: "auto" }} />
         </Container>
         :
-        <Container fixed>
+        <Container fixed sx={{ position: "relative", minHeight: "100vh", maxWidth: "700px" }}>
+          <Fab onClick={handleOpen} sx={{ position: "absolute", right: "20px", bottom: "80px", color: "#1976d2" }}>
+            <AddCircleIcon sx={{ width: "50px", height: "50px" }} />
+          </Fab>
           <HomeContentsBox problemContents={problemContents} />
-        </Container>
+        </Container >
       }
       {/* <TargetForm targetProp={target} problemProp={problem} /> */}
-      <IconButton onClick={handleOpen} >
-        <AddCircleIcon sx={{ width: "50px", height: "50px" }} />
-      </IconButton>
+
+
       <Modal
         open={open}
         onClose={handleClose}
