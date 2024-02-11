@@ -8,7 +8,6 @@ import dayjs from 'dayjs';
 import ja from 'date-fns/locale/ja'
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 import { ProblemContentsModel } from '@/types/ProblemContents';
 import HomeContentsBox from '@/components/homepage/HomeContentsBox';
 import { Content } from 'next/font/google';

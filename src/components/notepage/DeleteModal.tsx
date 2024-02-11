@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
+import Popper from '@mui/material/Popper';
 
 type PageProps = {
     open: boolean,
@@ -17,7 +18,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 300,
-    height: 80,
+    minHeight: 120,
     bgcolor: 'background.paper',
     textAlign: "center",
     // border: '2px solid #000',
@@ -46,9 +47,12 @@ export default function DeleteModal({ open, setOpen, DeleteContents }: PageProps
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-                <Stack spacing={2} direction="row" >
-                    <Button variant="outlined" onClick={DeleteButtonClick}>削除</Button>
-                    <Button variant="outlined" onClick={CancelButtonClick}>キャンセル</Button>
+                <Typography variant="body2" component="div" sx={{ mb: 2 }}>
+                    本当に削除しますか？
+                </Typography>
+                <Stack spacing={2} direction="row">
+                    <Button sx={{ width: "100%" }} variant="outlined" onClick={CancelButtonClick}>キャンセル</Button>
+                    <Button sx={{ width: "100%" }} variant="contained" color="warning" onClick={DeleteButtonClick}>削除</Button>
                 </Stack>
             </Box>
         </Modal>

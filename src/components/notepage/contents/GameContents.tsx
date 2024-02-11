@@ -22,6 +22,7 @@ import NotDataCaption from '../NotDataCaption';
 import DeleteModal from '../DeleteModal';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 
 type PageProps = {
@@ -58,8 +59,8 @@ export default function GameContents({ contents }: PageProps) {
                                     {String(contents.title)}
                                 </Typography>
                             </Box>
-                            <Button sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></Button>
-                            <Button sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></Button>
+                            <IconButton sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></IconButton>
+                            <IconButton sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></IconButton>
                         </Stack>
 
                         <Divider />
