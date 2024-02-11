@@ -7,14 +7,15 @@ import { useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase';
 import dayjs from 'dayjs';
 
-export const useInsertGame = async (data) => {
-
-    const res = await fetch('/api/game/', {
+export const useInsertPractice = async (data) => {
+    const res = await fetch('/api/practice/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
             'content-type': 'application/json'
         }
     })
+
     return res
+
 }

@@ -18,6 +18,7 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { useInsertPractice } from '@/hooks/practice/useInsertPractice';
 
 export default function Home() {
   const router = useRouter()
@@ -46,13 +47,7 @@ export default function Home() {
         data.createDate = date;
         data.updateDate = date;
 
-        const response = await fetch('/api/practice/', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'content-type': 'application/json'
-          }
-        }).then((res) => {
+        const response = await useInsertPractice(data).then((res) => {
           if (res.ok) {
             try {
               router.push('/notes/' + dayjs(String(data.date)).format('YYYY-MM-DD'));

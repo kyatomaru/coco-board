@@ -23,6 +23,7 @@ import DeleteModal from '../DeleteModal';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import Chip from '@mui/material/Chip';
 
 
 type PageProps = {
@@ -53,13 +54,14 @@ export default function PracticeContents({ contents }: PageProps) {
                 <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeleteContents} />
                 {contents
                     ?
-                    <Box sx={{ py: 1 }} >
-                        <Stack direction="row" sx={{ p: 1 }} >
-                            <Box sx={{ width: "100%", px: 2 }}>
-                                <Typography variant="h6" component="div">
+                    <Box sx={{ pb: 1 }} >
+                        <Stack direction="row" sx={{ p: 1, mx: 1 }} >
+                            <Stack direction="row" sx={{ width: "100%", alignItems: "center" }} >
+                                <Typography variant="h6" sx={{ fontSize: 18 }} component="div">
                                     {String(contents.title)}
                                 </Typography>
-                            </Box>
+                                <Chip label="練習" color="primary" sx={{ ml: 4 }} />
+                            </Stack>
                             <IconButton sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></IconButton>
                             <IconButton sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></IconButton>
                         </Stack>
@@ -92,7 +94,7 @@ export default function PracticeContents({ contents }: PageProps) {
                             </>
                         }
 
-                        {contents.details.length > 0 &&
+                        {contents.details[0] != null &&
                             <>
                                 <Divider />
                                 <Box sx={{ px: 2, my: 1 }}>

@@ -21,6 +21,7 @@ import Footer from "@/components/Footer";
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
+import { usePatchPractice } from '@/hooks/practice/usePatchGame';
 
 export default function Home() {
   const router = useRouter()
@@ -49,13 +50,7 @@ export default function Home() {
       data.updateData.createDate = date;
       data.updateData.updateDate = date;
 
-      const response = await fetch('/api/game/', {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-        headers: {
-          'content-type': 'application/json'
-        }
-      }).then((res) => {
+      const response = await usePatchPractice(data).then((res) => {
         if (res.ok) {
           try {
             router.push('/notes/' + dayjs(String(data.updateData.date)).format('YYYY-MM-DD'));

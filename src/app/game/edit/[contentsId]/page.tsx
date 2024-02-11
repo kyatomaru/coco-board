@@ -22,6 +22,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Footer from "@/components/Footer";
 import CircularProgress from '@mui/material/CircularProgress';
+import { usePatchGame } from '@/hooks/game/usePatchGame';
 
 export default function Home() {
   const router = useRouter()
@@ -50,24 +51,7 @@ export default function Home() {
       data.updateData.createDate = date;
       data.updateData.updateDate = date;
 
-      await fetch('/api/game/', {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-        headers: {
-          'content-type': 'application/json'
-        }
-      })
-
-      const problemContents = new HomeProblemModel(params.contentsId, contents.problems, contents.date, date, date)
-      const problemData = { updateData: problemContents, contentsId: params.contentsId }
-
-      const response = await fetch('/api/problem/', {
-        method: 'PATCH',
-        body: JSON.stringify(problemData),
-        headers: {
-          'content-type': 'application/json'
-        }
-      }).then((res) => {
+      const response = await usePatchGame(data).then((res) => {
         if (res.ok) {
           try {
             router.push('/notes/' + dayjs(String(data.updateData.date)).format('YYYY-MM-DD'));

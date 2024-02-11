@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { auth } from '@/app/firebase';
 import type { GameContentsType } from '@/types/GameContents';
 import { GameContentsModel } from '@/types/GameContents';
@@ -23,6 +25,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Footer from "@/components/Footer";
 import { Container } from '@mui/material';
+import { useInsertGame } from '@/hooks/game/useInsertGame';
 
 export default function Home() {
   const router = useRouter()
@@ -44,34 +47,13 @@ export default function Home() {
       const uid = await auth.currentUser?.uid;
       if (uid) {
         data.uid = uid;
-
         if (dateValue) data.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
 
         const date = new Date();
         data.createDate = date;
         data.updateDate = date;
 
-        const response = await fetch('/api/game/', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'content-type': 'application/json'
-          }
-        })
-
-        console.log(response.json())
-
-        const contentsId = response.json()
-
-        const problemContents = new HomeProblemModel(contentsId, contents.problems, contents.date, date, date)
-
-        await fetch('/api/problem/', {
-          method: 'POST',
-          body: JSON.stringify(problemContents),
-          headers: {
-            'content-type': 'application/json'
-          }
-        }).then((res) => {
+        const response = await useInsertGame(data).then((res) => {
           if (res.ok) {
             try {
               router.push('/notes/' + dayjs(String(data.date)).format('YYYY-MM-DD'));
