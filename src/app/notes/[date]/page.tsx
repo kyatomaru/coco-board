@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <Header />
-      {true ?
+      {isLoading ?
         <Container fixed sx={{ height: "100vh", position: "relative", textAlign: "center" }} >
           <CircularProgress sx={{ position: "absolute", top: "50%", bottom: "50%", my: "auto" }} />
         </Container>
