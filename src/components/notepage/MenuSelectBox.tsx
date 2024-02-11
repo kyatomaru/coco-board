@@ -27,7 +27,7 @@ export default function MenuSelectBox({ menu, handleMenuChange }: PageProps) {
     }
 
     return (
-        <Box sx={{ textAlign: "center", mx: 1 }}>
+        <Box sx={{ textAlign: "center", mx: 1, mt: 1 }}>
             <ToggleButtonGroup
                 value={alignment}
                 exclusive

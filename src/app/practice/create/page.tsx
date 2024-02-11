@@ -79,12 +79,12 @@ export default function Home() {
       <Container sx={{ mt: "80px", mb: "80px" }}>
         <Box>
           <Stack direction="row" sx={{ p: 1, justifyContent: "center", alignItems: "center" }}>
-            <MenuSelectBox />
             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
               <DemoContainer components={['DatePicker']}>
                 <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDateValue(newValue)} />
               </DemoContainer>
             </LocalizationProvider>
+            <MenuSelectBox />
           </Stack>
         </Box>
 
