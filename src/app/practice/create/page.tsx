@@ -18,6 +18,35 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { useInsertPractice } from '@/hooks/practice/useInsertPractice';
+
+async function insertData(event: React.FormEvent<HTMLFormElement>, contents, dateValue) {
+  event.preventDefault()
+  // const formData = new FormData(event.currentTarget)
+  const data = contents
+  // const data = Object.fromEntries(formData)
+
+
+
+  const uid = await auth.currentUser?.uid;
+  if (uid) {
+    data.uid = uid;
+
+    if (dateValue) data.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
+
+    const date = new Date();
+    data.createDate = date;
+    data.updateDate = date;
+
+    fetch('/api/practice/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+  }
+}
 
 export default function Home() {
   const router = useRouter()
@@ -25,52 +54,13 @@ export default function Home() {
   const [dateValue, setDateValue] = React.useState<Date | null>(new Date());
   const [titleError, setTitleError] = React.useState(false);
   const [contents, setContents] = React.useState(new PracticeContentsModel());
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    const data = contents
-    // const data = Object.fromEntries(formData)
-
-    if (!data.title) {
-      setTitleError(true)
-    }
-    else {
-      const uid = await auth.currentUser?.uid;
-      if (uid) {
-        data.uid = uid;
-
-        if (dateValue) data.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
-
-        const date = new Date();
-        data.createDate = date;
-        data.updateDate = date;
-
-        const response = await fetch('/api/practice/', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'content-type': 'application/json'
-          }
-        }).then((res) => {
-          if (res.ok) {
-            try {
-              router.push('/notes/' + dayjs(String(data.date)).format('YYYY-MM-DD'));
-            } catch (error) {
-              console.log(error)
-            }
-          }
-        })
-      }
-    }
-  }
-
-  const clickGameButton = () => {
-    router.push('/game/create')
-  }
-
-  const clickPracticeButton = () => {
-    router.push('/practice/create')
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true)
+    insertData(event, contents, dateValue).then(() => {
+      router.push('/notes/' + dayjs(String(dateValue)).format('YYYY-MM-DD'));
+    })
   }
 
   return (

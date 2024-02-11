@@ -36,11 +36,12 @@ export default function ProblemForm({ contents }: PageProps) {
     }
 
     return (
-        <Box>
-            <InputLabel sx={{ m: 1 }}>課題</InputLabel>
+        <Box >
+            <InputLabel sx={{ m: 1, fontSize: 14 }}>課題</InputLabel>
             <Box sx={{ m: 1 }}>
-                <FormControl fullWidth>
+                <FormControl sx={{ fontSize: 14 }} fullWidth>
                     <OutlinedInput
+                        sx={{ fontSize: 14 }}
                         id="outlined-adornment-problem"
                         name="problem"
                         value={problem}
@@ -51,7 +52,7 @@ export default function ProblemForm({ contents }: PageProps) {
                     />
                 </FormControl>
             </Box>
-            <Box sx={{ my: 3 }}>
+            <Box sx={{ mt: 2 }}>
                 <AddInputBox title="課題解決のために取り組むこと" contents={contents.solutions} ChangeInput={ChangeSolutions} AddInput={AddSolutions} />
             </Box>
         </Box>

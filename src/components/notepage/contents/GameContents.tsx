@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 import type { GameContentsType } from '@/types/GameContents';
 import { useDeleteGame } from '@/hooks/game/useDeleteGame';
 import Typography from '@mui/material/Typography';
-import List from '@mui/material/List';
+import Chip from '@mui/material/Chip';
 import Card from '@mui/material/Card';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -22,6 +22,7 @@ import NotDataCaption from '../NotDataCaption';
 import DeleteModal from '../DeleteModal';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 
 type PageProps = {
@@ -51,15 +52,16 @@ export default function GameContents({ contents }: PageProps) {
                 <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeleteContents} />
                 {contents
                     ?
-                    <Box sx={{ py: 1 }}  >
-                        <Stack direction="row" sx={{ p: 1 }} >
-                            <Box sx={{ width: "100%", px: 2 }}>
-                                <Typography variant="h6" component="div">
+                    <Box sx={{ pb: 1 }}>
+                        <Stack direction="row" sx={{ p: 1, mx: 1 }} >
+                            <Stack direction="row" sx={{ width: "100%", alignItems: "center" }} >
+                                <Typography variant="h6" sx={{ fontSize: 18 }} component="div">
                                     {String(contents.title)}
                                 </Typography>
-                            </Box>
-                            <Button sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></Button>
-                            <Button sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></Button>
+                                <Chip label="試合" color="success" sx={{ ml: 4 }} />
+                            </Stack>
+                            <IconButton sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></IconButton>
+                            <IconButton sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></IconButton>
                         </Stack>
 
                         <Divider />
@@ -117,7 +119,7 @@ export default function GameContents({ contents }: PageProps) {
                             </>
                         }
 
-                        {contents.goodPoints.length > 0 &&
+                        {contents.goodPoints[0] != null &&
                             <>
                                 <Divider />
                                 <Box sx={{ px: 2, my: 1 }}>
@@ -134,9 +136,7 @@ export default function GameContents({ contents }: PageProps) {
                             </>
                         }
 
-
-
-                        {contents.badPoints.length > 0 &&
+                        {contents.badPoints[0] != null &&
                             <>
                                 <Divider />
                                 <Box sx={{ px: 2, my: 1 }}>

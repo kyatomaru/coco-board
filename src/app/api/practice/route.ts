@@ -18,37 +18,58 @@ export async function GET(
     const uid = req.nextUrl.searchParams.get("uid")
     const date = req.nextUrl.searchParams.get("date")
     const contentsId = req.nextUrl.searchParams.get("contentsId")
-    if (uid && date) {
-        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).get()
-            .then(snapshot => {
-                const data = Array()
-                snapshot.forEach((doc) => {
-                    const ob = doc.data()
-                    ob.contentsId = doc.id
-                    data.push(ob)
+
+    if (uid) {
+        if (date) {
+            const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).get()
+                .then(snapshot => {
+                    const data = Array()
+                    snapshot.forEach((doc) => {
+                        const ob = doc.data()
+                        ob.contentsId = doc.id
+                        data.push(ob)
+                    })
+                    return data
+
+                }).catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+            console.log(docRef)
+            return NextResponse.json(docRef, { status: 200 })
+        }
+        else if (contentsId) {
+            const docRef = await db.collection(COLLECTION_NAME).doc(contentsId).get()
+                .then(snapshot => {
+                    const data = snapshot.data()
+                    data.contentsId = contentsId
+
+                    return data
                 })
-                return data
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+            console.log(docRef)
 
-            }).catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-        console.log(docRef)
-        return NextResponse.json(docRef, { status: 200 })
-    }
-    if (contentsId) {
-        const docRef = await db.collection(COLLECTION_NAME).doc(contentsId).get()
-            .then(snapshot => {
-                const data = snapshot.data()
-                data.contentsId = contentsId
+            return NextResponse.json(docRef, { status: 200 })
+        }
+        else {
+            const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('date', 'desc').orderBy('createDate', 'desc').limit(10).get()
+                .then(snapshot => {
+                    const data = Array()
+                    snapshot.forEach((doc) => {
+                        const ob = doc.data()
+                        ob.contentsId = doc.id
+                        data.push(ob)
+                    })
+                    return data
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+            console.log(docRef)
 
-                return data
-            })
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-        console.log(docRef)
-
-        return NextResponse.json(docRef, { status: 200 })
+            return NextResponse.json(docRef, { status: 200 })
+        }
     }
 }
 

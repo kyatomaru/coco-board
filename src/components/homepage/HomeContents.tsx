@@ -48,8 +48,8 @@ export default function HomeContents({ problemContents }: PageProps) {
                                 <Box sx={{ width: "100%" }}>
                                     <ListItemText id={labelId} primary={value.problem} />
                                 </Box>
-                                <Button sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></Button>
-                                <Button sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></Button>
+                                <IconButton sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></IconButton>
+                                <IconButton sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></IconButton>
 
                             </Stack>
                         </ListItemButton>
