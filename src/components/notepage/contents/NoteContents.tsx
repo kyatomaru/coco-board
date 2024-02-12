@@ -45,12 +45,12 @@ export default function NoteContents({ contents }: PageProps) {
     }
 
     return (
-        <Card sx={{ minWidth: 275, my: 5 }}>
+        <Card sx={{ minWidth: 250, my: 5 }}>
             <Stack sx={{ width: "100%" }} justifyContent="center" alignItems="center" direction="row">
                 <Box sx={{ width: "100%", textAlign: "center" }}>
                     <IconButton onClick={clickLeftButton} disabled={contentsId == 0}><ArrowBackIosIcon /></IconButton>
                 </Box>
-                <Typography sx={{ width: "100%", px: 2, textAlign: "center", fontSize: 18 }} variant="h6" component="div">
+                <Typography sx={{ width: "100%", minWidth: "130px", px: 2, textAlign: "center", fontSize: 17 }} variant="h6" component="div">
                     {String(contents.date)}
                 </Typography>
                 <Box sx={{ width: "100%", textAlign: "center" }}>

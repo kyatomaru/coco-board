@@ -54,12 +54,12 @@ export default function GameContents({ contents }: PageProps) {
                     ?
                     <Box sx={{ pb: 1 }}>
                         <Stack direction="row" sx={{ p: 1, mx: 1 }} >
-                            <Stack direction="row" sx={{ width: "100%", alignItems: "center" }} >
-                                <Typography variant="h6" sx={{ fontSize: 18 }} component="div">
+                            <Box sx={{ width: "100%", alignItems: "center" }} >
+                                <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
                                     {String(contents.title)}
                                 </Typography>
-                                <Chip label="試合" color="success" sx={{ ml: 4 }} />
-                            </Stack>
+                                <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} />
+                            </Box>
                             <IconButton sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></IconButton>
                             <IconButton sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></IconButton>
                         </Stack>

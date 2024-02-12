@@ -56,12 +56,12 @@ export default function PracticeContents({ contents }: PageProps) {
                     ?
                     <Box sx={{ pb: 1 }} >
                         <Stack direction="row" sx={{ p: 1, mx: 1 }} >
-                            <Stack direction="row" sx={{ width: "100%", alignItems: "center" }} >
-                                <Typography variant="h6" sx={{ fontSize: 18 }} component="div">
+                            <Box sx={{ width: "100%", alignItems: "center" }} >
+                                <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
                                     {String(contents.title)}
                                 </Typography>
-                                <Chip label="練習" color="primary" sx={{ ml: 4 }} />
-                            </Stack>
+                                <Chip label="練習" color="primary" size="small" sx={{ fontSize: 9 }} />
+                            </Box>
                             <IconButton sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></IconButton>
                             <IconButton sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></IconButton>
                         </Stack>
