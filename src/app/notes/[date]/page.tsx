@@ -76,12 +76,12 @@ export default function Home() {
           <CircularProgress sx={{ position: "absolute", top: "50%", bottom: "50%", my: "auto" }} />
         </Container>
         :
-        <Container sx={{ my: "70px" }}>
+        <Container sx={{ my: "70px", px: 0 }}>
           {/* <Stack direction="row" sx={{ p: 1, justifyContent: "center", alignItems: "center" }}>
             <DateBox date={String(params.date)} />
             <MenuSelectBox menu={menu} handleMenuChange={handleMenuChange} />
           </Stack> */}
-          <Container maxWidth="sm" sx={{ mb: "80px" }}>
+          <Container maxWidth="sm" sx={{ mb: "80px", px: 0 }}>
             <NoteContentsBox contents={contents} />
             {/* {menu == 0 &&
               // <></>
