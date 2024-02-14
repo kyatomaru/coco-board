@@ -60,7 +60,7 @@ export async function GET(
             return NextResponse.json(docRef, { status: 200 })
         }
         else {
-            const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('date', 'desc').orderBy('createDate', 'desc').limit(10).get()
+            const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('date', 'desc').orderBy('createDate', 'desc').get()
                 .then(snapshot => {
                     const data = Array()
                     snapshot.forEach((doc) => {

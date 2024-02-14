@@ -11,7 +11,8 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 type PageProps = {
-    contents: Array<PracticeContentsType | null>
+    contents: Array<PracticeContentsType | null>,
+
 }
 
 export default function PracticeContentsBox({ contents }: PageProps) {
@@ -31,8 +32,7 @@ export default function PracticeContentsBox({ contents }: PageProps) {
                 <Button sx={{ width: "100%" }} onClick={clickLeftButton} disabled={contentsId == 0}><ArrowBackIosIcon /></Button>
                 <Button sx={{ width: "100%" }} onClick={clickRightButton} disabled={contentsId == contents.length - 1 || contents.length == 0}><ArrowForwardIosIcon /></Button>
             </Stack >
-            <PracticeContents contents={contents[contentsId]} />
-
+            {/* <PracticeContents contents={contents[contentsId]} /> */}
         </Box>
     )
 }

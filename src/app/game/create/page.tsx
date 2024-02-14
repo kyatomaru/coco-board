@@ -85,7 +85,7 @@ export default function Home() {
           <CircularProgress sx={{ position: "absolute", top: "50%", bottom: "50%", my: "auto" }} />
         </Container>
         :
-        <Container fixed sx={{ mt: "80px", mb: "80px" }}>
+        <Container maxWidth="sm" fixed sx={{ mt: "80px", mb: "80px" }}>
           <Stack direction="row" sx={{ p: 1, justifyContent: "center", alignItems: "center" }}>
             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
               <DemoContainer components={['DatePicker']}>

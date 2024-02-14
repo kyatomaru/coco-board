@@ -23,14 +23,19 @@ import DeleteModal from '../DeleteModal';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import { useGetAllGame } from '@/hooks/game/useGetGame';
+import { useGetAllPractice } from '@/hooks/practice/useGetPractice';
 
 
 type PageProps = {
     contents: GameContentsType
+    DeleteContents: any
 }
 
-export default function GameContents({ contents }: PageProps) {
+
+export default function GameContents({ contents, DeleteContents }: PageProps) {
     const [open, setOpen] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState<boolean>(true)
     const router = useRouter()
 
     const EditButtonClick = () => {
@@ -41,15 +46,16 @@ export default function GameContents({ contents }: PageProps) {
         setOpen(true)
     }
 
-    const DeleteContents = () => {
+    const DeleteGameContents = () => {
         useDeleteGame(contents.contentsId)
-        router.replace('/notes/' + (dayjs(String(new Date())).format('YYYY-MM-DD')));
+        DeleteContents(contents.contentsId)
+        setOpen(false)
     }
 
     return (
         <Card sx={{ minWidth: 275 }}>
             <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeleteContents} />
+                <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeleteGameContents} />
                 {contents
                     ?
                     <Box sx={{ pb: 1 }}>
@@ -60,8 +66,8 @@ export default function GameContents({ contents }: PageProps) {
                                 </Typography>
                                 <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} />
                             </Box>
-                            <IconButton sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></IconButton>
-                            <IconButton sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></IconButton>
+                            <IconButton sx={{ minWidth: "20px", m: "auto" }} onClick={EditButtonClick}><EditIcon /></IconButton>
+                            <IconButton sx={{ minWidth: "20px", m: "auto" }} onClick={DeleteButtonClick}><DeleteIcon /></IconButton>
                         </Stack>
 
                         <Divider />

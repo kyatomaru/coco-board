@@ -46,7 +46,7 @@ export default function Footer() {
     };
 
     const ClickViewButton = () => {
-        router.push('/notes/' + dayjs().format('YYYY-MM-DD'))
+        router.push('/notes')
     };
 
     const ClickCalendarButton = () => {
@@ -64,7 +64,7 @@ export default function Footer() {
                     }}>
                     <BottomNavigationAction label="ホーム" icon={<HomeIcon />} onClick={ClickHomeButton} />
                     <BottomNavigationAction label="閲覧" icon={<StickyNote2Icon />} onClick={ClickViewButton} />
-                    <BottomNavigationAction label="作成" icon={<AddBoxIcon />} onClick={ClickMakeButton} ></BottomNavigationAction>
+                    {/* <BottomNavigationAction label="作成" icon={<AddBoxIcon />} onClick={ClickMakeButton} ></BottomNavigationAction> */}
                     {/* <BottomNavigationAction label="Board" onClick={ClickCalendarButton} /> */}
                 </BottomNavigation >
             </AppBar>

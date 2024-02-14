@@ -17,7 +17,7 @@ type PageProps = {
 export default function AddInputBox({ title, contents, ChangeInput, AddInput }: PageProps) {
 
     return (
-        <Box sx={{ m: 1 }}>
+        <Box sx={{ mb: 1 }}>
             <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
                 <InputLabel sx={{ mx: 1, fontSize: 14 }}>{title}</InputLabel>
                 <Button sx={{ fontSize: 14 }} onClick={AddInput}>追加</Button>

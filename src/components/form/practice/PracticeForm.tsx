@@ -47,16 +47,9 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
 
     return (
         <Box >
-            <Box sx={{ my: 3 }}>
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+            <Box sx={{ mb: 3 }}>
+                <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
                     <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-title">タイトル</InputLabel>
-                    {/* <OutlinedInput
-                        id="outlined-adornment-title"
-                        name="title"
-                        aria-describedby="outlined-title-helper-text"
-                        label="タイトル"
-                        defaultValue={title}
-                    /> */}
                     <Select
                         labelId="outlined-adornment-title-label"
                         name="title"
@@ -74,42 +67,45 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
                     </Select>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-place">場所</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-place"
-                        name="place"
-                        aria-describedby="outlined-place-helper-text"
-                        label="場所"
-                        value={place}
-                        onChange={newValue => {
-                            setPlace(newValue.target.value)
-                            contents.place = newValue.target.value
-                        }}
-                        sx={{ fontSize: 14 }}
-                    />
-                </FormControl>
+                <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
+                    <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
+                        <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-place">場所</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-place"
+                            name="place"
+                            aria-describedby="outlined-place-helper-text"
+                            label="場所"
+                            value={place}
+                            onChange={newValue => {
+                                setPlace(newValue.target.value)
+                                contents.place = newValue.target.value
+                            }}
+                            sx={{ fontSize: 14 }}
+                        />
+                    </FormControl>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-weather">天気</InputLabel>
-                    <Select
-                        labelId="outlined-adornment-weather-label"
-                        name="weather"
-                        id="outlined-adornment-weather"
-                        value={weather}
-                        label="天気"
-                        onChange={newValue => {
-                            setWeather(newValue.target.value)
-                            contents.weather = newValue.target.value
-                        }}
-                        sx={{ fontSize: 14 }}
-                    >
-                        <MenuItem sx={{ fontSize: 14 }} value="晴れ">晴れ</MenuItem>
-                        <MenuItem sx={{ fontSize: 14 }} value="曇り">曇り</MenuItem>
-                        <MenuItem sx={{ fontSize: 14 }} value="雨">雨</MenuItem>
-                        <MenuItem sx={{ fontSize: 14 }} value="雪">雪</MenuItem>
-                    </Select>
-                </FormControl>
+
+                    <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
+                        <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-weather">天気</InputLabel>
+                        <Select
+                            labelId="outlined-adornment-weather-label"
+                            name="weather"
+                            id="outlined-adornment-weather"
+                            value={weather}
+                            label="天気"
+                            onChange={newValue => {
+                                setWeather(newValue.target.value)
+                                contents.weather = newValue.target.value
+                            }}
+                            sx={{ fontSize: 14 }}
+                        >
+                            <MenuItem sx={{ fontSize: 14 }} value="晴れ">晴れ</MenuItem>
+                            <MenuItem sx={{ fontSize: 14 }} value="曇り">曇り</MenuItem>
+                            <MenuItem sx={{ fontSize: 14 }} value="雨">雨</MenuItem>
+                            <MenuItem sx={{ fontSize: 14 }} value="雪">雪</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Stack>
             </Box>
 
             <Box sx={{ my: 3 }}>

@@ -75,18 +75,20 @@ export default function Home() {
             <CircularProgress />
           </Container>
           :
-          <Box>
-            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
-              <DemoContainer components={['DatePicker']}>
-                <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDateValue(newValue)} />
-              </DemoContainer>
-            </LocalizationProvider>
+          <Container maxWidth="sm" fixed sx={{ mt: "80px", mb: "80px" }}>
+            <Box>
+              <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
+                <DemoContainer components={['DatePicker']}>
+                  <DatePicker format='yyyy年MM月dd日' value={dateValue} disableFuture onChange={(newValue) => setDateValue(newValue)} />
+                </DemoContainer>
+              </LocalizationProvider>
 
-            <form onSubmit={onSubmit} method='POST'>
-              <GameForm contents={contents} titleError={titleError} />
-              <Button type='submit'>決定</Button>
-            </form>
-          </Box>
+              <form onSubmit={onSubmit} method='POST'>
+                <GameForm contents={contents} titleError={titleError} />
+                <Button type='submit'>決定</Button>
+              </form>
+            </Box>
+          </Container>
         }
       </Container>
       <Footer />
