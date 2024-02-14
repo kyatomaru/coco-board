@@ -6,7 +6,6 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import dayjs from 'dayjs';
 import type { GameContentsType } from '@/types/GameContents';
 import { useDeleteGame } from '@/hooks/game/useDeleteGame';
 import Typography from '@mui/material/Typography';
@@ -27,13 +26,31 @@ import GameContents from "./GameContents"
 import PracticeContents from './PracticeContents';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import dayjs from 'dayjs';
+import { confirmPasswordReset } from 'firebase/auth';
 
 type PageProps = {
-    contents: any
+    contents: any,
+    DeleteContents: any
 }
 
-export default function NoteContents({ contents }: PageProps) {
+const day = ['日', '月', '火', '水', '木', '金', '土']
+
+const DataFormat = (date) => {
+    const thisYear = dayjs(String(new Date)).format('YYYY');
+    const recordYear = dayjs(String(date)).format('YYYY');
+    const recordDay = `(${day[Number(dayjs(String(date)).format('d'))]})`
+
+    if (thisYear == recordYear) {
+        return dayjs(String(date)).format('M/DD ') + recordDay;
+    }
+    else {
+        return dayjs(String(date)).format('YYYY/M/DD ') + recordDay;
+    }
+
+}
+
+export default function NoteContents({ contents, DeleteContents }: PageProps) {
     const [contentsId, setcontentsId] = React.useState(0);
 
     const clickLeftButton = () => {
@@ -51,7 +68,7 @@ export default function NoteContents({ contents }: PageProps) {
                     <IconButton onClick={clickLeftButton} disabled={contentsId == 0}><ArrowBackIosIcon /></IconButton>
                 </Box>
                 <Typography sx={{ width: "100%", minWidth: "130px", px: 2, textAlign: "center", fontSize: 17 }} variant="h6" component="div">
-                    {String(contents.date)}
+                    {DataFormat(contents.date)}
                 </Typography>
                 <Box sx={{ width: "100%", textAlign: "center" }}>
                     <IconButton onClick={clickRightButton} disabled={contentsId == contents.contents.length - 1 || contents.contents.length == 0}><ArrowForwardIosIcon /></IconButton>
@@ -64,11 +81,11 @@ export default function NoteContents({ contents }: PageProps) {
                             <>
                                 {
                                     value.type == "game" &&
-                                    <GameContents contents={value} />
+                                    <GameContents contents={value} DeleteContents={DeleteContents} />
                                 }
                                 {
                                     value.type == "practice" &&
-                                    <PracticeContents contents={value} />
+                                    <PracticeContents contents={value} DeleteContents={DeleteContents} />
                                 }
                             </>
                         }

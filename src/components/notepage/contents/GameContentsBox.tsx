@@ -32,8 +32,8 @@ export default function GameContentsBox({ contents }: PageProps) {
                 <Button sx={{ width: "100%" }} onClick={clickLeftButton} disabled={contentsId == 0}><ArrowBackIosIcon /></Button>
                 <Button sx={{ width: "100%" }} onClick={clickRightButton} disabled={contentsId == contents.length - 1 || contents.length == 0}><ArrowForwardIosIcon /></Button>
             </Stack >
-            <GameContents contents={contents[contentsId]} />
-            
+            {/* <GameContents contents={contents[contentsId]} /> */}
+
         </Box >
     )
 }

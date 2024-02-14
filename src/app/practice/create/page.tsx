@@ -66,7 +66,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <Header />
-      <Container sx={{ mt: "80px", mb: "80px" }}>
+      <Container maxWidth="sm" sx={{ mt: "80px", mb: "80px" }}>
         <Box>
           <Stack direction="row" sx={{ p: 1, justifyContent: "center", alignItems: "center" }}>
             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>

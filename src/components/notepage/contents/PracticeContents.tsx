@@ -27,10 +27,11 @@ import Chip from '@mui/material/Chip';
 
 
 type PageProps = {
-    contents: PracticeContentsType
+    contents: PracticeContentsType,
+    DeleteContents: any
 }
 
-export default function PracticeContents({ contents }: PageProps) {
+export default function PracticeContents({ contents, DeleteContents }: PageProps) {
     const [open, setOpen] = React.useState(false);
     const router = useRouter()
 
@@ -43,15 +44,16 @@ export default function PracticeContents({ contents }: PageProps) {
         setOpen(true)
     }
 
-    const DeleteContents = () => {
+    const DeletePracticeContents = () => {
         useDeletePractice(contents.contentsId)
-        router.replace('/notes/' + (dayjs(String(new Date())).format('YYYY-MM-DD')));
+        DeleteContents(contents.contentsId)
+        setOpen(false)
     }
 
     return (
         <Card sx={{ minWidth: 275 }}>
             <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeleteContents} />
+                <DeleteModal open={open} setOpen={setOpen} DeleteContents={DeletePracticeContents} />
                 {contents
                     ?
                     <Box sx={{ pb: 1 }} >
@@ -62,8 +64,8 @@ export default function PracticeContents({ contents }: PageProps) {
                                 </Typography>
                                 <Chip label="練習" color="primary" size="small" sx={{ fontSize: 9 }} />
                             </Box>
-                            <IconButton sx={{ minWidth: "20px" }} onClick={EditButtonClick}><EditIcon /></IconButton>
-                            <IconButton sx={{ minWidth: "20px" }} onClick={DeleteButtonClick}><DeleteIcon /></IconButton>
+                            <IconButton sx={{ minWidth: "20px", m: "auto" }} onClick={EditButtonClick}><EditIcon /></IconButton>
+                            <IconButton sx={{ minWidth: "20px", m: "auto" }} onClick={DeleteButtonClick}><DeleteIcon /></IconButton>
                         </Stack>
 
                         {contents.place &&

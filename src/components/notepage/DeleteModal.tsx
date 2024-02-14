@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import Popper from '@mui/material/Popper';
+import { useRouter } from 'next/navigation'
+import { useGetAllGame } from '@/hooks/game/useGetGame';
 
 type PageProps = {
     open: boolean,
@@ -28,11 +30,13 @@ const style = {
 };
 
 export default function DeleteModal({ open, setOpen, DeleteContents }: PageProps) {
+    const [isLoading, setIsLoading] = React.useState<boolean>(true)
+    const router = useRouter()
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const DeleteButtonClick = () => {
-        DeleteContents();
+        DeleteContents()
     }
 
     const CancelButtonClick = () => {
@@ -52,7 +56,7 @@ export default function DeleteModal({ open, setOpen, DeleteContents }: PageProps
                 </Typography>
                 <Stack spacing={2} direction="row">
                     <Button sx={{ width: "100%" }} variant="outlined" onClick={CancelButtonClick}>キャンセル</Button>
-                    <Button sx={{ width: "100%" }} variant="contained" color="warning" onClick={DeleteButtonClick}>削除</Button>
+                    <Button sx={{ width: "100%" }} variant="contained" onClick={DeleteButtonClick}>削除</Button>
                 </Stack>
             </Box>
         </Modal>

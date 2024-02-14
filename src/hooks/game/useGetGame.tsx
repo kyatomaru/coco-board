@@ -11,7 +11,6 @@ export const useGetAllGame = (setIsLoading) => {
 
     const params = useParams()
 
-
     React.useEffect(() => {
         const GetContents = async (uid: string | undefined) => {
             if (uid) {

@@ -29,7 +29,7 @@ export default function HomeContentsBox({ problemContents }: PageProps) {
     }
 
     return (
-        <Container sx={{ mt: "80px", mb: "80px" }}>
+        <Container sx={{}}>
             <HomeContents problemContents={problemContents} />
         </Container>
     )
