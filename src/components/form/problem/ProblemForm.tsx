@@ -6,12 +6,14 @@ import { ProblemContentsType } from '@/types/ProblemContents';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 
 type PageProps = {
-    contents: ProblemContentsType
+    contents: ProblemContentsType,
+    titleError: boolean
 }
 
-export default function ProblemForm({ contents }: PageProps) {
+export default function ProblemForm({ contents, titleError }: PageProps) {
     const [problem, setProblem] = React.useState(contents.problem);
     const [solution, setSolution] = React.useState(contents.solutions);
 
@@ -37,22 +39,31 @@ export default function ProblemForm({ contents }: PageProps) {
 
     return (
         <Box >
-            <InputLabel sx={{ m: 1, fontSize: 14 }}>課題</InputLabel>
-            <Box sx={{ m: 1 }}>
-                <FormControl sx={{ fontSize: 14 }} fullWidth>
+            <Box sx={{ mb: 3 }}>
+                <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
+                    <InputLabel sx={{ fontSize: 14 }} error={titleError} htmlFor="outlined-adornment-problem">課題</InputLabel>
                     <OutlinedInput
-                        sx={{ fontSize: 14 }}
+                        required
                         id="outlined-adornment-problem"
                         name="problem"
+                        aria-describedby="outlined-title-helper-text"
+                        label="課題"
                         value={problem}
                         onChange={newValue => {
                             setProblem(newValue.target.value)
                             contents.problem = newValue.target.value
                         }}
+                        sx={{ fontSize: 14 }}
                     />
+                    {!!titleError && (
+                        <FormHelperText error id="accountId-error">
+                            {"入力してください。"}
+                        </FormHelperText>
+                    )}
+
                 </FormControl>
             </Box>
-            <Box sx={{ mt: 2 }}>
+            <Box >
                 <AddInputBox title="課題解決のために取り組むこと" contents={contents.solutions} ChangeInput={ChangeSolutions} AddInput={AddSolutions} />
             </Box>
         </Box>
