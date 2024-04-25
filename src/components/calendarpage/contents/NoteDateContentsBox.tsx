@@ -27,6 +27,10 @@ import ArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import dayjs from 'dayjs';
 import { useDateFormat } from '@/hooks/useDateFormat';
 
+const DateFormat = (date) => {
+    return useDateFormat(String(date))
+}
+
 export default function NoteDateContentsBox() {
     const router = useRouter()
     const params = useParams()
@@ -47,9 +51,7 @@ export default function NoteDateContentsBox() {
             fetch(`/api/note/?${query}`)
                 .then((response) => response.json())
                 .then((data) => {
-                    if (data.length > 0) {
-                        setContents(data)
-                    }
+                    setContents(data)
                 })
         }
     }
@@ -72,10 +74,8 @@ export default function NoteDateContentsBox() {
 
     }, [])
 
-    const DeleteContents = () => {
-        setIsLoading(true)
+    const DeleteContents = async () => {
         GetContents(auth.currentUser?.uid)
-        setIsLoading(false)
     }
 
     const clickBackButton = () => {
@@ -107,7 +107,7 @@ export default function NoteDateContentsBox() {
                             </Box>
                             <Box sx={{ height: "40px", mx: "auto", textAlign: "center", width: 150 }}>
                                 <Typography variant="h6" sx={{ fontSize: 14, lineHeight: "40px" }} component="div">
-                                    {useDateFormat(String(params.date))}
+                                    {DateFormat(params.date)}
                                 </Typography>
                             </Box>
                         </Box>

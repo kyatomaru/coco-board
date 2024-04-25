@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
 import Footer from "@/components/Footer";
-import PracticeContentsBox from '@/components/notepage/contents/practice/PracticeContentsBox';
+// import PracticeContentsBox from '@/components/notepage/contents/practice/PracticeContentsBox';
 import Container from '@mui/material/Container';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';

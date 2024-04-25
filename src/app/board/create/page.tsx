@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase';
 import type { GameContentsType } from '@/types/game/GameContents';
 import { GameContentsModel } from '@/types/game/GameContents';
-import { HomeProblemModel } from '@/types/problem/Problem';
+// import { HomeProblemModel } from '@/types/problem/Problem';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import MenuSelectBox from "@/components/form/MenuSelectBox"
@@ -62,7 +62,8 @@ export default function Home() {
 
         const contentsId = response.json()
 
-        const problemContents = new HomeProblemModel(contentsId, contents.problems, contents.date, date, date)
+        const problemContents = []
+        // const problemContents = new HomeProblemModel(contentsId, contents.problems, contents.date, date, date)
 
         await fetch('/api/problem/', {
           method: 'POST',

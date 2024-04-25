@@ -67,7 +67,7 @@ export default function HomeContents({ problemContents }: PageProps) {
                                             sx={{ pl: 5 }}
                                             role={undefined}
                                             dense>
-                                            <ListItemText id={labelId2} primary={value2} />
+                                            <ListItemText id={labelId2} />
 
                                         </ListItemButton>
                                     </ListItem>

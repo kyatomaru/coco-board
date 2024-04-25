@@ -28,6 +28,10 @@ import dayjs from 'dayjs';
 import { useDateFormat } from '@/hooks/useDateFormat';
 import Grid from '@mui/material/Grid';
 
+const DateFormat = (date) => {
+    return useDateFormat(String(date))
+}
+
 export default function NoteDateContentsBox() {
     const router = useRouter()
     const params = useParams()
@@ -107,7 +111,7 @@ export default function NoteDateContentsBox() {
                         </Grid>
                         <Grid item xs>
                             <Typography variant="h6" sx={{ fontSize: 14, textAlign: "center" }} component="div">
-                                {useDateFormat(String(params.date))}
+                                {DateFormat(params.date)}
                             </Typography>
                         </Grid>
                     </Grid>

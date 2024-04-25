@@ -106,8 +106,8 @@ export async function POST(
     const insertData = await req.json();
 
     if (insertData) {
-        const docRef = db.collection(COLLECTION_NAME).add(insertData)
-            .then(() => {
+        db.collection(COLLECTION_NAME).add(insertData)
+            .then((res) => {
                 console.log("Document successfully created!");
             })
             .catch((error) => {

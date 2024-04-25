@@ -14,6 +14,7 @@ import { theme } from '@/components/style/Thema'
 import AddInputBox from '../inputBox/AddInputBox';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
+import { PracticeDetailsModel } from '@/types/practice/PracticeDetails';
 
 
 type PageProps = {
@@ -43,7 +44,7 @@ export default function PracticeForm({ contents, titleError }: PageProps) {
         details.forEach((item) => {
             input.push(item)
         })
-        input.push([undefined])
+        input.push(new PracticeDetailsModel())
         setDetails(input)
         contents.details = input
     }

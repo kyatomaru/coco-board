@@ -18,7 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Divider from '@mui/material/Divider';
-import NotDataCaption from '../../NotDataCaption';
+// import NotDataCaption from '../../NotDataCaption';
 import DeleteModal from '../../DeleteModal';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -184,7 +184,7 @@ export default function PracticeContents({ contents, DeleteContents }: PageProps
 
                                         {contents.details.map((detail, index) => (
                                             <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
-                                                {detail}
+                                                {/* {detail} */}
                                             </Typography>
                                         ))}
                                     </Box>

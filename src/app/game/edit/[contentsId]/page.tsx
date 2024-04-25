@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useRouter, useParams } from 'next/navigation'
 import { auth } from '@/app/firebase';
 import { useGetIdGame } from '@/hooks/game/useGetGame';
-import { HomeProblemModel } from '@/types/problem/Problem';
+// import { HomeProblemModel } from '@/types/problem/Problem';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import MenuSelectBox from "@/components/form/MenuSelectBox"

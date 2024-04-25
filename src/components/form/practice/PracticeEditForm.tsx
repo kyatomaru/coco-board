@@ -121,7 +121,7 @@ export default function PracticeEditForm() {
                 <Box sx={{ position: 'sticky', top: 0, backgroundColor: "white", zIndex: 100 }} >
                     <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
                         <Grid >
-                            <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => router.push('/notes')}>キャンセル</Button>
+                            <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => router.push(`/calendar/${dayjs(String(practiceContents.date)).format('YYYY-MM-DD')}`)}>キャンセル</Button>
                         </Grid>
                         <Grid >
                             <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>記録する</Button>

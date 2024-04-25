@@ -184,7 +184,7 @@ export default function PracticeContents({ contents, DeleteContents }: PageProps
 
                                         {contents.details.map((detail, index) => (
                                             <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
-                                                {detail}
+                                                {/* {detail} */}
                                             </Typography>
                                         ))}
                                     </Box>

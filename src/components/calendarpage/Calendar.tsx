@@ -169,7 +169,7 @@ const Calendar = () => {
                             {contents[0] != undefined && (
                                 contents.map((content, index) => (
                                     content.date == dayjs(String(day)).format('YYYY-MM-DD') &&
-                                    <Chip size="small" sx={{ justifyContent: "flex-start", mt: "2px", width: "100%", fontSize: 10, height: 20, borderRadius: "5px" }} color={content.collection == "game" ? "success" : "primary"} variant="filled" label={content.title} />
+                                    <Chip key={index} size="small" sx={{ justifyContent: "flex-start", mt: "2px", width: "100%", fontSize: 10, height: 20, borderRadius: "5px" }} color={content.collection == "game" ? "success" : "primary"} variant="filled" label={content.title} />
                                 ))
                             )}
                         </Box>

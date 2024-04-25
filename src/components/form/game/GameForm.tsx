@@ -44,8 +44,6 @@ export default function GameForm({ contents, titleError }: PageProps) {
     const [badPoints, setBadPoints] = React.useState(contents.badPoints);
     const [comment, setComment] = React.useState(contents.comment);
 
-    console.log(contents.position)
-
     const ChangeGoodPointsContext = (newValue: String, index) => {
         const input = []
         goodPoints.forEach((item) => {

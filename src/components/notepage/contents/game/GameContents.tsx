@@ -220,7 +220,7 @@ export default function GameContents({ contents, DeleteContents }: PageProps) {
 
                                         {contents.goodPoints.map((goodPoint, index) => (
                                             <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
-                                                {goodPoint}
+                                                {/* {goodPoint} */}
                                             </Typography>
                                         ))}
                                     </Box>
@@ -237,7 +237,7 @@ export default function GameContents({ contents, DeleteContents }: PageProps) {
 
                                         {contents.badPoints.map((badPoint, index) => (
                                             <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
-                                                {badPoint}
+                                                {/* {badPoint} */}
                                             </Typography>
                                         ))}
                                     </Box>

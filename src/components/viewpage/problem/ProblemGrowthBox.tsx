@@ -98,77 +98,72 @@ export default function ProblemGrowthBox({ contents, DeleteContents }: PageProps
     }
 
     return (
-        <>
-            <DeleteModal open={deleteModalOpen} setOpen={setDeleteModalOpen} DeleteContents={DeleteProblemContents} />
-            <ContentsMenu open={contentsModalOpen} setOpen={setContentsModalOpen} Delete={DeleteButtonClick} Edit={EditButtonClick} View={ViewButtonClick} />
+        <Card sx={{ minWidth: 250 }} >
+            <Box sx={{ position: "relative" }}>
+                <IconButton
+                    aria-label="more"
+                    id="long-button"
+                    // aria-controls={open ? 'long-menu' : undefined}
+                    // aria-expanded={open ? 'true' : undefined}
+                    // aria-haspopup="true"
+                    onClick={menuHandleClick}
+                    sx={{
+                        right: "10px", top: "7px",
+                        position: "absolute",
+                        zIndex: 1000, width: "35px", height: "35px", m: "auto"
+                    }}
+                >
+                    <MoreHorizIcon />
+                </IconButton>
+                <Stack direction="row" sx={{ p: 1, mx: 1, alignItems: "center" }} >
+                    <Box sx={{ width: "100%", alignItems: "center" }} >
+                        <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
+                            {String(contents.problem)}
+                        </Typography>
 
-            <Card sx={{ minWidth: 250 }} >
-                <Box sx={{ position: "relative" }}>
-                    <IconButton
-                        aria-label="more"
-                        id="long-button"
-                        // aria-controls={open ? 'long-menu' : undefined}
-                        // aria-expanded={open ? 'true' : undefined}
-                        // aria-haspopup="true"
-                        onClick={menuHandleClick}
-                        sx={{
-                            right: "10px", top: "7px",
-                            position: "absolute",
-                            zIndex: 1000, width: "35px", height: "35px", m: "auto"
-                        }}
-                    >
-                        <MoreHorizIcon />
-                    </IconButton>
-                    <Stack direction="row" sx={{ p: 1, mx: 1, alignItems: "center" }} >
-                        <Box sx={{ width: "100%", alignItems: "center" }} >
-                            <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
-                                {String(contents.problem)}
+                        <Chip label={String(contents.category[contents.categoryId].title)} size="small" sx={{ fontSize: 9, backgroundColor: contents.category[contents.categoryId].bgColor, color: contents.category[contents.categoryId].color, }} />
+                    </Box>
+                </Stack>
+
+                <Divider />
+                <Box sx={{ px: 2, my: 1 }}>
+                    <Stack>
+                        <Box >
+                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                克服度
                             </Typography>
-
-                            <Chip label={String(contents.category[contents.categoryId].title)} size="small" sx={{ fontSize: 9, backgroundColor: contents.category[contents.categoryId].bgColor, color: contents.category[contents.categoryId].color, }} />
+                            <Rating size="large" name="half-rating" defaultValue={Number(contents.overcome)} precision={0.5} readOnly />
+                        </Box>
+                        <Box>
+                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                達成日
+                            </Typography>
+                            <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
+                                {DataFormat(String(contents.createDate))}
+                            </Typography>
                         </Box>
                     </Stack>
-
-                    <Divider />
-                    <Box sx={{ px: 2, my: 1 }}>
-                        <Stack>
-                            <Box >
-                                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                    克服度
-                                </Typography>
-                                <Rating size="large" name="half-rating" defaultValue={Number(contents.overcome)} precision={0.5} readOnly />
-                            </Box>
-                            <Box>
-                                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                    達成日
-                                </Typography>
-                                <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
-                                    {DataFormat(String(contents.createDate))}
-                                </Typography>
-                            </Box>
-                        </Stack>
-                    </Box>
-
-                    <Divider />
-                    {contents.solutions[0] != null &&
-                        <>
-                            <Divider />
-                            <Box sx={{ px: 2, my: 1 }}>
-                                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                    取り組むこと
-                                </Typography>
-
-                                {contents.solutions.map((solution, index) => (
-                                    <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
-                                        {solution.context}
-                                    </Typography>
-                                ))}
-                            </Box>
-                        </>
-                    }
                 </Box>
-            </Card >
-        </>
+
+                <Divider />
+                {contents.solutions[0] != null &&
+                    <>
+                        <Divider />
+                        <Box sx={{ px: 2, my: 1 }}>
+                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                取り組むこと
+                            </Typography>
+
+                            {contents.solutions.map((solution, index) => (
+                                <Typography key={index} variant="body2" sx={{ px: 1, pb: 1 }}>
+                                    {solution.context}
+                                </Typography>
+                            ))}
+                        </Box>
+                    </>
+                }
+            </Box>
+        </Card >
     )
 }
 

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useRouter, useParams } from 'next/navigation'
 import { auth } from '@/app/firebase';
 import { useGetIdGame } from '@/hooks/game/useGetGame';
-import { HomeProblemModel } from '@/types/problem/Problem';
+// import { HomeProblemModel } from '@/types/problem/Problem';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import MenuSelectBox from "@/components/form/MenuSelectBox"
@@ -28,6 +28,18 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import type { User } from 'firebase/auth';
 import PracticeContents from '@/components/viewpage/contents/practice/PracticeContents';
 
+const containterStyle = {
+  // height: "auto",
+  // position: "absolute",
+  // zIndex: 90,
+  // top: "0",
+  borderRight: "solid 0.5px #b2b2b2",
+  borderLeft: "solid 0.5px #b2b2b2",
+  bgcolor: "white",
+  pb: "45px",
+  minHeight: "100vh"
+
+}
 
 export default function Home() {
   const router = useRouter()
@@ -80,7 +92,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
-      <Container maxWidth="sm" sx={{ px: 0, position: "relative", mt: 4 }}>
+      <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative" }}>
         <PracticeContents contents={contents} DeleteContents={DeleteContents} />
       </Container>
       <Footer />

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase';
 import { TargetModel } from '@/types/Target';
-import { ProblemModel } from '@/types/problem/Problem';
+// import { ProblemModel } from '@/types/problem/Problem';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import Footer from "@/components/Footer";
@@ -17,7 +17,7 @@ export default function Home() {
 
   const [dateValue, setDateValue] = React.useState<Date | null>(new Date());
   const [target, setTarget] = React.useState(new TargetModel());
-  const [problem, setProblem] = React.useState(new ProblemModel());
+  // const [problem, setProblem] = React.useState(new ProblemModel());
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()

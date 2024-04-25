@@ -92,218 +92,212 @@ export default function GameContents({ contents, DeleteContents }: PageProps) {
     }
 
     return (
-        <>
-            {/* <DeleteModal open={deleteModalOpen} setOpen={setDeleteModalOpen} DeleteContents={DeleteGameContents} /> */}
-            {/* <ContentsMenu open={contentsModalOpen} setOpen={setContentsModalOpen} Delete={DeleteButtonClick} Edit={EditButtonClick} View={ViewButtonClick} /> */}
 
-
-            <Box>
-                <Box sx={{ position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 100 }} >
-                    <Grid sx={{ px: 1, height: "45px" }} container direction="row" alignItems="center" justifyContent="space-between">
-                        <Grid >
-                            <IconButton onClick={(event) => router.push("/notes/problem")} ><ArrowBackIosNewIcon /></IconButton>
-                        </Grid>
-                        <Grid>
-                            <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
-                                記録
-                            </Typography>
-                        </Grid>
-                        <Grid >
-                            <Stack direction="row" spacing={1}>
-                                <IconButton onClick={EditButtonClick} ><EditIcon /></IconButton>
-                                <IconButton onClick={DeleteButtonClick} ><DeleteIcon /></IconButton>
-                            </Stack>
-                            {/* <NextButton size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>記録する</NextButton> */}
-                        </Grid>
+        <Box>
+            <Box sx={{ position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 100 }} >
+                <Grid sx={{ px: 1, height: "45px" }} container direction="row" alignItems="center" justifyContent="space-between">
+                    <Grid >
+                        <IconButton onClick={(event) => router.push(`/calendar/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`)} ><ArrowBackIosNewIcon /></IconButton>
                     </Grid>
-                    <Divider />
-                </Box>
-                <Stack direction="row" sx={{ p: 1, mx: 1 }} >
-
-                    <Box sx={{ width: "100%", alignItems: "center" }} >
-                        <Typography sx={{ fontSize: 17 }} variant="h6" component="div">
-                            {DataFormat(contents.date)}
-                        </Typography>
+                    <Grid>
                         <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
-                            {String(contents.title)}
+                            記録
                         </Typography>
-                        <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} />
-                    </Box>
+                    </Grid>
+                    <Grid >
+                        <Stack direction="row" spacing={1}>
+                            <IconButton onClick={EditButtonClick} ><EditIcon /></IconButton>
+                            <IconButton onClick={DeleteButtonClick} ><DeleteIcon /></IconButton>
+                        </Stack>
+                        {/* <NextButton size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>記録する</NextButton> */}
+                    </Grid>
+                </Grid>
+                <Divider />
+            </Box>
+            <Stack direction="row" sx={{ p: 1, mx: 1 }} >
 
+                <Box sx={{ width: "100%", alignItems: "center" }} >
+                    <Typography sx={{ fontSize: 17 }} variant="h6" component="div">
+                        {DataFormat(contents.date)}
+                    </Typography>
+                    <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
+                        {String(contents.title)}
+                    </Typography>
+                    <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} />
+                </Box>
+
+            </Stack>
+
+            <Divider />
+
+            <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} justifyContent="space-between" alignItems="center">
+                <Box sx={{ px: 2, py: 1, width: "100%" }}>
+                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                        場所
+                    </Typography>
+                    {contents.place &&
+                        <Typography variant="body2" sx={{}}>
+                            {String(contents.place)}
+                        </Typography>
+                    }
+                </Box>
+                <Box sx={{ px: 2, py: 1, width: "100%" }}>
+                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                        天気
+                    </Typography>
+                    {contents.weather &&
+                        <Typography variant="body2" sx={{}}>
+                            {String(contents.weather)}
+                        </Typography>
+                    }
+                </Box>
+            </Stack>
+
+            <Divider />
+
+            <Box sx={{ width: "100%", px: 2, my: 1 }}>
+                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                    チーム
+                </Typography>
+                <Stack direction="row" sx={{}} >
+                    <Box sx={{ width: "100%" }}>
+                        <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                            {String(contents.name1)}
+                        </Typography>
+                        <Typography variant="body2" sx={{}}>
+                            {String(contents.score1)}
+                        </Typography>
+                    </Box>
+                    <Box sx={{ width: "100%" }}>
+                        <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                            {String(contents.name2)}
+                        </Typography>
+                        <Typography variant="body2" sx={{}}>
+                            {String(contents.score2)}
+                        </Typography>
+                    </Box>
                 </Stack>
+            </Box>
 
-                <Divider />
+            <Divider />
 
-                <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} justifyContent="space-between" alignItems="center">
-                    <Box sx={{ px: 2, py: 1, width: "100%" }}>
+            <Box sx={{ width: "100%", my: 1 }}>
+                {contents.condition &&
+                    <Box sx={{ px: 2, mb: 2 }}>
                         <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                            場所
+                            体調
                         </Typography>
-                        {contents.place &&
-                            <Typography variant="body2" sx={{}}>
-                                {String(contents.place)}
+                        <Stack direction="row" alignItems="center">
+                            <span>{customIcons[Number(contents.condition)].icon}</span>
+                            <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                {customIcons[Number(contents.condition)].label}
                             </Typography>
-                        }
+                        </Stack>
                     </Box>
-                    <Box sx={{ px: 2, py: 1, width: "100%" }}>
+                }
+                {contents.fatigue &&
+                    <Box sx={{ px: 2, mb: 2 }}>
                         <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                            天気
+                            疲労感
                         </Typography>
-                        {contents.weather &&
-                            <Typography variant="body2" sx={{}}>
-                                {String(contents.weather)}
+                        <Stack direction="row" alignItems="center">
+                            <span>{customIcons[Number(contents.fatigue)].icon}</span>
+                            <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                {customIcons[Number(contents.fatigue)].label}
                             </Typography>
-                        }
+                        </Stack>
                     </Box>
-                </Stack>
-
-                <Divider />
-
-                <Box sx={{ width: "100%", px: 2, my: 1 }}>
-                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                        チーム
-                    </Typography>
-                    <Stack direction="row" sx={{}} >
-                        <Box sx={{ width: "100%" }}>
-                            <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
-                                {String(contents.name1)}
-                            </Typography>
-                            <Typography variant="body2" sx={{}}>
-                                {String(contents.score1)}
-                            </Typography>
-                        </Box>
-                        <Box sx={{ width: "100%" }}>
-                            <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
-                                {String(contents.name2)}
-                            </Typography>
-                            <Typography variant="body2" sx={{}}>
-                                {String(contents.score2)}
-                            </Typography>
-                        </Box>
-                    </Stack>
-                </Box>
-
-                <Divider />
-
-                <Box sx={{ width: "100%", my: 1 }}>
-                    {contents.condition &&
-                        <Box sx={{ px: 2, mb: 2 }}>
-                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                体調
-                            </Typography>
-                            <Stack direction="row" alignItems="center">
-                                <span>{customIcons[Number(contents.condition)].icon}</span>
-                                <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
-                                    {customIcons[Number(contents.condition)].label}
-                                </Typography>
-                            </Stack>
-                        </Box>
-                    }
-                    {contents.fatigue &&
-                        <Box sx={{ px: 2, mb: 2 }}>
-                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                疲労感
-                            </Typography>
-                            <Stack direction="row" alignItems="center">
-                                <span>{customIcons[Number(contents.fatigue)].icon}</span>
-                                <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
-                                    {customIcons[Number(contents.fatigue)].label}
-                                </Typography>
-                            </Stack>
-                        </Box>
-                    }
-                    {contents.injury &&
-                        <Box sx={{ px: 2 }}>
-                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                怪我
-                            </Typography>
-                            <Typography variant="body2" sx={{}}>
-                                {String(contents.injury)}
-                            </Typography>
-                        </Box>
-                    }
-                </Box>
-
-
-                {contents.position != null &&
-                    <>
-                        <Divider />
-                        <Box sx={{ px: 2, my: 1 }}>
-                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                ポジション
-                            </Typography>
-                            <Typography variant="body2" sx={{}}>
-                                {String(contents.position)}
-                            </Typography>
-                        </Box>
-                    </>
                 }
-                <Divider />
-                <Box sx={{ px: 2, my: 1 }}>
-                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                        良かったところ
-                    </Typography>
-                    {contents.goodPoints[0] != null ?
-                        <List sx={{ px: 0, my: 1, py: 0 }}>
-                            {contents.goodPoints.map((goodPoint, index) => (
-                                <Box key={index}>
-                                    {
-                                        goodPoint.context != "" &&
-                                        <ListText primary={goodPoint.context} secondary={contents.feedbackCategory[Number(goodPoint.type)].title} />
-                                    }
-                                </Box>
-                            ))
-                            }
-                        </List >
-                        :
-                        <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
-                            なし
+                {contents.injury &&
+                    <Box sx={{ px: 2 }}>
+                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                            怪我
                         </Typography>
-                    }
-                </Box>
-
-                <Divider />
-                <Box sx={{ px: 2, my: 1 }}>
-                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                        悪かった点
-                    </Typography>
-                    {contents.badPoints[0] != null ?
-                        <List sx={{ px: 0, my: 1, py: 0 }}>
-                            {contents.badPoints.map((badPoint, index) => (
-                                <Box key={index}>
-                                    {
-                                        badPoint.context != "" &&
-                                        <ListText primary={badPoint.context} secondary={contents.feedbackCategory[Number(badPoint.type)].title} />
-                                    }
-                                </Box>
-                            ))
-                            }
-                        </List >
-                        :
-                        <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
-                            なし
+                        <Typography variant="body2" sx={{}}>
+                            {String(contents.injury)}
                         </Typography>
-                    }
-                </Box>
-
-                {contents.comment != "" &&
-                    <>
-                        <Divider />
-                        <Box sx={{ px: 2, my: 1 }}>
-                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                コメント
-                            </Typography>
-
-                            <Typography variant="body2" sx={{ pb: 1 }}>
-                                {contents.comment}
-                            </Typography>
-                        </Box>
-                        <Divider />
-                    </>
+                    </Box>
                 }
-            </Box >
-            {/* </CardActionArea> */}
-        </>
+            </Box>
+
+
+            {contents.position != null &&
+                <>
+                    <Divider />
+                    <Box sx={{ px: 2, my: 1 }}>
+                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                            ポジション
+                        </Typography>
+                        <Typography variant="body2" sx={{}}>
+                            {String(contents.position)}
+                        </Typography>
+                    </Box>
+                </>
+            }
+            <Divider />
+            <Box sx={{ px: 2, my: 1 }}>
+                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                    良かったところ
+                </Typography>
+                {contents.goodPoints[0] != null ?
+                    <List sx={{ px: 0, my: 1, py: 0 }}>
+                        {contents.goodPoints.map((goodPoint, index) => (
+                            <Box key={index}>
+                                {
+                                    goodPoint.context != "" &&
+                                    <ListText primary={goodPoint.context} secondary={contents.feedbackCategory[Number(goodPoint.type)].title} />
+                                }
+                            </Box>
+                        ))
+                        }
+                    </List >
+                    :
+                    <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
+                        なし
+                    </Typography>
+                }
+            </Box>
+
+            <Divider />
+            <Box sx={{ px: 2, my: 1 }}>
+                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                    悪かった点
+                </Typography>
+                {contents.badPoints[0] != null ?
+                    <List sx={{ px: 0, my: 1, py: 0 }}>
+                        {contents.badPoints.map((badPoint, index) => (
+                            <Box key={index}>
+                                {
+                                    badPoint.context != "" &&
+                                    <ListText primary={badPoint.context} secondary={contents.feedbackCategory[Number(badPoint.type)].title} />
+                                }
+                            </Box>
+                        ))
+                        }
+                    </List >
+                    :
+                    <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
+                        なし
+                    </Typography>
+                }
+            </Box>
+
+            {contents.comment != "" &&
+                <>
+                    <Divider />
+                    <Box sx={{ px: 2, my: 1 }}>
+                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                            コメント
+                        </Typography>
+
+                        <Typography variant="body2" sx={{ pb: 1 }}>
+                            {contents.comment}
+                        </Typography>
+                    </Box>
+                    <Divider />
+                </>
+            }
+        </Box >
     )
 }
 
