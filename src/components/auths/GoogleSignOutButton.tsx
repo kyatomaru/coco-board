@@ -5,6 +5,7 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation'
 import { signOut, getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/firebase"
+import Button from '@mui/material/Button';
 
 export default function GoogleSignInButton() {
     const router = useRouter()
@@ -26,7 +27,8 @@ export default function GoogleSignInButton() {
                 <span className="icon"></span>
                 <span className="buttonText">Google</span>
             </div> */}
-            <p>Sign Out</p>
+            {/* <p>Sign Out</p> */}
+            <Button>Logout</Button>
         </div>
     );
 }

@@ -5,6 +5,7 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation'
 import { signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { auth } from "@/app/firebase"
+import Button from '@mui/material/Button';
 
 export default function GoogleSignInButton() {
     const router = useRouter()
@@ -23,7 +24,8 @@ export default function GoogleSignInButton() {
                 <span className="icon"></span>
                 <span className="buttonText">Google</span>
             </div> */}
-            <p>Sign In</p>
+            <Button>Login</Button>
+            {/* <p>Sign In</p> */}
         </div>
     );
 }

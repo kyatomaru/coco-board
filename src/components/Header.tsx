@@ -62,6 +62,7 @@ export default function Header(props) {
                             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                                 Soccer Note
                             </Typography>
+                            <LoginBox />
                         </Toolbar>
                         {/* <Box sx={{ borderBottom: 1, borderColor: 'divider', width: "100%" }}>
                             <Tabs value={menu} onChange={handleChange} centered>
@@ -69,6 +70,7 @@ export default function Header(props) {
                                 <Tab label="課題" sx={{ width: "100px", m: "auto" }} />
                             </Tabs>
                         </Box> */}
+
                     </AppBar>
                 </HideOnScroll>
             </Box>

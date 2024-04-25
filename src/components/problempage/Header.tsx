@@ -74,6 +74,7 @@ export default function Header({ props, setMenu }: PageProps) {
                             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                                 Soccer Note
                             </Typography>
+                            <LoginBox />
                         </Toolbar>
                         {/* <Box sx={{ borderBottom: 1, borderColor: 'divider', width: "100%", alignSelf: 'center' }}> */}
                         {/* <StyledTabs value={headerMenu} sx={{ height: 35 }} onChange={(event, newValue) => { handleChange(event, newValue) }}>
