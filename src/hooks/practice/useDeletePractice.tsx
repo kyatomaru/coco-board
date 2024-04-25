@@ -3,7 +3,7 @@ export const useDeletePractice = (contentsId) => {
         const getParams = { contentsId: contentsId };
         const query = new URLSearchParams(getParams);
 
-        fetch(`/api/game/?${query}`, {
+        return fetch(`/api/practice/?${query}`, {
             method: 'DELETE'
         })
     }

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase';
-import { PracticeContentsModel } from '@/types/PracticeContents';
+import { PracticeContentsModel } from '@/types/practice/PracticeContents';
 import Header from "@/components/Header";
 import MenuSelectBox from "@/components/form/MenuSelectBox"
 import Footer from "@/components/Footer";

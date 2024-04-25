@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase';
 import { TargetModel } from '@/types/Target';
-import { ProblemModel } from '@/types/Problem';
+import { ProblemModel } from '@/types/problem/Problem';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import Footer from "@/components/Footer";

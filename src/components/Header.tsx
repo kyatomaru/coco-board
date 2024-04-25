@@ -12,64 +12,66 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import LoginBox from '@/components/auths/LoginBox';
+import CssBaseline from '@mui/material/CssBaseline';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import Container from '@mui/material/Container';
+import Slide from '@mui/material/Slide';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import MoreIcon from '@mui/icons-material/MoreVert';
+import InputBase from '@mui/material/InputBase';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
 
-export default function Hrader() {
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setAuth(event.target.checked);
-    };
+const barStyle = {
+    bgcolor: 'background.paper',
+    color: "black"
+}
 
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+function HideOnScroll(props) {
+    const { children, window } = props;
+    // Note that you normally won't need to set the window ref as useScrollTrigger
+    // will default to window.
+    // This is only being set here because the demo is in an iframe.
+    const trigger = useScrollTrigger({
+        // target: window ? window() : undefined,
+        target: window ? window() : undefined,
+    });
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+
 
     return (
-        <Box position='fixed' zIndex="100" sx={{ width: "100%", flexGrow: 1 }} >
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Soccer Note
-                    </Typography>
-                    <LoginBox />
-                    {auth && (
-                        <div>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                            </Menu>
-                        </div>
-                    )}
-                </Toolbar>
-            </AppBar>
-        </Box>
+        <Slide appear={false} direction="down" in={!trigger}>
+            {children}
+        </Slide>
+    );
+}
+
+export default function Header(props) {
+    return (
+        <React.Fragment>
+            <CssBaseline />
+            <Box position='fixed' zIndex="1100" sx={{ width: "100%", flexGrow: 1 }} >
+                <HideOnScroll {...props}>
+                    <AppBar sx={barStyle} position="static">
+                        <Toolbar>
+                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                                Soccer Note
+                            </Typography>
+                        </Toolbar>
+                        {/* <Box sx={{ borderBottom: 1, borderColor: 'divider', width: "100%" }}>
+                            <Tabs value={menu} onChange={handleChange} centered>
+                                <Tab label="記録" sx={{ width: "100px", m: "auto" }} />
+                                <Tab label="課題" sx={{ width: "100px", m: "auto" }} />
+                            </Tabs>
+                        </Box> */}
+                    </AppBar>
+                </HideOnScroll>
+            </Box>
+        </React.Fragment>
     );
 }

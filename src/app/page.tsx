@@ -2,13 +2,12 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation'
-import { getAuth } from "firebase/auth";
 import { auth } from '@/app/firebase';
 import dayjs from 'dayjs';
 import ja from 'date-fns/locale/ja'
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ProblemContentsModel } from '@/types/ProblemContents';
+import { ProblemContentsModel } from '@/types/problem/ProblemContents';
 import HomeContentsBox from '@/components/homepage/HomeContentsBox';
 import { Content } from 'next/font/google';
 import { useGetAllProblem } from '@/hooks/problem/useGetProblem';
@@ -21,93 +20,62 @@ import Container from '@mui/material/Container';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import Fab from '@mui/material/Fab';
+import Stack from '@mui/material/Stack';
+import CardActionArea from '@mui/material/CardActionArea';
+import Typography from '@mui/material/Typography';
+import ScheduleContents from '@/components/homepage/ScheduleContents';
+import NoteContentsBox from '@/components/homepage/note/NoteContentsBox';
+import ProblemContentsBox from '@/components/homepage/problem/ProblemContentsBox';
+import type { User } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function Home() {
   const router = useRouter()
-
-  const [dateValue, setDateValue] = React.useState<Date | null>(new Date());
+  const [user, setUser] = React.useState<User | null>(null);
+  const [token, setToken] = React.useState<string | null>(null);
+  const [contents, setContents] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
-  const [isCreate, setIsCreate] = React.useState<boolean>(true)
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [newProblemContents, setNewProblemContents] = React.useState(new ProblemContentsModel());
-
-  const problemContents = useGetAllProblem(setIsLoading)
-
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    const data = newProblemContents
-    // const data = Object.fromEntries(formData)
-
-    // if (!data.title) {
-    //   setTitleError(true)
-    // }
-    if (false) {
-
-    }
-    else {
-      const uid = await auth.currentUser?.uid;
-      if (uid) {
-        data.uid = uid;
-
-        if (dateValue) data.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
-
-        const date = new Date();
-        data.createDate = date;
-        data.updateDate = date;
-
-        const response = await fetch('/api/problem/', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'content-type': 'application/json'
-          }
-        }).then((res) => {
-          if (res.ok) {
-            try {
-              setNewProblemContents(new ProblemContentsModel())
-              setOpen(false)
-              router.push('/');
-              router.refresh()
-            } catch (error) {
-              console.log(error)
-            }
-          }
-        })
-      }
-    }
-  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <Header />
-      {isLoading ?
-        <Container fixed sx={{ height: "100vh", position: "relative", textAlign: "center" }} >
-          <CircularProgress sx={{ position: "absolute", top: "50%", bottom: "50%", my: "auto" }} />
-        </Container>
-        :
-        <Container fixed sx={{ position: "relative", minHeight: "100vh", maxWidth: "700px" }}>
-          <Fab onClick={handleOpen} sx={{ position: "absolute", right: "20px", bottom: "80px", color: "#1976d2" }}>
-            <AddCircleIcon sx={{ width: "50px", height: "50px" }} />
-          </Fab>
-          <HomeContentsBox problemContents={problemContents} />
-        </Container >
-      }
-      {/* <TargetForm targetProp={target} problemProp={problem} /> */}
+      <Container maxWidth="sm" sx={{ my: "90px", px: 0 }}>
+        {/* <Box sx={{ mb: 3, p: 2, borderRadius: 4, bgcolor: "rgba(247, 249, 249, 1.00)" }}>
+          <Stack sx={{ width: "100%" }} alignItems="center" direction="row">
+            <Typography variant="h6" sx={{ fontSize: 16, width: "100%" }}>
+              スケジュール
+            </Typography>
+            <Box sx={{ minWidth: "100px" }}>
+              <Button >記録する</Button>
+            </Box>
+          </Stack>
+          <ScheduleContents />
+        </Box> */}
 
+        <Box sx={{ mb: 3, px: 2, py: 1, borderRadius: 4, bgcolor: "rgba(247, 249, 249, 1.00)" }}>
+          <Stack sx={{ width: "100%" }} alignItems="center" direction="row">
+            <Typography variant="h6" sx={{ fontSize: 16, width: "100%" }}>
+              今日の記録
+            </Typography>
+            <Box sx={{ minWidth: "100px" }}>
+              <Button onClick={(event) => { router.push(`/calendar/${dayjs(String(new Date())).format('YYYY-MM-DD')}/create`) }}>記録する</Button>
+            </Box>
+          </Stack>
+          <NoteContentsBox />
+        </Box>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <ProblemFormModal contents={newProblemContents} onSubmit={onSubmit} />
-      </Modal>
-
+        <Box sx={{ mb: 3, px: 2, py: 1, borderRadius: 4, bgcolor: "rgba(247, 249, 249, 1.00)" }}>
+          <Stack sx={{ width: "100%" }} alignItems="center" direction="row">
+            <Typography variant="h6" sx={{ fontSize: 16, width: "100%" }}>
+              進行中の課題
+            </Typography>
+            <Box sx={{ minWidth: "100px" }}>
+              <Button onClick={(event) => { router.push(`/problem/growth`) }}>振り返る</Button>
+            </Box>
+          </Stack>
+          <ProblemContentsBox />
+        </Box>
+      </Container >
       <Footer />
     </main >
   )

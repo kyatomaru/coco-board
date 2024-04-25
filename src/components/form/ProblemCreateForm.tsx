@@ -18,7 +18,7 @@ import dayjs from 'dayjs';
 import ja from 'date-fns/locale/ja'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { ProblemContentsModel } from '@/types/ProblemContents';
+import { ProblemContentsModel } from '@/types/problem/ProblemContents';
 import { auth } from '@/app/firebase';
 import { redirect } from 'next/navigation';
 import Divider from '@mui/material/Divider';
@@ -55,8 +55,10 @@ export default function ProblemCreateForm() {
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setIsLoading(true)
-        insertProblemData(event, problemContents)
-        router.push('/notes/problem')
+        const res = await insertProblemData(event, problemContents)
+        if (res.ok) {
+            router.push('/notes/problem')
+        }
     }
 
     return (
@@ -75,7 +77,7 @@ export default function ProblemCreateForm() {
                 <Box sx={{ position: 'sticky', top: 0, backgroundColor: "white", zIndex: 100 }} >
                     <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
                         <Grid >
-                            <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => router.back()}>キャンセル</Button>
+                            <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => router.push('/problem')}>キャンセル</Button>
                         </Grid>
                         <Grid >
                             <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>記録する</Button>
@@ -109,7 +111,7 @@ async function insertProblemData(event: React.FormEvent<HTMLFormElement>, conten
         data.createDate = date;
         data.updateDate = date;
 
-        fetch('/api/problem/', {
+        return fetch('/api/problem/', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {

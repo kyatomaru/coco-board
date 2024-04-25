@@ -77,6 +77,8 @@ export async function PATCH(
     req: NextRequest,
     res: NextResponse
 ) {
+    console.log('api')
+
     const reqData = await req.json();
 
     const updateData = reqData.updateData

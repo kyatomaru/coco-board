@@ -8,13 +8,14 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import type { GameContentsType } from '@/types/GameContents';
-import type { PracticeContentsType } from '@/types/PracticeContents';
+import type { GameContentsType } from '@/types/game/GameContents';
+import type { PracticeContentsType } from '@/types/practice/PracticeContents';
 import NoteContents from './NoteContents';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import Card from '@mui/material/Card';
 import { useGetProblem } from '@/hooks/problem/useGetProblem';
 import { useGetAllGame } from '@/hooks/game/useGetGame';
 import { useGetAllPractice } from '@/hooks/practice/useGetPractice';
@@ -22,13 +23,14 @@ import DeleteModal from '../DeleteModal';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import type { User } from 'firebase/auth';
 import CircularProgress from '@mui/material/CircularProgress';
+import { auth } from '@/app/firebase';
 
 
 export default function NoteContentsBox() {
     const router = useRouter()
     const [user, setUser] = React.useState<User | null>(null);
     const [token, setToken] = React.useState<string | null>(null);
-    const [contents, setContents] = React.useState([null]);
+    const [contents, setContents] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState<boolean>(true)
     // const [gameContents, setGameContents] = React.useState<Array<GameContentsType | null>>([null]);
     // const [practiceContents, setPracticeContents] = React.useState<Array<PracticeContentsType | null>>([null]);
@@ -51,7 +53,6 @@ export default function NoteContentsBox() {
     React.useEffect(() => {
 
         setIsLoading(true)
-        const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(auth.currentUser);
@@ -70,31 +71,38 @@ export default function NoteContentsBox() {
 
     const DeleteContents = () => {
         setIsLoading(true)
-        const auth = getAuth();
         GetContents(auth.currentUser?.uid)
         setIsLoading(false)
     }
 
-    console.log(contents)
-
     return (
-        <Box>
+        <Container>
             {isLoading ?
                 <Container fixed sx={{ height: "100vh", position: "relative", textAlign: "center" }} >
                     <CircularProgress sx={{ position: "absolute", top: "50%", bottom: "50%", my: "auto" }} />
                 </Container>
                 :
                 <>
-                    {
-                        contents[0] != null &&
+                    {contents.length > 0 ?
                         contents.map((value, index) => {
                             return (
                                 <NoteContents key={index} contents={value} DeleteContents={DeleteContents} />
                             )
                         })
+                        :
+                        <Card sx={{ minWidth: 250 }} elevation={2}>
+                            <Stack direction="column" sx={{ p: 1, mx: 1, height: 160 }} alignContent="center" justifyContent="center" >
+                                <Typography sx={{ fontSize: 13, textAlign: "center" }} variant="h6" component="div">
+                                    記録がありません
+                                </Typography>
+                                <Box sx={{ textAlign: "center" }}>
+                                    <Button onClick={() => { router.push("/notes/create") }}>記録する</Button>
+                                </Box>
+                            </Stack>
+                        </Card>
                     }
                 </>
             }
-        </Box >
+        </Container >
     )
 }

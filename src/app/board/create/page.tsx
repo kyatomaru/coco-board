@@ -3,9 +3,9 @@
 import * as React from 'react';
 import { useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase';
-import type { GameContentsType } from '@/types/GameContents';
-import { GameContentsModel } from '@/types/GameContents';
-import { HomeProblemModel } from '@/types/Problem';
+import type { GameContentsType } from '@/types/game/GameContents';
+import { GameContentsModel } from '@/types/game/GameContents';
+import { HomeProblemModel } from '@/types/problem/Problem';
 import Header from "@/components/Header";
 import TitleBox from "@/components/TitleBox";
 import MenuSelectBox from "@/components/form/MenuSelectBox"

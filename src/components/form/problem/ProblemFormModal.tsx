@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddInputBox from '../inputBox/AddInputBox';
-import { ProblemContentsType } from '@/types/ProblemContents';
+import { ProblemContentsType } from '@/types/problem/ProblemContents';
 import ProblemForm from '@/components/form/problem/ProblemForm';
 
 
@@ -36,7 +36,7 @@ export default function ProblemFormModal({ contents, onSubmit }: PageProps) {
             method='POST'
 
         >
-            <ProblemForm contents={contents} />
+            {/* <ProblemForm contents={contents} /> */}
             <Button type='submit'>決定</Button>
         </Box>
     )

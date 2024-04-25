@@ -2,7 +2,7 @@ import * as React from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useParams } from 'next/navigation';
 import type { User } from 'firebase/auth';
-import { GameContentsModel, type GameContentsType } from '@/types/GameContents';
+import { GameContentsModel, type GameContentsType } from '@/types/game/GameContents';
 
 export const useGetAllGame = (setIsLoading) => {
     const [user, setUser] = React.useState<User | null>(null);

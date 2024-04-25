@@ -4,15 +4,24 @@ import * as React from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import type { GameContentsType } from '@/types/GameContents';
+import type { GameContentsType } from '@/types/game/GameContents';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import AddInputBox from '../inputBox/AddInputBox';
+import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import { styled } from '@mui/material/styles';
+import { GameFeedbackModel } from '@/types/game/GameFeedback';
+import MuiRating, { RatingProps, IconContainerProps } from '@mui/material/Rating';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
+import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 
 type PageProps = {
     contents: GameContentsType,
@@ -23,6 +32,9 @@ export default function GameForm({ contents, titleError }: PageProps) {
     const [title, setTitle] = React.useState(contents.title);
     const [place, setPlace] = React.useState(contents.place);
     const [weather, setWeather] = React.useState(contents.weather);
+    const [injury, setInjury] = React.useState(contents.injury);
+    const [condition, setCondition] = React.useState(contents.condition);
+    const [fatigue, setFatigue] = React.useState(contents.fatigue);
     const [name1, setName1] = React.useState(contents.name1);
     const [score1, setScore1] = React.useState(contents.score1);
     const [name2, setName2] = React.useState(contents.name2);
@@ -30,13 +42,26 @@ export default function GameForm({ contents, titleError }: PageProps) {
     const [position, setPosition] = React.useState(contents.position);
     const [goodPoints, setGoodPoints] = React.useState(contents.goodPoints);
     const [badPoints, setBadPoints] = React.useState(contents.badPoints);
+    const [comment, setComment] = React.useState(contents.comment);
 
-    const ChangeGoodPoints = (newValue, index) => {
+    console.log(contents.position)
+
+    const ChangeGoodPointsContext = (newValue: String, index) => {
         const input = []
         goodPoints.forEach((item) => {
             input.push(item)
         })
-        input[index] = newValue
+        input[index].context = newValue
+        setGoodPoints(input)
+        contents.goodPoints = input
+    }
+
+    const ChangeGoodPointsType = (newValue: Number, index) => {
+        const input = []
+        goodPoints.forEach((item) => {
+            input.push(item)
+        })
+        input[index].type = newValue
         setGoodPoints(input)
         contents.goodPoints = input
     }
@@ -46,17 +71,27 @@ export default function GameForm({ contents, titleError }: PageProps) {
         goodPoints.forEach((item) => {
             input.push(item)
         })
-        input.push([undefined])
+        input.push(new GameFeedbackModel())
         setGoodPoints(input)
         contents.goodPoints = input
     }
 
-    const ChangeBadPoints = (newValue, index) => {
+    const ChangeBadPointsContext = (newValue: String, index) => {
         const input = []
         badPoints.forEach((item) => {
             input.push(item)
         })
-        input[index] = newValue
+        input[index].context = newValue
+        setBadPoints(input)
+        contents.badPoints = input
+    }
+
+    const ChangeBadPointsType = (newValue: Number, index) => {
+        const input = []
+        badPoints.forEach((item) => {
+            input.push(item)
+        })
+        input[index].type = newValue
         setBadPoints(input)
         contents.badPoints = input
     }
@@ -66,23 +101,27 @@ export default function GameForm({ contents, titleError }: PageProps) {
         badPoints.forEach((item) => {
             input.push(item)
         })
-        input.push([undefined])
+        input.push(new GameFeedbackModel())
         setBadPoints(input)
         contents.badPoints = input
     }
 
     return (
-        <Box >
-            <Box sx={{ mb: 3 }}>
+        <Box>
+            <Box sx={{ my: 1, px: 2 }}>
+                <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                    基本情報
+                </Typography>
                 <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
-                    <InputLabel sx={{ fontSize: 14 }} error={titleError} htmlFor="outlined-adornment-title">タイトル</InputLabel>
+                    <InputLabel sx={{ fontSize: 14 }} shrink={contents.title != undefined} error={titleError} htmlFor="outlined-adornment-title">タイトル</InputLabel>
                     <OutlinedInput
+
                         required
                         id="outlined-adornment-title"
                         name="title"
                         aria-describedby="outlined-title-helper-text"
                         label="タイトル"
-                        value={title}
+                        value={contents.title}
                         error={titleError}
                         // helperText="入力してください。"
                         onSelect={() => { titleError = false }}
@@ -90,7 +129,8 @@ export default function GameForm({ contents, titleError }: PageProps) {
                             setTitle(newValue.target.value)
                             contents.title = newValue.target.value
                         }}
-                        sx={{ fontSize: 14 }}
+                        sx={{ fontSize: 14, backgroundColor: "background.paper" }}
+                        notched={contents.title != undefined}
                     />
                     {!!titleError && (
                         <FormHelperText error id="accountId-error">
@@ -99,34 +139,38 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     )}
                 </FormControl>
 
-                <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
-                    <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
-                        <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-place">場所</InputLabel>
-                        <OutlinedInput sx={{ fontSize: 14 }}
+                <Stack spacing={1} sx={{ mb: 2 }} direction="row" alignItems="center">
+                    <FormControl fullWidth variant="outlined">
+                        <InputLabel sx={{ fontSize: 14 }} shrink={contents.place != undefined} htmlFor="outlined-adornment-place">場所</InputLabel>
+                        <OutlinedInput
+                            sx={{ fontSize: 14, backgroundColor: "background.paper" }}
                             id="outlined-adornment-place"
                             name="place"
                             aria-describedby="outlined-place-helper-text"
                             label="場所"
-                            value={place}
+                            value={contents.place}
                             onChange={newValue => {
                                 setPlace(newValue.target.value)
                                 contents.place = newValue.target.value
                             }}
+                            notched={contents.place != undefined}
                         />
                     </FormControl>
 
-                    <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
-                        <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-weather">天気</InputLabel>
-                        <Select sx={{ fontSize: 14 }}
+                    <FormControl fullWidth variant="outlined">
+                        <InputLabel sx={{ fontSize: 14 }} shrink={contents.weather != ""} htmlFor="outlined-adornment-weather">天気</InputLabel>
+                        <Select
+                            sx={{ fontSize: 14, backgroundColor: "background.paper" }}
                             labelId="outlined-adornment-weather-label"
                             name="weather"
                             id="outlined-adornment-weather"
-                            value={weather}
+                            value={contents.weather}
                             label="天気"
                             onChange={newValue => {
                                 setWeather(newValue.target.value)
                                 contents.weather = newValue.target.value
                             }}
+                            notched={contents.weather != ""}
                         >
                             <MenuItem sx={{ fontSize: 14 }} value="晴れ">晴れ</MenuItem>
                             <MenuItem sx={{ fontSize: 14 }} value="曇り">曇り</MenuItem>
@@ -139,32 +183,98 @@ export default function GameForm({ contents, titleError }: PageProps) {
 
             <Divider />
 
-            <Box sx={{ my: 3 }}>
+            <Box sx={{ my: 1, px: 2 }}>
+                <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                    コンディション
+                </Typography>
+                <Box sx={{ mb: 3 }}>
+                    <InputLabel sx={{ mb: 1, fontSize: 14 }} >体調</InputLabel>
+                    <Stack direction="row" spacing={2}>
+                        <StyledRating
+                            name="highlight-selected-only"
+                            size="large"
+                            value={Number(contents.condition)}
+                            IconContainerComponent={IconContainer}
+                            getLabelText={(value: number) => customIcons[value].label}
+                            onChange={(event, newValue) => {
+                                setCondition(newValue);
+                                contents.condition = newValue
+                            }}
+                            highlightSelectedOnly
+                        />
+                        {contents.condition != 0 &&
+                            <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                {customIcons[Number(contents.condition)].label}
+                            </Typography>
+                        }
+                    </Stack>
+                </Box>
+                <Box sx={{ mb: 3 }}>
+                    <InputLabel sx={{ mb: 1, fontSize: 14 }} >疲労感</InputLabel>
+                    <Stack direction="row" spacing={2}>
+                        <StyledRating
+                            name="highlight-selected-only"
+                            size="large"
+                            value={Number(contents.fatigue)}
+                            IconContainerComponent={IconContainer}
+                            getLabelText={(value: number) => customIcons[value].label}
+                            onChange={(event, newValue) => {
+                                setFatigue(newValue);
+                                contents.fatigue = newValue
+                            }}
+                            highlightSelectedOnly
+                        />
+                        {contents.fatigue != 0 &&
+                            <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                {customIcons[Number(contents.fatigue)].label}
+                            </Typography>
+                        }
+                    </Stack>
+                </Box>
+                <Box sx={{ mb: 3 }}>
+                    <InputLabel sx={{ mb: 1, fontSize: 14 }} >怪我</InputLabel>
+                    <FormControl fullWidth sx={{ mb: 1, }} variant="outlined">
+                        <OutlinedInput sx={{ fontSize: 14, backgroundColor: "background.paper" }}
+                            value={contents.injury}
+                            onChange={newValue => {
+                                setInjury(newValue.target.value)
+                                contents.injury = newValue.target.value
+                            }}
+                        />
+                    </FormControl>
+                </Box>
+            </Box>
+
+            <Divider />
+
+            <Box sx={{ my: 1, px: 2 }}>
+                <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                    チーム情報
+                </Typography>
                 <InputLabel sx={{ mb: 1, fontSize: 14 }} >チーム1</InputLabel>
-                <Stack sx={{ mb: 1, alignItems: "center" }} spacing={2} direction="row" >
+                <Stack sx={{ mb: 2, alignItems: "center" }} spacing={1} direction="row" >
                     <FormControl fullWidth sx={{ mb: 1, }} variant="outlined">
                         {/* <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-name1">チーム名</InputLabel> */}
-                        <OutlinedInput sx={{ fontSize: 14 }}
+                        <OutlinedInput sx={{ fontSize: 14, backgroundColor: "background.paper" }}
                             id="outlined-adornment-name1"
                             name="name1"
                             placeholder="チーム名"
-                            value={name1}
+                            value={contents.name1}
                             onChange={newValue => {
                                 setName1(newValue.target.value)
                                 contents.name1 = newValue.target.value
                             }}
-
                         />
                     </FormControl>
 
-                    <FormControl sx={{ mb: 1, width: "100px" }} variant="outlined">
+                    <FormControl sx={{ mb: 1, width: "70px", minWidth: "70px" }} variant="outlined">
                         {/* <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-score1">点数</InputLabel> */}
-                        <OutlinedInput sx={{ fontSize: 14 }}
+                        <OutlinedInput sx={{ fontSize: 14, backgroundColor: "background.paper" }}
                             id="outlined-adornment-score1"
                             name="score1"
                             aria-describedby="outlined-score1-helper-text"
-                            placeholder="点数"
-                            value={score1}
+                            placeholder="スコア"
+                            value={contents.score1}
                             onChange={newValue => {
                                 setScore1(newValue.target.value)
                                 contents.score1 = newValue.target.value
@@ -173,18 +283,17 @@ export default function GameForm({ contents, titleError }: PageProps) {
                     </FormControl>
                 </Stack>
 
-
                 <InputLabel sx={{ mb: 1, fontSize: 14 }} >チーム2</InputLabel>
-                <Stack sx={{ mb: 2, alignItems: "center" }} spacing={2} direction="row">
+                <Stack sx={{ mb: 2, alignItems: "center" }} spacing={1} direction="row">
                     <FormControl fullWidth sx={{ mb: 1, }} variant="outlined">
                         {/* <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-name2">チーム名</InputLabel> */}
                         <OutlinedInput
-                            sx={{ fontSize: 14 }}
+                            sx={{ fontSize: 14, backgroundColor: "background.paper" }}
                             id="outlined-adornment-name2"
                             name="name2"
                             aria-describedby="outlined-name2-helper-text"
                             placeholder="チーム名"
-                            value={name2}
+                            value={contents.name2}
                             onChange={newValue => {
                                 setName2(newValue.target.value)
                                 contents.name2 = newValue.target.value
@@ -192,15 +301,15 @@ export default function GameForm({ contents, titleError }: PageProps) {
                         />
                     </FormControl>
 
-                    <FormControl sx={{ mb: 1, width: "100px" }} variant="outlined">
+                    <FormControl sx={{ mb: 1, width: "70px", minWidth: "70px" }} variant="outlined">
                         {/* <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-score2">点数</InputLabel> */}
                         <OutlinedInput
-                            sx={{ fontSize: 14 }}
+                            sx={{ fontSize: 14, backgroundColor: "background.paper" }}
                             id="outlined-adornment-score2"
                             name="score2"
                             aria-describedby="outlined-score2-helper-text"
-                            placeholder="点数"
-                            value={score2}
+                            placeholder="スコア"
+                            value={contents.score2}
                             onChange={newValue => {
                                 setScore2(newValue.target.value)
                                 contents.score2 = newValue.target.value
@@ -208,29 +317,161 @@ export default function GameForm({ contents, titleError }: PageProps) {
                         />
                     </FormControl>
                 </Stack>
+            </Box>
 
+            <Divider />
+
+            <Box sx={{ my: 1, px: 2 }}>
+                <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                    ポジション
+                </Typography>
                 <FormControl fullWidth sx={{ my: 1 }} variant="outlined">
-                    <InputLabel sx={{ fontSize: 14 }} htmlFor="outlined-adornment-position">ポジション</InputLabel>
-                    <OutlinedInput sx={{ fontSize: 14 }}
+                    <InputLabel sx={{ fontSize: 14 }} shrink={contents.position != undefined} htmlFor="outlined-adornment-position">ポジション</InputLabel>
+                    <OutlinedInput sx={{ fontSize: 14, backgroundColor: "background.paper" }}
                         id="outlined-adornment-position"
                         name="position"
                         aria-describedby="outlined-weight-helper-text"
                         label="ポジション"
-                        value={position}
+                        value={contents.position}
                         onChange={newValue => {
                             setPosition(newValue.target.value)
                             contents.position = newValue.target.value
                         }}
+                        notched={contents.position != undefined}
                     />
                 </FormControl>
             </Box>
 
             <Divider />
 
-            <Box sx={{ my: 3 }}>
-                <AddInputBox title="良かった点" contents={contents.goodPoints} ChangeInput={ChangeGoodPoints} AddInput={AddGoodPoints} />
-                <AddInputBox title="悪かった点" contents={contents.badPoints} ChangeInput={ChangeBadPoints} AddInput={AddBadPoints} />
+            <Box sx={{ my: 1, px: 2 }}>
+                <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                    振り返り
+                </Typography>
+                <Box sx={{ mb: 1 }}>
+                    <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
+                        <InputLabel sx={{ mx: 1, fontSize: 14, width: "100%" }}>良かった点</InputLabel>
+                        <Button sx={{ fontSize: 14 }} onClick={AddGoodPoints}>追加</Button>
+                    </Stack>
+                    {contents.goodPoints.map((input, index) => (
+                        <Stack spacing={1} key={index} direction="row" sx={{ alignItems: "center", mb: 2 }}>
+                            <Select sx={{ fontSize: 14, minWidth: "120px" }}
+                                value={contents.goodPoints[index].type}
+                                onChange={newValue => {
+                                    ChangeGoodPointsType(Number(newValue.target.value), index)
+                                }}
+                            >
+                                {contents.feedbackCategory.map((type, index2) => (
+                                    <MenuItem sx={{ fontSize: 14 }} key={index2} value={index2}>{type.title}</MenuItem>
+                                ))}
+                            </Select>
+                            <FormControl fullWidth sx={{ mb: 1 }}>
+                                <OutlinedInput
+                                    value={contents.goodPoints[index].context}
+                                    onChange={newValue => ChangeGoodPointsContext(newValue.target.value, index)}
+                                    sx={{ fontSize: 14 }}
+                                />
+                            </FormControl>
+                        </Stack>
+                    ))}
+                </Box>
+
+                <Box sx={{ mb: 1 }}>
+                    <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
+                        <InputLabel sx={{ mx: 1, fontSize: 14, width: "100%" }}>悪かった点</InputLabel>
+                        <Button sx={{ fontSize: 14 }} onClick={AddBadPoints}>追加</Button>
+                    </Stack>
+                    {contents.badPoints.map((input, index) => (
+                        <Stack spacing={1} key={index} direction="row" sx={{ alignItems: "center", mb: 2 }}>
+                            <Select sx={{ fontSize: 14, minWidth: "120px" }}
+                                value={contents.badPoints[index].type}
+                                onChange={newValue => {
+                                    ChangeBadPointsType(Number(newValue.target.value), index)
+                                }}
+                            >
+                                {contents.feedbackCategory.map((type, index2) => (
+                                    <MenuItem sx={{ fontSize: 14 }} key={index2} value={index2}>{type.title}</MenuItem>
+                                ))}
+                            </Select>
+                            <FormControl fullWidth sx={{ mb: 1 }}>
+                                <OutlinedInput
+                                    id="outlined-adornment-input"
+                                    value={contents.badPoints[index].context}
+                                    onChange={newValue => ChangeBadPointsContext(newValue.target.value, index)}
+                                    sx={{ fontSize: 14 }}
+                                />
+                            </FormControl>
+                        </Stack>
+                    ))}
+                </Box>
+                {/* <AddInputBox title="良かった点" contents={contents.goodPoints} ChangeInput={ChangeGoodPoints} AddInput={AddGoodPoints} /> */}
+                {/* <AddInputBox title="悪かった点" contents={contents.badPoints} ChangeInput={ChangeBadPoints} AddInput={AddBadPoints} /> */}
+            </Box>
+
+            <Divider />
+
+            <Box sx={{ my: 1, px: 2 }}>
+                <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                    コメント
+                </Typography>
+                <FormControl fullWidth sx={{ fontSize: 14 }} variant="outlined">
+                    <OutlinedInput
+                        sx={{ m: "0 !important", fontSize: 14, backgroundColor: "background.paper" }}
+                        multiline
+                        value={contents.comment}
+                        onChange={newValue => {
+                            setComment(newValue.target.value)
+                            contents.comment = newValue.target.value
+                        }}
+                        notched={contents.comment != ""}
+                    />
+                </FormControl>
             </Box>
         </Box >
     );
+}
+
+
+const StyledRating = styled((props: RatingProps) => (
+    <MuiRating
+        // max={4}
+        {...props}
+    />
+))(({ theme }) => ({
+    '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
+        color: theme.palette.action.disabled,
+    },
+}));
+
+const customIcons: {
+    [index: string]: {
+        icon: React.ReactElement;
+        label: string;
+    };
+} = {
+    1: {
+        icon: <SentimentVeryDissatisfiedIcon color="error" />,
+        label: '不良',
+    },
+    2: {
+        icon: <SentimentDissatisfiedIcon color="error" />,
+        label: 'やや不良',
+    },
+    3: {
+        icon: <SentimentSatisfiedIcon color="warning" />,
+        label: '普通',
+    },
+    4: {
+        icon: <SentimentSatisfiedAltIcon color="success" />,
+        label: 'やや良好',
+    },
+    5: {
+        icon: <SentimentVerySatisfiedIcon sx={{ color: "#00cc33" }} />,
+        label: '良好',
+    },
+};
+
+function IconContainer(props: IconContainerProps) {
+    const { value, ...other } = props;
+    return <span {...other}>{customIcons[value].icon}</span>;
 }

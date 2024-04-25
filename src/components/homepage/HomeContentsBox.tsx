@@ -6,8 +6,8 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import type { GameContentsType } from '@/types/GameContents';
-import type { ProblemContentsType } from '@/types/ProblemContents';
+import type { GameContentsType } from '@/types/game/GameContents';
+import type { ProblemContentsType } from '@/types/problem/ProblemContents';
 import GameContents from "./HomeContents"
 import HomeContents from './HomeContents';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';

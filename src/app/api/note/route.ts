@@ -14,37 +14,72 @@ export async function GET(
     const date = req.nextUrl.searchParams.get("date")
     const contentsId = req.nextUrl.searchParams.get("contentsId")
 
-    if (uid) {
-        const gameDocRef = await db.collection('game').where("uid", "==", uid).orderBy('date', 'desc').orderBy('createDate', 'desc').get()
+    if (uid && !date) {
+        const docRef = Array()
+        await db.collection('game').where("uid", "==", uid).get()
             .then(snapshot => {
-                const data = Array()
                 snapshot.forEach((doc) => {
                     const ob = doc.data()
-                    ob.contentsId = doc.id
-                    data.push(ob)
+                    ob.collection = "game"
+                    docRef.push(ob)
                 })
-                return data
+
             })
             .catch((error) => {
                 console.log("Error getting game documents: ", error);
             });
 
-        const practiceDocRef = await db.collection('practice').where("uid", "==", uid).orderBy('date', 'desc').orderBy('createDate', 'desc').get()
+        await db.collection('practice').where("uid", "==", uid).get()
             .then(snapshot => {
-                const data = Array()
                 snapshot.forEach((doc) => {
                     const ob = doc.data()
-                    ob.contentsId = doc.id
-                    data.push(ob)
+                    ob.collection = "practice"
+                    docRef.push(ob)
                 })
-                return data
             })
             .catch((error) => {
                 console.log("Error getting practice documents: ", error);
             });
 
-        const docRef = sortContents(gameDocRef, practiceDocRef)
-        // const docRef = []
+        return NextResponse.json(docRef, { status: 200 })
+
+    } else if (uid && date) {
+        console.log(date)
+        const docRef = Array()
+        const gameDocRef = await db.collection("game").where("uid", "==", uid).where("date", "==", date).get()
+            .then(snapshot => {
+                // const data = Array()
+                snapshot.forEach((doc) => {
+                    const ob = doc.data()
+                    ob.contentsId = doc.id
+                    ob.collection = "game"
+                    // data.push(ob)
+                    docRef.push([ob])
+                })
+                // return data
+
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+
+        const practiceDocRef = await db.collection("practice").where("uid", "==", uid).where("date", "==", date).get()
+            .then(snapshot => {
+                // const data = Array()
+                snapshot.forEach((doc) => {
+                    const ob = doc.data()
+                    ob.contentsId = doc.id
+                    // data.push(ob)
+                    ob.collection = "practice"
+                    docRef.push([ob])
+                })
+                // return data
+
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+
+        // const docRef = sortContents(gameDocRef, practiceDocRef)
+        console.log(docRef)
 
         return NextResponse.json(docRef, { status: 200 })
     }
@@ -52,11 +87,12 @@ export async function GET(
 
 
 
-const sortDateContents = (dateArray, contents, type) => {
-    console.log(contents)
+
+const sortDateContents = (dateArray, contents, collection) => {
+
     for (let index = 0; index < contents.length; index++) {
         let flag = false
-        contents[index].type = type
+        contents[index].collection = collection
         for (let index2 = 0; index2 < dateArray.length; index2++) {
             if (dateArray[index2].date === dayjs(String(contents[index].date)).format('YYYY/M/DD')) {
                 flag = true

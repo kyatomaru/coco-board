@@ -2,9 +2,9 @@ import * as React from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useParams } from 'next/navigation';
 import type { User } from 'firebase/auth';
-import type { GameContentsType } from "@/types/GameContents";
-import type { PracticeContentsType } from "@/types/PracticeContents";
-import { ProblemContentsModel, ProblemContentsType } from '@/types/ProblemContents';
+import type { GameContentsType } from "@/types/game/GameContents";
+import type { PracticeContentsType } from "@/types/practice/PracticeContents";
+import { ProblemContentsModel, ProblemContentsType } from '@/types/problem/ProblemContents';
 
 export const useGetProblem = (gameContents: Array<GameContentsType>, practiceContents: Array<PracticeContentsType>) => {
     const problem = []

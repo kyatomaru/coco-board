@@ -2,7 +2,7 @@ import * as React from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useParams } from 'next/navigation';
 import type { User } from 'firebase/auth';
-import { PracticeContentsModel, type PracticeContentsType } from '@/types/PracticeContents';
+import { PracticeContentsModel, type PracticeContentsType } from '@/types/practice/PracticeContents';
 
 export const useGetAllPractice = (setIsLoading) => {
     const [user, setUser] = React.useState<User | null>(null);
@@ -62,7 +62,6 @@ export const useGetIdPractice = (setIsLoading, setDateValue) => {
                 fetch(`/api/practice/?${query}`)
                     .then((response) => response.json())
                     .then((data) => {
-                        console.log(data)
                         setContents(data)
                         setDateValue(new Date(data.date))
                         setIsLoading(false)
