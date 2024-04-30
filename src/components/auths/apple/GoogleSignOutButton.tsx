@@ -3,29 +3,32 @@
 import * as React from 'react';
 // import "./GoogleButton.module.scss"
 import { useRouter } from 'next/navigation'
-import { signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+import { signOut, getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/app/firebase"
 import Button from '@mui/material/Button';
 
 export default function GoogleSignInButton() {
     const router = useRouter()
-    const GoogleProvider = new GoogleAuthProvider();
-    GoogleProvider.setCustomParameters({
-        prompt: "select_account"
-    });
-    const GoogleSignIn = async () => {
-        const user = await signInWithPopup(auth, GoogleProvider)
+    const GoogleSignOut = async () => {
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            router.push('/')
+        }).catch((error) => {
+            // An error happened.
+        });
+
     }
 
     return (
-        <div id="gSignInWrapper" onClick={GoogleSignIn}>
+        <div id="gSignInWrapper" onClick={GoogleSignOut}>
             {/* <span className="label">Sign in with:</span>
             <div id="customBtn" className="customGPlusSignIn">
                 <span className="icon"></span>
                 <span className="buttonText">Google</span>
             </div> */}
-            <Button>Login</Button>
-            {/* <p>Sign In</p> */}
+            {/* <p>Sign Out</p> */}
+            <Button>Logout</Button>
         </div>
     );
 }

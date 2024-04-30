@@ -3,6 +3,9 @@
 const path = require('path');
 
 const nextConfig = {
+    images: {
+        domains: ['localhost'], // 画像を置いているドメイン
+    },
     webpack: (config) => {
         config.resolve.alias = {
             ...config.resolve.alias,

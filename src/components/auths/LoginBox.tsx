@@ -1,13 +1,14 @@
 "use client"
 
 import * as React from 'react';
-import GoogleSignInButton from './GoogleSignInButton';
-import GoogleSignOutButton from './GoogleSignOutButton';
+import GoogleSignInButton from './google/GoogleSignInButton';
+import SignOutButton from './SignOutButton';
 import { useRouter } from 'next/navigation'
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import type { User } from "firebase/auth"
+import { Router } from 'next/router';
 
-// type UserContextType = User | null | undefined;
+
 
 export default function LoginBox() {
     const router = useRouter()
@@ -27,9 +28,9 @@ export default function LoginBox() {
     return (
         <div>
             {user !== undefined
-                ? (<GoogleSignOutButton />)
+                ? (<SignOutButton />)
                 : (<GoogleSignInButton />)
             }
-        </div>
+        </div >
     );
 }

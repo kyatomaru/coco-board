@@ -24,6 +24,9 @@ import AddIcon from '@mui/icons-material/Add';
 import HomeContentsBox from '@/components/homepage/HomeContentsBox';
 import { useGetAllProblem } from '@/hooks/problem/useGetProblem';
 import Calendar from '@/components/calendarpage/Calendar';
+import type { User } from 'firebase/auth';
+import { onAuthStateChanged, getAuth } from "firebase/auth"
+import LoginPage from '@/components/auths/LoginPage';
 
 type Props = {
   /**
@@ -38,8 +41,19 @@ type Props = {
 export default function Home(props) {
   const params = useParams()
   const router = useRouter()
-  // const [contents, setContents] = React.useState<string | null>(null);
+  const [user, setUser] = React.useState<User | undefined>();
   const [menu, setMenu] = React.useState(0);
+
+  React.useEffect(() => {
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(auth.currentUser)
+        //router.push('/notes/2023-06-27')
+      }
+    })
+  });
 
   const handleMenuChange = (newValue) => {
     setMenu(newValue);
@@ -47,9 +61,11 @@ export default function Home(props) {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between, bg-white">
-      <Header props={props} setMenu={setMenu} />
-      <Container maxWidth="sm" sx={{ mt: "65px", mb: "90px", px: 0, position: "relative" }}>
-        {/* <Box sx={{ position: 'fixed', right: 0, left: 0, height: "-webkit-fill-available", pointerEvents: "none" }} >
+      {user !== undefined
+        ? <>
+          <Header props={props} setMenu={setMenu} />
+          <Container maxWidth="sm" sx={{ mt: "65px", mb: "90px", px: 0, position: "relative" }}>
+            {/* <Box sx={{ position: 'fixed', right: 0, left: 0, height: "-webkit-fill-available", pointerEvents: "none" }} >
           <Container maxWidth="sm" sx={{ my: 0, height: "70vh", px: 0, position: "relative" }}>
             <Fab sx={{ position: "absolute", zIndex: 1050, pointerEvents: "auto", right: 25, bottom: 25, backgroundColor: "#1976d2 !important" }} color="primary" aria-label="add"
               onClick={(event) => {
@@ -60,10 +76,13 @@ export default function Home(props) {
             </Fab>
           </Container>
         </Box> */}
-        <Calendar />
-      </Container >
+            <Calendar />
+          </Container >
 
-      < Footer />
+          < Footer />
+        </>
+        : <LoginPage />
+      }
     </main >
   )
 }

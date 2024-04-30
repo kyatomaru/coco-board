@@ -15,6 +15,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import type { User } from 'firebase/auth';
+import { onAuthStateChanged, getAuth } from "firebase/auth"
+import LoginPage from '@/components/auths/LoginPage';
 
 type Props = {
   /**
@@ -28,16 +31,19 @@ type Props = {
 export default function Home(props) {
   const params = useParams()
   const router = useRouter()
-  // const [contents, setContents] = React.useState<string | null>(null);
+  const [user, setUser] = React.useState<User | undefined>();
   const [menu, setMenu] = React.useState(1);
 
-  // React.useEffect(() => {
-  //   if (params.menu == "note") {
-  //     setMenu(0)
-  //   } else if (params.menu == "problem") {
-  //     setMenu(1)
-  //   }
-  // }, [])
+  React.useEffect(() => {
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(auth.currentUser)
+        //router.push('/notes/2023-06-27')
+      }
+    })
+  });
 
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -50,32 +56,37 @@ export default function Home(props) {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between, bg-white">
-      <Header props={props} setMenu={setMenu} />
+      {user !== undefined
+        ? <>
+          <Header props={props} setMenu={setMenu} />
 
-      <Container maxWidth="sm" sx={{ my: "65px", px: 0, position: "relative" }}>
-        {/* <Box sx={{ borderBottom: 1, borderColor: 'divider', width: "100%" }}>
+          <Container maxWidth="sm" sx={{ my: "65px", px: 0, position: "relative" }}>
+            {/* <Box sx={{ borderBottom: 1, borderColor: 'divider', width: "100%" }}>
           <Tabs value={menu} onChange={handleChange} centered>
             <Tab label="進行中" sx={{ width: "100px", m: "auto" }} />
             <Tab label="停止中" sx={{ width: "100px", m: "auto" }} />
           </Tabs>
         </Box> */}
 
-        <Box sx={{ position: 'fixed', right: 0, left: 0, height: "-webkit-fill-available" }} >
-          <Container maxWidth="sm" sx={{ my: 0, height: "100vh", px: 0, position: "relative" }}>
-            <Fab sx={{ position: "absolute", right: 30, bottom: 150, backgroundColor: "#1976d2 !important" }} color="primary" aria-label="add"
-              onClick={(event) =>
-                router.push("/problem/create")
+            <Box sx={{ position: 'fixed', right: 0, left: 0, height: "-webkit-fill-available" }} >
+              <Container maxWidth="sm" sx={{ my: 0, height: "100vh", px: 0, position: "relative" }}>
+                <Fab sx={{ position: "absolute", right: 30, bottom: 150, backgroundColor: "#1976d2 !important" }} color="primary" aria-label="add"
+                  onClick={(event) =>
+                    router.push("/problem/create")
 
-              }>
-              <AddIcon />
-            </Fab>
+                  }>
+                  <AddIcon />
+                </Fab>
+              </Container>
+            </Box>
+            <ProblemContentsBox />
+
           </Container>
-        </Box>
-        <ProblemContentsBox />
 
-      </Container>
-
-      < Footer />
+          < Footer />
+        </>
+        : <LoginPage />
+      }
     </main >
   )
 }
