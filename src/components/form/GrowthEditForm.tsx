@@ -105,7 +105,7 @@ export default function GrowthFormModal({ open, setOpen, getGrowth, growthConten
 
         growthContents.problemId = String(params.contentsId)
         // if (dateValue) growthContents.date = String(dayjs(String(dateValue)));
-        if (dateValue) growthContents.date = new Date(String(dateValue));
+        if (dateValue) growthContents.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
         // growthContents.createDate = new Date();
         growthContents.updateDate = new Date();
         const res = await editGrowthData(growthContents)
