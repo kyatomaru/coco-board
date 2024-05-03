@@ -24,7 +24,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Card from '@mui/material/Card';
 import { auth } from '@/app/firebase';
 
-export default function ProblemContentsBox() {
+type PageProps = {
+    achieveMenu: boolean
+}
+
+export default function ProblemContentsBox({ achieveMenu }: PageProps) {
     const [contentsId, setcontentsId] = React.useState(0);
     const [isLoading, setIsLoading] = React.useState(false);
     const [problem, setProblem] = React.useState([]);
@@ -93,6 +97,7 @@ export default function ProblemContentsBox() {
                         problem.length > 0 ?
                             problem.map((value, index) => {
                                 return (
+                                    achieveMenu == value.achieve &&
                                     <ProblemContents key={index} problemContents={value} DeleteProblemContents={DeleteContents} />
                                 )
                             })

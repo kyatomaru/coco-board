@@ -17,6 +17,7 @@ export interface ProblemContentsType {
     detail: string,
     completionDate: Date,
     importance: Number,
+    achieve: Boolean
 }
 
 const categoryList = [
@@ -62,6 +63,7 @@ export class ProblemContentsModel implements ProblemContentsType {
     detail: string
     completionDate: Date
     importance: Number
+    achieve: Boolean
 
     constructor() {
         return {
@@ -80,6 +82,7 @@ export class ProblemContentsModel implements ProblemContentsType {
             completionDate: new Date(),
             importance: 1,
             feedback: [],
+            achieve: false
         }
     }
 }

@@ -41,7 +41,6 @@ export async function GET(
                 }).catch((error) => {
                     console.log("Error getting documents: ", error);
                 });
-            console.log(docRef)
             return NextResponse.json(docRef, { status: 200 })
         }
         else if (contentsId) {

@@ -57,7 +57,11 @@ export default function Home() {
       fetch(`/api/problem/?${query}`)
         .then((response) => response.json())
         .then((data) => {
-          setProblems(data)
+          const problemData = []
+          for (let index = 0; index < data.length; index++) {
+            if (data[index].achieve == false) problemData.push(data[index])
+          }
+          setProblems(problemData)
           const growthList = Array()
           for (let index = 0; index < data.length; index++) {
             growthList.push(new ProblemContentsModel())

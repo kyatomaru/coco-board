@@ -105,7 +105,7 @@ export default function ProblemForm({ contents, titleError }: PageProps) {
                 <InputLabel sx={{ fontSize: 14 }}>達成日</InputLabel>
                 <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
                     <DemoContainer sx={{ pt: "0 !important" }} components={['DatePicker']}>
-                        <DatePicker sx={{ mx: "0 !important", width: "auto !important" }} format='yyyy年MM月dd日' value={contents.completionDate} onChange={(newValue) => {
+                        <DatePicker sx={{ mx: "0 !important", width: "auto !important" }} format='yyyy年MM月dd日' value={new Date(contents.completionDate)} onChange={(newValue) => {
                             // setDateValue(newValue)
                             contents.completionDate = newValue
                         }} />

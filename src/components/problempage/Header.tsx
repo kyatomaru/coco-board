@@ -35,7 +35,7 @@ const barStyle = {
 
 type PageProps = {
     props: any,
-    setMenu: React.Dispatch<React.SetStateAction<number>>
+    setMenu: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function HideOnScroll(props) {
@@ -59,7 +59,8 @@ export default function Header({ props, setMenu }: PageProps) {
     const [headerMenu, setHeaderMenu] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setMenu(newValue);
+        if (newValue == 0) setMenu(false);
+        else if (newValue == 1) setMenu(true);
         setHeaderMenu(newValue)
     };
 
@@ -76,12 +77,10 @@ export default function Header({ props, setMenu }: PageProps) {
                             </Typography>
                             <LoginBox />
                         </Toolbar>
-                        {/* <Box sx={{ borderBottom: 1, borderColor: 'divider', width: "100%", alignSelf: 'center' }}> */}
-                        {/* <StyledTabs value={headerMenu} sx={{ height: 35 }} onChange={(event, newValue) => { handleChange(event, newValue) }}>
-                            <StyledTab label="進行中" sx={{ height: 35, m: "auto", fontSize: 13 }} />
-                            <StyledTab label="停止中" sx={{ height: 35, m: "auto", fontSize: 13 }} />
-                        </StyledTabs> */}
-                        {/* </Box> */}
+                        <StyledTabs value={headerMenu} sx={{ height: 35 }} onChange={(event, newValue) => { handleChange(event, newValue) }}>
+                            <StyledTab label="未達成" sx={{ height: 35, m: "auto", fontSize: 13 }} />
+                            <StyledTab label="達成" sx={{ height: 35, m: "auto", fontSize: 13 }} />
+                        </StyledTabs>
                     </AppBar>
                 </HideOnScroll>
             </Box>

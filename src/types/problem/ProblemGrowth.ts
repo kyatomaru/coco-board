@@ -1,5 +1,5 @@
 export interface ProblemGrowthType {
-    date: Date,
+    date: string,
     createDate: Date,
     updateDate: Date,
     uid: string,
@@ -11,7 +11,7 @@ export interface ProblemGrowthType {
 }
 
 export class ProblemGrowthModel implements ProblemGrowthType {
-    date: Date
+    date: string
     updateDate: Date
     uid: string
     createDate: Date
@@ -23,7 +23,7 @@ export class ProblemGrowthModel implements ProblemGrowthType {
 
     constructor() {
         return {
-            date: new Date(),
+            date: undefined,
             updateDate: new Date(),
             uid: undefined,
             solutions: [undefined],

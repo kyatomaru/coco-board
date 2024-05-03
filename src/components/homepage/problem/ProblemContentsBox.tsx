@@ -23,11 +23,14 @@ import DatePickerDay from '../../form/DatePickerDay';
 import CircularProgress from '@mui/material/CircularProgress';
 import Card from '@mui/material/Card';
 import { auth } from '@/app/firebase';
+import dayjs from 'dayjs';
 
 export default function ProblemContentsBox() {
     const [contentsId, setcontentsId] = React.useState(0);
     const [isLoading, setIsLoading] = React.useState(false);
     const [problem, setProblem] = React.useState([]);
+    const [growth, setGrowth] = React.useState([]);
+
     const [user, setUser] = React.useState<User | null>(null);
     const [token, setToken] = React.useState<string | null>(null);
 
@@ -41,29 +44,47 @@ export default function ProblemContentsBox() {
         setcontentsId(contentsId + 1)
     }
 
-    const GetContents = async (uid: string | undefined) => {
+    const GetProblemContents = async (uid: string | undefined) => {
         if (uid) {
-            const getParams = { uid: uid };
-            const query = new URLSearchParams(getParams);
+            const getProblemParams = { uid: uid };
+            const problemQuery = new URLSearchParams(getProblemParams);
 
-            fetch(`/api/problem/?${query}`)
+            const getGrowthParams = { uid: uid, date: dayjs(String(new Date())).format('YYYY-MM-DD') };
+            const growthQuery = new URLSearchParams(getGrowthParams);
+
+            fetch(`/api/problem/?${problemQuery}`)
                 .then((response) => response.json())
-                .then((data) => {
-                    setProblem(data)
+                .then((getProblemData) => {
+                    const problemData = []
+                    for (let index = 0; index < getProblemData.length; index++) {
+                        if (getProblemData[index].achieve == false) problemData.push(getProblemData[index])
+                    }
+                    setProblem(problemData)
+
+                    fetch(`/api/growth/list/?${growthQuery}`)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            const growthData = []
+                            for (let index = 0; index < getProblemData.length; index++) {
+                                for (let index2 = 0; index2 < data.length; index2++) {
+                                    if (getProblemData[index].contentsId == data[index2].problemId) growthData.push(data[index2])
+                                }
+                            }
+                            setGrowth(growthData)
+                        })
                 })
         }
     }
 
     React.useEffect(() => {
-
         setIsLoading(true)
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 setUser(auth.currentUser);
                 user.getIdToken().then((token) => {
                     setToken(token);
                 });
-                GetContents(auth.currentUser?.uid)
+                await GetProblemContents(auth.currentUser?.uid)
                 setIsLoading(false)
             } else {
                 setUser(null);
@@ -77,7 +98,7 @@ export default function ProblemContentsBox() {
 
     const DeleteContents = () => {
         setIsLoading(true)
-        GetContents(auth.currentUser?.uid)
+        GetProblemContents(auth.currentUser?.uid)
         setIsLoading(false)
     }
 
@@ -93,7 +114,7 @@ export default function ProblemContentsBox() {
                         problem.length > 0 ?
                             problem.map((value, index) => {
                                 return (
-                                    <ProblemContents key={index} problemContents={value} DeleteProblemContents={DeleteContents} />
+                                    <ProblemContents key={index} problemContents={value} growthContents={growth[index]} DeleteProblemContents={DeleteContents} />
                                 )
                             })
                             :

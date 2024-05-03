@@ -33,17 +33,30 @@ import { useDateFormat } from '@/hooks/useDateFormat';
 // import { ProblemCategoryType } from '@/types/SolutionCategory';
 import WatchIcon from '@mui/icons-material/WatchLater';
 import { deleteProblemMs } from '@/const/modalMessage';
+import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
+import MuiAccordionSummary, {
+    AccordionSummaryProps,
+} from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { styled } from '@mui/material/styles';
+import { ProblemGrowthType } from '@/types/problem/ProblemGrowth';
+import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
+import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 
 type PageProps = {
     problemContents: ProblemContentsType,
-    DeleteProblemContents: any
+    DeleteProblemContents: any,
+    growthContents: ProblemGrowthType
 }
 
 const DataFormat = (date: String) => {
     return useDateFormat(date)
 }
 
-export default function ProblemproblemContents({ problemContents, DeleteProblemContents }: PageProps) {
+export default function ProblemproblemContents({ problemContents, DeleteProblemContents, growthContents }: PageProps) {
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [menuModalOpen, setMenuModalOpen] = React.useState<boolean>(false)
 
@@ -75,6 +88,24 @@ export default function ProblemproblemContents({ problemContents, DeleteProblemC
         }
     }
 
+    // const ReturnGrowthOvercome = () => {
+    //     for (let index = 0; index < growthContents.length; index++) {
+    //         if (problemContents.contentsId == growthContents[index].problemId) {
+    //             return growthContents[index].overcome
+    //         }
+
+    //     }
+    // }
+
+    // const ReturnGrowthComment = () => {
+    //     for (let index = 0; index < growthContents.length; index++) {
+    //         if (problemContents.contentsId == growthContents[index].problemId) {
+    //             return growthContents[index].comment
+    //         }
+    //     }
+    //     return ""
+    // }
+
     // console.log(problemContents.solutionsCategory)
 
     return (
@@ -83,96 +114,115 @@ export default function ProblemproblemContents({ problemContents, DeleteProblemC
             <ProblemContentsMenu open={menuModalOpen} setOpen={setMenuModalOpen} Delete={DeleteButtonClick} Edit={EditButtonClick} View={ViewButtonClick} />
             <Card sx={{ minWidth: 250, my: 1 }} >
                 <Box sx={{ position: "relative" }}>
-                    {/* <IconButton
-                        onClick={menuHandleClick}
-                        sx={{
-                            right: "10px", top: "7px",
-                            position: "absolute",
-                            zIndex: 1000, width: "35px", height: "35px", m: "auto"
-                        }}
-                    >
-                        <MoreHorizIcon />
-                    </IconButton> */}
-                    <CardActionArea onClick={() => ViewButtonClick()}>
-                        <Stack direction="row" sx={{ py: 1, mx: 2, alignItems: "center" }} >
-                            <Box sx={{ width: "100%", alignItems: "center" }} >
-                                <Stack direction="row" justifyContent="space-between" alignItems="center">
-                                    <Typography variant="h6" sx={{ fontSize: 14 }} component="div">
-                                        {String(problemContents.problem)}
-                                    </Typography>
-                                    <Chip label={String(problemContents.category[problemContents.categoryId].title)} size="small" sx={{ fontSize: 9, backgroundColor: problemContents.category[problemContents.categoryId].bgColor, color: problemContents.category[problemContents.categoryId].color, }} />
-                                </Stack>
-                                {/* <Stack direction="row" alignItems="center">
-                                    {dayjs(String(problemContents.completionDate)).isBefore(dayjs(String(new Date))) ?
-                                        <Typography variant="h6" color="error" sx={{ fontSize: 16 }} component="div">
-                                            {DataFormat(String(problemContents.completionDate))}
-                                        </Typography>
-                                        :
-                                        <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
-                                            {DataFormat(String(problemContents.completionDate))}
-                                        </Typography>
-                                    }
+                    {/* <CardActionArea onClick={() => ViewButtonClick()}> */}
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
 
-                                    {dayjs(String(problemContents.completionDate)).isBefore(dayjs(String(new Date))) &&
-                                        <WatchIcon fontSize='small' color="error" sx={{ ml: 1 }} />
-                                    }
-                                </Stack> */}
-                                {/* <Stack direction="row" spacing={1} >
-                                    {
-                                        problemContents.importance == 3 &&
-                                        <Chip label="重要" size="small" sx={{ fontSize: 9 }} />
-                                    }
-                                </Stack> */}
-                                {/* <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mt: 1 }}>
-                                    
-                                    <Box>
-                                        <Typography variant="h6" sx={{ fontSize: 12 }} component="div">
-                                            登録日:{dayjs(String(problemContents.createDate)).format('YYYY/M/D')}
-                                        </Typography>
-                                    </Box>
-                                </Stack> */}
-                            </Box>
-                        </Stack>
-
-                        {/* <Divider />
-                        <Box sx={{ px: 2, my: 1 }}>
-                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                克服度
+                        >
+                            <Typography variant="h6" sx={{ fontSize: 14 }} component="div">
+                                {String(problemContents.problem)}
                             </Typography>
-                            <Rating size="large" name="half-rating" defaultValue={Number(problemContents.overcome)} precision={0.5} readOnly />
-                        </Box> */}
+                            <Chip label={String(problemContents.category[problemContents.categoryId].title)} size="small" sx={{ fontSize: 9, backgroundColor: problemContents.category[problemContents.categoryId].bgColor, color: problemContents.category[problemContents.categoryId].color, }} />
+                        </AccordionSummary>
 
-                        {/* <Divider />
-                        {problemContents.solutions[0] != null &&
-                            <>
-                                <Divider />
-                                <Box sx={{ px: 2, my: 1 }}>
-                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                        取り組むこと
-                                    </Typography>
+                        <AccordionDetails>
+                            {growthContents != undefined &&
+                                <Card sx={{
+                                    pt: 1, px: 1,
+                                    borderTop: '0.5px solid rgba(0, 0, 0, .125)',
+                                    borderBottom: '0.5px solid rgba(0, 0, 0, .125)'
+                                }}>
 
-                                    {problemContents.solutions.map((solution, index) => (
-                                        <Box key={index} >
-                                            {
-                                                solution.context != "" &&
-                                                <Stack direction="row"  >
-                                                    <Typography variant="body2" sx={{ p: 1, width: "100px" }}>
-                                                        {problemContents.solutionsCategory[Number(solution.type)].title}
-                                                    </Typography>
-                                                    <Divider orientation="vertical" variant="middle" flexItem />
-                                                    <Typography variant="body2" sx={{ p: 1 }}>
-                                                        {solution.context}
-                                                    </Typography>
-                                                </Stack>
-                                            }
-                                        </Box>
-                                    ))}
-                                </Box>
-                            </>
-                        } */}
-                    </CardActionArea>
+                                    <Stack direction="row" alignItems="center">
+                                        <span>{customIcons[Number(growthContents.overcome)].icon}</span>
+                                        <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                            {customIcons[Number(growthContents.overcome)].label}
+                                        </Typography>
+
+                                    </Stack>
+                                    <Box sx={{ my: 1 }}>
+                                        {growthContents != undefined &&
+                                            <Typography variant="body1" sx={{ fontSize: 14 }}>
+                                                {growthContents.comment}
+                                            </Typography>
+                                        }
+                                    </Box>
+                                </Card>
+                            }
+                        </AccordionDetails>
+
+                    </Accordion>
+                    {/* </CardActionArea> */}
                 </Box>
             </Card >
         </>
     );
 }
+
+const customIcons: {
+    [index: string]: {
+        icon: React.ReactElement;
+        label: string;
+    };
+} = {
+    // 1: {
+    //     icon: <SentimentVeryDissatisfiedIcon color="error" />,
+    //     label: 'Very Dissatisfied',
+    // },
+    1: {
+        icon: <SentimentDissatisfiedIcon color="error" />,
+        label: '退化・改悪した',
+    },
+    2: {
+        icon: <SentimentSatisfiedIcon color="warning" />,
+        label: '成長が見られない',
+    },
+    3: {
+        icon: <SentimentSatisfiedAltIcon color="success" />,
+        label: 'やや成長・改善した',
+    },
+    4: {
+        icon: <SentimentVerySatisfiedIcon sx={{ color: "#00ff00" }} />,
+        label: '成長・改善した',
+    },
+};
+
+const Accordion = styled((props: AccordionProps) => (
+    <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+    '&:not(:last-child)': {
+        borderBottom: 0
+    },
+    '&::before': {
+        display: 'none',
+    },
+}));
+
+const AccordionSummary = styled((props: AccordionSummaryProps) => (
+    <MuiAccordionSummary
+        expandIcon={<ExpandMoreIcon sx={{ fontSize: '0.9rem' }} />}
+        {...props}
+    />
+))(({ theme }) => ({
+    // backgroundColor:
+    //     theme.palette.mode === 'dark'
+    //         ? 'rgba(255, 255, 255, .05)'
+    //         : 'rgba(0, 0, 0, .03)',
+    flexDirection: 'row-reverse',
+    '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+        transform: 'rotate(180deg)',
+    },
+    '& .MuiAccordionSummary-content': {
+        marginLeft: theme.spacing(1),
+        justifyContent: "space-between",
+    },
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    // padding: theme.spacing(2),
+    padding: 0,
+    borderTop: '1px solid rgba(0, 0, 0, .125)',
+}));

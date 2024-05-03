@@ -81,7 +81,7 @@ export default function Home() {
             <Box sx={{ mb: 3, px: 2, py: 1, borderRadius: 4, bgcolor: "rgba(247, 249, 249, 1.00)" }}>
               <Stack sx={{ width: "100%" }} alignItems="center" direction="row">
                 <Typography variant="h6" sx={{ fontSize: 16, width: "100%" }}>
-                  進行中の課題
+                  未達成の課題
                 </Typography>
                 <Box sx={{ minWidth: "100px" }}>
                   <Button onClick={(event) => { router.push(`/problem/growth`) }}>振り返る</Button>

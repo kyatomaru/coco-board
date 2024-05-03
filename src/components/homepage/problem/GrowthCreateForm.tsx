@@ -91,18 +91,21 @@ export default function GrowthFormModal({ problems, growth }: PageProps) {
         event.preventDefault()
         setIsLoading(true)
 
-        for (let index = 0; index < problems.length; index++) {
-            growth[index].problemId = String(problems[index].contentsId)
-            growth[index].date = new Date();
-            growth[index].createDate = new Date();
-            growth[index].updateDate = new Date();
-        }
-
-        const res = await insertGrowthList(growth)
-        if (res.ok) {
-            router.push('/')
-        } else {
-            // 失敗時の処理（エラーメッセージの表示）
+        const uid = await auth.currentUser?.uid;
+        if (uid) {
+            for (let index = 0; index < problems.length; index++) {
+                growth[index].uid = uid;
+                growth[index].problemId = String(problems[index].contentsId)
+                growth[index].date = dayjs(String(dateValue)).format('YYYY-MM-DD');
+                growth[index].createDate = new Date();
+                growth[index].updateDate = new Date();
+            }
+            const res = await insertGrowthList(growth)
+            if (res.ok) {
+                router.push('/')
+            } else {
+                // 失敗時の処理（エラーメッセージの表示）
+            }
         }
 
     }
@@ -151,17 +154,12 @@ export default function GrowthFormModal({ problems, growth }: PageProps) {
 }
 
 async function insertGrowthList(contents) {
+    return fetch('/api/growth/list/', {
+        method: 'POST',
+        body: JSON.stringify(contents),
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
 
-    const uid = await auth.currentUser?.uid;
-    if (uid) {
-        contents.uid = uid;
-
-        return fetch('/api/growth/list/', {
-            method: 'POST',
-            body: JSON.stringify(contents),
-            headers: {
-                'content-type': 'application/json'
-            }
-        })
-    }
 }
