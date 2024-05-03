@@ -67,11 +67,11 @@ export default function Home(props) {
           <NoteContentsBox />
 
         }
-        {
+        {/* {
           menu == 1 &&
           < ProblemContentsBox />
 
-        }
+        } */}
       </Container >
 
       < Footer />
