@@ -71,10 +71,10 @@ export default function Home() {
           <NoteContentsBox />
 
         }
-        {menu == 1 &&
+        {/* {menu == 1 &&
           <ProblemContentsBox />
 
-        }
+        } */}
       </Container>
 
       < Footer />
