@@ -79,7 +79,6 @@ export default function Home(props) {
                                 </Fab>
                             </Container>
                         </Box>
-                        {String(menu)}
                         <ProblemContentsBox achieveMenu={menu} />
 
                     </Container>
