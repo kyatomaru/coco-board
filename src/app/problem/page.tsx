@@ -70,7 +70,7 @@ export default function Home(props) {
 
                         <Box sx={{ position: 'fixed', right: 0, left: 0, height: "-webkit-fill-available" }} >
                             <Container maxWidth="sm" sx={{ my: 0, height: "100vh", px: 0, position: "relative" }}>
-                                <Fab sx={{ position: "absolute", right: 30, bottom: 150, backgroundColor: "#1976d2 !important" }} color="primary" aria-label="add"
+                                <Fab sx={{ bottom: { xs: 250, sm: 160 }, position: "absolute", right: 30, backgroundColor: "#1976d2 !important" }} color="primary" aria-label="add"
                                     onClick={(event) =>
                                         router.push("/problem/create")
 
