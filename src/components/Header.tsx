@@ -1,35 +1,26 @@
 "use client"
 
 import * as React from 'react';
+import { useRouter } from 'next/navigation';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import LoginBox from '@/components/auths/LoginBox';
 import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import Container from '@mui/material/Container';
 import Slide from '@mui/material/Slide';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
-
+import HeaderMenus from './HeaderMenus';
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
 
 const barStyle = {
     bgcolor: 'background.paper',
-    color: "black"
+    color: "black",
+    position: 'fixed',
+    zIndex: "1100",
+    width: "100%",
+    flexGrow: 1,
+    display: { sm: "block", md: "none" }
 }
 
 function HideOnScroll(props) {
@@ -52,28 +43,31 @@ function HideOnScroll(props) {
 }
 
 export default function Header(props) {
+    const router = useRouter()
+
     return (
         <React.Fragment>
             <CssBaseline />
-            <Box position='fixed' zIndex="1100" sx={{ width: "100%", flexGrow: 1 }} >
-                <HideOnScroll {...props}>
-                    <AppBar sx={barStyle} position="static">
-                        <Toolbar>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                Soccer Note
+            {/* <Box position='fixed' zIndex="1100" sx={{ width: "100%", flexGrow: 1 }} > */}
+            <HideOnScroll {...props}>
+                <AppBar sx={barStyle} position="static">
+                    <Toolbar>
+                        <Stack
+                            direction="row"
+                            alignItems="center"
+                            sx={{ height: { xs: 50, sm: 64 }, background: "white", width: "100%" }}>
+                            <IconButton sx={{ p: "0" }} onClick={(event) => { router.push('/home') }}>
+                                <Box sx={{ width: 45, height: 45, backgroundImage: "url(icon.png)", backgroundSize: "cover" }} />
+                            </IconButton>
+                            <Typography variant="h6" component="h2" sx={{ display: { xs: "none", sm: "block" }, pl: 2 }}>
+                                coco-board
                             </Typography>
-                            <LoginBox />
-                        </Toolbar>
-                        {/* <Box sx={{ borderBottom: 1, borderColor: 'divider', width: "100%" }}>
-                            <Tabs value={menu} onChange={handleChange} centered>
-                                <Tab label="記録" sx={{ width: "100px", m: "auto" }} />
-                                <Tab label="課題" sx={{ width: "100px", m: "auto" }} />
-                            </Tabs>
-                        </Box> */}
-
-                    </AppBar>
-                </HideOnScroll>
-            </Box>
-        </React.Fragment>
+                        </Stack>
+                        <HeaderMenus />
+                    </Toolbar>
+                </AppBar>
+            </HideOnScroll>
+            {/* </Box> */}
+        </React.Fragment >
     );
 }

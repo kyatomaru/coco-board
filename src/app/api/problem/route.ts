@@ -55,12 +55,8 @@ export async function PATCH(
     req: NextRequest,
     res: NextResponse
 ) {
-    const reqData = await req.json();
-
-    const updateData = reqData.updateData
-    const contentsId = reqData.contentsId
-
-    console.log(updateData)
+    const updateData = await req.json();
+    const contentsId = updateData.contentsId
 
     if (updateData && contentsId) {
         const docRef = db.collection(COLLECTION_NAME).doc(contentsId).update(updateData)

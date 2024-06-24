@@ -1,0 +1,66 @@
+"use client"
+
+import * as React from 'react';
+import GoogleSignInButton from '../../../common/auth/google/GoogleSignInButton';
+// import LineSignInButton from '../../../components/auths/line/LineSignInButton';
+// import XSignInButton from '../../../components/auths/x/XSignInButton';
+import GoogleSignOutButton from '../../../common/auth/google/GoogleSignOutButton';
+import { useRouter } from 'next/navigation'
+import { onAuthStateChanged, getAuth } from "firebase/auth"
+import { auth } from '@/app/firebase';
+import type { User } from "firebase/auth"
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
+import LoginBox from './LoginBox';
+
+
+export default function LoginPage() {
+    const router = useRouter()
+    const [user, setUser] = React.useState<User | undefined>()
+
+    React.useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                if (user.emailVerified) {
+                    router.replace('/home')
+                }
+            }
+        })
+    });
+
+    return (
+        <Container maxWidth="xs" fixed sx={{ my: "20px" }}>
+            <Box sx={{ px: "20px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
+                <Box sx={{ mb: "40px" }}>
+                    <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                        coco-board
+                    </Typography>
+                </Box>
+                <Box>
+                    <LoginBox />
+                </Box>
+                <Divider>
+                    <Typography variant="body1" sx={{ fontSize: 13 }}>
+                        または
+                    </Typography>
+                </Divider>
+                <GoogleSignInButton />
+                {/* <LineSignInButton /> */}
+                {/* <XSignInButton /> */}
+            </Box>
+            <Box sx={{ mt: "12px", p: "20px 20px 10px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
+                <Typography variant="h5" sx={{ fontSize: 13, }}>
+                    アカウントをお持ちでない場合
+                </Typography>
+                <Typography  >
+                    <Button href='/accounts/signup' size="medium" sx={{ height: "30px", fontSize: 13 }} >
+                        登録する
+                    </Button>
+                </Typography>
+            </Box>
+        </Container>
+    );
+}

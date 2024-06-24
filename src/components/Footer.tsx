@@ -1,40 +1,33 @@
 "use client"
 
 import * as React from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import AppBar from '@mui/material/AppBar';
 import dayjs from 'dayjs'
-import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation';
-import EditNoteIcon from '@mui/icons-material/EditNote';
 import HomeIcon from '@mui/icons-material/Home';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-import StickyNote2Icon from '@mui/icons-material/StickyNote2';
-import TaskIcon from '@mui/icons-material/Task';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import EventIcon from '@mui/icons-material/Event';
-import EmailIcon from '@mui/icons-material/Email';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+
 
 export default function Footer() {
     const pathName = usePathname().split('/')
 
     const setLabel = () => {
-
-        if (pathName[1] === "") {
+        if (pathName[1] === "home") {
             return 0
         }
-        else if (pathName[1] === "problem") {
-            return 2
-        }
-        else if (pathName[1] === "calendar") {
+        else if (pathName[1] === "create") {
             return 1
         }
-
-        else if (pathName[1] === "board") {
+        else if (pathName[1] === "calendar") {
+            return 2
+        }
+        else if (pathName[1] === "problem") {
             return 3
         }
     }
@@ -44,15 +37,15 @@ export default function Footer() {
     const router = useRouter()
 
     const ClickHomeButton = () => {
-        router.push("/")
+        router.push("/home")
     };
 
     const ClickProblemButton = () => {
         router.push('/problem')
     };
 
-    const ClickViewButton = () => {
-        router.push('/notes')
+    const ClickCreateButton = () => {
+        router.push(`/create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/board`)
     };
 
     const ClickCalendarButton = () => {
@@ -68,28 +61,20 @@ export default function Footer() {
     };
 
     return (
-        <Box  >
-            <AppBar position="fixed" sx={{ top: 'auto', bottom: 0, backgroundColor: 'background.paper' }}>
+        <Box sx={{ width: "100%" }}>
+            <AppBar position="fixed" sx={{ top: 'auto', bottom: 0, backgroundColor: 'background.paper', height: 45, display: { sm: "block", md: "none" } }}>
                 <BottomNavigation
                     value={value}
-                    sx={{ height: "45px", px: 1, width: "100%", maxWidth: "500px", mx: "auto", justifyContent: "center" }}
                     onChange={(event, newValue) => {
                         setValue(newValue);
-                    }}>
-                    {/* <IconButton sx={{ m: "auto" }} onClick={ClickHomeButton}><HomeIcon /></IconButton>
-                    <IconButton sx={{ m: "auto" }} onClick={ClickViewButton} ><TextSnippetIcon /></IconButton>
-                    <IconButton sx={{ m: "auto" }} onClick={ClickViewButton} ><EventIcon /></IconButton>
-                    <IconButton sx={{ m: "auto" }} onClick={ClickViewButton}><EmailIcon /></IconButton>
-                    <IconButton sx={{ m: "auto" }} onClick={ClickViewButton} ><AccountCircle /></IconButton> */}
-
-                    <BottomNavigationAction icon={<HomeIcon />} onClick={ClickHomeButton} />
-                    <BottomNavigationAction icon={<EventIcon />} onClick={ClickCalendarButton} />
-                    <BottomNavigationAction icon={<TextSnippetIcon />} onClick={ClickProblemButton} />
-                    {/* <BottomNavigationAction icon={<EmailIcon />} onClick={ClickMessageButton} />
-                    <BottomNavigationAction icon={<AccountCircle />} onClick={ClickAccountButton} /> */}
-
-                </BottomNavigation >
+                    }}
+                >
+                    <BottomNavigationAction sx={{ maxWidth: 90, minWidth: 50 }} value={0} onClick={ClickHomeButton} icon={<HomeIcon />} />
+                    <BottomNavigationAction sx={{ maxWidth: 90, minWidth: 50 }} value={1} onClick={ClickCreateButton} icon={<AddBoxIcon />} />
+                    <BottomNavigationAction sx={{ maxWidth: 90, minWidth: 50 }} value={2} onClick={ClickCalendarButton} icon={<EventIcon />} />
+                    <BottomNavigationAction sx={{ maxWidth: 90, minWidth: 50 }} value={3} onClick={ClickProblemButton} icon={<TextSnippetIcon />} />
+                </BottomNavigation>
             </AppBar>
-        </Box>
+        </Box >
     );
 }

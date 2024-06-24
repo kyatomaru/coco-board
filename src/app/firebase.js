@@ -1,6 +1,7 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAMuTnEQE6oD67cVhgyaZ2Ffdqf3mOQrxI",
@@ -10,7 +11,8 @@ const firebaseConfig = {
     storageBucket: "soccer-note-714d1.appspot.com",
     messagingSenderId: "789270839877",
     appId: "1:789270839877:web:0db557eda811f4f148592c",
-    measurementId: "G-1GMQJRB5TM"
+    measurementId: "G-1GMQJRB5TM",
+    storageBucket: 'gs://soccer-note-714d1.appspot.com'
 };
 
 // typeof window !== 'undefined' && getApps().length === 0 ?
@@ -19,6 +21,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
+const storage = getStorage(app);
 
-
-export { auth, db }
+export { auth, db, storage }

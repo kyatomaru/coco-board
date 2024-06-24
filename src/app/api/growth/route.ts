@@ -17,8 +17,9 @@ export async function GET(
 ) {
     const uid = req.nextUrl.searchParams.get("uid")
     const problemId = req.nextUrl.searchParams.get("problemId")
+    const date = req.nextUrl.searchParams.get("date")
 
-    if (uid && !problemId) {
+    if (uid && !problemId && !date) {
         const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).get()
             .then(snapshot => {
                 const data = Array()
@@ -35,8 +36,26 @@ export async function GET(
         return NextResponse.json(docRef, { status: 200 })
     }
 
-    if (problemId) {
-        const docRef = await db.collection(COLLECTION_NAME).where("problemId", "==", problemId).orderBy('date', 'desc').get()
+    if (uid && problemId && !date) {
+        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("problemId", "==", problemId).orderBy('date', 'desc').get()
+            .then(snapshot => {
+                const data = Array()
+                snapshot.forEach((doc) => {
+                    const ob = doc.data()
+                    ob.contentsId = doc.id
+                    data.push(ob)
+                })
+                return data
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+
+        return NextResponse.json(docRef, { status: 200 })
+    }
+
+    if (uid && !problemId && date) {
+        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).get()
             .then(snapshot => {
                 const data = Array()
                 snapshot.forEach((doc) => {

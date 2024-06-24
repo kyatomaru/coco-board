@@ -1,9 +1,9 @@
-export const useDeleteGame = (contentsId) => {
+export const useDeleteGame = async (contentsId) => {
     if (contentsId) {
         const getParams = { contentsId: contentsId };
         const query = new URLSearchParams(getParams);
 
-        return fetch(`/api/game/?${query}`, {
+        return await fetch(`/api/game/?${query}`, {
             method: 'DELETE'
         })
     }

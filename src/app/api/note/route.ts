@@ -44,7 +44,6 @@ export async function GET(
         return NextResponse.json(docRef, { status: 200 })
 
     } else if (uid && date) {
-        console.log(date)
         const docRef = Array()
         const gameDocRef = await db.collection("game").where("uid", "==", uid).where("date", "==", date).get()
             .then(snapshot => {
@@ -53,7 +52,6 @@ export async function GET(
                     const ob = doc.data()
                     ob.contentsId = doc.id
                     ob.collection = "game"
-                    // data.push(ob)
                     docRef.push([ob])
                 })
                 // return data
@@ -68,7 +66,6 @@ export async function GET(
                 snapshot.forEach((doc) => {
                     const ob = doc.data()
                     ob.contentsId = doc.id
-                    // data.push(ob)
                     ob.collection = "practice"
                     docRef.push([ob])
                 })
@@ -78,14 +75,9 @@ export async function GET(
                 console.log("Error getting documents: ", error);
             });
 
-        // const docRef = sortContents(gameDocRef, practiceDocRef)
-        console.log(docRef)
-
         return NextResponse.json(docRef, { status: 200 })
     }
 }
-
-
 
 
 const sortDateContents = (dateArray, contents, collection) => {

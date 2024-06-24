@@ -1,4 +1,3 @@
-import type { SolutionCategoryType } from "../SolutionCategory"
 import { type GameFeedbackType, GameFeedbackModel } from "./GameFeedback"
 
 export interface GameContentsType {
@@ -20,19 +19,8 @@ export interface GameContentsType {
     position: String,
     goodPoints: Array<GameFeedbackType>,
     badPoints: Array<GameFeedbackType>,
-    feedbackCategory: Array<SolutionCategoryType>,
     comment: string,
-    // problems: Array<ProblemSolutionType>,
 }
-
-const feedbackList = [
-    { title: "全般", bgColor: "white", color: "black" },
-    { title: "技術", bgColor: "#0000ff", color: "white" },
-    { title: "戦術", bgColor: "#008000", color: "white" },
-    { title: "フィジカル", bgColor: "#ffff00", color: "black" },
-    { title: "メンタル", bgColor: "#ff0000", color: "white" },
-    { title: "その他", bgColor: "white", color: "black" }
-]
 
 export class GameContentsModel implements GameContentsType {
     contentsId: String
@@ -53,16 +41,15 @@ export class GameContentsModel implements GameContentsType {
     position: String
     goodPoints: Array<GameFeedbackType>
     badPoints: Array<GameFeedbackType>
-    feedbackCategory: Array<SolutionCategoryType>
     comment: string
 
-    constructor() {
+    constructor(date) {
         return {
             contentsId: undefined,
             createDate: new Date(),
             updateDate: new Date(),
             uid: undefined,
-            date: undefined,
+            date: date,
             title: undefined,
             weather: "",
             place: undefined,
@@ -76,7 +63,6 @@ export class GameContentsModel implements GameContentsType {
             position: undefined,
             goodPoints: [new GameFeedbackModel()],
             badPoints: [new GameFeedbackModel()],
-            feedbackCategory: feedbackList,
             comment: undefined
         }
     }

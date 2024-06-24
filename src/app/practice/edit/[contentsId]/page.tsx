@@ -2,75 +2,52 @@
 
 import * as React from 'react';
 import { useRouter, useParams } from 'next/navigation'
-import { auth } from '@/app/firebase';
-import { useGetIdPractice } from '@/hooks/practice/useGetPractice';
-import Header from "@/components/Header";
-import TitleBox from "@/components/TitleBox";
-import MenuSelectBox from "@/components/form/MenuSelectBox"
-import { Dayjs } from 'dayjs';
-import dayjs from 'dayjs';
-import ja from 'date-fns/locale/ja'
-import { format } from 'date-fns'
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import PracticeEditForm from "@/components/form/practice/PracticeEditForm"
-import Button from '@mui/material/Button';
+import LoadingPage from '@/components/LoadingPage';
+import { useIsAuth } from '@/hooks/auth/useIsAuth';
+import { useGetPractice } from '@/hooks/practice/useGetPractice';
+import PracticeForm from '@/features/common/forms/practice/PracticeForm';
 import Footer from "@/components/Footer";
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
-import { usePatchPractice } from '@/hooks/practice/usePatchGame';
-
-async function updateData(event: React.FormEvent<HTMLFormElement>, data, dateValue) {
-  event.preventDefault()
-  // const formData = new FormData(event.currentTarget)
-  // const updateData = Object.fromEntries(formData)
-
-  const uid = await auth.currentUser?.uid;
-  if (uid) {
-    data.updateData.uid = uid;
-
-    if (dateValue) data.updateData.date = dayjs(String(dateValue)).format('YYYY-MM-DD');
-
-    const date = new Date();
-    data.updateData.createDate = date;
-    data.updateData.updateDate = date;
-
-    fetch('/api/practice/', {
-      method: 'PATCH',
-      body: JSON.stringify(data),
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-  }
-}
+import Box from '@mui/material/Box';
+import type { User } from 'firebase/auth';
+import { auth } from '@/app/firebase';
+import { onAuthStateChanged, getAuth } from "firebase/auth"
+import { useUpdatePractice } from '@/hooks/practice/useUpdatePractice';
+import LoginPage from '@/features/routes/accounts/login/LoginPage';
 
 export default function Home() {
-  const router = useRouter()
   const params = useParams()
+  const router = useRouter()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [titleError, setTitleError] = React.useState(false);
-  const [dateValue, setDateValue] = React.useState<Date | null>(new Date());
 
-  const contents = useGetIdPractice(setIsLoading, setDateValue)
+  const [user, setUser] = React.useState<User | undefined>(null);
+  const [contents, getContents] = useGetPractice(user, params.contentsId)
 
-  // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   setIsLoading(true)
-  //   const data = { updateData: contents, contentsId: params.contentsId }
-  //   updateData(event, data, dateValue).then(() => {
-  //     router.push('/notes/' + dayjs(String(dateValue)).format('YYYY-MM-DD'));
-  //   })
-  // }
+  useIsAuth(router)
+
+  React.useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(auth.currentUser)
+      }
+    })
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
-      <Container maxWidth="sm" sx={{ px: 0, position: "relative" }}>
-        <PracticeEditForm />
-      </Container>
-      <Footer />
+      <LoadingPage />
+      {user !== null &&
+        <>
+          <Container maxWidth="sm" sx={{ px: 0, position: "relative" }}>
+            <Box sx={{ pb: "30px", borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", backgroundColor: "#fbfbfb" }}>
+              {contents != undefined &&
+                <PracticeForm contents={contents} postData={useUpdatePractice} />
+              }
+            </Box>
+          </Container>
+        </>
+      }
     </main >
   )
 }
