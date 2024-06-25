@@ -5,7 +5,8 @@ import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBl1jvE4K7DtNSZyetpwjYDlFYZaYUnq24",
-    authDomain: "coco-board-app.firebaseapp.com",
+    // authDomain: "coco-board-app.firebaseapp.com",
+    authDomain: "cocoboard.jp",
     projectId: "coco-board-app",
     storageBucket: "coco-board-app.appspot.com",
     messagingSenderId: "49261316257",
