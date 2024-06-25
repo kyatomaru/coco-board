@@ -4,15 +4,14 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAMuTnEQE6oD67cVhgyaZ2Ffdqf3mOQrxI",
-    authDomain: "soccer-note-714d1.firebaseapp.com",
-    // authDomain: "soccer-note.vercel.app",
-    projectId: "soccer-note-714d1",
-    storageBucket: "soccer-note-714d1.appspot.com",
-    messagingSenderId: "789270839877",
-    appId: "1:789270839877:web:0db557eda811f4f148592c",
-    measurementId: "G-1GMQJRB5TM",
-    storageBucket: 'gs://soccer-note-714d1.appspot.com'
+    apiKey: "AIzaSyBl1jvE4K7DtNSZyetpwjYDlFYZaYUnq24",
+    authDomain: "coco-board-app.firebaseapp.com",
+    projectId: "coco-board-app",
+    storageBucket: "coco-board-app.appspot.com",
+    messagingSenderId: "49261316257",
+    appId: "1:49261316257:web:dfaef996b2c1a7509d48e0",
+    measurementId: "G-6SLDJVH50X",
+    storageBucket: 'gs://coco-board-app.appspot.com'
 };
 
 // typeof window !== 'undefined' && getApps().length === 0 ?

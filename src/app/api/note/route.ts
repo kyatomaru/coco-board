@@ -75,6 +75,8 @@ export async function GET(
                 console.log("Error getting documents: ", error);
             });
 
+        console.log(docRef)
+
         return NextResponse.json(docRef, { status: 200 })
     }
 }

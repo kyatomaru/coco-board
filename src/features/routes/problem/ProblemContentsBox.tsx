@@ -327,7 +327,7 @@ export default function ProblemContentsBox({ problemContents, growthContents, ge
                                         :
                                         <Box>
                                             <Typography variant="h6" sx={{ fontSize: 14 }} component="div">
-                                                記録がありません
+                                                課題がありません
                                             </Typography>
                                         </Box>
                                     }

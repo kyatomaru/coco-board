@@ -13,7 +13,7 @@ export default function GoogleSignInButton() {
         const auth = getAuth();
         signOut(auth).then(() => {
             // Sign-out successful.
-            router.push('/')
+            router.push('/accounts/login')
         }).catch((error) => {
             // An error happened.
         });

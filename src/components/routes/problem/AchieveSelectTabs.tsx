@@ -26,6 +26,7 @@ const barStyle = {
     flexGrow: 1,
     height: 50,
     display: { sm: "none", md: "block" },
+    pl: { md: "120px", lg: "250px" }
 }
 
 type PageProps = {

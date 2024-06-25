@@ -30,6 +30,8 @@ const fetchNoteContents = async (query) => {
         .then(async (data) => {
             const boardData = JSON.parse(JSON.stringify(data))
 
+            console.log(boardData)
+
             for (let index = 0; index < boardData.length; index++) {
                 const getImageParams = { id: boardData[index].contentsId };
                 const imageQuery = new URLSearchParams(getImageParams);

@@ -1,11 +1,12 @@
 "use client"
 
 import * as React from 'react';
+import { useRouter } from 'next/navigation';
 import type { User } from 'firebase/auth';
 import dayjs from 'dayjs';
 import { useGetAllProblem } from '@/hooks/problem/useGetAllProblem';
 import Skeleton from '@mui/material/Skeleton';
-import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import ProblemCard from './ProblemCard';
@@ -19,6 +20,8 @@ type PageProps = {
 }
 
 export default function ProblemCardBox({ user, achieveMenu }: PageProps) {
+    const router = useRouter()
+
     const [problemContents, getProblemContents] = useGetAllProblem(user)
     const [growthContents, getGrowthContents] = useGetDateGrowth(user, dayjs(String(new Date())).format('YYYY-MM-DD'))
     const [newGrowthContents, setNewGrowthContents] = React.useState(undefined)
@@ -56,11 +59,14 @@ export default function ProblemCardBox({ user, achieveMenu }: PageProps) {
                             )
                         })
                         :
-                        <Card sx={{ minWidth: 250, height: "115px", my: 3 }} elevation={2}>
+                        <Card sx={{ minWidth: 250, height: "115px", mb: 2 }} elevation={2}>
                             <Stack direction="column" sx={{ p: 1, mx: 1, height: 120 }} alignContent="center" justifyContent="center" >
                                 <Typography sx={{ fontSize: 13, textAlign: "center" }} variant="h6" component="div">
-                                    記録がありません
+                                    課題がありません
                                 </Typography>
+                                <Button sx={{ fontSize: 14, width: 160, mx: "auto", my: 1 }} onClick={(event) => router.push('/create/problem')} >
+                                    課題を追加する
+                                </Button>
                             </Stack>
                         </Card>
                     }
