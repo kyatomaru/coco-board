@@ -64,7 +64,7 @@ export default function GoogleSignInButton() {
 
 function Icon() {
     return (
-        <Image src="/auth/google-icon.svg" width={20} height={20} alt="google_img" />
+        <Image src="/images/auth/google-icon.svg" width={20} height={20} alt="google_img" />
     );
 }
 

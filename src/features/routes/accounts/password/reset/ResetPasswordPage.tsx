@@ -13,6 +13,8 @@ import LoadingPage from '@/components/LoadingPage';
 import Alert from '@mui/material/Alert';
 import { actionCodeSettings } from '@/constants/Auth';
 import CheckIcon from '@mui/icons-material/Check';
+import Stack from '@mui/material/Stack';
+import CardMedia from '@mui/material/CardMedia';
 
 const REGEX_NUMBER = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i;
 
@@ -98,11 +100,24 @@ export default function ResetPasswordPage() {
             }
 
             <Box sx={{ px: "20px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
-                <Box sx={{ mb: "40px" }}>
-                    <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    spacing={2}
+                    sx={{ mb: "40px" }}>
+                    < CardMedia
+                        component="img"
+                        sx={{ width: 50, height: 50 }}
+                        image="/images/icon.png"
+                    />
+                    <Typography sx={{
+                        fontSize: { xs: 25, md: 30 },
+                        fontWeight: "bold"
+                    }}>
                         coco-board
                     </Typography>
-                </Box>
+                </Stack>
 
                 {isReset ?
                     <Box>

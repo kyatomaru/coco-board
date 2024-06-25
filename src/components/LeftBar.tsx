@@ -23,6 +23,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import Divider from '@mui/material/Divider';
 import LogoutConfirmModal from '@/features/common/auth/LogoutConfirmModal';
+import CardMedia from '@mui/material/CardMedia';
 
 const barStyle = {
     bgcolor: 'background.paper',
@@ -85,7 +86,11 @@ export default function LeftBar(props) {
                         sx={{ height: "100vh", width: { md: "90px", lg: "250px" }, background: "white" }}>
                         <Stack direction="row" justifyItems="center" alignItems="center" sx={{ py: 5, mb: 3 }}>
                             <IconButton sx={{ p: "0" }} onClick={(event) => { router.push('/home') }}>
-                                <Box sx={{ width: 40, height: 40, backgroundImage: "url(icon.png)", backgroundSize: "cover" }} />
+                                < CardMedia
+                                    component="img"
+                                    sx={{ width: 45, height: 45 }}
+                                    image="/images/icon.png"
+                                />
                             </IconButton>
                             <Typography variant="h6" component="h2" sx={{ display: { md: "none", lg: "block" }, pl: 2 }}>
                                 coco-board
