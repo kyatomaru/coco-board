@@ -16,6 +16,7 @@ import Tab from '@mui/material/Tab';
 import HeaderMenus from '@/components/HeaderMenus';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import CardMedia from '@mui/material/CardMedia';
 
 const barStyle = {
     bgcolor: 'background.paper',
@@ -72,7 +73,11 @@ export default function Header({ props, setMenu }: PageProps) {
                             alignItems="center"
                             sx={{ height: { xs: 50, sm: 64 }, background: "white", width: "100%" }}>
                             <IconButton sx={{ p: "0" }} onClick={(event) => { router.push('/home') }}>
-                                <Box sx={{ width: 45, height: 45, backgroundImage: "url(icon.png)", backgroundSize: "cover" }} />
+                                < CardMedia
+                                    component="img"
+                                    sx={{ width: 45, height: 45 }}
+                                    image="/images/icon.png"
+                                />
                             </IconButton>
                             <Typography variant="h6" component="h2" sx={{ display: { xs: "none", sm: "block" }, pl: 2 }}>
                                 coco-board

@@ -24,7 +24,7 @@ const courtStyle = (courtWidth, courtHeight) => {
         backgroundSize: "cover",
         width: courtWidth + "px",
         height: courtHeight + "px",
-        backgroundImage: 'url(/board/court1.jpg)',
+        backgroundImage: 'url(/images/board/court1.jpg)',
         margin: "auto",
         userSelect: "none",
         position: "absolute",
