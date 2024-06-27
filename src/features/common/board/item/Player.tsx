@@ -50,7 +50,9 @@ export default function Player({ courtRef, frame, setFrame, currentFrame, diamet
     const [isDrag, setIsDrag] = React.useState(false);
     const [playerSize, setPlayerSize] = React.useState(diameter);
 
-    const onDragStart = (e) => {
+    const onDragStart = (e, dragElement) => {
+        console.log(dragElement)
+
         setIsDrag(true)
         setPlayerSize(Number(diameter) + 10)
     }
@@ -76,10 +78,11 @@ export default function Player({ courtRef, frame, setFrame, currentFrame, diamet
     return (
         <Draggable nodeRef={courtRef}
             // bounds="parent"
+            handle={`.player${index}`}
             bounds={{ left: 0, top: 0, right: courtRef.current.clientWidth - diameter, bottom: courtRef.current.clientHeight - diameter }}
             position={{ x: isDrag ? frame[currentFrame].players[index].x : frame[currentFrame].players[index].x, y: isDrag ? frame[currentFrame].players[index].y : frame[currentFrame].players[index].y }}
             onStart={onDragStart} onStop={onDragEnd} >
-            <Box>
+            <Box className={`player${index}`}>
                 <Box sx={playerStyle(playerSize, frame[currentFrame].players[index].x, frame[currentFrame].players[index].y, frame[currentFrame].players[index].color)} >
                     {/* <Avatar sx={playerStyle(playerSize, frame[currentFrame].players[index].x, frame[currentFrame].players[index].y, frame[currentFrame].players[index].color)} > */}
                     <Typography sx={{ fontSize: 12, fontWeight: "bold", lineHeight: 0 }}>

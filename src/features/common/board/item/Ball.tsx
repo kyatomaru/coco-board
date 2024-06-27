@@ -30,7 +30,12 @@ export default function Ball({ courtRef, frame, setFrame, currentFrame, diameter
     const [isDrag, setIsDrag] = React.useState(false);
     const [ballSize, setBallSize] = React.useState(diameter);
 
-    const onDragStart = (e) => {
+    const onDragStart = (e, dragElement) => {
+        const frameArray = Array()
+        frame.forEach((item) => {
+            frameArray.push(item)
+        })
+
         setIsDrag(true)
         setBallSize(Number(diameter) + 10)
     }
@@ -51,12 +56,18 @@ export default function Ball({ courtRef, frame, setFrame, currentFrame, diameter
 
     return (
         <Draggable
+            handle='.ball'
             nodeRef={courtRef}
             bounds={{ left: 0, top: 0, right: courtRef.current.clientWidth - diameter, bottom: courtRef.current.clientHeight - diameter }}
-            position={{ x: isDrag ? frame[currentFrame].ball.x : frame[currentFrame].ball.x, y: isDrag ? frame[currentFrame].ball.y : frame[currentFrame].ball.y }}
+            position={{ x: frame[currentFrame].ball.x, y: frame[currentFrame].ball.y }}
             onStart={onDragStart} onStop={onDragEnd} >
-            <Avatar sx={ballStyle(ballSize, frame[currentFrame].ball.x, frame[currentFrame].ball.y)} >
-                <SportsSoccerIcon sx={{ width: ballSize + "px", height: ballSize + "px" }} />
+            <Avatar
+                className='ball'
+                sx={ballStyle(ballSize, frame[currentFrame].ball.x, frame[currentFrame].ball.y)}
+            >
+                <SportsSoccerIcon
+                    sx={{ width: ballSize + "px", height: ballSize + "px" }}
+                />
             </Avatar >
         </Draggable >
 
