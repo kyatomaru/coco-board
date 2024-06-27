@@ -78,7 +78,7 @@ export default function Calendar({ user }: PageProps) {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
-            <Box sx={{ mt: 3, p: 1, border: '1px solid rgba(0, 0, 0, 0.12)' }}>
+            <Box sx={{ p: 1, border: { md: '1px solid rgba(0, 0, 0, 0.12)' } }}>
                 <Grid container>
                     <Grid item xs={12} sx={{}} >
                         <Stack direction="row" justifyContent="space-between" alignItems="center" >

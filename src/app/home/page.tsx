@@ -18,6 +18,7 @@ import type { User } from 'firebase/auth';
 import { auth } from '../firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import LeftBar from '@/components/LeftBar';
+import Divider from '@mui/material/Divider';
 
 export default function Home() {
   const router = useRouter()
@@ -41,26 +42,36 @@ export default function Home() {
         <>
           <Header />
           <LeftBar />
-          <Container maxWidth="md" sx={{ my: { xs: "80px", sm: "90px", md: "30px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
-            <Box sx={{ mb: 3, px: 2, py: 1, borderRadius: 2, bgcolor: "rgba(247, 250, 250, 1.00)" }}>
+          <Container maxWidth="md" sx={{ my: { xs: "55px", sm: "70px", md: "30px" }, px: 2, pl: { md: "120px", lg: "250px" } }}>
+            <Box sx={{ mb: 3, py: 1, borderRadius: 2 }}>
               <Stack sx={{ width: "100%" }} alignItems="center" direction="row">
                 <Typography variant="h6" sx={{ fontSize: 14, width: "100%" }}>
                   今日の記録
                 </Typography>
-                <Box sx={{ minWidth: "100px" }}>
-                  <Button onClick={(event) => { router.push(`/create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/board`) }}>記録する</Button>
+                <Box sx={{ minWidth: "80px" }}>
+                  <Button onClick={(event) => { router.push(`/create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/board`) }}>
+                    <Typography sx={{ fontSize: ".875rem", fontWight: 600 }} component="span">
+                      記録する
+                    </Typography>
+                  </Button>
                 </Box>
               </Stack>
               <NoteCardBox user={user} date={new Date()} />
             </Box>
 
-            <Box sx={{ mb: 3, px: 2, py: 1, borderRadius: 2, bgcolor: "rgba(247, 250, 250, 1.00)" }}>
+            <Divider />
+
+            <Box sx={{ mb: 3, py: 1, borderRadius: 2 }}>
               <Stack sx={{ width: "100%" }} alignItems="center" direction="row">
                 <Typography variant="h6" sx={{ fontSize: 14, width: "100%" }}>
                   未達成の課題
                 </Typography>
-                <Box sx={{ minWidth: "100px" }}>
-                  <Button onClick={(event) => { router.push(`create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/growth`) }}>振り返る</Button>
+                <Box sx={{ minWidth: "80px" }}>
+                  <Button onClick={(event) => { router.push(`create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/growth`) }}>
+                    <Typography sx={{ fontSize: ".875rem", fontWight: 600 }} component="span">
+                      振り返る
+                    </Typography>
+                  </Button>
                 </Box>
               </Stack>
               <ProblemCardBox user={user} achieveMenu={false} />
