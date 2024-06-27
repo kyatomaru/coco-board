@@ -15,6 +15,7 @@ import { useInsertBoard } from '@/hooks/board/useInsertBoard';
 import { BoardModel } from '@/types/board/Board';
 import LeftBar from '@/components/LeftBar';
 import dayjs from 'dayjs';
+import { useScrollLock } from '@/hooks/common/useScrollLock';
 
 export default function Home() {
   const params = useParams()
@@ -23,6 +24,7 @@ export default function Home() {
   const [user, setUser] = React.useState<User | undefined>(null);
 
   useIsAuth(router)
+  useScrollLock()
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
