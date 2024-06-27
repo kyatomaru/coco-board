@@ -422,7 +422,11 @@ export default function GameForm({ contents, postData }: pageProps) {
                         <Box sx={{ mb: 1 }}>
                             <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
                                 <InputLabel sx={{ mx: 1, fontSize: 14, width: "100%" }}>良かった点</InputLabel>
-                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddGoodPoints}>追加</Button>
+                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddGoodPoints}>
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
+                                </Button>
                             </Stack>
                             {contents.goodPoints.map((input, index) => (
                                 <Stack spacing={1} key={index} direction="row" sx={{ alignItems: "center", mb: 2 }}>
@@ -450,7 +454,11 @@ export default function GameForm({ contents, postData }: pageProps) {
                         <Box sx={{ mb: 1 }}>
                             <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
                                 <InputLabel sx={{ mx: 1, fontSize: 14, width: "100%" }}>悪かった点</InputLabel>
-                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddBadPoints}>追加</Button>
+                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddBadPoints}>
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
+                                </Button>
                             </Stack>
                             {contents.badPoints.map((input, index) => (
                                 <Stack spacing={1} key={index} direction="row" sx={{ alignItems: "center", mb: 2 }}>
