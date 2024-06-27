@@ -76,6 +76,8 @@ export default function TopControlBar({ frame, setFrame, setCurrentFrame, board,
         frameArray.push(new FrameModel([], new BallModel()))
         setFrame(frameArray)
         setCurrentFrame(0)
+
+        setIsOpenResetBoardModal(false)
     }
 
     return (

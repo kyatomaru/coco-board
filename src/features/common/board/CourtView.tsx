@@ -109,7 +109,7 @@ export default function CourtView({ courtWidth, courtHeight, frame, setFrame, cu
                     </>
                 }
             </Box>
-        </Box >
+        </Box>
     )
 }
 
