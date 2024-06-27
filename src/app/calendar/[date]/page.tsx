@@ -36,7 +36,7 @@ export default function Home() {
       {user !== null &&
         <>
           <LeftBar />
-          <Container maxWidth="md" sx={{ px: 0, position: "relative", mb: "50px", pl: { md: "120px", lg: "250px" } }}>
+          <Container maxWidth="md" sx={{ px: 2, position: "relative", mb: "50px", pl: { md: "120px", lg: "250px" } }}>
             <CreateButton />
             <DateBar />
             <NoteCardBox user={user} date={new Date(String(params.date))} />
