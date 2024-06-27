@@ -41,7 +41,7 @@ export default function Home(props) {
                     <Header props={props} setMenu={setMenu} />
                     <LeftBar />
                     <AchieveSelectTabs setMenu={setMenu} />
-                    <Container maxWidth="md" sx={{ my: { xs: "80px", sm: "90px", md: "30px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
+                    <Container maxWidth="md" sx={{ my: { xs: "80px", sm: "90px", md: "30px" }, px: 2, pl: { md: "120px", lg: "250px" } }}>
                         <CreateButton />
                         <ProblemContentsBox user={user} achieveMenu={menu} />
                     </Container>
