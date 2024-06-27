@@ -36,7 +36,7 @@ export default function Home(props) {
         <>
           <Header props={props} />
           <LeftBar />
-          <Container maxWidth="md" sx={{ mt: { xs: "65px", sm: "65px", md: "0px" }, mb: { xs: "80px", sm: "90px", md: "30px" }, px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
+          <Container maxWidth="md" sx={{ mt: { xs: "55px", sm: "70px", md: "0px" }, mb: { xs: "80px", sm: "90px", md: "30px" }, px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
             <Calendar user={user} />
           </Container >
           < Footer />

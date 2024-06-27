@@ -64,8 +64,10 @@ export default function ProblemCardBox({ user, achieveMenu }: PageProps) {
                                 <Typography sx={{ fontSize: 13, textAlign: "center" }} variant="h6" component="div">
                                     課題がありません
                                 </Typography>
-                                <Button sx={{ fontSize: 14, width: 160, mx: "auto", my: 1 }} onClick={(event) => router.push('/create/problem')} >
-                                    課題を追加する
+                                <Button sx={{ width: 160, mx: "auto", my: 1 }} onClick={(event) => router.push('/create/problem')} >
+                                    <Typography sx={{ fontSize: ".875rem", fontWight: 600 }} component="span">
+                                        課題を追加する
+                                    </Typography>
                                 </Button>
                             </Stack>
                         </Card>
