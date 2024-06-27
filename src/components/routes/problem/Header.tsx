@@ -87,8 +87,8 @@ export default function Header({ props, setMenu }: PageProps) {
                         <HeaderMenus />
                     </Toolbar>
                     <StyledTabs value={headerMenu} sx={{ height: 30, mx: "auto" }} onChange={(event, newValue) => { handleChange(event, newValue) }}>
-                        <StyledTab label="未達成" sx={{ height: 30, mx: "auto", fontSize: ".7rem" }} />
-                        <StyledTab label="達成" sx={{ height: 30, mx: "auto", fontSize: ".7rem" }} />
+                        <StyledTab label="未達成" sx={{ height: 30, mx: "auto", fontSize: ".8rem" }} />
+                        <StyledTab label="達成" sx={{ height: 30, mx: "auto", fontSize: ".8rem" }} />
                     </StyledTabs>
                 </AppBar>
             </HideOnScroll>
