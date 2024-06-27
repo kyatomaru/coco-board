@@ -78,7 +78,7 @@ export default function Calendar({ user }: PageProps) {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
-            <Box sx={{ p: 1, border: { md: '1px solid rgba(0, 0, 0, 0.12)' } }}>
+            <Box sx={{ p: { md: 2 }, border: { md: '1px solid rgba(0, 0, 0, 0.12)' } }}>
                 <Grid container>
                     <Grid item xs={12} sx={{}} >
                         <Stack direction="row" justifyContent="space-between" alignItems="center" >
@@ -114,11 +114,19 @@ export default function Calendar({ user }: PageProps) {
 
                     {weekDays.map((day, index) => (
                         <Grid item xs={12 / 7} key={index} sx={{ textAlign: 'center', border: '1px solid rgba(0, 0, 0, 0.12)' }}>
-                            <Box sx={{ display: 'flex', justifyContent: "center", alignItems: "center", minHeight: 30, fontSize: 13 }}>{day}</Box>
+                            <Box sx={{
+                                borderLeft: (index + 7) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                borderRight: (index + 1) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                borderBottom: days.length - 7 <= index && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                display: 'flex', justifyContent: "center", alignItems: "center", minHeight: 30, fontSize: 13
+                            }}>{day}</Box>
                         </Grid>
                     ))}
                     {days.map((day, index) => (
-                        <Grid item xs={12 / 7} key={index} sx={{ textAlign: 'center', border: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                        <Grid item xs={12 / 7} key={index} sx={{
+                            textAlign: 'center',
+                            border: '0.5px solid rgba(0, 0, 0, 0.12)',
+                        }}>
                             <Box
                                 onClick={(event) => { router.push(`/calendar/${dayjs(String(day)).format('YYYY-MM-DD')}`) }}
                                 sx={{
@@ -126,7 +134,6 @@ export default function Calendar({ user }: PageProps) {
                                     flexDirection: 'column',
                                     alignItems: 'flex-start',
                                     justifyContent: 'flex-start',
-                                    borderColor: 'divider',
                                     bgcolor: isToday(day) && 'lightsteelblue',
                                     color: isSameMonth(day, selectedDate) ? 'text.primary' : 'text.disabled',
                                     height: { xs: 70, md: 110 },
@@ -135,6 +142,9 @@ export default function Calendar({ user }: PageProps) {
                                     '&:hover': {
                                         bgcolor: isToday(day) ? "silver" : 'action.hover',
                                     },
+                                    borderLeft: (index + 7) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                    borderRight: (index + 1) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                    borderBottom: days.length - 7 <= index && '1.5px solid rgba(0, 0, 0, 0.12)',
                                 }}
                             >
                                 <Typography fontSize={13} sx={{ height: 16 }}>
@@ -149,7 +159,7 @@ export default function Calendar({ user }: PageProps) {
                                                 variant="filled"
                                                 label={content.title}
                                             />
-                                            <Chip key={index} size="small" sx={{ display: { sm: "none", xs: "block" }, mt: "1px", width: 10, height: 10, borderRadius: "5px" }}
+                                            <Chip key={index} size="small" sx={{ display: { sm: "none", xs: "block" }, mt: "2px", width: 10, height: 10, borderRadius: "5px" }}
                                                 color={content.collection == "game" ? "success" : content.collection == "practice" ? "primary" : "warning"}
                                                 variant="filled"
                                             />
