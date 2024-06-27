@@ -205,7 +205,11 @@ export default function PracticeForm({ contents, postData }: pageProps) {
                                 <Typography variant="h6" sx={{ fontSize: 14 }} component="div">
                                     練習内容
                                 </Typography>
-                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddDetails}>追加</Button>
+                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddDetails}>
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
+                                </Button>
                             </Stack>
                             {contents.details.map((input, index) => (
                                 <Stack spacing={1} key={index} direction="row" sx={{ alignItems: "center", mb: 2 }}>
