@@ -46,14 +46,14 @@ export async function GET(
             // Display email verification handler and UI.
             // return NextResponse.redirect(`/accounts/verifyemail/${actionCode}`)
             if (handleVerifyEmail(auth, actionCode, continueUrl, lang))
-                return NextResponse.redirect(`/accounts/verifyemail/${actionCode}`)
+                return NextResponse.redirect(new URL(`/accounts/verifyemail/${actionCode}`, req.url))
             else
-                break;
+                return NextResponse.redirect(new URL(`/accounts/verifyemail/error`, req.url))
         default:
-            return NextResponse.redirect(`/`)
+            return NextResponse.redirect(new URL(`/accounts/login`, req.url))
         // Error: invalid mode.
     }
-    return NextResponse.redirect(`/`)
+    return NextResponse.redirect(new URL(`/home`, req.url))
 }
 
 import { verifyPasswordResetCode, confirmPasswordReset, applyActionCode } from "firebase/auth";
@@ -109,6 +109,7 @@ function handleVerifyEmail(auth, actionCode, continueUrl, lang) {
     }).catch((error) => {
         // Code is invalid or expired. Ask the user to verify their email address
         // again.
+
     });
     return false
 }

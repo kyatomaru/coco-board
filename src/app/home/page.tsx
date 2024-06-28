@@ -50,7 +50,7 @@ export default function Home() {
                 </Typography>
                 <Box sx={{ minWidth: "80px" }}>
                   <Button onClick={(event) => { router.push(`/create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/board`) }}>
-                    <Typography sx={{ fontSize: ".875rem", fontWight: 600 }} component="span">
+                    <Typography sx={{ fontSize: ".875rem", fontWight: "bold" }} component="span">
                       記録する
                     </Typography>
                   </Button>
@@ -68,7 +68,7 @@ export default function Home() {
                 </Typography>
                 <Box sx={{ minWidth: "80px" }}>
                   <Button onClick={(event) => { router.push(`create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/growth`) }}>
-                    <Typography sx={{ fontSize: ".875rem", fontWight: 600 }} component="span">
+                    <Typography sx={{ fontSize: ".875rem", fontWight: "bold" }} component="span">
                       振り返る
                     </Typography>
                   </Button>

@@ -55,25 +55,25 @@ export default function EmailsendPage() {
                 :
 
                 <Container maxWidth="xs" fixed sx={{ my: "20px" }}>
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                        justifyContent="center"
-                        spacing={2}
-                        sx={{ mb: "40px" }}>
-                        < CardMedia
-                            component="img"
-                            sx={{ width: 50, height: 50 }}
-                            image="/images/icon.png"
-                        />
-                        <Typography sx={{
-                            fontSize: { xs: 25, md: 30 },
-                            fontWeight: "bold"
-                        }}>
-                            coco-board
-                        </Typography>
-                    </Stack>
-                    <Box sx={{ mt: "12px", p: "20px 20px 10px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
+                    <Box sx={{ px: "20px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
+                        <Stack
+                            direction="row"
+                            alignItems="center"
+                            justifyContent="center"
+                            spacing={2}
+                            sx={{ mb: "40px" }}>
+                            < CardMedia
+                                component="img"
+                                sx={{ width: 50, height: 50 }}
+                                image="/images/icon.png"
+                            />
+                            <Typography sx={{
+                                fontSize: { xs: 25, md: 30 },
+                                fontWeight: "bold"
+                            }}>
+                                coco-board
+                            </Typography>
+                        </Stack>
                         <Typography variant="h5" sx={{ fontSize: 13, }}>
                             {user.email}に送信されたメールから認証してください。
                         </Typography>
