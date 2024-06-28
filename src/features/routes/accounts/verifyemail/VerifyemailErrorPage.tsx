@@ -52,16 +52,12 @@ export default function VerifyemailErrorPage() {
                         coco-board
                     </Typography>
                 </Stack>
-                <Box sx={{ mb: "10px" }}>
-                    <Typography variant="h5" sx={{ fontSize: 13 }}>
-                        認証に失敗しました。
-                    </Typography>
-                </Box>
-                <Typography>
-                    <Button type="submit" href='/accounts/login' size="medium" sx={{ height: "30px", fontSize: 13, }} >
-                        確認した
-                    </Button>
+                <Typography variant="h5" sx={{ fontSize: 13 }}>
+                    メールの認証に失敗しました。
                 </Typography>
+                <Button fullWidth href='/accounts/login' size="medium" sx={{ width: "150px", mt: 1, borderRadius: 3, fontWeight: "bold" }} >
+                    確認した
+                </Button>
             </Box>
         </Container>
     );

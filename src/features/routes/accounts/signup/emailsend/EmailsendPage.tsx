@@ -82,7 +82,7 @@ export default function EmailsendPage() {
                                 再送信する
                             </Button>
                         </Typography>
-                        <Button fullWidth href='/accounts/signup' size="medium" sx={{ mt: 2, borderRadius: 3, fontWeight: "bold" }} >
+                        <Button fullWidth href='/accounts/signup' size="medium" sx={{ width: "150px", mt: 2, borderRadius: 3, fontWeight: "bold" }} >
                             戻る
                         </Button>
                     </Box>
