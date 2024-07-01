@@ -23,8 +23,9 @@ const barStyle = {
     position: 'fixed',
     zIndex: "1000",
     width: "100%",
-    flexGrow: 1,
     height: { sx: 30, md: 50 },
+    boxShadow: "none",
+    borderBottom: "solid 1px rgb(219, 219, 219)",
     display: { sm: "none", md: "block" },
     pl: { md: "120px", lg: "250px" }
 }
