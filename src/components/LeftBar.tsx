@@ -34,7 +34,9 @@ const barStyle = {
     top: 0,
     left: 0,
     display: { xs: "none", sm: "none", md: "block" },
-    p: 0
+    p: 0,
+    boxShadow: "none",
+    borderRight: "solid 1px rgb(219, 219, 219)",
 }
 
 export default function LeftBar(props) {
