@@ -12,7 +12,7 @@ import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import EventIcon from '@mui/icons-material/Event';
 import IconButton from '@mui/material/IconButton';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-
+import Link from 'next/link'
 
 export default function Footer() {
     const pathName = usePathname().split('/')
@@ -69,10 +69,14 @@ export default function Footer() {
                         setValue(newValue);
                     }}
                 >
-                    <BottomNavigationAction sx={{ maxWidth: 90, minWidth: 50 }} value={0} onClick={ClickHomeButton} icon={<HomeIcon />} />
-                    <BottomNavigationAction sx={{ maxWidth: 90, minWidth: 50 }} value={1} onClick={ClickCreateButton} icon={<AddBoxIcon />} />
-                    <BottomNavigationAction sx={{ maxWidth: 90, minWidth: 50 }} value={2} onClick={ClickCalendarButton} icon={<EventIcon />} />
-                    <BottomNavigationAction sx={{ maxWidth: 90, minWidth: 50 }} value={3} onClick={ClickProblemButton} icon={<TextSnippetIcon />} />
+                    <BottomNavigationAction href="/home" sx={{ maxWidth: 90, minHeight: 50 }} value={0}
+                        icon={<HomeIcon />} />
+                    <BottomNavigationAction href={`/create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/board`} sx={{ maxWidth: 90, minHeight: 50 }} value={1}
+                        icon={<AddBoxIcon />} />
+                    <BottomNavigationAction href="/calendar" sx={{ maxWidth: 90, minHeight: 50 }} value={2}
+                        icon={<EventIcon />} />
+                    <BottomNavigationAction href="/problem" sx={{ maxWidth: 90, minHeight: 50 }} value={3}
+                        icon={<TextSnippetIcon />} />
                 </BottomNavigation>
             </AppBar>
         </Box >

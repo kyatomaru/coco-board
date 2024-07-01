@@ -14,7 +14,7 @@ const mainImageStyle = {
     transform: "translateZ(0)",
     width: "100%",
     zIndex: -1,
-    backgroundImage: "url(/welcomePage/mainImage.jpg)",
+    backgroundImage: "url(/images/welcomePage/mainImage.jpg)",
     backgroundSize: "cover",
 }
 
@@ -32,7 +32,7 @@ export default function WelcomePage() {
                     top: "10px", left: "-7px",
                 }}>
                 <IconButton sx={{ p: "0" }}>
-                    <Box sx={{ width: 45, height: 45, backgroundImage: "url(icon.png)", backgroundSize: "cover" }} />
+                    <Box sx={{ width: 45, height: 45, backgroundImage: "url(/images/icon.png)", backgroundSize: "cover" }} />
                 </IconButton>
                 <Typography sx={{
                     fontSize: { xs: 25, md: 30 },
@@ -70,14 +70,14 @@ export default function WelcomePage() {
                         autoPlay
                         muted
                         loop
-                        image="/welcomePage/tacticsImage.mp4"
+                        image="/images/welcomePage/tacticsImage.mp4"
                         sx={{ width: { xs: 210, sm: 260 }, margin: "auto", mt: 3 }}
                     />
                 </Box>
 
                 <Divider />
 
-                <Box sx={{ textAlign: "center", width: "100%", minHeight: 380, backgroundImage: "url(/welcomePage/commuteImage.png)", backgroundSize: "cover" }}>
+                <Box sx={{ textAlign: "center", width: "100%", minHeight: 380, backgroundImage: "url(/images/welcomePage/commuteImage.png)", backgroundSize: "cover" }}>
                     <Box sx={{ textAlign: "center", py: 7, px: 3, maxWidth: 450, margin: "auto" }}>
                         <Typography sx={{ color: "white", fontSize: 25, mb: 3 }}>いつでもどこでも練習・試合の内容を記録しよう</Typography>
                         <Typography sx={{ color: "white" }}>
@@ -94,7 +94,7 @@ export default function WelcomePage() {
                         課題の管理機能で現状の課題を把握することができます。
                     </Typography>
                     <CardMedia
-                        image="/welcomePage/problempageImage.png"
+                        image="/images/welcomePage/problempageImage.png"
                         sx={{ width: { xs: 230, sm: 350 }, height: { xs: 320, sm: 480 }, margin: "auto", mt: 3 }}
                     />
                 </Box>
