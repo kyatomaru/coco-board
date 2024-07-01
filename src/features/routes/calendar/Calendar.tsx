@@ -21,6 +21,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import type { User } from 'firebase/auth';
 import { auth } from '@/app/firebase';
 import { useGetNote } from '@/hooks/note/useGetAllNote';
+import Skeleton from '@mui/material/Skeleton';
 
 const CustomTextField = styled((props: TextFieldProps) => (
     <MuiTextField {...props} />
@@ -112,65 +113,72 @@ export default function Calendar({ user }: PageProps) {
                         </Stack>
                     </Grid>
 
-                    {weekDays.map((day, index) => (
-                        <Grid item xs={12 / 7} key={index} sx={{ textAlign: 'center', border: '1px solid rgba(0, 0, 0, 0.12)' }}>
-                            <Box sx={{
-                                borderLeft: (index + 7) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
-                                borderRight: (index + 1) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
-                                borderBottom: days.length - 7 <= index && '1.5px solid rgba(0, 0, 0, 0.12)',
-                                display: 'flex', justifyContent: "center", alignItems: "center", minHeight: 30, fontSize: 13
-                            }}>{day}</Box>
-                        </Grid>
-                    ))}
-                    {days.map((day, index) => (
-                        <Grid item xs={12 / 7} key={index} sx={{
-                            textAlign: 'center',
-                            border: '0.5px solid rgba(0, 0, 0, 0.12)',
-                        }}>
-                            <Box
-                                onClick={(event) => { router.push(`/calendar/${dayjs(String(day)).format('YYYY-MM-DD')}`) }}
-                                sx={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'flex-start',
-                                    justifyContent: 'flex-start',
-                                    bgcolor: isToday(day) && 'lightsteelblue',
-                                    color: isSameMonth(day, selectedDate) ? 'text.primary' : 'text.disabled',
-                                    height: { xs: 70, md: 110 },
-                                    px: '2px',
-                                    cursor: "pointer",
-                                    '&:hover': {
-                                        bgcolor: isToday(day) ? "silver" : 'action.hover',
-                                    },
-                                    borderLeft: (index + 7) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
-                                    borderRight: (index + 1) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
-                                    borderBottom: days.length - 7 <= index && '1.5px solid rgba(0, 0, 0, 0.12)',
-                                }}
-                            >
-                                <Typography fontSize={13} sx={{ height: 16 }}>
-                                    {day.getDate()}
-                                </Typography>
-                                {contents != undefined && contents[0] != undefined && (
-                                    contents.map((content, index) => (
-                                        content.date == dayjs(String(day)).format('YYYY-MM-DD') &&
-                                        <>
-                                            <Chip key={index} size="small" sx={{ display: { sm: "block", xs: "none" }, justifyContent: "flex-start", mt: "2px", width: "100%", fontSize: 10, height: 15, borderRadius: "5px" }}
-                                                color={content.collection == "game" ? "success" : content.collection == "practice" ? "primary" : "warning"}
-                                                variant="filled"
-                                                label={content.title}
-                                            />
-                                            <Chip key={index} size="small" sx={{ display: { sm: "none", xs: "block" }, mt: "2px", width: 10, height: 10, borderRadius: "5px" }}
-                                                color={content.collection == "game" ? "success" : content.collection == "practice" ? "primary" : "warning"}
-                                                variant="filled"
-                                            />
-                                        </>
-                                    ))
-                                )}
-                            </Box>
-                        </Grid>
-                    ))}
+                    {contents != undefined ?
+                        <>
+                            {
+                                weekDays.map((day, index) => (
+                                    <Grid item xs={12 / 7} key={index} sx={{ textAlign: 'center', border: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                                        <Box sx={{
+                                            borderLeft: (index + 7) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                            borderRight: (index + 1) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                            borderBottom: days.length - 7 <= index && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                            display: 'flex', justifyContent: "center", alignItems: "center", minHeight: 30, fontSize: 13
+                                        }}>{day}</Box>
+                                    </Grid>
+                                ))
+                            }
+                            {days.map((day, index) => (
+                                <Grid item xs={12 / 7} key={index} sx={{
+                                    textAlign: 'center',
+                                    border: '0.5px solid rgba(0, 0, 0, 0.12)',
+                                }}>
+                                    <Box
+                                        onClick={(event) => { router.push(`/calendar/${dayjs(String(day)).format('YYYY-MM-DD')}`) }}
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'flex-start',
+                                            justifyContent: 'flex-start',
+                                            bgcolor: isToday(day) && 'lightsteelblue',
+                                            color: isSameMonth(day, selectedDate) ? 'text.primary' : 'text.disabled',
+                                            height: { xs: 70, md: 110 },
+                                            px: '2px',
+                                            cursor: "pointer",
+                                            '&:hover': {
+                                                bgcolor: isToday(day) ? "silver" : 'action.hover',
+                                            },
+                                            borderLeft: (index + 7) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                            borderRight: (index + 1) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                            borderBottom: days.length - 7 <= index && '1.5px solid rgba(0, 0, 0, 0.12)',
+                                        }}
+                                    >
+                                        <Typography fontSize={13} sx={{ height: 16 }}>
+                                            {day.getDate()}
+                                        </Typography>
+                                        {contents != undefined && contents[0] != undefined && (
+                                            contents.map((content, index) => (
+                                                content.date == dayjs(String(day)).format('YYYY-MM-DD') &&
+                                                <>
+                                                    <Chip key={index} size="small" sx={{ display: { sm: "block", xs: "none" }, justifyContent: "flex-start", mt: "2px", width: "100%", fontSize: 10, height: 15, borderRadius: "5px" }}
+                                                        color={content.collection == "game" ? "success" : content.collection == "practice" ? "primary" : "warning"}
+                                                        variant="filled"
+                                                        label={content.title}
+                                                    />
+                                                    <Chip key={index} size="small" sx={{ display: { sm: "none", xs: "block" }, mt: "2px", width: 10, height: 10, borderRadius: "5px" }}
+                                                        color={content.collection == "game" ? "success" : content.collection == "practice" ? "primary" : "warning"}
+                                                        variant="filled"
+                                                    />
+                                                </>
+                                            ))
+                                        )}
+                                    </Box>
+                                </Grid>
+                            ))}
+                        </>
+                        :
+                        <Skeleton variant="rectangular" height={600} sx={{ width: "100%" }} />
+                    }
                 </Grid>
-                {/* </Paper> */}
             </Box>
         </LocalizationProvider >
     );
