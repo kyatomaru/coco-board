@@ -47,9 +47,9 @@ export default function Home() {
                 <Typography variant="h6" sx={{ fontSize: 14, width: "100%" }}>
                   今日の記録
                 </Typography>
-                <Box sx={{ minWidth: "100px" }}>
+                {/* <Box sx={{ minWidth: "100px" }}>
                   <Button onClick={(event) => { router.push(`/create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/board`) }}>記録する</Button>
-                </Box>
+                </Box> */}
               </Stack>
               <NoteCardBox user={user} date={new Date()} />
             </Box>
@@ -59,9 +59,9 @@ export default function Home() {
                 <Typography variant="h6" sx={{ fontSize: 14, width: "100%" }}>
                   未達成の課題
                 </Typography>
-                <Box sx={{ minWidth: "100px" }}>
+                {/* <Box sx={{ minWidth: "100px" }}>
                   <Button onClick={(event) => { router.push(`create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/growth`) }}>振り返る</Button>
-                </Box>
+                </Box> */}
               </Stack>
               <ProblemCardBox user={user} achieveMenu={false} />
             </Box>

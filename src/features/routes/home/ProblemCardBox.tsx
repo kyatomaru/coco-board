@@ -59,16 +59,17 @@ export default function ProblemCardBox({ user, achieveMenu }: PageProps) {
                             )
                         })
                         :
-                        <Card sx={{ minWidth: 250, height: "115px", mb: 2 }} elevation={2}>
-                            <Stack direction="column" sx={{ p: 1, mx: 1, height: 120 }} alignContent="center" justifyContent="center" >
-                                <Typography sx={{ fontSize: 13, textAlign: "center" }} variant="h6" component="div">
-                                    課題がありません
-                                </Typography>
-                                <Button sx={{ fontSize: 14, width: 160, mx: "auto", my: 1 }} onClick={(event) => router.push('/create/problem')} >
-                                    課題を追加する
-                                </Button>
-                            </Stack>
-                        </Card>
+                        <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center" >
+                            <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", my: 1 }} component="h2">
+                                課題を追加しよう。
+                            </Typography>
+                            <Typography sx={{ fontSize: 13, textAlign: "center" }} variant="h6" component="div">
+                                まだ課題が追加されていません。成長のための一歩を踏み出すために、今すぐ課題を追加しましょう。
+                            </Typography>
+                            <Button sx={{ fontSize: 14, width: 160, mx: "auto", my: 1 }} onClick={(event) => router.push('/create/problem')} >
+                                課題を追加する
+                            </Button>
+                        </Stack>
                     }
                 </Box>
             }

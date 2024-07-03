@@ -31,6 +31,10 @@ import MobileStepper from '@mui/material/MobileStepper';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import MuiListItemText, { ListItemTextProps } from '@mui/material/ListItemText';
+import { elementsCategories } from '@/types/Category';
+import Skeleton from '@mui/material/Skeleton';
 
 type PageProps = {
     problemContents: any,
@@ -102,14 +106,38 @@ export default function ProblemCard({ problemContents, growthContents, getProble
                         </AccordionSummary>
 
                         <AccordionDetails>
-                            {growthContents != undefined ?
+                            <Box sx={{ px: 2, my: 1 }}>
+                                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                    取り組むこと
+                                </Typography>
+                                {problemContents.solutions[0] != null ?
+                                    <List sx={{ px: 0, my: 1, py: 0 }}>
+                                        {problemContents.solutions.map((solution, index) => (
+                                            <Box key={index}>
+                                                {
+                                                    solution.context != "" && <>
+                                                        <ListText primary={solution.context} secondary={elementsCategories[Number(solution.type)].title} />
+                                                    </>
+                                                }
+                                            </Box>
+                                        ))
+                                        }
+
+                                    </List >
+                                    :
+                                    <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
+                                        なし
+                                    </Typography>
+                                }
+                            </Box>
+                            {/* {growthContents != undefined ?
                                 <Card sx={{
                                     pt: 1, px: 1,
                                     borderTop: '0.5px solid rgba(0, 0, 0, .125)',
                                     borderBottom: '0.5px solid rgba(0, 0, 0, .125)'
-                                }}>
-                                    {/* <MoreHorizButton menuHandleClick={GrowthMenuHandleClick} /> */}
-                                    <Stack direction="row" alignItems="center">
+                                }}> */}
+
+                            {/* <Stack direction="row" alignItems="center">
                                         <span>{customIcons[Number(growthContents.overcome)].icon}</span>
                                         <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
                                             {customIcons[Number(growthContents.overcome)].label}
@@ -122,8 +150,9 @@ export default function ProblemCard({ problemContents, growthContents, getProble
                                                 {growthContents.comment}
                                             </Typography>
                                         }
-                                    </Box>
-                                </Card>
+                                    </Box> */}
+
+                            {/* </Card>
                                 :
                                 <Card sx={{
                                     p: 1,
@@ -136,7 +165,7 @@ export default function ProblemCard({ problemContents, growthContents, getProble
                                         </Typography>
                                     </Box>
                                 </Card>
-                            }
+                            } */}
                         </AccordionDetails>
                     </Accordion>
                 </Box >
@@ -208,4 +237,17 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     // padding: theme.spacing(2),
     padding: 0,
     borderTop: '1px solid rgba(0, 0, 0, .125)',
+}));
+
+const ListText = styled((props: ListItemTextProps) => (
+    <MuiListItemText
+        {...props}
+    />
+))(({ theme }) => ({
+    '& span': {
+        fontSize: 13
+    },
+    '& p': {
+        fontSize: 10,
+    },
 }));
