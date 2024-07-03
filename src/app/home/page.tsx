@@ -18,6 +18,7 @@ import type { User } from 'firebase/auth';
 import { auth } from '../firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import LeftBar from '@/components/LeftBar';
+import Divider from '@mui/material/Divider';
 
 export default function Home() {
   const router = useRouter()
@@ -41,8 +42,8 @@ export default function Home() {
         <>
           <Header />
           <LeftBar />
-          <Container maxWidth="md" sx={{ my: { xs: "80px", sm: "90px", md: "30px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
-            <Box sx={{ mb: 3, px: 2, py: 1, borderRadius: 2, bgcolor: "rgba(247, 250, 250, 1.00)" }}>
+          <Container maxWidth="md" sx={{ my: { xs: "55px", sm: "70px", md: "30px" }, px: 2, pl: { md: "120px", lg: "250px" } }}>
+            <Box sx={{ mb: 3, py: 1, borderRadius: 2 }}>
               <Stack sx={{ width: "100%" }} alignItems="center" direction="row">
                 <Typography variant="h6" sx={{ fontSize: 14, width: "100%" }}>
                   今日の記録
@@ -54,7 +55,9 @@ export default function Home() {
               <NoteCardBox user={user} date={new Date()} />
             </Box>
 
-            <Box sx={{ mb: 3, px: 2, py: 1, borderRadius: 2, bgcolor: "rgba(247, 250, 250, 1.00)" }}>
+            <Divider />
+
+            <Box sx={{ mb: 3, py: 1, borderRadius: 2 }}>
               <Stack sx={{ width: "100%" }} alignItems="center" direction="row">
                 <Typography variant="h6" sx={{ fontSize: 14, width: "100%" }}>
                   未達成の課題

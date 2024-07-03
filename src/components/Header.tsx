@@ -13,6 +13,7 @@ import HeaderMenus from './HeaderMenus';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import CardMedia from '@mui/material/CardMedia';
+import { BorderBottom } from '@mui/icons-material';
 
 const barStyle = {
     bgcolor: 'background.paper',
@@ -20,7 +21,8 @@ const barStyle = {
     position: 'fixed',
     zIndex: "1100",
     width: "100%",
-    flexGrow: 1,
+    boxShadow: "none",
+    borderBottom: "solid 1px rgb(219, 219, 219)",
     display: { sm: "block", md: "none" }
 }
 

@@ -106,10 +106,18 @@ export default function GrowthAllForm({ problemContents, growthContents, setGrow
             <Box sx={{ position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 100 }} >
                 <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
                     <Grid >
-                        <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => { router.push('/') }}>キャンセル</Button>
+                        <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => { router.push('/home') }}>
+                            <Typography fontSize={13} component="p">
+                                キャンセル
+                            </Typography>
+                        </Button>
                     </Grid>
-                    <Grid >
-                        <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>記録する</Button>
+                    <Grid>
+                        <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>
+                            <Typography fontSize={13} component="p">
+                                記録する
+                            </Typography>
+                        </Button>
                     </Grid>
                 </Grid>
                 <Divider />

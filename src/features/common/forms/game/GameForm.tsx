@@ -148,10 +148,18 @@ export default function GameForm({ contents, postData }: pageProps) {
             <Box sx={{ position: 'sticky', top: 0, backgroundColor: "white", zIndex: 100 }} >
                 <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
                     <Grid >
-                        <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => router.back()}>キャンセル</Button>
+                        <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => router.back()}>
+                            <Typography fontSize={13} component="p">
+                                キャンセル
+                            </Typography>
+                        </Button>
                     </Grid>
-                    <Grid >
-                        <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>記録する</Button>
+                    <Grid>
+                        <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>
+                            <Typography fontSize={13} component="p">
+                                記録する
+                            </Typography>
+                        </Button>
                     </Grid>
                 </Grid>
 
@@ -414,7 +422,11 @@ export default function GameForm({ contents, postData }: pageProps) {
                         <Box sx={{ mb: 1 }}>
                             <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
                                 <InputLabel sx={{ mx: 1, fontSize: 14, width: "100%" }}>良かった点</InputLabel>
-                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddGoodPoints}>追加</Button>
+                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddGoodPoints}>
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
+                                </Button>
                             </Stack>
                             {contents.goodPoints.map((input, index) => (
                                 <Stack spacing={1} key={index} direction="row" sx={{ alignItems: "center", mb: 2 }}>
@@ -442,7 +454,11 @@ export default function GameForm({ contents, postData }: pageProps) {
                         <Box sx={{ mb: 1 }}>
                             <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
                                 <InputLabel sx={{ mx: 1, fontSize: 14, width: "100%" }}>悪かった点</InputLabel>
-                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddBadPoints}>追加</Button>
+                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddBadPoints}>
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
+                                </Button>
                             </Stack>
                             {contents.badPoints.map((input, index) => (
                                 <Stack spacing={1} key={index} direction="row" sx={{ alignItems: "center", mb: 2 }}>

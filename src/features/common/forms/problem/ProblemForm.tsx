@@ -20,6 +20,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import Select from '@mui/material/Select';
+import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import { ProblemSolutionModel } from '@/types/problem/ProblemSolution';
 import { elementsCategories, skillsCategories } from '@/types/Category';
@@ -115,10 +116,18 @@ export default function ProblemForm({ contents, postData }: PageProps) {
             <Box sx={{ position: 'sticky', top: 0, backgroundColor: "white", zIndex: 100 }} >
                 <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
                     <Grid >
-                        <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => router.push('/problem')}>キャンセル</Button>
+                        <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => router.push('/problem')}>
+                            <Typography fontSize={13} component="p">
+                                キャンセル
+                            </Typography>
+                        </Button>
                     </Grid>
                     <Grid >
-                        <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>記録する</Button>
+                        <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>
+                            <Typography fontSize={13} component="p">
+                                記録する
+                            </Typography>
+                        </Button>
                     </Grid>
                 </Grid>
                 <Divider />

@@ -99,10 +99,18 @@ export default function PracticeForm({ contents, postData }: pageProps) {
             <Box sx={{ position: 'sticky', top: 0, backgroundColor: "white", zIndex: 100 }} >
                 <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
                     <Grid >
-                        <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => router.back()}>キャンセル</Button>
+                        <Button size="small" sx={{ color: 'black' }} variant='text' onClick={(event) => router.back()}>
+                            <Typography fontSize={13} component="p">
+                                キャンセル
+                            </Typography>
+                        </Button>
                     </Grid>
                     <Grid >
-                        <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>記録する</Button>
+                        <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>
+                            <Typography fontSize={13} component="p">
+                                記録する
+                            </Typography>
+                        </Button>
                     </Grid>
                 </Grid>
 
@@ -197,7 +205,11 @@ export default function PracticeForm({ contents, postData }: pageProps) {
                                 <Typography variant="h6" sx={{ fontSize: 14 }} component="div">
                                     練習内容
                                 </Typography>
-                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddDetails}>追加</Button>
+                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddDetails}>
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
+                                </Button>
                             </Stack>
                             {contents.details.map((input, index) => (
                                 <Stack spacing={1} key={index} direction="row" sx={{ alignItems: "center", mb: 2 }}>
