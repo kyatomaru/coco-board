@@ -14,11 +14,13 @@ import { auth } from '@/app/firebase';
 import { Skeleton } from '@mui/material';
 
 type PageProps = {
-    contents: any
-    postData: any
+    contents: any,
+    getContents: any,
+    postData: any,
+    onClose: any
 }
 
-export default function BoardViewForm({ contents, postData }: PageProps) {
+export default function BoardViewForm({ contents, getContents, postData, onClose }: PageProps) {
     const router = useRouter()
     const params = useParams()
     const [courtHeight, setCourtHeight] = React.useState(0);
@@ -73,17 +75,17 @@ export default function BoardViewForm({ contents, postData }: PageProps) {
             });
 
             const res = await postData(contents, image)
-            console.log(res)
+
             if (res.ok) {
-                router.replace(`/calendar/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`)
+                await getContents()
+                onClose()
             }
         }
     }
 
     return (
         <Box>
-
-            <TopControlBar frame={frame} setFrame={setFrame} setCurrentFrame={setCurrentFrame} board={contents} onSubmit={onSubmit} />
+            <TopControlBar onClose={onClose} frame={frame} setFrame={setFrame} setCurrentFrame={setCurrentFrame} board={contents} onSubmit={onSubmit} />
             <CourtView courtWidth={courtWidth} courtHeight={courtHeight} frame={frame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} isPlay={isPlay} isView={false} setIsPlay={setIsPlay} playFrame={playFrame} />
             <BottomControlBar frame={frame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} setPlayFrame={setPlayFrame} isPlay={isPlay} setIsPlay={setIsPlay} />
         </Box>

@@ -10,9 +10,11 @@ export const useDateFormat = (date: String) => {
     const recodeDate = dayjs(String(date)).format('YYYY/M/DD')
     const thisToday = dayjs(String(new Date())).format('YYYY/M/DD')
     const thisYesterday = dayjs(String(new Date(new Date().setDate(new Date().getDate() - 1)))).format('YYYY/M/DD')
+    const thisTomorrowday = dayjs(String(new Date(new Date().setDate(new Date().getDate() + 1)))).format('YYYY/M/DD')
 
-    if (thisToday == recodeDate) return "今日 " + recordDay
     if (thisYesterday == recodeDate) return "昨日 " + recordDay
+    if (thisToday == recodeDate) return "今日 " + recordDay
+    if (thisTomorrowday == recodeDate) return "明日 " + recordDay
 
     if (thisYear == recordYear) {
         return dayjs(String(date)).format('M/D ') + recordDay;

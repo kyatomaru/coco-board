@@ -7,15 +7,25 @@ import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Container from '@mui/material/Container';
-import Calendar from '@/features/routes/calendar/Calendar';
+import NoteCalendar from '@/features/routes/calendar/NoteCalendar';
+import TaskCalendar from '@/features/routes/calendar/TaskCalendar';
 import type { User } from 'firebase/auth';
 import { auth } from '../firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import LeftBar from '@/components/LeftBar';
+import CalendarHeader from '@/components/routes/calendar/CalendarHeader';
+import { useGetNote } from '@/hooks/note/useGetAllNote';
+import { useGetAllTask } from '@/hooks/task/useGetAllTask';
+import CalendarFooter from '@/components/routes/calendar/CalendarFooter';
 
 export default function Home(props) {
   const router = useRouter()
   const [user, setUser] = React.useState<User | undefined>(null);
+  const [selectedMonth, setSelectedMonth] = React.useState(new Date());
+  const [pageMenu, setPageMenu] = React.useState(0);
+
+  const [contents, getContents] = useGetNote(user)
+  const [tasks, getTasks] = useGetAllTask(user)
 
   useIsAuth(router)
 
@@ -34,12 +44,16 @@ export default function Home(props) {
       <LoadingPage />
       {user !== null &&
         <>
-          <Header props={props} />
+          <CalendarHeader date={new Date()} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
           <LeftBar />
-          <Container maxWidth="md" sx={{ mt: { xs: "55px", sm: "70px", md: "0px" }, mb: { xs: "80px", sm: "90px", md: "30px" }, px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
-            <Calendar user={user} />
+          <Container maxWidth="md" sx={{ my: "50px", px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
+            {pageMenu == 0 ?
+              <NoteCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={contents} />
+              :
+              <TaskCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} task={tasks[pageMenu - 1]} />
+            }
           </Container >
-          < Footer />
+          < CalendarFooter selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} tasks={tasks} pageMenu={pageMenu} setPageMenu={setPageMenu} />
         </>
       }
     </main >
