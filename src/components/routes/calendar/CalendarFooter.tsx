@@ -56,7 +56,7 @@ export default function CalendarFooter({ selectedMonth, setSelectedMonth, pageMe
                 <Tab label="記録" sx={{ fontSize: 13 }} />
                 {tasks != undefined && (
                     tasks.map((task, index) => (
-                        <Tab label={task.title} sx={{ fontSize: 13 }} />
+                        <Tab key={index} label={task.title} sx={{ fontSize: 13 }} />
                     )))
                 }
             </Tabs>
