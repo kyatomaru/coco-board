@@ -121,7 +121,7 @@ export default function TaskBox({ task, achieve, getTask, getAchieve }: PageProp
 
                                     <Stack justifyContent="space-between" direction="row" sx={{ px: 1, maxWidth: "300px" }}>
                                         {days.map((day, index) => {
-                                            return <Avatar sx={{
+                                            return <Avatar key={index} sx={{
                                                 width: "32px", height: "32px", fontSize: 13, fontWeight: "bold",
                                                 bgcolor: "#eee", color: task.doday[index] ? "#e57f3a" : "#444",
                                                 border: task.doday[index] && "0.5px #e57f3a solid"

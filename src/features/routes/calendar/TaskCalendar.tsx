@@ -93,7 +93,7 @@ export default function TaskCalendar({ user, selectedMonth, setSelectedMonth, ta
                                         {achieve != undefined && achieve[0] != undefined && (
                                             achieve.map((data, index) => (
                                                 data.date == dayjs(String(day)).format('YYYY-MM-DD') && data.achieve &&
-                                                <Box sx={{ display: "flex", my: "auto", width: "100%" }}>
+                                                <Box key={index} sx={{ display: "flex", my: "auto", width: "100%" }}>
                                                     < DoneIcon sx={{ borderRadius: "20px", fontSize: { xs: "20px", md: "40px" }, m: "auto", color: "#20603d", backgroundColor: "#baf5ba" }} />
                                                 </Box>
                                             ))

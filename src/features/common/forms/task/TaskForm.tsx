@@ -168,6 +168,7 @@ export default function TaskForm({ task, getTask, postData, onClose }: PageProps
                         <Stack justifyContent="space-between" direction="row" sx={{ maxWidth: "300px" }}>
                             {days.map((day, index) => {
                                 return <IconButton
+                                    key={index}
                                     onClick={() => { changeDoday(index) }}
                                     sx={{ width: "40px", height: "40px" }}>
                                     <Avatar sx={{

@@ -75,15 +75,23 @@ export default function TaskCard({ user, task, getTask, date }: PageProps) {
         setAchieve(contents)
 
         if (!achieve.achievementId) {
-            const res = await useInsertAchieve(contents)
-            if (res.ok) {
-                getAchieve()
-            }
+            InsertAchieve(contents)
         } else {
-            const res = await useUpdateAchieve(contents)
-            if (res.ok) {
-                getAchieve()
-            }
+            UpdateAchieve(contents)
+        }
+    }
+
+    const InsertAchieve = async (contents) => {
+        const res = await useInsertAchieve(contents)
+        if (res.ok) {
+            getAchieve()
+        }
+    }
+
+    const UpdateAchieve = async (contents) => {
+        const res = await useUpdateAchieve(contents)
+        if (res.ok) {
+            getAchieve()
         }
     }
 
