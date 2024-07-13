@@ -48,12 +48,9 @@ const DataFormat = (date: String) => {
 
 export default function TaskBox({ task, achieve, getTask, getAchieve }: PageProps) {
     const [taskDeleteModalOpen, setTaskDeleteModalOpen] = React.useState(false);
-    const [taskAchieveModalOpen, setTaskAchieveModalOpen] = React.useState(false);
     const [editModalOpen, setEditModalOpen] = React.useState<boolean>(false)
 
     const router = useRouter()
-
-    const [activeStep, setActiveStep] = React.useState(0);
 
     const taskEditButtonClick = () => {
         setEditModalOpen(true)

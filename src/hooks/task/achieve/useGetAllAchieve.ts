@@ -21,7 +21,7 @@ export const useGetAllAchieve = (user, taskId) => {
         setAchieve(await fetchAchieve(query))
     }
 
-    return [achieve, getAchieve]
+    return [achieve, setAchieve, getAchieve]
 }
 
 const fetchAchieve = async (query) => {
