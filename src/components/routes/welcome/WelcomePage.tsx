@@ -89,13 +89,13 @@ export default function WelcomePage() {
                 <Divider />
 
                 <Box sx={{ textAlign: "center", py: 7, maxWidth: 450, margin: "auto" }}>
-                    <Typography sx={{ fontSize: 25, mb: 3, px: 3 }}>課題を管理しよう</Typography>
+                    <Typography sx={{ fontSize: 25, mb: 3, px: 3 }}>取り組むことをチェックしよう</Typography>
                     <Typography sx={{ px: 3 }}>
-                        課題の管理機能で現状の課題を把握することができます。
+                        曜日ごとに取り組むことを登録することができます。継続的に取り組み成長に繋げましょう。
                     </Typography>
                     <CardMedia
-                        image="/images/welcomePage/problempageImage.png"
-                        sx={{ width: { xs: 230, sm: 350 }, height: { xs: 320, sm: 480 }, margin: "auto", mt: 3 }}
+                        image="/images/welcomePage/taskImage.png"
+                        sx={{ width: { xs: 240, sm: 360 }, height: { xs: 320, sm: 480 }, margin: "auto", mt: 3 }}
                     />
                 </Box>
             </Box>

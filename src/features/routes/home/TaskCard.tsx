@@ -27,6 +27,7 @@ import { useGetDateAchieve } from '@/hooks/task/achieve/useGetDateAchieve';
 import { AchievementModel } from '@/types/task/Achievement';
 import { useInsertAchieve } from '@/hooks/task/achieve/useInsertAchieve';
 import { useUpdateAchieve } from '@/hooks/task/achieve/useUpdateAchieve';
+import { useGetAllAchieve } from '@/hooks/task/achieve/useGetAllAchieve';
 
 type PageProps = {
     user: any
@@ -40,20 +41,10 @@ const DataFormat = (date: String) => {
 }
 
 export default function TaskCard({ user, task, getTask, date }: PageProps) {
-    const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
-    const [menuModalOpen, setMenuModalOpen] = React.useState<boolean>(false)
+    // const [achieve, setAchieve, getAchieve] = useGetDateAchieve(user, task.taskId, dayjs(String(date)).format('YYYY-MM-DD'))
+    const [achieves, setAchieves, getAchieves] = useGetAllAchieve(user, task.taskId)
+    const [achieve, setAchieve] = React.useState(new AchievementModel())
 
-    const [activeStep, setActiveStep] = React.useState(0);
-
-    const [achieve, setAchieve, getAchieve] = useGetDateAchieve(user, task.taskId, dayjs(String(date)).format('YYYY-MM-DD'))
-
-    const clickLeftButton = () => {
-        setActiveStep(activeStep - 1)
-    }
-
-    const clickRightButton = () => {
-        setActiveStep(activeStep + 1)
-    }
 
     const router = useRouter()
 
@@ -64,6 +55,21 @@ export default function TaskCard({ user, task, getTask, date }: PageProps) {
     const EditButtonClick = () => {
         router.replace(`/task/edit/${task.taskId}`)
     }
+
+    React.useEffect(() => {
+        setAchieve(new AchievementModel())
+        if (achieves != undefined) {
+            achieves.forEach(element => {
+                if (element.date == dayjs(String(date)).format('YYYY-MM-DD')) {
+                    if (element.achieve) {
+                        setAchieve(element)
+                    } else {
+                        setAchieve(element)
+                    }
+                }
+            });
+        }
+    }, [date, achieves])
 
     const AchieveButtonClick = async () => {
         const contents = new AchievementModel()
@@ -84,20 +90,20 @@ export default function TaskCard({ user, task, getTask, date }: PageProps) {
     const InsertAchieve = async (contents) => {
         const res = await useInsertAchieve(contents)
         if (res.ok) {
-            getAchieve()
+            getAchieves()
         }
     }
 
     const UpdateAchieve = async (contents) => {
         const res = await useUpdateAchieve(contents)
         if (res.ok) {
-            getAchieve()
+            getAchieves()
         }
     }
 
     return (
         <>
-            {achieve == undefined ?
+            {achieves == undefined ?
                 <Skeleton variant="rounded" height={48} />
                 :
                 <Card elevation={0} sx={{ minWidth: 250, backgroundColor: task.doday[new Date(String(date)).getDay()] && "#f58f4a15" }} >
@@ -109,7 +115,9 @@ export default function TaskCard({ user, task, getTask, date }: PageProps) {
                                 position: "absolute",
                                 zIndex: 1000, width: "40px", height: "40px", m: "auto"
                             }}>
-                            <DoneIcon sx={{ backgroundColor: achieve.achieve && "#baf5ba", color: achieve.achieve && "#20603d" }} />
+                            <DoneIcon
+                                sx={{ backgroundColor: achieve.achieve && "#baf5ba", color: achieve.achieve && "#20603d" }}
+                            />
                         </IconButton>
                         <CardActionArea onClick={() => ViewButtonClick()} >
                             <Box sx={{ p: 2 }}>
