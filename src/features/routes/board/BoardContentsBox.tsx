@@ -16,12 +16,17 @@ import { deleteNoteMs } from '@/constants/modalMessage';
 import { useDeleteBoard } from '@/hooks/board/useDeleteBoard';
 import NoteContentsBar from '@/features/common/contents/bar/NoteContentsBar';
 import dayjs from 'dayjs';
+import BoardViewForm from '@/features/common/forms/board/BoardViewForm';
+import { useUpdateBoard } from '@/hooks/board/useUpdateBoard';
+import Modal from '@mui/material/Modal';
+import Container from '@mui/material/Container';
 
 type pageProps = {
     contents: BoardType
+    getContents: any
 }
 
-export default function BoardContentsBox({ contents }: pageProps) {
+export default function BoardContentsBox({ contents, getContents }: pageProps) {
     const router = useRouter()
     const params = useParams()
     const [menu, setMenu] = React.useState(0);
@@ -55,9 +60,10 @@ export default function BoardContentsBox({ contents }: pageProps) {
     })
 
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
+    const [editModalOpen, setEditModalOpen] = React.useState<boolean>(false)
 
     const EditButtonClick = () => {
-        router.push(`/board/edit/${contents.contentsId}`)
+        setEditModalOpen(true)
     }
 
     const DeleteButtonClick = () => {
@@ -74,51 +80,61 @@ export default function BoardContentsBox({ contents }: pageProps) {
     return (
         <>
             <DeleteConfirmModal open={deleteModalOpen} setOpen={setDeleteModalOpen} title={boardModalTitle} message={deleteNoteMs} confirmText="削除" onSubmit={DeleteBoardContents} />
+            {editModalOpen ?
+                <Modal
+                    open={editModalOpen}
+                    sx={{ overflowY: menu != 0 && "auto", scrollbarWidth: "none" }}
+                >
+                    <Container maxWidth="sm" sx={{ px: 0, minHeight: "100vh", position: "relative", zIndex: 1500, borderRadius: 4 }}>
+                        <BoardViewForm contents={contents} getContents={getContents} postData={useUpdateBoard} onClose={() => { setEditModalOpen(false) }} />
+                    </Container>
+                </Modal>
+                :
+                <Box>
+                    {contents != undefined
+                        ? <NoteContentsBar contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
+                        : <Skeleton variant="rectangular" height={30} />
+                    }
+                    {contents != undefined
+                        ? <CourtView courtWidth={courtWidth} courtHeight={courtHeight} frame={contents.boardFrame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} isPlay={isPlay} isView={true} setIsPlay={setIsPlay} playFrame={playFrame} />
+                        : <Skeleton variant="rectangular" height={courtHeight} />
+                    }
+                    {contents != undefined
+                        ? <BottomViewBar frame={contents.boardFrame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} setPlayFrame={setPlayFrame} isPlay={isPlay} setIsPlay={setIsPlay} />
+                        : <Skeleton variant="rectangular" height={30} />
+                    }
 
-            <Box>
-                {contents != undefined
-                    ? <NoteContentsBar contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
-                    : <Skeleton variant="rectangular" height={30} />
-                }
-                {contents != undefined
-                    ? <CourtView courtWidth={courtWidth} courtHeight={courtHeight} frame={contents.boardFrame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} isPlay={isPlay} isView={true} setIsPlay={setIsPlay} playFrame={playFrame} />
-                    : <Skeleton variant="rectangular" height={courtHeight} />
-                }
-                {contents != undefined
-                    ? <BottomViewBar frame={contents.boardFrame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} setPlayFrame={setPlayFrame} isPlay={isPlay} setIsPlay={setIsPlay} />
-                    : <Skeleton variant="rectangular" height={30} />
-                }
-
-                {contents != undefined ?
-                    <Box>
-                        <Box sx={{ p: 1, mx: 1 }} >
-                            <Box sx={{ width: "100%", alignItems: "center" }} >
-                                <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
-                                    {String(contents.title)}
-                                </Typography>
-                                {/* <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} /> */}
-                            </Box>
-                        </Box>
-                        <Divider />
-                        {contents.comment != "" &&
-                            <>
-                                <Box sx={{ px: 2, py: 1 }}>
-                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                        コメント
+                    {contents != undefined ?
+                        <Box>
+                            <Box sx={{ p: 1, mx: 1 }} >
+                                <Box sx={{ width: "100%", alignItems: "center" }} >
+                                    <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
+                                        {String(contents.title)}
                                     </Typography>
-
-                                    <Typography variant="body2" sx={{ pb: 1 }}>
-                                        {contents.comment}
-                                    </Typography>
+                                    {/* <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} /> */}
                                 </Box>
-                                <Divider />
-                            </>
-                        }
-                    </Box>
-                    :
-                    <Skeleton variant="rectangular" height={87} />
-                }
-            </Box>
+                            </Box>
+                            <Divider />
+                            {contents.comment != "" &&
+                                <>
+                                    <Box sx={{ px: 2, py: 1 }}>
+                                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                            コメント
+                                        </Typography>
+
+                                        <Typography variant="body2" sx={{ pb: 1 }}>
+                                            {contents.comment}
+                                        </Typography>
+                                    </Box>
+                                    <Divider />
+                                </>
+                            }
+                        </Box>
+                        :
+                        <Skeleton variant="rectangular" height={87} />
+                    }
+                </Box>
+            }
         </>
     )
 }

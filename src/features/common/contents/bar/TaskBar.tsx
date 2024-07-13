@@ -15,23 +15,23 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 type PageProps = {
-    contents: any,
+    task: any,
     EditButtonClick: any,
     DeleteButtonClick: any,
 }
 
-export default function NoteContentsBar({ contents, EditButtonClick, DeleteButtonClick }: PageProps) {
+export default function TaskBar({ task, EditButtonClick, DeleteButtonClick }: PageProps) {
     const router = useRouter()
 
     return (
         <Box sx={{ position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 1200 }} >
             <Grid sx={{ px: 1, height: "40px" }} container direction="row" alignItems="center" justifyContent="space-between">
                 <Grid>
-                    <IconButton onClick={(event) => { contents != undefined && router.push(`/home/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`) }} ><ArrowLeftIcon /></IconButton>
+                    <IconButton onClick={(event) => { task != undefined && router.push(`/home/${dayjs(String(task.date)).format('YYYY-MM-DD')}`) }} ><ArrowLeftIcon /></IconButton>
                 </Grid>
                 <Grid>
                     <Typography variant="h6" sx={{ fontSize: 14 }} component="div">
-                        記録
+                        取り組むこと
                     </Typography>
                 </Grid>
                 <Grid >

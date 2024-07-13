@@ -30,9 +30,12 @@ import { deleteNoteMs } from '@/constants/modalMessage';
 import { elementsCategories } from '@/types/Category';
 import { useDeleteGame } from '@/hooks/game/useDeleteGame';
 import NoteContentsBar from '@/features/common/contents/bar/NoteContentsBar';
+import { useUpdateGame } from '@/hooks/game/useUpdateGame';
+import GameForm from '@/features/common/forms/game/GameForm';
 
 type PageProps = {
     contents: GameContentsType
+    getContents: any
 }
 
 const DataFormat = (date: String) => {
@@ -40,12 +43,13 @@ const DataFormat = (date: String) => {
 }
 
 
-export default function GameContentsBox({ contents }: PageProps) {
+export default function GameContentsBox({ contents, getContents }: PageProps) {
     const router = useRouter()
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
+    const [editModalOpen, setEditModalOpen] = React.useState<boolean>(false)
 
     const EditButtonClick = () => {
-        router.push(`/game/edit/${contents.contentsId}`)
+        setEditModalOpen(true)
     }
 
     const DeleteButtonClick = () => {
@@ -62,217 +66,220 @@ export default function GameContentsBox({ contents }: PageProps) {
     return (
         <>
             <DeleteConfirmModal open={deleteModalOpen} setOpen={setDeleteModalOpen} title={gameModalTitle} message={deleteNoteMs} confirmText="削除" onSubmit={DeleteGameContents} />
+            {editModalOpen ?
+                <GameForm contents={contents} getContents={getContents} postData={useUpdateGame} onClose={() => { setEditModalOpen(false) }} />
+                :
+                <Box>
+                    <NoteContentsBar contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
 
-            <Box>
-                <NoteContentsBar contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
-
-                {contents != undefined ?
-                    <Stack direction="row" sx={{ p: 1, mx: 1 }} >
-                        <Box sx={{ width: "100%", alignItems: "center" }} >
-                            <Typography sx={{ fontSize: 17 }} variant="h6" component="div">
-                                {DataFormat(contents.date)}
-                            </Typography>
-                            <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
-                                {String(contents.title)}
-                            </Typography>
-                            <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} />
-                        </Box>
-                    </Stack>
-                    :
-                    <Skeleton variant="rectangular" height={94} />
-                }
-
-                <Divider />
-
-                {contents != undefined ?
-                    <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} justifyContent="space-between" alignItems="center">
-                        <Box sx={{ px: 2, py: 1, width: "100%" }}>
-                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                場所
-                            </Typography>
-                            {contents.place &&
-                                <Typography variant="body2" sx={{}}>
-                                    {String(contents.place)}
+                    {contents != undefined ?
+                        <Stack direction="row" sx={{ p: 1, mx: 1 }} >
+                            <Box sx={{ width: "100%", alignItems: "center" }} >
+                                <Typography sx={{ fontSize: 17 }} variant="h6" component="div">
+                                    {DataFormat(contents.date)}
                                 </Typography>
-                            }
-                        </Box>
-                        <Box sx={{ px: 2, py: 1, width: "100%" }}>
-                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                天気
-                            </Typography>
-                            {contents.weather &&
-                                <Typography variant="body2" sx={{}}>
-                                    {String(contents.weather)}
+                                <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
+                                    {String(contents.title)}
                                 </Typography>
-                            }
-                        </Box>
-                    </Stack>
-                    :
-                    <Skeleton variant="rectangular" height={65} />
-                }
-                <Divider />
-
-                {contents != undefined ?
-                    <Box sx={{ width: "100%", px: 2, my: 1 }}>
-                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                            チーム
-                        </Typography>
-                        <Stack direction="row" sx={{}} >
-                            <Box sx={{ width: "100%" }}>
-                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
-                                    {String(contents.name1)}
-                                </Typography>
-                                <Typography variant="body2" sx={{}}>
-                                    {String(contents.score1)}
-                                </Typography>
-                            </Box>
-                            <Box sx={{ width: "100%" }}>
-                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
-                                    {String(contents.name2)}
-                                </Typography>
-                                <Typography variant="body2" sx={{}}>
-                                    {String(contents.score2)}
-                                </Typography>
+                                <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} />
                             </Box>
                         </Stack>
-                    </Box>
-                    :
-                    <Skeleton variant="rectangular" height={87} />
-                }
+                        :
+                        <Skeleton variant="rectangular" height={94} />
+                    }
 
-                <Divider />
+                    <Divider />
 
-                {contents != undefined ?
-                    <Box sx={{ width: "100%", my: 1 }}>
-                        {contents.condition &&
-                            <Box sx={{ px: 2, mb: 2 }}>
+                    {contents != undefined ?
+                        <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} justifyContent="space-between" alignItems="center">
+                            <Box sx={{ px: 2, py: 1, width: "100%" }}>
                                 <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                    体調
+                                    場所
                                 </Typography>
-                                <Stack direction="row" alignItems="center">
-                                    <span>{customIcons[Number(contents.condition)].icon}</span>
-                                    <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
-                                        {customIcons[Number(contents.condition)].label}
+                                {contents.place &&
+                                    <Typography variant="body2" sx={{}}>
+                                        {String(contents.place)}
                                     </Typography>
-                                </Stack>
+                                }
                             </Box>
-                        }
-                        {contents.fatigue &&
-                            <Box sx={{ px: 2, mb: 2 }}>
+                            <Box sx={{ px: 2, py: 1, width: "100%" }}>
                                 <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                    疲労感
+                                    天気
                                 </Typography>
-                                <Stack direction="row" alignItems="center">
-                                    <span>{customIcons[Number(contents.fatigue)].icon}</span>
-                                    <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
-                                        {customIcons[Number(contents.fatigue)].label}
+                                {contents.weather &&
+                                    <Typography variant="body2" sx={{}}>
+                                        {String(contents.weather)}
                                     </Typography>
-                                </Stack>
+                                }
                             </Box>
-                        }
-                        {contents.injury &&
-                            <Box sx={{ px: 2 }}>
+                        </Stack>
+                        :
+                        <Skeleton variant="rectangular" height={65} />
+                    }
+                    <Divider />
+
+                    {contents != undefined ?
+                        <Box sx={{ width: "100%", px: 2, my: 1 }}>
+                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                チーム
+                            </Typography>
+                            <Stack direction="row" sx={{}} >
+                                <Box sx={{ width: "100%" }}>
+                                    <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                        {String(contents.name1)}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{}}>
+                                        {String(contents.score1)}
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ width: "100%" }}>
+                                    <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                        {String(contents.name2)}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{}}>
+                                        {String(contents.score2)}
+                                    </Typography>
+                                </Box>
+                            </Stack>
+                        </Box>
+                        :
+                        <Skeleton variant="rectangular" height={87} />
+                    }
+
+                    <Divider />
+
+                    {contents != undefined ?
+                        <Box sx={{ width: "100%", my: 1 }}>
+                            {contents.condition &&
+                                <Box sx={{ px: 2, mb: 2 }}>
+                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                        体調
+                                    </Typography>
+                                    <Stack direction="row" alignItems="center">
+                                        <span>{customIcons[Number(contents.condition)].icon}</span>
+                                        <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                            {customIcons[Number(contents.condition)].label}
+                                        </Typography>
+                                    </Stack>
+                                </Box>
+                            }
+                            {contents.fatigue &&
+                                <Box sx={{ px: 2, mb: 2 }}>
+                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                        疲労感
+                                    </Typography>
+                                    <Stack direction="row" alignItems="center">
+                                        <span>{customIcons[Number(contents.fatigue)].icon}</span>
+                                        <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                            {customIcons[Number(contents.fatigue)].label}
+                                        </Typography>
+                                    </Stack>
+                                </Box>
+                            }
+                            {contents.injury &&
+                                <Box sx={{ px: 2 }}>
+                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                        怪我
+                                    </Typography>
+                                    <Typography variant="body2" sx={{}}>
+                                        {String(contents.injury)}
+                                    </Typography>
+                                </Box>
+                            }
+                        </Box>
+                        :
+                        <Skeleton variant="rectangular" height={189} />
+                    }
+
+
+                    {contents != undefined && contents.position != null &&
+                        <>
+                            <Divider />
+                            <Box sx={{ px: 2, my: 1 }}>
                                 <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                    怪我
+                                    ポジション
                                 </Typography>
                                 <Typography variant="body2" sx={{}}>
-                                    {String(contents.injury)}
+                                    {String(contents.position)}
                                 </Typography>
                             </Box>
-                        }
-                    </Box>
-                    :
-                    <Skeleton variant="rectangular" height={189} />
-                }
+                        </>
+                    }
+                    <Divider />
 
-
-                {contents != undefined && contents.position != null &&
-                    <>
-                        <Divider />
+                    {contents != undefined ?
                         <Box sx={{ px: 2, my: 1 }}>
                             <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                ポジション
+                                良かったところ
                             </Typography>
-                            <Typography variant="body2" sx={{}}>
-                                {String(contents.position)}
-                            </Typography>
+                            {contents.goodPoints[0] != null ?
+                                <List sx={{ px: 0, my: 1, py: 0 }}>
+                                    {contents.goodPoints.map((goodPoint, index) => (
+                                        <Box key={index}>
+                                            {
+                                                goodPoint.context != "" &&
+                                                <ListText primary={goodPoint.context} secondary={elementsCategories[Number(goodPoint.type)].title} />
+                                            }
+                                        </Box>
+                                    ))
+                                    }
+                                </List >
+                                :
+                                <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
+                                    なし
+                                </Typography>
+                            }
                         </Box>
-                    </>
-                }
-                <Divider />
+                        :
+                        <Skeleton variant="rectangular" height={62} />
+                    }
 
-                {contents != undefined ?
-                    <Box sx={{ px: 2, my: 1 }}>
-                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                            良かったところ
-                        </Typography>
-                        {contents.goodPoints[0] != null ?
-                            <List sx={{ px: 0, my: 1, py: 0 }}>
-                                {contents.goodPoints.map((goodPoint, index) => (
-                                    <Box key={index}>
-                                        {
-                                            goodPoint.context != "" &&
-                                            <ListText primary={goodPoint.context} secondary={elementsCategories[Number(goodPoint.type)].title} />
-                                        }
-                                    </Box>
-                                ))
-                                }
-                            </List >
-                            :
-                            <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
-                                なし
-                            </Typography>
-                        }
-                    </Box>
-                    :
-                    <Skeleton variant="rectangular" height={62} />
-                }
+                    <Divider />
 
-                <Divider />
-
-                {contents != undefined ?
-                    <Box sx={{ px: 2, my: 1 }}>
-                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                            悪かった点
-                        </Typography>
-                        {contents.badPoints[0] != null ?
-                            <List sx={{ px: 0, my: 1, py: 0 }}>
-                                {contents.badPoints.map((badPoint, index) => (
-                                    <Box key={index}>
-                                        {
-                                            badPoint.context != "" &&
-                                            <ListText primary={badPoint.context} secondary={elementsCategories[Number(badPoint.type)].title} />
-                                        }
-                                    </Box>
-                                ))
-                                }
-                            </List >
-                            :
-                            <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
-                                なし
-                            </Typography>
-                        }
-                    </Box>
-                    :
-                    <Skeleton variant="rectangular" height={62} />
-                }
-
-                {contents != undefined && contents.comment != "" &&
-                    <>
-                        <Divider />
+                    {contents != undefined ?
                         <Box sx={{ px: 2, my: 1 }}>
                             <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                コメント
+                                悪かった点
                             </Typography>
-
-                            <Typography variant="body2" sx={{ pb: 1 }}>
-                                {contents.comment}
-                            </Typography>
+                            {contents.badPoints[0] != null ?
+                                <List sx={{ px: 0, my: 1, py: 0 }}>
+                                    {contents.badPoints.map((badPoint, index) => (
+                                        <Box key={index}>
+                                            {
+                                                badPoint.context != "" &&
+                                                <ListText primary={badPoint.context} secondary={elementsCategories[Number(badPoint.type)].title} />
+                                            }
+                                        </Box>
+                                    ))
+                                    }
+                                </List >
+                                :
+                                <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
+                                    なし
+                                </Typography>
+                            }
                         </Box>
-                        <Divider />
-                    </>
-                }
-            </Box >
+                        :
+                        <Skeleton variant="rectangular" height={62} />
+                    }
+
+                    {contents != undefined && contents.comment != "" &&
+                        <>
+                            <Divider />
+                            <Box sx={{ px: 2, my: 1 }}>
+                                <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                    コメント
+                                </Typography>
+
+                                <Typography variant="body2" sx={{ pb: 1 }}>
+                                    {contents.comment}
+                                </Typography>
+                            </Box>
+                            <Divider />
+                        </>
+                    }
+                </Box >
+            }
         </>
     )
 }

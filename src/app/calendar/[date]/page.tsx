@@ -4,25 +4,34 @@ import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
 import LoadingPage from '@/components/LoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Container from '@mui/material/Container';
+import NoteCalendar from '@/features/routes/calendar/NoteCalendar';
+import TaskCalendar from '@/features/routes/calendar/TaskCalendar';
 import type { User } from 'firebase/auth';
 import { auth } from '@/app/firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
-import NoteCardBox from '@/features/common/contents/box/NoteCardBox';
-import LoginPage from '@/features/routes/accounts/login/LoginPage';
-import DateBar from '@/features/routes/calendar/DateBar';
-import CreateButton from '@/features/routes/calendar/CreateButton';
 import LeftBar from '@/components/LeftBar';
+import CalendarHeader from '@/components/routes/calendar/CalendarHeader';
+import { useGetNote } from '@/hooks/note/useGetAllNote';
+import { useGetAllTask } from '@/hooks/task/useGetAllTask';
+import CalendarFooter from '@/components/routes/calendar/CalendarFooter';
 
-export default function Home() {
-  const params = useParams()
+export default function Home(props) {
   const router = useRouter()
+  const params = useParams()
   const [user, setUser] = React.useState<User | undefined>(null);
+  const [selectedMonth, setSelectedMonth] = React.useState(new Date(String(params.date)));
+  const [pageMenu, setPageMenu] = React.useState(0);
+
+  const [contents, getContents] = useGetNote(user)
+  const [tasks, getTasks] = useGetAllTask(user)
 
   useIsAuth(router)
 
   React.useEffect(() => {
+    // const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(auth.currentUser)
@@ -30,21 +39,24 @@ export default function Home() {
     })
   });
 
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between, bg-white">
       <LoadingPage />
       {user !== null &&
         <>
+          <CalendarHeader date={new Date(String(params.date))} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
           <LeftBar />
-          <Container maxWidth="md" sx={{ px: 2, position: "relative", mb: "50px", pl: { md: "120px", lg: "250px" } }}>
-            <CreateButton />
-            <DateBar />
-            <NoteCardBox user={user} date={new Date(String(params.date))} />
+          <Container maxWidth="md" sx={{ my: "50px", px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
+            {pageMenu == 0 ?
+              <NoteCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={contents} />
+              :
+              <TaskCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} task={tasks[pageMenu - 1]} />
+            }
           </Container >
-          <Footer />
+          < CalendarFooter selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} tasks={tasks} pageMenu={pageMenu} setPageMenu={setPageMenu} />
         </>
       }
-
     </main >
   )
 }

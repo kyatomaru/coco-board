@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import NoteCardBox from '@/features/common/contents/box/NoteCardBox';
 import TaskCardBox from '@/features/routes/home/TaskCardBox';
 import type { User } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth } from '@/app/firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import LeftBar from '@/components/LeftBar';
 import HomeHeader from '@/components/routes/home/HomeHeader';
@@ -19,7 +19,7 @@ export default function Home() {
   const router = useRouter()
   const params = useParams()
   const [user, setUser] = React.useState<User | undefined>(null);
-  const [date, setDate] = React.useState(new Date())
+  const [date, setDate] = React.useState(new Date(String(params.date)))
   const [displayMenu, setDisplayMenu] = React.useState(0)
   const [isNoteCreateModal, setIsNoteCreateModal] = React.useState(-1)
   const [isTaskAddModal, setIsTaskAddModal] = React.useState(false)
@@ -43,8 +43,7 @@ export default function Home() {
           {/* <Header /> */}
           <LeftBar />
           <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
-          <Container maxWidth="md" sx={{ my: "100px", px: 0, pl: { md: "120px", lg: "250px", position: "relative" } }}>
-
+          <Container maxWidth="md" sx={{ my: "100px", px: 0, pl: { md: "120px", lg: "250px" } }}>
             {displayMenu == 1 &&
               <Box sx={{ mb: 3, borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(0) }} />

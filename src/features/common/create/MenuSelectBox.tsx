@@ -9,11 +9,16 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Typography } from '@mui/material';
 
-export default function MenuSelectBox() {
+type PageProps = {
+    alignment: Number,
+    setAlignment: Function
+}
+
+export default function MenuSelectBox({ alignment, setAlignment }: PageProps) {
     const params = useParams()
     const router = useRouter()
     const pathName = usePathname().split('/')
-    const [alignment, setAlignment] = React.useState(0)
+    // const [alignment, setAlignment] = React.useState(0)
 
     const handleAlignment = (
         event: React.MouseEvent<HTMLElement>,
@@ -35,19 +40,19 @@ export default function MenuSelectBox() {
     }, [])
 
     const ClickGameButton = () => {
-        router.replace(`/create/${dayjs(String(params.date)).format('YYYY-MM-DD')}/game/`)
+        // router.replace(`/create/${dayjs(String(params.date)).format('YYYY-MM-DD')}/game/`)
     }
 
     const ClickPracticeButton = () => {
-        router.replace(`/create/${dayjs(String(params.date)).format('YYYY-MM-DD')}/practice/`)
+        // router.replace(`/create/${dayjs(String(params.date)).format('YYYY-MM-DD')}/practice/`)
     }
 
     const ClickBoardButton = () => {
-        router.replace(`/create/${dayjs(String(params.date)).format('YYYY-MM-DD')}/board/`)
+        // router.replace(`/create/${dayjs(String(params.date)).format('YYYY-MM-DD')}/board/`)
     }
 
     return (
-        <Box sx={{ textAlign: "center", position: 'sticky', bottom: 10, zIndex: 100 }}>
+        <Box sx={{ textAlign: "center", position: 'sticky', mt: 10, bottom: 10, zIndex: 100 }}>
             <ToggleButtonGroup
                 value={alignment}
                 exclusive

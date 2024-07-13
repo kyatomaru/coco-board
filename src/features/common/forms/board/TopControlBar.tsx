@@ -19,6 +19,7 @@ import BoardCreateForm from './BoardInfoForm';
 import { BoardType } from '@/types/board/Board';
 
 type PageProps = {
+    onClose: any,
     frame: Array<FrameType>,
     setFrame: Function,
     setCurrentFrame: Function,
@@ -27,7 +28,7 @@ type PageProps = {
 }
 
 
-export default function TopControlBar({ frame, setFrame, setCurrentFrame, board, onSubmit }: PageProps) {
+export default function TopControlBar({ onClose, frame, setFrame, setCurrentFrame, board, onSubmit }: PageProps) {
     const params = useParams()
     const router = useRouter()
 
@@ -89,7 +90,7 @@ export default function TopControlBar({ frame, setFrame, setCurrentFrame, board,
             }
 
             <Stack direction="row" justifyContent="space-around" sx={{ margin: "auto", backgroundColor: "white", borderTop: "solid 0.5px #b2b2b2", borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", }}>
-                <IconButton size='small' onClick={(event) => router.back()}>
+                <IconButton size='small' onClick={onClose}>
                     <ClearIcon sx={{ width: { xs: "20px" }, height: { xs: "20px" } }} />
                 </IconButton>
 

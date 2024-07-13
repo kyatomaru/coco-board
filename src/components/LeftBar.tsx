@@ -55,6 +55,9 @@ export default function LeftBar(props) {
         else if (pathName[1] === "problem") {
             return 3
         }
+        else if (pathName[1] === "task") {
+            return 4
+        }
     }
 
     const [value, setValue] = React.useState(setLabel())
@@ -75,6 +78,10 @@ export default function LeftBar(props) {
 
     const ClickCalendarButton = () => {
         router.push('/calendar')
+    };
+
+    const ClickTaskButton = () => {
+        router.push('/task')
     };
 
     return (
@@ -105,12 +112,12 @@ export default function LeftBar(props) {
                             </Stack>
                         </Button>
 
-                        <Button sx={{ my: 1, justifyContent: "flex-start", color: value == 1 ? "black" : "#666" }}>
+                        {/* <Button sx={{ my: 1, justifyContent: "flex-start", color: value == 1 ? "black" : "#666" }}>
                             <Stack direction="row" justifyItems="center" alignItems="center" onClick={ClickCreateButton}>
                                 <AddBoxIcon sx={{ fontSize: 32 }} />
                                 <Typography sx={{ fontSize: 17, px: 2, fontWeight: value == 1 && "bold", display: { md: "none", lg: "block" } }}>記録</Typography>
                             </Stack>
-                        </Button>
+                        </Button> */}
 
                         <Button sx={{ my: 1, justifyContent: "flex-start", color: value == 2 ? "black" : "#666" }}>
                             <Stack direction="row" justifyItems="center" alignItems="center" onClick={ClickCalendarButton} >
@@ -119,14 +126,24 @@ export default function LeftBar(props) {
                             </Stack>
                         </Button>
 
-                        <Button sx={{ my: 1, justifyContent: "flex-start", color: value == 3 ? "black" : "#666" }}>
+                        {/* <Button sx={{ my: 1, justifyContent: "flex-start", color: value == 3 ? "black" : "#666" }}>
                             <Stack direction="row" justifyItems="center" alignItems="center" onClick={ClickProblemButton}>
                                 <TextSnippetIcon sx={{ fontSize: 32 }} />
                                 <Typography sx={{ fontSize: 17, px: 2, fontWeight: value == 3 && "bold", display: { md: "none", lg: "block" } }}>課題</Typography>
                             </Stack>
                         </Button>
 
-                        <HeaderMenusButton />
+                        <Button sx={{ my: 1, justifyContent: "flex-start", color: value == 4 ? "black" : "#666" }}>
+                            <Stack direction="row" justifyItems="center" alignItems="center" onClick={ClickTaskButton}>
+                                <TextSnippetIcon sx={{ fontSize: 32 }} />
+                                <Typography sx={{ fontSize: 17, px: 2, fontWeight: value == 4 && "bold", display: { md: "none", lg: "block" } }}>タスク</Typography>
+                            </Stack>
+                        </Button> */}
+
+
+                        <Button sx={{ my: 1, justifyContent: "flex-start", color: "#666" }}>
+                            <HeaderMenusButton />
+                        </Button>
                     </Stack>
                 </Toolbar>
             </AppBar>
@@ -167,12 +184,10 @@ const HeaderMenusButton = () => {
     return (
         <div>
             <LogoutConfirmModal open={logoutModalOpen} setOpen={setLogoutModalOpen} />
-            <Button onClick={handleClick} sx={{ my: 1, justifyContent: "flex-start", color: "#666" }}>
-                <Stack direction="row" justifyItems="center" alignItems="center" >
-                    <MenuIcon sx={{ fontSize: { md: 32 } }} />
-                    <Typography sx={{ fontSize: 17, px: 2, display: { md: "none", lg: "block" } }}>その他</Typography>
-                </Stack>
-            </Button>
+            <Stack direction="row" justifyItems="center" alignItems="center" onClick={handleClick} >
+                <MenuIcon sx={{ fontSize: { md: 32 } }} />
+                <Typography sx={{ fontSize: 17, px: 2, display: { md: "none", lg: "block" } }}>その他</Typography>
+            </Stack>
             <StyledMenu
                 MenuListProps={{
                     'aria-labelledby': 'demo-customized-button',

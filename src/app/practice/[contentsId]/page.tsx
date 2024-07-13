@@ -17,7 +17,6 @@ const containterStyle = {
   borderRight: "solid 0.5px #b2b2b2",
   borderLeft: "solid 0.5px #b2b2b2",
   bgcolor: "white",
-  pb: "45px",
   minHeight: "100vh"
 }
 
@@ -25,7 +24,7 @@ export default function Home() {
   const params = useParams()
   const router = useRouter()
   const [user, setUser] = React.useState<User | undefined>(null);
-  const [contents, setContents] = useGetPractice(user, params.contentsId)
+  const [contents, getContents] = useGetPractice(user, params.contentsId)
 
   useIsAuth(router)
 
@@ -41,12 +40,9 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <LoadingPage />
       {user !== null &&
-        <>
-          <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative" }}>
-            <PracticeContentsBox contents={contents} />
-          </Container>
-          <Footer />
-        </>
+        <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative" }}>
+          <PracticeContentsBox contents={contents} getContents={getContents} />
+        </Container>
       }
     </main >
   )

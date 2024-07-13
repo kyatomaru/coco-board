@@ -15,23 +15,45 @@ import Button from '@mui/material/Button';
 import GameCard from '@/features/common/contents/card/GameCard';
 import PracticeCard from '@/features/common/contents/card/PracticeCard';
 import BoardCard from '@/features/common/contents/card/BoardCard';
+import Modal from '@mui/material/Modal';
+import CreateNoteFormBox from '@/features/routes/home/CreateNoteFormBox';
 
 type PageProps = {
     user: User,
-    date: String | Date
+    date: String | Date,
+    menu: Number,
+    setMenu: any
 }
 
-export default function NoteCardBox({ user, date }: PageProps) {
+export default function NoteCardBox({ user, date, menu, setMenu }: PageProps) {
     const router = useRouter()
     const [contents, getContents] = useGetNote(user, dayjs(String(date)).format('YYYY-MM-DD'))
+    const [isDateLoding, setIsDateLoding] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsDateLoding(true)
+    }, [date]);
+
+    React.useEffect(() => {
+        setIsDateLoding(false)
+    }, [contents]);
 
     return (
         <Box>
+            {menu != -1 &&
+                <Modal
+                    open={menu != -1}
+                    onClose={(event) => { setMenu(-1) }}
+                    sx={{ overflowY: menu != 0 && "auto", scrollbarWidth: "none" }}
+                >
+                    <CreateNoteFormBox getNoteContents={getContents} menu={menu} setMenu={setMenu} date={date} />
+                </Modal>
+            }
             <Box sx={{ my: 1 }}>
-                {contents == undefined ?
+                {contents == undefined || isDateLoding ?
                     <Skeleton variant="rounded" height={131} />
                     :
-                    <Box>
+                    <>
                         {contents[0] != undefined ?
                             (contents.map((value, index) => {
                                 return (
@@ -49,19 +71,20 @@ export default function NoteCardBox({ user, date }: PageProps) {
                                 )
                             }))
                             :
+
                             <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center" >
                                 <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", my: 1 }} component="h2">
-                                    今日の戦術・試合・練習を記録しよう。
+                                    戦術・試合・練習を記録しよう。
                                 </Typography>
                                 <Typography sx={{ fontSize: 13, textAlign: "center" }} variant="h6" component="div">
-                                    まだ記録がありません。次の勝利のために、今すぐ記録を始めましょう。
+                                    まだ記録がありません。次の勝利のために、今すぐ記録を残しましょう。
                                 </Typography>
                                 <Box sx={{ mt: 3 }}>
                                     <Button onClick={(event) => { router.push(`/create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/board`) }}>記録する</Button>
                                 </Box>
                             </Stack>
                         }
-                    </Box>
+                    </>
                 }
             </Box>
         </Box>
