@@ -38,7 +38,6 @@ export default function Home(props) {
     })
   });
 
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between, bg-white">
       <LoadingPage />
@@ -53,7 +52,7 @@ export default function Home(props) {
               <TaskCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} task={tasks[pageMenu - 1]} />
             }
           </Container >
-          < CalendarFooter selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} tasks={tasks} pageMenu={pageMenu} setPageMenu={setPageMenu} />
+          <CalendarFooter selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} tasks={tasks} pageMenu={pageMenu} setPageMenu={setPageMenu} />
         </>
       }
     </main >
