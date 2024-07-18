@@ -23,7 +23,7 @@ export default function TaskCalendar({ user, selectedMonth, setSelectedMonth, ta
     const [boards, setBoards] = React.useState([undefined]);
     const [isLoading, setIsLoading] = React.useState<boolean>(true)
 
-    const [achieve, getAchieve] = useGetAllAchieve(user, task.taskId)
+    const [achieve, setAchieve, getAchieve] = useGetAllAchieve(user, task.taskId)
 
     const startDay = startOfWeek(startOfMonth(selectedMonth));
     const endDay = endOfWeek(endOfMonth(selectedMonth));
@@ -42,6 +42,10 @@ export default function TaskCalendar({ user, selectedMonth, setSelectedMonth, ta
     }
 
     const weekDays = ['日', '月', '火', '水', '木', '金', '土'];
+
+    React.useEffect(() => {
+        getAchieve()
+    }, [task]);
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
@@ -94,7 +98,7 @@ export default function TaskCalendar({ user, selectedMonth, setSelectedMonth, ta
                                             achieve.map((data, index) => (
                                                 data.date == dayjs(String(day)).format('YYYY-MM-DD') && data.achieve &&
                                                 <Box key={index} sx={{ display: "flex", my: "auto", width: "100%" }}>
-                                                    < DoneIcon sx={{ borderRadius: "20px", fontSize: { xs: "20px", md: "40px" }, m: "auto", color: "#20603d", backgroundColor: "#baf5ba" }} />
+                                                    <DoneIcon sx={{ borderRadius: "20px", fontSize: { xs: "20px", md: "40px" }, m: "auto", color: "#20603d", backgroundColor: "#baf5ba" }} />
                                                 </Box>
                                             ))
                                         )}
