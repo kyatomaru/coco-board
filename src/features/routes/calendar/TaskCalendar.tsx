@@ -44,6 +44,7 @@ export default function TaskCalendar({ user, selectedMonth, setSelectedMonth, ta
     const weekDays = ['日', '月', '火', '水', '木', '金', '土'];
 
     React.useEffect(() => {
+        setAchieve(undefined)
         getAchieve()
     }, [task]);
 
