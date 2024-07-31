@@ -27,7 +27,7 @@ export default function TaskBar({ task, EditButtonClick, DeleteButtonClick }: Pa
         <Box sx={{ position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 1200 }} >
             <Grid sx={{ px: 1, height: "40px" }} container direction="row" alignItems="center" justifyContent="space-between">
                 <Grid>
-                    <IconButton onClick={(event) => { task != undefined && router.push(`/home/${dayjs(String(task.date)).format('YYYY-MM-DD')}`) }} ><ArrowLeftIcon /></IconButton>
+                    <IconButton onClick={(event) => { task != undefined && router.back() }} ><ArrowLeftIcon /></IconButton>
                 </Grid>
                 <Grid>
                     <Typography variant="h6" sx={{ fontSize: 14 }} component="div">

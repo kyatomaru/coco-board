@@ -42,9 +42,9 @@ export default function NoteMenuModal({ open, setOpen, View, Edit, Delete }: Pag
                     <MenuItem sx={{ py: 1 }} onClick={Delete} >
                         <Typography variant="button" sx={{ mx: "auto", color: "red", fontWeight: "bold" }} >削除</Typography>
                     </MenuItem>
-                    <MenuItem sx={{ py: 1 }} onClick={Edit}>
+                    {/* <MenuItem sx={{ py: 1 }} onClick={Edit}>
                         <Typography variant="button" sx={{ mx: "auto" }}>編集</Typography>
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem sx={{ py: 1 }} onClick={View}>
                         <Typography variant="button" sx={{ mx: "auto" }}>閲覧ページへ移動</Typography>
                     </MenuItem>
