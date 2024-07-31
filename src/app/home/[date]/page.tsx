@@ -13,7 +13,7 @@ import { auth } from '@/app/firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import LeftBar from '@/components/LeftBar';
 import HomeHeader from '@/components/routes/home/HomeHeader';
-import CreateButton from '@/features/common/button/CreateButton';
+import CreateButton from '@/features/common/button/CreateButton'
 
 export default function Home() {
   const router = useRouter()
@@ -40,10 +40,9 @@ export default function Home() {
       <LoadingPage />
       {user !== null &&
         <>
-          {/* <Header /> */}
           <LeftBar />
           <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
-          <Container maxWidth="md" sx={{ my: "100px", px: 0, pl: { md: "120px", lg: "250px" } }}>
+          <Container maxWidth="md" sx={{ mt: { xs: "150px", sm: "164px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
             {displayMenu == 1 &&
               <Box sx={{ mb: 3, borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(0) }} />

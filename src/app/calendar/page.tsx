@@ -45,7 +45,7 @@ export default function Home(props) {
         <>
           <CalendarHeader date={new Date()} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
           <LeftBar />
-          <Container maxWidth="md" sx={{ my: "50px", px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
+          <Container maxWidth="md" sx={{ mt: { xs: "96px", sm: "102px" }, mb: "50px", px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
             {pageMenu == 0 ?
               <NoteCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={contents} />
               :

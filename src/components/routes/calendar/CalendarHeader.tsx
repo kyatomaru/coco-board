@@ -23,6 +23,8 @@ import dayjs from 'dayjs';
 import { Chip } from '@mui/material';
 import MuiTextField, { TextFieldProps } from '@mui/material/TextField';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import CardMedia from '@mui/material/CardMedia';
+import HeaderMenus from '@/components/HeaderMenus';
 
 const barStyle = {
     bgcolor: 'background.paper',
@@ -57,6 +59,24 @@ export default function CalendarHeader({ date, selectedMonth, setSelectedMonth }
 
     return (
         <AppBar sx={barStyle} position="static">
+            <Toolbar sx={{ borderBottom: "solid 1px rgb(219, 219, 219)", display: { md: "none" }, minHeight: "46px !important" }}>
+                <Stack
+                    direction="row"
+                    alignItems="center"
+                    sx={{ height: { xs: 46, sm: 52 }, background: "white", width: "100%" }}>
+                    <IconButton sx={{ p: "0" }} >
+                        <CardMedia
+                            component="img"
+                            sx={{ width: 38, height: 38 }}
+                            image="/images/icon.png"
+                        />
+                    </IconButton>
+                    <Typography variant="h6" component="h2" sx={{ display: { xs: "none", sm: "block" }, pl: 2 }}>
+                        coco-board
+                    </Typography>
+                </Stack>
+                <HeaderMenus />
+            </Toolbar>
             <Stack sx={{ height: 45, px: 1, width: "100%", maxWidth: "550px", mx: "auto" }} direction="row" justifyContent="space-between" alignItems="center" >
                 <IconButton size='large' onClick={previousMonth} sx={{ width: 30, height: 30 }}>
                     <ArrowLeftIcon />
