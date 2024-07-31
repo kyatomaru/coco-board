@@ -16,6 +16,8 @@ import CardActionArea from '@mui/material/CardActionArea';
 import { gameModalTitle } from '@/constants/modalMessage';
 import { deleteNoteMs } from '@/constants/modalMessage';
 import MoreHorizButton from '@/features/common/contents/button/MoreHorizButton';
+import { useUpdateGame } from '@/hooks/game/useUpdateGame';
+import GameForm from '@/features/common/forms/game/GameForm';
 
 type PageProps = {
     contents: GameContentsType
@@ -24,6 +26,7 @@ type PageProps = {
 
 export default function GameCard({ contents, getContents }: PageProps) {
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
+    const [editModalOpen, setEditModalOpen] = React.useState<boolean>(false)
     const [isLoading, setIsLoading] = React.useState<boolean>(true)
 
     const [menuModalOpen, setMenuModalOpen] = React.useState<boolean>(false)
@@ -35,11 +38,11 @@ export default function GameCard({ contents, getContents }: PageProps) {
     }
 
     const ViewButtonClick = () => {
-        router.replace(`/game/${contents.contentsId}`)
+        router.push(`/game/${contents.contentsId}`)
     }
 
     const EditButtonClick = () => {
-        router.replace(`/game/edit/${contents.contentsId}`)
+        setEditModalOpen(true)
     }
 
     const DeleteButtonClick = () => {

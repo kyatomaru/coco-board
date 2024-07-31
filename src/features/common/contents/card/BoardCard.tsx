@@ -32,7 +32,7 @@ export default function BoardCard({ contents, getContents }: PageProps) {
     }
 
     const ViewButtonClick = () => {
-        router.replace(`/board/${contents.contentsId}`)
+        router.push(`/board/${contents.contentsId}`)
     }
 
     const EditButtonClick = () => {

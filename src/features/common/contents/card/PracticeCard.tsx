@@ -35,7 +35,7 @@ export default function PracticeCard({ contents, getContents }: PageProps) {
     }
 
     const ViewButtonClick = () => {
-        router.replace(`/practice/${contents.contentsId}`)
+        router.push(`/practice/${contents.contentsId}`)
     }
 
     const EditButtonClick = () => {

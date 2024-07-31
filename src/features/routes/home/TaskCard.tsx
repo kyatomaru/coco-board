@@ -49,7 +49,7 @@ export default function TaskCard({ user, task, getTask, date }: PageProps) {
     const router = useRouter()
 
     const ViewButtonClick = () => {
-        router.replace(`/task/${task.taskId}`)
+        router.push(`/task/${task.taskId}`)
     }
 
     const EditButtonClick = () => {
