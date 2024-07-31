@@ -80,7 +80,7 @@ export default function NoteCardBox({ user, date, menu, setMenu }: PageProps) {
                                     まだ記録がありません。次の勝利のために、今すぐ記録を残しましょう。
                                 </Typography>
                                 <Box sx={{ mt: 3 }}>
-                                    <Button onClick={(event) => { router.push(`/create/${dayjs(String(new Date())).format('YYYY-MM-DD')}/board`) }}>記録する</Button>
+                                    <Button onClick={(event) => setMenu(true)}>記録する</Button>
                                 </Box>
                             </Stack>
                         }

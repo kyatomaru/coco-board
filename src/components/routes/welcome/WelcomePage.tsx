@@ -91,7 +91,7 @@ export default function WelcomePage() {
                 <Box sx={{ textAlign: "center", py: 7, maxWidth: 450, margin: "auto" }}>
                     <Typography sx={{ fontSize: 25, mb: 3, px: 3 }}>取り組むことをチェックしよう</Typography>
                     <Typography sx={{ px: 3 }}>
-                        曜日ごとに取り組むことを登録することができます。継続的に取り組み成長に繋げましょう。
+                        曜日ごとに取り組むことを登録することができます。継続的に取り組み、成長に繋げましょう。
                     </Typography>
                     <CardMedia
                         image="/images/welcomePage/taskImage.png"

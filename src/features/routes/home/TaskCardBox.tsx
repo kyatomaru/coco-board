@@ -69,7 +69,7 @@ export default function TaskCardBox({ user, date, isAddModal, setIsAddModal }: P
                             <Typography sx={{ fontSize: 13, textAlign: "center" }} variant="h6" component="div">
                                 自分に課題を与えよう。成長のための一歩を踏み出すために、取り組むことを追加しましょう。
                             </Typography>
-                            <Button sx={{ fontSize: 14, width: 160, mx: "auto", my: 1 }} onClick={(event) => router.push('/create/problem')} >
+                            <Button sx={{ fontSize: 14, width: 160, mx: "auto", my: 1 }} onClick={(event) => setIsAddModal(true)} >
                                 取り組みを追加する
                             </Button>
                         </Stack>

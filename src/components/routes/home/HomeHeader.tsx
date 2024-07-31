@@ -21,6 +21,7 @@ import { useDateFormat } from '@/utils/useDateFormat';
 import ArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import EventIcon from '@mui/icons-material/Event';
+import CardMedia from '@mui/material/CardMedia';
 
 const barStyle = {
     bgcolor: 'background.paper',
@@ -47,6 +48,24 @@ type PageProps = {
 export default function HomeHeader({ date, setDate, displayMenu, setDisplayMenu }: PageProps) {
     return (
         <AppBar sx={barStyle} position="static">
+            <Toolbar sx={{ borderBottom: "solid 1px rgb(219, 219, 219)", display: { md: "none" }, minHeight: "46px !important" }}>
+                <Stack
+                    direction="row"
+                    alignItems="center"
+                    sx={{ height: { xs: 46, sm: 52 }, background: "white", width: "100%" }}>
+                    <IconButton sx={{ p: "0" }} >
+                        <CardMedia
+                            component="img"
+                            sx={{ width: 38, height: 38 }}
+                            image="/images/icon.png"
+                        />
+                    </IconButton>
+                    <Typography variant="h6" component="h2" sx={{ display: { xs: "none", sm: "block" }, pl: 2 }}>
+                        coco-board
+                    </Typography>
+                </Stack>
+                <HeaderMenus />
+            </Toolbar>
             <Stack sx={{ height: 45, px: 1, width: "100%", maxWidth: "550px", mx: "auto" }} direction="row" justifyContent="space-between" alignItems="center" >
                 <IconButton size='large'
                     onClick={() => { setDate(addDays(new Date(String(date)), -1)) }}
@@ -71,7 +90,7 @@ export default function HomeHeader({ date, setDate, displayMenu, setDisplayMenu 
                 <StyledTab label="取り組み" sx={{ height: 32, m: "auto", fontSize: 13 }} />
                 <StyledTab label="記録" sx={{ height: 32, m: "auto", fontSize: 13 }} />
             </StyledTabs>
-        </AppBar>
+        </AppBar >
     );
 }
 
