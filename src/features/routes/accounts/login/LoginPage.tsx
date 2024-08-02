@@ -35,8 +35,8 @@ export default function LoginPage() {
     });
 
     return (
-        <Container maxWidth="xs" fixed sx={{ my: "20px" }}>
-            <Box sx={{ px: "20px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
+        <Container maxWidth="xs" fixed sx={{ mt: "70px", mb: "30px" }}>
+            <Box sx={{ alignItems: "center", px: "25px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
                 <Stack
                     direction="row"
                     alignItems="center"
@@ -55,9 +55,11 @@ export default function LoginPage() {
                         coco-board
                     </Typography>
                 </Stack>
-                <Typography textAlign="center" fontSize="15px" component="h2" sx={{ mb: 3 }}>
-                    {"ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。"}
-                </Typography>
+                <Box sx={{ mb: 3 }}>
+                    <p style={{ textAlign: "center", fontSize: "1em", fontWeight: 400 }}>
+                        ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。
+                    </p>
+                </Box>
                 <GoogleSignInButton />
                 {/* <LineSignInButton /> */}
                 {/* <XSignInButton /> */}
