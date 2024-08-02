@@ -60,7 +60,7 @@ export default function Header(props) {
                             alignItems="center"
                             sx={{ height: { xs: 50, sm: 64 }, background: "white", width: "100%" }}>
                             <IconButton sx={{ p: "0" }} onClick={(event) => { router.push('/home') }}>
-                                < CardMedia
+                                <CardMedia
                                     component="img"
                                     sx={{ width: 45, height: 45 }}
                                     image="/images/icon.png"

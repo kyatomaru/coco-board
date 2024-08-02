@@ -8,6 +8,7 @@ import { useSignOut } from '@/hooks/auth/useSignOut';
 import { useRouter } from 'next/navigation';
 import Divider from '@mui/material/Divider';
 import LogoutConfirmModal from '@/features/common/auth/LogoutConfirmModal';
+import Link from '@mui/material/Link';
 
 const StyledMenu = styled((props: MenuProps) => (
     <Menu
@@ -100,12 +101,16 @@ export default function HeaderMenus() {
                 {/* <MenuItem sx={{ fontSize: 14 }} onClick={ClickHelpButton} disableRipple>
                     ヘルプ
                 </MenuItem> */}
-                <MenuItem target='_blank' href='/privacy' sx={{ fontSize: 14 }} disableRipple>
-                    プライバシー
-                </MenuItem>
-                <MenuItem target='_blank' href='/terms' sx={{ fontSize: 14 }} disableRipple>
-                    利用規約
-                </MenuItem>
+                <Link target='_blank' href='/privacy' underline="none">
+                    <MenuItem sx={{ fontSize: 14 }} disableRipple>
+                        プライバシー
+                    </MenuItem>
+                </Link>
+                <Link target='_blank' href='/terms' underline="none">
+                    <MenuItem sx={{ fontSize: 14 }} disableRipple>
+                        利用規約
+                    </MenuItem>
+                </Link>
                 <Divider />
                 <MenuItem sx={{ fontSize: 14 }} onClick={ClickLogoutButton} disableRipple>
                     ログアウト

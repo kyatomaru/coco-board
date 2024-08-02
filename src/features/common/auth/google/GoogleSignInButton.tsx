@@ -44,7 +44,7 @@ const loginBtnStyle = {
     alignItems: "center",
     width: "100%",
     border: "1.5px solid #AFAFAF",
-    borderRadius: "3px",
+    borderRadius: "10px",
     margin: "8px 0"
 }
 
@@ -55,7 +55,7 @@ export default function GoogleSignInButton() {
     return (
         <button onClick={() => { GoogleSignIn(router) }} style={loginBtnStyle}>
             <span className="icon" style={{ marginRight: "10px" }}><Icon /></span>
-            <span className="buttonText">Googleでログイン</span>
+            <span className="buttonText" style={{ color: "black", fontWeight: "600" }}>Googleでログイン</span>
         </button >
     );
 }
