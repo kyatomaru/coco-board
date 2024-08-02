@@ -45,19 +45,19 @@ export default function Home() {
           <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
           <Container maxWidth="md" sx={{ mt: { xs: "146px", sm: "152px" }, px: 0, pl: { md: "120px", lg: "250px", position: "relative" } }}>
 
-            {displayMenu == 1 &&
+            {displayMenu == 0 &&
               <Box sx={{ mb: 3, borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(0) }} />
                 <NoteCardBox user={user} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
             }
-            {displayMenu == 0 &&
+            {displayMenu == 1 &&
               <Box sx={{ mb: 3, borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsTaskAddModal(true) }} />
                 <TaskCardBox user={user} date={date} isAddModal={isTaskAddModal} setIsAddModal={setIsTaskAddModal} />
               </Box>
             }
-          </Container >
+          </Container>
           {/* <Footer /> */}
         </>
       }

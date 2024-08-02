@@ -56,7 +56,7 @@ export default function LoginPage() {
                     </Typography>
                 </Stack>
                 <Typography textAlign="center" fontSize="15px" component="h2" sx={{ mb: 3 }}>
-                    ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。
+                    {"ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。"}
                 </Typography>
                 <GoogleSignInButton />
                 {/* <LineSignInButton /> */}
