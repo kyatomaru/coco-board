@@ -87,8 +87,8 @@ export default function HomeHeader({ date, setDate, displayMenu, setDisplayMenu 
                 </IconButton>
             </Stack>
             <StyledTabs value={displayMenu} sx={{ mx: "auto" }} onChange={(event, newValue) => { setDisplayMenu(newValue) }}>
-                <StyledTab label="取り組み" sx={{ height: 32, m: "auto", fontSize: 13 }} />
                 <StyledTab label="記録" sx={{ height: 32, m: "auto", fontSize: 13 }} />
+                <StyledTab label="取り組み" sx={{ height: 32, m: "auto", fontSize: 13 }} />
             </StyledTabs>
         </AppBar >
     );
