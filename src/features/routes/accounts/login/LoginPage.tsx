@@ -56,7 +56,7 @@ export default function LoginPage() {
                     </Typography>
                 </Stack>
                 <Box sx={{ mb: 3 }}>
-                    <p style={{ textAlign: "center", fontSize: "1em", fontWeight: 400 }}>
+                    <p style={{ textAlign: "center", fontSize: "1em", fontWeight: 400, color: "black" }}>
                         ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。
                     </p>
                 </Box>
