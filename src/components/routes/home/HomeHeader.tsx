@@ -69,7 +69,7 @@ export default function HomeHeader({ date, setDate, displayMenu, setDisplayMenu 
             <Stack sx={{ height: 45, px: 1, width: "100%", maxWidth: "550px", mx: "auto" }} direction="row" justifyContent="space-between" alignItems="center" >
                 <IconButton size='large'
                     onClick={() => { setDate(addDays(new Date(String(date)), -1)) }}
-                    sx={{ width: 30, height: 30 }}>
+                    sx={{ width: 40, height: 40 }}>
                     <ArrowLeftIcon />
                 </IconButton>
                 <Stack direction="row" alignItems="center">
@@ -82,7 +82,7 @@ export default function HomeHeader({ date, setDate, displayMenu, setDisplayMenu 
                 </Stack>
                 <IconButton size='large'
                     onClick={() => { setDate(addDays(new Date(String(date)), 1)) }}
-                    sx={{ width: 30, height: 30 }}>
+                    sx={{ width: 40, height: 40 }}>
                     <ArrowRightIcon />
                 </IconButton>
             </Stack>

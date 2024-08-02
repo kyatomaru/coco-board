@@ -62,16 +62,18 @@ export default function TaskCardBox({ user, date, isAddModal, setIsAddModal }: P
                             )
                         })
                         :
-                        <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center" >
-                            <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", my: 1 }} component="h2">
+                        <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center">
+                            <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", my: 1, color: "black" }} component="h2">
                                 毎日の取り組みを追加しよう。
                             </Typography>
-                            <Typography sx={{ fontSize: 13, textAlign: "center" }} variant="h6" component="div">
+                            <Typography sx={{ fontSize: 14, textAlign: "center", color: "black" }} component="h2">
                                 自分に課題を与えよう。成長のための一歩を踏み出すために、取り組むことを追加しましょう。
                             </Typography>
-                            <Button sx={{ fontSize: 14, width: 160, mx: "auto", my: 1 }} onClick={(event) => setIsAddModal(true)} >
-                                取り組みを追加する
-                            </Button>
+                            <Box sx={{ mt: 2 }}>
+                                <Button onClick={(event) => setIsAddModal(true)} >
+                                    取り組みを追加する
+                                </Button>
+                            </Box>
                         </Stack>
                     }
                 </Box>
