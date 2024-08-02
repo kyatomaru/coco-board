@@ -55,27 +55,12 @@ export default function LoginPage() {
                         coco-board
                     </Typography>
                 </Stack>
-                <Box>
-                    <LoginBox />
-                </Box>
-                <Divider>
-                    <Typography variant="body1" sx={{ fontSize: 13 }}>
-                        または
-                    </Typography>
-                </Divider>
+                <Typography textAlign="center" fontSize="15px" component="h2" sx={{ mb: 3 }}>
+                    ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。
+                </Typography>
                 <GoogleSignInButton />
                 {/* <LineSignInButton /> */}
                 {/* <XSignInButton /> */}
-            </Box>
-            <Box sx={{ mt: "12px", p: "20px 20px 10px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
-                <Typography variant="h5" sx={{ fontSize: 13, }}>
-                    アカウントをお持ちでない場合
-                </Typography>
-                <Typography  >
-                    <Button href='/accounts/signup' size="medium" sx={{ height: "30px", fontSize: 13 }} >
-                        登録する
-                    </Button>
-                </Typography>
             </Box>
         </Container>
     );
