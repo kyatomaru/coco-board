@@ -73,10 +73,10 @@ export default function NoteCardBox({ user, date, menu, setMenu }: PageProps) {
                             :
 
                             <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center" >
-                                <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", my: 1 }} component="h2">
+                                <Typography textAlign="center" fontSize="15px" fontWeight="bold" sx={{ my: 1 }} component="h2">
                                     戦術・試合・練習を記録しよう。
                                 </Typography>
-                                <Typography sx={{ fontSize: 13, textAlign: "center" }} variant="h6" component="div">
+                                <Typography textAlign="center" fontSize="14px" component="h2">
                                     まだ記録がありません。次の勝利のために、今すぐ記録を残しましょう。
                                 </Typography>
                                 <Box sx={{ mt: 3 }}>
