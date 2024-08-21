@@ -1,0 +1,27 @@
+export const PositionList = (width, height) => {
+    return {
+        "GK": { y: height / 60 * 55, x: width / 2 },
+        "LSB": { y: height / 60 * 43, x: width / 2 },
+        "LCB": { y: height / 60 * 45, x: width / 2 },
+        "CB": { y: height / 60 * 45, x: width / 2 },
+        "RCB": { y: height / 60 * 45, x: width / 2 },
+        "RSB": { y: height / 60 * 43, x: width / 2 },
+        "LDM": { y: height / 60 * 43, x: width / 2 },
+        "DM": { y: height / 60 * 43, x: width / 2 },
+        "RDM": { y: height / 60 * 43, x: width / 2 },
+        "LSM": { y: height / 60 * 43, x: width / 2 },
+        "LCM": { y: height / 60 * 45, x: width / 2 },
+        "CM": { y: height / 60 * 45, x: width / 2 },
+        "RCM": { y: height / 60 * 45, x: width / 2 },
+        "RSM": { y: height / 60 * 43, x: width / 2 },
+        "LW": { y: height / 60 * 43, x: width / 2 },
+        "LOM": { y: height / 60 * 45, x: width / 2 },
+        "OM": { y: height / 60 * 45, x: width / 2 },
+        "ROM": { y: height / 60 * 45, x: width / 2 },
+        "RW": { y: height / 60 * 43, x: width / 2 },
+        "ST": { y: height / 60 * 43, x: width / 2 },
+        "LCF": { y: height / 60 * 43, x: width / 2 },
+        "CF": { y: height / 60 * 43, x: width / 2 },
+        "RCF": { y: height / 60 * 43, x: width / 2 },
+    }
+}

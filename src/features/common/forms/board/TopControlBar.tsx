@@ -1,22 +1,29 @@
 "use client"
 
 import * as React from 'react';
-import { useParams, useRouter } from 'next/navigation'
 import Stack from '@mui/material/Stack';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import dayjs from 'dayjs';
 import ClearIcon from '@mui/icons-material/Clear';
-import PersonIcon from '@mui/icons-material/Person';
-import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import NearMeIcon from '@mui/icons-material/NearMe';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PeopleIcon from '@mui/icons-material/People';
+import SettingsIcon from '@mui/icons-material/Settings';
 import SyncIcon from '@mui/icons-material/Sync';
 import SaveIcon from '@mui/icons-material/Save';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { FrameModel, FrameType } from '@/types/board/Frame';
-import { PlayerModel } from '@/types/board/Player';
 import { BallModel } from '@/types/board/Ball';
-import AddPlayerModal from './modal/AddPlayerModal';
-import ResetBoardModal from './modal/ResetBoardModal';
+import ConfirmCloseModal from '../../contents/modal/ConfirmModal';
+import ResetBoardModal from '../../contents/modal/ConfirmModal';
+import { backTitle, resetTitle, backMs } from '@/constants/board/ModalMessage'
 import BoardCreateForm from './BoardInfoForm';
 import { BoardType } from '@/types/board/Board';
+import Divider from '@mui/material/Divider';
 
 type PageProps = {
     onClose: any,
@@ -24,53 +31,42 @@ type PageProps = {
     setFrame: Function,
     setCurrentFrame: Function,
     board: BoardType,
-    onSubmit: Function
+    onSubmit: Function,
+    menu: Number,
+    setMenu: Function,
+    isPlay: boolean
 }
 
+const stackStyle = {
+    height: "25px", position: "relative", zIndex: 2000,
+    overflowY: "auto", backgroundColor: "white", borderTop: "solid 0.5px #b2b2b2", borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2",
+    "-ms-overflow-style": "none", "scrollbar-width": "none", "&::-webkit-scrollbar": { display: "none" }
+}
 
-export default function TopControlBar({ onClose, frame, setFrame, setCurrentFrame, board, onSubmit }: PageProps) {
-    const params = useParams()
-    const router = useRouter()
+const buttonStyle = (menu, index) => {
+    return {
+        minWidth: "50px",
+        borderRadius: 0,
+        color: menu == index ? "white" : "#444",
+        backgroundColor: menu == index && "#444 !important"
+    }
+}
 
-    const [isOpenAddPlayerModal, setIsOpenAddPlayerModal] = React.useState<boolean>(false)
+export default function TopControlBar({ onClose, frame, setFrame, setCurrentFrame, board, onSubmit, menu, setMenu, isPlay }: PageProps) {
     const [isOpenResetBoardModal, setIsOpenResetBoardModal] = React.useState<boolean>(false)
     const [isOpenSaveModal, setIsOpenSaveModal] = React.useState<boolean>(false)
+    const [isConfirmCloseModal, setIsConfirmCloseModal] = React.useState<boolean>(false)
 
-    const addBall = () => {
-        const frameArray = []
-        frame.forEach((item) => {
-            frameArray.push(item)
-        })
+    const [windowWidth, setWindowWidth] = React.useState(0)
+    const [scrollX, setScrollX] = React.useState(0)
 
-        if (frameArray[0].ball.x < 0) {
-            frame.forEach((item) => {
-                item.ball.x = 0
-                item.ball.y = 0
-            })
-        }
-        setFrame(frameArray)
-    }
+    React.useEffect(() => {
+        setWindowWidth(window.innerWidth)
+    }, [])
 
-    const addPlayer = (team) => {
-        const frameArray = []
-
-        frame.forEach((item) => {
-            frameArray.push(item)
-        })
-
-        let teamLength = 0
-        for (let index = 0; index < frameArray[0].players.length; index++) {
-            if (team == frameArray[0].players[index].teamNumber) teamLength++;
-        }
-        const name = "player" + String(frameArray[0].players.length + 1)
-
-        frameArray.forEach((item) => {
-            item.players.push(new PlayerModel(team, teamLength + 1, name))
-        })
-
-        setFrame(frameArray)
-        setIsOpenAddPlayerModal(false)
-    }
+    React.useEffect(() => {
+        window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
+    })
 
     const resetBoard = () => {
         const frameArray = Array()
@@ -83,33 +79,78 @@ export default function TopControlBar({ onClose, frame, setFrame, setCurrentFram
 
     return (
         <>
-            <AddPlayerModal open={isOpenAddPlayerModal} setOpen={setIsOpenAddPlayerModal} AddPlayer={addPlayer} />
-            <ResetBoardModal open={isOpenResetBoardModal} setOpen={setIsOpenResetBoardModal} resetBoard={resetBoard} />
+            <ConfirmCloseModal open={isConfirmCloseModal} setOpen={setIsConfirmCloseModal} title={backTitle} message={backMs} confirmText="中止する" onSubmit={onClose} />
+            <ResetBoardModal open={isOpenResetBoardModal} setOpen={setIsOpenResetBoardModal} title={resetTitle} message="" confirmText="リセットする" onSubmit={resetBoard} />
             {isOpenSaveModal &&
                 <BoardCreateForm setOpen={setIsOpenSaveModal} board={board} onSubmit={onSubmit} />
             }
 
-            <Stack direction="row" justifyContent="space-around" sx={{ margin: "auto", backgroundColor: "white", borderTop: "solid 0.5px #b2b2b2", borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", }}>
-                <IconButton size='small' onClick={onClose}>
-                    <ClearIcon sx={{ width: { xs: "20px" }, height: { xs: "20px" } }} />
-                </IconButton>
+            {isPlay ?
+                <Box sx={{ height: 25, width: "100%", backgroundColor: "white", position: "relative", zIndex: 2000 }}></Box>
+                :
+                <>
+                    <Stack direction="row" justifyContent="flex-start" sx={stackStyle} id="top-controlbar" >
+                        <IconButton onClick={() => !isPlay && setIsConfirmCloseModal(true)} sx={buttonStyle(menu, -1)}>
+                            <ClearIcon />
+                        </IconButton>
 
-                <IconButton size='small' onClick={() => { setIsOpenAddPlayerModal(true) }}>
-                    <PersonIcon sx={{ width: { xs: "20px" }, height: { xs: "20px" } }} />
-                </IconButton>
+                        <Divider orientation="vertical" flexItem />
 
-                <IconButton size='small' onClick={addBall}>
-                    <SportsSoccerIcon sx={{ width: { xs: "20px" }, height: { xs: "20px" } }} />
-                </IconButton>
+                        <IconButton onClick={() => { !isPlay && setMenu(0) }} sx={buttonStyle(menu, 0)}>
+                            <NearMeIcon sx={{ transform: "rotate(270deg)", width: "20px", height: "20px" }} />
+                        </IconButton>
 
-                <IconButton size='small' onClick={() => { setIsOpenResetBoardModal(true) }}>
-                    <SyncIcon sx={{ width: { xs: "20px" }, height: { xs: "20px" } }} />
-                </IconButton>
+                        <Divider orientation="vertical" flexItem />
 
-                <IconButton size='small' onClick={() => { setIsOpenSaveModal(true) }}>
-                    <SaveIcon sx={{ width: { xs: "20px" }, height: { xs: "20px" } }} />
-                </IconButton>
-            </Stack >
+                        <IconButton onClick={() => { !isPlay && setMenu(1) }} sx={buttonStyle(menu, 1)}>
+                            <PersonAddAlt1Icon sx={{ width: "20px", height: "20px" }} />
+                        </IconButton>
+
+                        <Divider orientation="vertical" flexItem />
+
+                        <IconButton onClick={() => { !isPlay && setMenu(2) }} sx={buttonStyle(menu, 2)}>
+                            <PeopleIcon sx={{ width: "20px", height: "20px" }} />
+                        </IconButton>
+
+                        <Divider orientation="vertical" flexItem />
+
+                        <IconButton onClick={() => { !isPlay && setMenu(3) }} sx={buttonStyle(menu, 3)}>
+                            <img src={menu == 3 ? "/images/board/stadiumIcon_white.svg" : "/images/board/stadiumIcon_gray.svg"} style={{ width: "20px", height: "20px", color: "#444" }} />
+                        </IconButton>
+
+                        <Divider orientation="vertical" flexItem />
+
+                        <IconButton onClick={() => { !isPlay && setMenu(4) }} sx={buttonStyle(menu, 4)}>
+                            <SettingsIcon sx={{ width: "20px", height: "20px" }} />
+                        </IconButton>
+
+                        <Divider orientation="vertical" flexItem />
+
+                        <IconButton onClick={() => { !isPlay && setIsOpenResetBoardModal(true) }} sx={buttonStyle(menu, -1)}>
+                            <SyncIcon sx={{ width: "20px", height: "20px" }} />
+                        </IconButton>
+
+                        <Divider orientation="vertical" flexItem />
+
+                        <IconButton onClick={() => { !isPlay && setIsOpenSaveModal(true) }} sx={buttonStyle(menu, -1)}>
+                            <SaveIcon sx={{ width: "20px", height: "20px" }} />
+                        </IconButton>
+
+                        <Divider orientation="vertical" flexItem />
+                    </Stack >
+                    {408 - 25 > windowWidth && scrollX <= 0 &&
+                        <IconButton onClick={() => { const el = document.getElementById("top-controlbar"); el.scroll({ left: 408 }); setScrollX(el.scrollLeft) }} sx={{ position: "absolute", zIndex: 2010, right: 0, top: 0, width: "25px", height: "25px", backgroundColor: "white", ":hover": { backgroundColor: "#eee" }, borderRadius: 0, border: "solid 0.5px #b2b2b2" }}>
+                            <ArrowForwardIosIcon sx={{ width: "12px", height: "12px" }} />
+                        </IconButton>
+                    }
+                    {408 - 25 > windowWidth && scrollX > 0 &&
+                        <IconButton onClick={() => { const el = document.getElementById("top-controlbar"); el.scroll({ left: 0 }); setScrollX(el.scrollLeft) }} sx={{ position: "absolute", zIndex: 2010, left: 0, top: 0, width: "25px", height: "25px", backgroundColor: "white", ":hover": { backgroundColor: "#eee" }, borderRadius: 0, border: "solid 0.5px #b2b2b2" }}>
+                            <ArrowBackIosNewIcon sx={{ width: "12px", height: "12px" }} />
+                            {/* {scrollX} */}
+                        </IconButton>
+                    }
+                </>
+            }
         </>
     )
 }

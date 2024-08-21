@@ -39,13 +39,15 @@ type pageProps = {
 }
 
 export default function BoardInfoForm({ setOpen, board, onSubmit }: pageProps) {
-    const params = useParams()
     const [title, setTitle] = React.useState(undefined);
     const [comment, setComment] = React.useState(undefined);
     const [titleError, setTitleError] = React.useState(false);
 
     return (
-        <Box sx={{ borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", backgroundColor: "#fbfbfb" }}>
+        <Box sx={{
+            zIndex: 2100,
+            position: "relative", borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", backgroundColor: "#fbfbfb"
+        }}>
             <Box
                 component="form"
                 onSubmit={onSubmit}

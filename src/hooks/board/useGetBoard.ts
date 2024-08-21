@@ -31,5 +31,7 @@ const fetchBoardContents = async (query) => {
             return data
         })
 
+    console.log(boardData)
+
     return boardData
 }

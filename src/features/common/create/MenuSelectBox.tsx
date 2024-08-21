@@ -60,9 +60,9 @@ export default function MenuSelectBox({ alignment, setAlignment }: PageProps) {
                 aria-label="text alignment"
                 sx={{ backgroundColor: "#9a9a9a", height: "40px", color: "white" }}
             >
-                <ToggleButton onClick={ClickBoardButton} sx={{ minWidth: "60px" }} value={0} >
+                {/* <ToggleButton onClick={ClickBoardButton} sx={{ minWidth: "60px" }} value={0} >
                     <Typography fontSize="small" sx={{ color: alignment == 0 && "white" }}>ボード</Typography>
-                </ToggleButton>
+                </ToggleButton> */}
                 <ToggleButton onClick={ClickGameButton} sx={{ minWidth: "60px" }} value={1} >
                     <Typography fontSize="small" sx={{ color: alignment == 1 && "white" }}>試合</Typography>
                 </ToggleButton>

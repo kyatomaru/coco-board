@@ -60,13 +60,16 @@ export default function BottomViewBar({ frame, setFrame, currentFrame, setCurren
     }
 
     React.useEffect(() => {
-        const frameArray = Array()
-        frameArray.push(new FrameModel([], new BallModel()))
-        setFrame(frameArray)
+        // const frameArray = Array()
+        // frameArray.push(new FrameModel([], new BallModel()))
+        // setFrame(frameArray)
     }, [])
 
     return (
-        <Stack direction="row" justifyContent="space-between" sx={{ px: 2, margin: "auto", backgroundColor: "white", borderBottom: "solid 0.5px #b2b2b2" }}>
+        <Stack direction="row" justifyContent="space-between" sx={{
+            position: "relative", zIndex: 2000, px: 2, margin: "auto", backgroundColor: "white", borderBottom: "solid 0.5px #b2b2b2", borderRight: "solid 0.5px #b2b2b2",
+            borderLeft: "solid 0.5px #b2b2b2",
+        }}>
             <Stack sx={{ width: "30%" }} direction="row" justifyContent="space-between" alignItems="center">
                 <Slider
                     size="small"
@@ -107,7 +110,7 @@ const initPlayFrame = (frame, frameDig) => {
     const players = Array()
 
     frame[0].players.forEach(value => {
-        players.push(new PlayerModel(value.teamNumber, value.backNumber, undefined))
+        players.push(new PlayerModel(value.teamNumber, value.backNumber, undefined, value.color))
     });
 
     for (let frameIndex = 0; frameIndex < frame.length - 1; frameIndex++) {
@@ -132,8 +135,4 @@ const initPlayFrame = (frame, frameDig) => {
 const getBetweenCdn = (maxRatio, ratio, cdn1, cdn2) => {
     let cdn = cdn1 + ((cdn2 - cdn1) / maxRatio) * ratio;
     return cdn;
-}
-
-const StopFrame = () => {
-
 }

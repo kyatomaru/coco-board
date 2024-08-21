@@ -20,14 +20,15 @@ import CreateNoteFormBox from '@/features/routes/home/CreateNoteFormBox';
 
 type PageProps = {
     user: User,
+    contents: any,
+    getContents: any,
     date: String | Date,
     menu: Number,
     setMenu: any
 }
 
-export default function NoteCardBox({ user, date, menu, setMenu }: PageProps) {
+export default function NoteCardBox({ user, contents, getContents, date, menu, setMenu }: PageProps) {
     const router = useRouter()
-    const [contents, getContents] = useGetNote(user, dayjs(String(date)).format('YYYY-MM-DD'))
     const [isDateLoding, setIsDateLoding] = React.useState(false);
 
     React.useEffect(() => {
@@ -43,7 +44,7 @@ export default function NoteCardBox({ user, date, menu, setMenu }: PageProps) {
             {menu != -1 &&
                 <Modal
                     open={menu != -1}
-                    onClose={(event) => { setMenu(-1) }}
+                    onClose={(event) => { }}
                     sx={{ overflowY: menu != 0 && "auto", scrollbarWidth: "none" }}
                 >
                     <CreateNoteFormBox getNoteContents={getContents} menu={menu} setMenu={setMenu} date={date} />
@@ -58,9 +59,6 @@ export default function NoteCardBox({ user, date, menu, setMenu }: PageProps) {
                             (contents.map((value, index) => {
                                 return (
                                     <Card key={index} sx={{ minWidth: 250, mb: 2 }} elevation={2}>
-                                        {value.collection == "board" &&
-                                            <BoardCard contents={value} getContents={getContents} />
-                                        }
                                         {value.collection == "game" &&
                                             <GameCard contents={value} getContents={getContents} />
                                         }
@@ -71,16 +69,15 @@ export default function NoteCardBox({ user, date, menu, setMenu }: PageProps) {
                                 )
                             }))
                             :
-
                             <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center">
                                 <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", mb: 1, color: "black" }} component="h2">
-                                    戦術・試合・練習を記録しよう。
+                                    試合・練習を記録しよう。
                                 </Typography>
                                 <Typography sx={{ fontSize: 14, textAlign: "center", color: "black" }} component="h2">
                                     まだ記録がありません。次の勝利のために、今すぐ記録を残しましょう。
                                 </Typography>
                                 <Box sx={{ mt: 2 }}>
-                                    <Button onClick={(event) => setMenu(0)}>記録する</Button>
+                                    <Button onClick={(event) => setMenu(1)}>記録する</Button>
                                 </Box>
                             </Stack>
                         }

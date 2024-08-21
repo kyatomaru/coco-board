@@ -47,18 +47,20 @@ export default function BottomControlBar({ frame, setFrame, currentFrame, setCur
     }
 
     const addFrame = () => {
-        const frameArray = Array()
-        frame.forEach((item) => {
-            frameArray.push(item)
-        })
+        if (frame.length < 30) {
+            const frameArray = Array()
+            frame.forEach((item) => {
+                frameArray.push(item)
+            })
 
-        const players = JSON.parse(JSON.stringify(frameArray[frameArray.length - 1].players))
-        const ball = JSON.parse(JSON.stringify(frameArray[frameArray.length - 1].ball))
+            const players = JSON.parse(JSON.stringify(frameArray[frameArray.length - 1].players))
+            const ball = JSON.parse(JSON.stringify(frameArray[frameArray.length - 1].ball))
 
-        frameArray.push(new FrameModel(players, ball))
-        setFrame(frameArray)
+            frameArray.push(new FrameModel(players, ball))
+            setFrame(frameArray)
 
-        setCurrentFrame(frame.length)
+            setCurrentFrame(frame.length)
+        }
     }
 
     const deleteFrame = () => {
@@ -88,13 +90,14 @@ export default function BottomControlBar({ frame, setFrame, currentFrame, setCur
     }
 
     React.useEffect(() => {
-        const frameArray = Array()
-        frameArray.push(new FrameModel([], new BallModel()))
-        setFrame(frameArray)
+        // const frameArray = Array()
+        // frameArray.push(new FrameModel([], new BallModel()))
+        // setFrame(frameArray)
+        // console.log(frameArray)
     }, [])
 
     return (
-        <Stack direction="row" justifyContent="space-between" sx={{ px: 2, margin: "auto", backgroundColor: "white", borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", borderBottom: "solid 0.5px #b2b2b2" }}>
+        <Stack direction="row" justifyContent="space-between" sx={{ position: "relative", zIndex: 2000, px: 2, margin: "auto", backgroundColor: "white", borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", borderBottom: "solid 0.5px #b2b2b2" }}>
             <Stack sx={{ width: "30%" }} direction="row" justifyContent="space-between" alignItems="center">
                 <Slider
                     size="small"
@@ -140,7 +143,7 @@ const initPlayFrame = (frame, frameDig) => {
     const players = Array()
 
     frame[0].players.forEach(value => {
-        players.push(new PlayerModel(value.teamNumber, value.backNumber, undefined))
+        players.push(new PlayerModel(value.teamNumber, value.backNumber, undefined, value.color))
     });
 
     for (let frameIndex = 0; frameIndex < frame.length - 1; frameIndex++) {

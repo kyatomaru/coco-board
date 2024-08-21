@@ -1,5 +1,5 @@
 export const useUpdateBoard = async (board, image) => {
-    return await fetch(`/api/board/`, {
+    const res = await fetch(`/api/board/`, {
         method: 'PATCH',
         body: JSON.stringify(board),
         headers: {
@@ -16,4 +16,6 @@ export const useUpdateBoard = async (board, image) => {
             })
             return res
         })
+
+    return res
 }

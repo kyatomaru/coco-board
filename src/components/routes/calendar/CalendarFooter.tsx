@@ -43,22 +43,17 @@ type PageProps = {
     setSelectedMonth: any
     pageMenu: any,
     setPageMenu: any,
-    tasks: any
 }
 
 
-export default function CalendarFooter({ selectedMonth, setSelectedMonth, pageMenu, setPageMenu, tasks }: PageProps) {
+export default function CalendarFooter({ selectedMonth, setSelectedMonth, pageMenu, setPageMenu }: PageProps) {
 
     return (
         <AppBar sx={barStyle} position="static">
             <Tabs scrollButtons={false} value={pageMenu} onChange={(event, newValue) => { setPageMenu(Number(newValue)) }}
                 variant="scrollable" sx={{ height: 40 }} >
-                <Tab label="記録" sx={{ fontSize: 13 }} />
-                {tasks != undefined && (
-                    tasks.map((task, index) => (
-                        <Tab key={index} label={task.title} sx={{ fontSize: 13 }} />
-                    )))
-                }
+                <Tab label="ボード" sx={{ fontSize: 13 }} />
+                <Tab label="ノート" sx={{ fontSize: 13 }} />
             </Tabs>
         </AppBar>
     );

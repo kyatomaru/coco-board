@@ -29,7 +29,7 @@ export async function GET(
 
     if (uid) {
         if (date) {
-            const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).get()
+            const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).orderBy('updateDate', 'desc').get()
                 .then(snapshot => {
                     const data = Array()
                     snapshot.forEach(doc => {
@@ -63,7 +63,7 @@ export async function GET(
             return NextResponse.json(docRef, { status: 200 })
         }
         else {
-            const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('date', 'desc').orderBy('createDate', 'desc').get()
+            const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('date', 'desc').orderBy('updateDate', 'desc').get()
                 .then(snapshot => {
                     const data = Array()
                     snapshot.forEach((doc) => {

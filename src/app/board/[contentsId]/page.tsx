@@ -14,10 +14,9 @@ import { BoardType, BoardModel } from '@/types/board/Board';
 import { useGetBoard } from '@/hooks/board/useGetBoard';
 
 const containterStyle = {
-  borderRight: "solid 0.5px #b2b2b2",
-  borderLeft: "solid 0.5px #b2b2b2",
+  // borderRight: "solid 0.5px #b2b2b2",
+  // borderLeft: "solid 0.5px #b2b2b2",
   bgcolor: "white",
-  pb: "45px",
   minHeight: "100vh"
 
 }
@@ -25,8 +24,6 @@ const containterStyle = {
 export default function Home() {
   const params = useParams()
   const router = useRouter()
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const [titleError, setTitleError] = React.useState(false);
   const [user, setUser] = React.useState<User | undefined>(null);
 
   const [contents, getContents] = useGetBoard(user, params.contentsId)
