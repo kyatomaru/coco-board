@@ -9,7 +9,6 @@ import BottomControlBar from './BottomControlBar';
 import CourtView from '../../board/CourtView'
 import { FrameModel, FrameType } from '@/types/board/Frame';
 import html2canvas from 'html2canvas';
-import { Canvg } from 'canvg';
 import { auth } from '@/app/firebase';
 import { BallModel } from '@/types/board/Ball';
 import { PlayerModel } from '@/types/board/Player';
