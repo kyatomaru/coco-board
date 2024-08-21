@@ -19,7 +19,6 @@
     "@mui/styled-engine": "5.15.11",
     "@mui/x-date-pickers": "7.9.0",
     "@mui/x-date-pickers-pro": "6.19.4",
-    "canvg": "4.0.2",
     "date-fns": "2.30.0",
     "dayjs": "1.11.10",
     "encoding": "0.1.13",
