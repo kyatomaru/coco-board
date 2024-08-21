@@ -22,7 +22,8 @@ import dayjs from 'dayjs';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Chip } from '@mui/material';
 import MuiTextField, { TextFieldProps } from '@mui/material/TextField';
-import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import HomeIcon from '@mui/icons-material/Home';
+// import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import CardMedia from '@mui/material/CardMedia';
 import HeaderMenus from '@/components/HeaderMenus';
 
@@ -101,7 +102,7 @@ export default function CalendarHeader({ date, selectedMonth, setSelectedMonth }
                         </Typography>
                     </Button> */}
                     <IconButton href={`/home/${dayjs(String(date)).format('YYYY-MM-DD')}`}>
-                        <TextSnippetIcon />
+                        <HomeIcon />
                     </IconButton>
                     <Typography component="h2" fontSize={15}>
                         {format(selectedMonth, 'yyyy年 M月')}

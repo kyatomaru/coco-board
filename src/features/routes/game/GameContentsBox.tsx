@@ -25,8 +25,8 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import Skeleton from '@mui/material/Skeleton';
 import DeleteConfirmModal from '@/features/common/contents/modal/ConfirmModal';
-import { gameModalTitle } from '@/constants/modalMessage';
-import { deleteNoteMs } from '@/constants/modalMessage';
+import { gameModalTitle } from '@/constants/ModalMessage';
+import { deleteNoteMs } from '@/constants/ModalMessage';
 import { elementsCategories } from '@/types/Category';
 import { useDeleteGame } from '@/hooks/game/useDeleteGame';
 import NoteContentsBar from '@/features/common/contents/bar/NoteContentsBar';

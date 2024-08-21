@@ -6,6 +6,7 @@ import LoadingPage from '@/components/LoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import BoardCardBox from '@/features/common/contents/box/BoardCardBox';
 import NoteCardBox from '@/features/common/contents/box/NoteCardBox';
 import TaskCardBox from '@/features/routes/home/TaskCardBox';
 import type { User } from 'firebase/auth';
@@ -14,6 +15,9 @@ import { onAuthStateChanged, getAuth } from "firebase/auth"
 import LeftBar from '@/components/LeftBar';
 import HomeHeader from '@/components/routes/home/HomeHeader';
 import CreateButton from '@/features/common/button/CreateButton';
+import { useGetNote } from '@/hooks/note/useGetDateNote';
+import { useGetBoard } from '@/hooks/board/useGetDateBoard';
+import dayjs from 'dayjs';
 
 export default function Home() {
   const router = useRouter()
@@ -23,6 +27,9 @@ export default function Home() {
   const [displayMenu, setDisplayMenu] = React.useState(0)
   const [isNoteCreateModal, setIsNoteCreateModal] = React.useState(-1)
   const [isTaskAddModal, setIsTaskAddModal] = React.useState(false)
+
+  const [board, getBoard] = useGetBoard(user, dayjs(String(date)).format('YYYY-MM-DD'))
+  const [note, getNote] = useGetNote(user, dayjs(String(date)).format('YYYY-MM-DD'))
 
   useIsAuth(router)
 
@@ -43,18 +50,18 @@ export default function Home() {
           {/* <Header /> */}
           <LeftBar />
           <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
-          <Container maxWidth="md" sx={{ mt: { xs: "146px", sm: "152px" }, px: 0, pl: { md: "120px", lg: "250px", position: "relative" } }}>
+          <Container maxWidth="md" sx={{ mt: { xs: "146px", sm: "110px" }, px: 0, pl: { md: "120px", lg: "250px", position: "relative" } }}>
 
             {displayMenu == 0 &&
               <Box sx={{ mb: 3, borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(0) }} />
-                <NoteCardBox user={user} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
+                <BoardCardBox user={user} contents={board} getContents={getBoard} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
             }
             {displayMenu == 1 &&
               <Box sx={{ mb: 3, borderRadius: 2, px: 2 }}>
-                <CreateButton onClick={() => { setIsTaskAddModal(true) }} />
-                <TaskCardBox user={user} date={date} isAddModal={isTaskAddModal} setIsAddModal={setIsTaskAddModal} />
+                <CreateButton onClick={() => { setIsNoteCreateModal(1) }} />
+                <NoteCardBox user={user} contents={note} getContents={getNote} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
             }
           </Container>

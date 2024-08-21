@@ -1,4 +1,5 @@
 import { FrameType } from "./Frame"
+import { SettingType, SettingModel } from "./Setting"
 
 export interface BoardType {
     contentsId: String,
@@ -8,7 +9,9 @@ export interface BoardType {
     date: String,
     title: string,
     comment: string,
-    boardFrame: Array<FrameType>,
+    courtId: number,
+    frame: Array<FrameType>,
+    setting: SettingType
 }
 
 export class BoardModel implements BoardType {
@@ -19,7 +22,9 @@ export class BoardModel implements BoardType {
     date: String
     title: string
     comment: string
-    boardFrame: Array<FrameType>
+    courtId: number
+    frame: Array<FrameType>
+    setting: SettingType
 
     constructor(date) {
         return {
@@ -30,7 +35,9 @@ export class BoardModel implements BoardType {
             date: date,
             title: undefined,
             comment: undefined,
-            boardFrame: [],
+            courtId: 0,
+            frame: [],
+            setting: new SettingModel()
         }
     }
 }

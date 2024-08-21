@@ -24,6 +24,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Divider from '@mui/material/Divider';
 import LogoutConfirmModal from '@/features/common/auth/LogoutConfirmModal';
 import CardMedia from '@mui/material/CardMedia';
+import Link from '@mui/material/Link';
 
 const barStyle = {
     bgcolor: 'background.paper',
@@ -199,12 +200,16 @@ const HeaderMenusButton = () => {
                 {/* <MenuItem sx={{ fontSize: 14 }} onClick={ClickHelpButton} disableRipple>
                     ヘルプ
                 </MenuItem> */}
-                <MenuItem target='_blank' href='/privacy' sx={{ fontSize: 14 }} disableRipple>
-                    プライバシー
-                </MenuItem>
-                <MenuItem target='_blank' href='/terms' sx={{ fontSize: 14 }} disableRipple>
-                    利用規約
-                </MenuItem>
+                <Link target='_blank' href='/privacy' underline="none" color="black">
+                    <MenuItem sx={{ fontSize: 14, color: "black" }} disableRipple>
+                        プライバシー
+                    </MenuItem>
+                </Link>
+                <Link target='_blank' href='/terms' underline="none" color="black">
+                    <MenuItem sx={{ fontSize: 14 }} disableRipple>
+                        利用規約
+                    </MenuItem>
+                </Link>
                 <Divider />
                 <MenuItem sx={{ fontSize: 14 }} onClick={ClickLogoutButton} disableRipple>
                     ログアウト

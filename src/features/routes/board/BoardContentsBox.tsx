@@ -11,8 +11,8 @@ import { FrameModel, FrameType } from '@/types/board/Frame';
 import { BoardType } from '@/types/board/Board';
 import Skeleton from '@mui/material/Skeleton';
 import DeleteConfirmModal from '@/features/common/contents/modal/ConfirmModal';
-import { boardModalTitle } from '@/constants/modalMessage';
-import { deleteNoteMs } from '@/constants/modalMessage';
+import { boardModalTitle } from '@/constants/ModalMessage';
+import { deleteNoteMs } from '@/constants/ModalMessage';
 import { useDeleteBoard } from '@/hooks/board/useDeleteBoard';
 import NoteContentsBar from '@/features/common/contents/bar/NoteContentsBar';
 import dayjs from 'dayjs';
@@ -28,9 +28,7 @@ type pageProps = {
 
 export default function BoardContentsBox({ contents, getContents }: pageProps) {
     const router = useRouter()
-    const params = useParams()
     const [menu, setMenu] = React.useState(0);
-    const [isLoading, setIsLoading] = React.useState<boolean>(true)
 
     const [courtHeight, setCourtHeight] = React.useState(0);
     const [courtWidth, setCourtWidth] = React.useState(0);
@@ -39,7 +37,6 @@ export default function BoardContentsBox({ contents, getContents }: pageProps) {
     const [currentFrame, setCurrentFrame] = React.useState(0)
 
     const [playFrame, setPlayFrame] = React.useState<Array<FrameType>>([]);
-    const [playCurrentFrame, setPlayCurrentFrame] = React.useState(0)
     const [isPlay, setIsPlay] = React.useState(false)
 
     const setWindow = () => {
@@ -59,6 +56,19 @@ export default function BoardContentsBox({ contents, getContents }: pageProps) {
         window.addEventListener("resize", setWindow);
     })
 
+    React.useEffect(() => {
+        if (contents != undefined) {
+            if (contents.frame.length != 0) {
+                const frameArray = []
+                contents.frame.forEach(value => {
+                    frameArray.push(value)
+                })
+                console.log(frameArray)
+                setFrame(frameArray)
+            }
+        }
+    }, [contents])
+
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [editModalOpen, setEditModalOpen] = React.useState<boolean>(false)
 
@@ -73,7 +83,7 @@ export default function BoardContentsBox({ contents, getContents }: pageProps) {
     const DeleteBoardContents = async () => {
         const res = await useDeleteBoard(contents.contentsId)
         if (res.ok) {
-            router.replace(`/calendar/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`)
+            router.replace(`/home/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`)
         }
     }
 
@@ -96,16 +106,16 @@ export default function BoardContentsBox({ contents, getContents }: pageProps) {
                         : <Skeleton variant="rectangular" height={30} />
                     }
                     {contents != undefined
-                        ? <CourtView courtWidth={courtWidth} courtHeight={courtHeight} frame={contents.boardFrame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} isPlay={isPlay} isView={true} setIsPlay={setIsPlay} playFrame={playFrame} />
+                        ? <CourtView board={contents} onClose={() => { }} onSubmit={() => { }} frame={frame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} isPlay={isPlay} isView={true} setIsPlay={setIsPlay} playFrame={playFrame} />
                         : <Skeleton variant="rectangular" height={courtHeight} />
                     }
                     {contents != undefined
-                        ? <BottomViewBar frame={contents.boardFrame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} setPlayFrame={setPlayFrame} isPlay={isPlay} setIsPlay={setIsPlay} />
+                        ? <BottomViewBar frame={frame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} setPlayFrame={setPlayFrame} isPlay={isPlay} setIsPlay={setIsPlay} />
                         : <Skeleton variant="rectangular" height={30} />
                     }
 
                     {contents != undefined ?
-                        <Box>
+                        <Box sx={{ borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }}>
                             <Box sx={{ p: 1, mx: 1 }} >
                                 <Box sx={{ width: "100%", alignItems: "center" }} >
                                     <Typography variant="h6" sx={{ fontSize: 16 }} component="div">

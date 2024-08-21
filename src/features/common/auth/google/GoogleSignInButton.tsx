@@ -45,7 +45,8 @@ const loginBtnStyle = {
     width: "100%",
     border: "1.5px solid #AFAFAF",
     borderRadius: "10px",
-    margin: "8px 0"
+    margin: "8px 0",
+    cursor: "pointer"
 }
 
 // const GoogleSignInButton = createButton(config);

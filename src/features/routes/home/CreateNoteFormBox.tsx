@@ -43,12 +43,6 @@ export default function CreateNoteFormBox({ getNoteContents, menu, setMenu, date
 
     return (
         <>
-            {menu == 0 &&
-                <Container maxWidth="sm" sx={{ px: 0, minHeight: "100vh", position: "relative", zIndex: 1500, borderRadius: 4 }}>
-                    <BoardViewForm contents={boardContents} getContents={getNoteContents} postData={useInsertBoard} onClose={() => { setMenu(-1) }} />
-                    <MenuSelectBox alignment={menu} setAlignment={setMenu} />
-                </Container>
-            }
             {menu == 1 &&
                 <Container maxWidth="sm" sx={{ px: 0, position: "relative", zIndex: 1500, borderRadius: 4 }}>
                     <Box sx={{ borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", backgroundColor: "#fbfbfb" }}>

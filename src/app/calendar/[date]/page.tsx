@@ -8,14 +8,14 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Container from '@mui/material/Container';
 import NoteCalendar from '@/features/routes/calendar/NoteCalendar';
-import TaskCalendar from '@/features/routes/calendar/TaskCalendar';
+import BoardCalendar from '@/features/routes/calendar/BoardCalendar';
 import type { User } from 'firebase/auth';
 import { auth } from '@/app/firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import LeftBar from '@/components/LeftBar';
 import CalendarHeader from '@/components/routes/calendar/CalendarHeader';
 import { useGetNote } from '@/hooks/note/useGetAllNote';
-import { useGetAllTask } from '@/hooks/task/useGetAllTask';
+import { useGetBoard } from '@/hooks/board/useGetAllBoard';
 import CalendarFooter from '@/components/routes/calendar/CalendarFooter';
 
 export default function Home(props) {
@@ -25,8 +25,8 @@ export default function Home(props) {
   const [selectedMonth, setSelectedMonth] = React.useState(new Date(String(params.date)));
   const [pageMenu, setPageMenu] = React.useState(0);
 
-  const [contents, getContents] = useGetNote(user)
-  const [tasks, getTasks] = useGetAllTask(user)
+  const [boardContents, getBoardContents] = useGetBoard(user)
+  const [noteContents, getNoteContents] = useGetNote(user)
 
   useIsAuth(router)
 
@@ -47,14 +47,14 @@ export default function Home(props) {
         <>
           <CalendarHeader date={new Date(String(params.date))} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
           <LeftBar />
-          <Container maxWidth="md" sx={{ mt: { xs: "96px", sm: "102px" }, mb: "50px", px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
+          <Container maxWidth="md" sx={{ mt: { xs: "96px", sm: "65px" }, mb: { xs: "50px", sm: "75px" }, px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
             {pageMenu == 0 ?
-              <NoteCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={contents} />
+              <NoteCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={boardContents} />
               :
-              <TaskCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} task={tasks[pageMenu - 1]} />
+              <BoardCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={noteContents} />
             }
           </Container >
-          < CalendarFooter selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} tasks={tasks} pageMenu={pageMenu} setPageMenu={setPageMenu} />
+          < CalendarFooter selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} pageMenu={pageMenu} setPageMenu={setPageMenu} />
         </>
       }
     </main >

@@ -25,23 +25,23 @@ export const useGetNote = (user) => {
 }
 
 const fetchNoteContents = async (query) => {
-    const boardData = await fetch(`/api/board/?${query}`)
-        .then((response) => response.json())
-        .then(async (data) => {
-            const boardData = JSON.parse(JSON.stringify(data))
+    // const boardData = await fetch(`/api/board/?${query}`)
+    //     .then((response) => response.json())
+    //     .then(async (data) => {
+    //         const boardData = JSON.parse(JSON.stringify(data))
 
-            for (let index = 0; index < boardData.length; index++) {
-                const getImageParams = { id: boardData[index].contentsId };
-                const imageQuery = new URLSearchParams(getImageParams);
+    //         for (let index = 0; index < boardData.length; index++) {
+    //             const getImageParams = { id: boardData[index].contentsId };
+    //             const imageQuery = new URLSearchParams(getImageParams);
 
-                await fetch(`/api/board/image?${imageQuery}`)
-                    .then((imageResponse) => imageResponse.json())
-                    .then((imageData) => {
-                        boardData[index].imagePath = imageData
-                    });
-            }
-            return boardData
-        })
+    //             await fetch(`/api/board/image?${imageQuery}`)
+    //                 .then((imageResponse) => imageResponse.json())
+    //                 .then((imageData) => {
+    //                     boardData[index].imagePath = imageData
+    //                 });
+    //         }
+    //         return boardData
+    //     })
 
     const gameData = await fetch(`/api/game/?${query}`)
         .then((response) => response.json())
@@ -55,7 +55,7 @@ const fetchNoteContents = async (query) => {
             return data
         })
 
-    const allData = boardData.concat(gameData, practiceData)
+    const allData = gameData.concat(practiceData)
 
     allData.sort((a, b) => descTimeSort(a.updateDate, b.updateDate));
 

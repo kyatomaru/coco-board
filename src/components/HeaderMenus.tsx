@@ -101,12 +101,12 @@ export default function HeaderMenus() {
                 {/* <MenuItem sx={{ fontSize: 14 }} onClick={ClickHelpButton} disableRipple>
                     ヘルプ
                 </MenuItem> */}
-                <Link target='_blank' href='/privacy' underline="none">
+                <Link target='_blank' href='/privacy' underline="none" color="black">
                     <MenuItem sx={{ fontSize: 14 }} disableRipple>
                         プライバシー
                     </MenuItem>
                 </Link>
-                <Link target='_blank' href='/terms' underline="none">
+                <Link target='_blank' href='/terms' underline="none" color="black">
                     <MenuItem sx={{ fontSize: 14 }} disableRipple>
                         利用規約
                     </MenuItem>

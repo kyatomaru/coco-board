@@ -13,8 +13,8 @@ import Chip from '@mui/material/Chip';
 import CardActionArea from '@mui/material/CardActionArea';
 import DeleteConfirmModal from '@/features/common/contents/modal/ConfirmModal';
 import ContentsMenuModal from '@/features/common/contents/modal/NoteMenuModal';
-import { practiceModalTitle } from '@/constants/modalMessage';
-import { deleteNoteMs } from '@/constants/modalMessage';
+import { practiceModalTitle } from '@/constants/ModalMessage';
+import { deleteNoteMs } from '@/constants/ModalMessage';
 import MoreHorizButton from '@/features/common/contents/button/MoreHorizButton';
 
 type PageProps = {

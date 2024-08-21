@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import { useRouter } from 'next/navigation'
+import zIndex from '@mui/material/styles/zIndex';
 
 type PageProps = {
     open: boolean,
@@ -25,12 +26,11 @@ const style = {
     bgcolor: 'background.paper',
     boxShadow: 24,
     width: 320,
-    maxWidth: '100%'
+    maxWidth: '100%',
+    zIndex: 2000,
 };
 
 export default function ConfirmModal({ open, setOpen, title, message, confirmText, onSubmit }: PageProps) {
-    const [isLoading, setIsLoading] = React.useState<boolean>(true)
-    const router = useRouter()
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -48,6 +48,7 @@ export default function ConfirmModal({ open, setOpen, title, message, confirmTex
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
+            sx={{ zIndex: 2000 }}
         >
             <Paper sx={style} >
                 <Box sx={{ textAlign: "center", p: 3 }}>

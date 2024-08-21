@@ -40,22 +40,27 @@ export async function PATCH(
     req: NextRequest,
     res: NextResponse
 ) {
-    const reqData = await req.json();
+    const insertData = await req.json()
+    const image = insertData.image
+    const id = insertData.id
 
-    const updateData = reqData.updateData
-    const contentsId = reqData.contentsId
+    const storageRef = ref(storage, id + ".png");
 
-    console.log(updateData)
+    deleteObject(storageRef).then(() => {
+        console.log('File deleted successfully')
+    }).catch((error) => {
+        console.log('an error occurred!')
+    });
 
-    if (updateData && contentsId) {
-        const docRef = db.collection(COLLECTION_NAME).doc(contentsId).update(updateData)
-            .then(() => {
-                console.log("Document successfully updated!");
-            })
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
+
+    const buffer = new Uint8Array(image.length);
+    for (let i = 0; i < image.length; i++) {
+        buffer[i] = image.charCodeAt(i);
     }
+
+    uploadBytes(storageRef, buffer).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+    });
 
     return NextResponse.json({ status: 200 })
 }

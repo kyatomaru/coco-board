@@ -44,7 +44,7 @@ export default function TopViewBar({ contents }: PageProps) {
     }
 
     return (
-        <Box sx={{ position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 1200, borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }} >
+        <Box sx={{ position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 1900, borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }} >
             <Grid sx={{ px: 1 }} container direction="row" alignItems="center" justifyContent="space-between">
                 <Grid >
                     <IconButton size='small' onClick={(event) => router.push(`/calendar/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`)} ><ArrowBackIosNewIcon /></IconButton>

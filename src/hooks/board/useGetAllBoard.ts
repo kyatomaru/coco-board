@@ -1,0 +1,37 @@
+import * as React from 'react';
+
+export const useGetBoard = (user) => {
+    const [contents, setContents] = React.useState<any>(undefined);
+
+    React.useEffect(() => {
+        if (user) {
+            const init = async () => {
+                const getParams = { uid: user.uid };
+                const query = new URLSearchParams(getParams);
+
+                setContents(await fetchBoardContents(query))
+            }
+            init()
+        }
+    }, [user])
+
+    const getContents = async () => {
+        const getParams = { uid: user.uid };
+        const query = new URLSearchParams(getParams);
+        setContents(await fetchBoardContents(query))
+    }
+
+    return [contents, getContents]
+}
+
+const fetchBoardContents = async (query) => {
+    const boardData = await fetch(`/api/board/?${query}`)
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+
+    console.log(boardData)
+
+    return boardData
+}
