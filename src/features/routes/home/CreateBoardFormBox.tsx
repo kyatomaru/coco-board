@@ -27,23 +27,30 @@ import LeftBar from '@/components/LeftBar';
 import dayjs from 'dayjs';
 
 type PageProps = {
-    getNoteContents: any,
+    allContents: Array<any>,
+    setContents: any,
     menu: Number,
     setMenu: Function,
     date: Date | String
 }
 
-export default function CreateBoardFormBox({ getNoteContents, menu, setMenu, date }: PageProps) {
+export default function CreateBoardFormBox({ allContents, setContents, menu, setMenu, date }: PageProps) {
     const params = useParams()
     const router = useRouter()
     const [boardContents, setBoardContents] = React.useState(new BoardModel(dayjs(String(date)).format('YYYY-MM-DD')));
-    const [gameContents, setGameContents] = React.useState(new GameContentsModel(dayjs(String(date)).format('YYYY-MM-DD')));
-    const [practiceContents, setPracticeContents] = React.useState(new PracticeContentsModel(dayjs(String(date)).format('YYYY-MM-DD')));
-    const [task, setTask] = React.useState(new TaskModel());
+
+    const InsertBoardContents = async (contents, image) => {
+        await useInsertBoard(contents, image).then((data) => {
+            const resultContents = allContents.slice()
+            resultContents.unshift(data)
+            setContents([...resultContents])
+            setMenu(-1)
+        })
+    }
 
     return (
         <Container maxWidth="sm" sx={{ px: 0, minHeight: "100vh", position: "relative", zIndex: 1500, borderRadius: 4 }}>
-            <BoardViewForm contents={boardContents} getContents={getNoteContents} postData={useInsertBoard} onClose={() => { setMenu(-1) }} />
+            <BoardViewForm contents={boardContents} postData={InsertBoardContents} onClose={() => { setMenu(-1) }} />
         </Container>
     )
 }

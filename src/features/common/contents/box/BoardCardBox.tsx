@@ -21,15 +21,16 @@ import CreateBoardFormBox from '@/features/routes/home/CreateBoardFormBox';
 type PageProps = {
     user: User,
     contents: any,
-    getContents: any,
+    setContents: any,
     date: String | Date,
     menu: Number,
     setMenu: any
 }
 
-export default function BoardCardBox({ user, contents, getContents, date, menu, setMenu }: PageProps) {
+export default function BoardCardBox({ user, contents, setContents, date, menu, setMenu }: PageProps) {
     const router = useRouter()
     const [isDateLoding, setIsDateLoding] = React.useState(false);
+    const [data, setData] = React.useState([])
 
     React.useEffect(() => {
         setIsDateLoding(true)
@@ -47,7 +48,7 @@ export default function BoardCardBox({ user, contents, getContents, date, menu, 
                     onClose={() => { }}
                     sx={{ overflowY: menu != 0 && "auto", scrollbarWidth: "none" }}
                 >
-                    <CreateBoardFormBox getNoteContents={getContents} menu={menu} setMenu={setMenu} date={date} />
+                    <CreateBoardFormBox allContents={contents} setContents={setContents} menu={menu} setMenu={setMenu} date={date} />
                 </Modal>
             }
             <Box sx={{ my: 1 }}>
@@ -56,17 +57,13 @@ export default function BoardCardBox({ user, contents, getContents, date, menu, 
                     :
                     <>
                         {contents[0] != undefined ?
-                            (contents.map((value, index) => {
+                            contents.map((value, index) => {
                                 return (
                                     <Card key={index} sx={{ minWidth: 250, mb: 2 }} elevation={2}>
-                                        {value.collection == "board" &&
-                                            <BoardCard contents={value} getContents={getContents} />
-                                        }
-                                    </Card>
-                                )
-                            }))
+                                        <BoardCard allContents={contents} contents={value} setContents={setContents} />
+                                    </Card>)
+                            })
                             :
-
                             <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center">
                                 <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", mb: 1, color: "black" }} component="h2">
                                     戦術・フォーメーションを記録しよう。

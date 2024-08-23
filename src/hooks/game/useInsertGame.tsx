@@ -1,9 +1,13 @@
 export const useInsertGame = async (contents) => {
-    return await fetch(`/api/game/`, {
+    const newData = await fetch(`/api/game/`, {
         method: 'POST',
         body: JSON.stringify(contents),
         headers: {
             "Content-Type": "application/json",
         },
-    })
+    }).then((data) => { return data.json() })
+
+    newData.collection = "game"
+
+    return newData
 }

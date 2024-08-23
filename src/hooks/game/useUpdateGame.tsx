@@ -5,5 +5,7 @@ export const useUpdateGame = async (contents) => {
         headers: {
             "Content-Type": "application/json",
         },
+    }).then((data) => {
+        return data.json()
     })
 }

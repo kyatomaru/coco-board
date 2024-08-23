@@ -17,11 +17,12 @@ import { practiceModalTitle, deleteNoteMs } from '@/constants/ModalMessage';
 import MoreHorizButton from '@/features/common/contents/button/MoreHorizButton';
 
 type PageProps = {
+    allContents: any,
     contents: PracticeContentsType,
-    getContents: any
+    setContents: any
 }
 
-export default function PracticeCard({ contents, getContents }: PageProps) {
+export default function PracticeCard({ allContents, contents, setContents }: PageProps) {
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState<boolean>(true)
 
@@ -49,7 +50,8 @@ export default function PracticeCard({ contents, getContents }: PageProps) {
     const DeletePracticeContents = async () => {
         const res = await useDeletePractice(contents.contentsId)
         if (res.ok) {
-            getContents()
+            const newData = allContents.filter((value) => { return value.contentsId != contents.contentsId })
+            setContents([...newData])
             setDeleteModalOpen(false)
             setMenuModalOpen(false)
         }

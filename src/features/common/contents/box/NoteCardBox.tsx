@@ -21,13 +21,13 @@ import CreateNoteFormBox from '@/features/routes/home/CreateNoteFormBox';
 type PageProps = {
     user: User,
     contents: any,
-    getContents: any,
+    setContents: any,
     date: String | Date,
     menu: Number,
     setMenu: any
 }
 
-export default function NoteCardBox({ user, contents, getContents, date, menu, setMenu }: PageProps) {
+export default function NoteCardBox({ user, contents, setContents, date, menu, setMenu }: PageProps) {
     const router = useRouter()
     const [isDateLoding, setIsDateLoding] = React.useState(false);
 
@@ -47,7 +47,7 @@ export default function NoteCardBox({ user, contents, getContents, date, menu, s
                     onClose={(event) => { }}
                     sx={{ overflowY: menu != 0 && "auto", scrollbarWidth: "none" }}
                 >
-                    <CreateNoteFormBox getNoteContents={getContents} menu={menu} setMenu={setMenu} date={date} />
+                    <CreateNoteFormBox allContents={contents} setContents={setContents} menu={menu} setMenu={setMenu} date={date} />
                 </Modal>
             }
             <Box sx={{ my: 1 }}>
@@ -60,10 +60,10 @@ export default function NoteCardBox({ user, contents, getContents, date, menu, s
                                 return (
                                     <Card key={index} sx={{ minWidth: 250, mb: 2 }} elevation={2}>
                                         {value.collection == "game" &&
-                                            <GameCard contents={value} getContents={getContents} />
+                                            <GameCard allContents={contents} contents={value} setContents={setContents} />
                                         }
                                         {value.collection == "practice" &&
-                                            <PracticeCard contents={value} getContents={getContents} />
+                                            <PracticeCard allContents={contents} contents={value} setContents={setContents} />
                                         }
                                     </Card>
                                 )

@@ -34,12 +34,11 @@ import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfi
 
 type pageProps = {
     contents: any,
-    getContents: any,
     postData: any,
     onClose: any
 }
 
-export default function GameForm({ contents, getContents, postData, onClose }: pageProps) {
+export default function GameForm({ contents, postData, onClose }: pageProps) {
     const router = useRouter()
     const params = useParams()
     const [waitFlag, setWaitFlag] = React.useState(false);
@@ -50,11 +49,7 @@ export default function GameForm({ contents, getContents, postData, onClose }: p
         const uid = await auth.currentUser?.uid;
         if (uid) {
             contents.uid = uid
-            const res = await postData(contents)
-            if (res.ok) {
-                await getContents()
-                onClose()
-            }
+            postData(contents)
         }
     }
 

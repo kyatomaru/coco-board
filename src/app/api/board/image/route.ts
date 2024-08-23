@@ -80,11 +80,19 @@ export async function POST(
         buffer[i] = image.charCodeAt(i);
     }
 
-    uploadBytes(storageRef, buffer).then((snapshot) => {
+    const url = await uploadBytes(storageRef, buffer).then((snapshot) => {
         console.log('Uploaded a blob or file!');
-    });
+    }).then(async (res) => {
+        return await getDownloadURL(ref(storage, id + ".png"))
+            .then((url) => {
+                return url
+            })
+            .catch((error) => {
+                // Handle any errors
+            })
+    })
 
-    return NextResponse.json({ status: 200 })
+    return NextResponse.json(url, { status: 200 })
 }
 
 export async function DELETE(

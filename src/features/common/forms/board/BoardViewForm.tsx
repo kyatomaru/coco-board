@@ -15,12 +15,11 @@ import { PlayerModel } from '@/types/board/Player';
 
 type PageProps = {
     contents: any,
-    getContents: any,
     postData: any,
     onClose: any
 }
 
-export default function BoardViewForm({ contents, getContents, postData, onClose }: PageProps) {
+export default function BoardViewForm({ contents, postData, onClose }: PageProps) {
     const [frame, setFrame] = React.useState<Array<FrameType>>([]);
     const [currentFrame, setCurrentFrame] = React.useState(0)
     const [isPlay, setIsPlay] = React.useState(false)
@@ -62,12 +61,7 @@ export default function BoardViewForm({ contents, getContents, postData, onClose
                 image = atob(dataurl.split(",")[1]);
             });
 
-            const res = await postData(contents, image)
-
-            if (res.ok) {
-                await getContents()
-                onClose()
-            }
+            postData(contents, image)
         }
     }
 

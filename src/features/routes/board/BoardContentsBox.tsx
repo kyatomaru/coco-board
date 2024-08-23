@@ -23,10 +23,10 @@ import Container from '@mui/material/Container';
 
 type pageProps = {
     contents: BoardType
-    getContents: any
+    setContents: any
 }
 
-export default function BoardContentsBox({ contents, getContents }: pageProps) {
+export default function BoardContentsBox({ contents, setContents }: pageProps) {
     const router = useRouter()
     const [menu, setMenu] = React.useState(0);
 
@@ -87,6 +87,13 @@ export default function BoardContentsBox({ contents, getContents }: pageProps) {
         }
     }
 
+    const UpdateBoardContents = async (contents, image) => {
+        await useUpdateBoard(contents, image).then((data) => {
+            setContents(data)
+            setEditModalOpen(false)
+        })
+    }
+
     return (
         <>
             <DeleteConfirmModal open={deleteModalOpen} setOpen={setDeleteModalOpen} title={boardModalTitle} message={deleteNoteMs} confirmText="削除" onSubmit={DeleteBoardContents} />
@@ -96,7 +103,7 @@ export default function BoardContentsBox({ contents, getContents }: pageProps) {
                     sx={{ overflowY: menu != 0 && "auto", scrollbarWidth: "none" }}
                 >
                     <Container maxWidth="sm" sx={{ px: 0, minHeight: "100vh", position: "relative", zIndex: 1500, borderRadius: 4 }}>
-                        <BoardViewForm contents={contents} getContents={getContents} postData={useUpdateBoard} onClose={() => { setEditModalOpen(false) }} />
+                        <BoardViewForm contents={contents} postData={UpdateBoardContents} onClose={() => { setEditModalOpen(false) }} />
                     </Container>
                 </Modal>
                 :

@@ -21,7 +21,7 @@ export const useGetGame = (user, contentsId) => {
         setContents(await fetchGameContents(query))
     }
 
-    return [contents, getContents]
+    return [contents, setContents]
 }
 
 const fetchGameContents = async (query) => {

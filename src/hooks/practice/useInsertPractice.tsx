@@ -1,9 +1,15 @@
 export const useInsertPractice = async (contents) => {
-    return await fetch(`/api/practice/`, {
+    const newData = await fetch(`/api/practice/`, {
         method: 'POST',
         body: JSON.stringify(contents),
         headers: {
             "Content-Type": "application/json",
         },
+    }).then((data) => {
+        return data.json()
     })
+
+    newData.collection = "practice"
+
+    return newData
 }

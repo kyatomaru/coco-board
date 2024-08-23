@@ -21,7 +21,7 @@ export const useGetPractice = (user, contentsId) => {
         setContents(await fetchPracticeContents(query))
     }
 
-    return [contents, getContents]
+    return [contents, setContents]
 }
 
 const fetchPracticeContents = async (query) => {
