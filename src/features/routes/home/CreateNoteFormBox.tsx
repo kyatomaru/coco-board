@@ -27,26 +27,45 @@ import LeftBar from '@/components/LeftBar';
 import dayjs from 'dayjs';
 
 type PageProps = {
-    getNoteContents: any,
+    allContents: any,
+    setContents: any,
     menu: Number,
     setMenu: Function,
     date: Date | String
 }
 
-export default function CreateNoteFormBox({ getNoteContents, menu, setMenu, date }: PageProps) {
+export default function CreateNoteFormBox({ allContents, setContents, menu, setMenu, date }: PageProps) {
     const params = useParams()
     const router = useRouter()
-    const [boardContents, setBoardContents] = React.useState(new BoardModel(dayjs(String(date)).format('YYYY-MM-DD')));
     const [gameContents, setGameContents] = React.useState(new GameContentsModel(dayjs(String(date)).format('YYYY-MM-DD')));
     const [practiceContents, setPracticeContents] = React.useState(new PracticeContentsModel(dayjs(String(date)).format('YYYY-MM-DD')));
-    const [task, setTask] = React.useState(new TaskModel());
+
+
+    const InsertGameContents = async (contents) => {
+        await useInsertGame(contents).then((data) => {
+            const resultContents = allContents.slice()
+            resultContents.unshift(data)
+            console.log(resultContents)
+            setContents([...resultContents])
+            setMenu(-1)
+        })
+    }
+
+    const InsertPracticeContents = async (contents) => {
+        await useInsertPractice(contents).then((data) => {
+            const resultContents = allContents.slice()
+            resultContents.unshift(data)
+            setContents([...resultContents])
+            setMenu(-1)
+        })
+    }
 
     return (
         <>
             {menu == 1 &&
                 <Container maxWidth="sm" sx={{ px: 0, position: "relative", zIndex: 1500, borderRadius: 4 }}>
                     <Box sx={{ borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", backgroundColor: "#fbfbfb" }}>
-                        <GameForm contents={gameContents} getContents={getNoteContents} postData={useInsertGame} onClose={() => { setMenu(-1) }} />
+                        <GameForm contents={gameContents} postData={InsertGameContents} onClose={() => { setMenu(-1) }} />
                         <MenuSelectBox alignment={menu} setAlignment={setMenu} />
                     </Box>
                 </Container>
@@ -55,7 +74,7 @@ export default function CreateNoteFormBox({ getNoteContents, menu, setMenu, date
             {menu == 2 &&
                 <Container maxWidth="sm" sx={{ px: 0, position: "relative", zIndex: 1500, borderRadius: 4 }}>
                     <Box sx={{ borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", backgroundColor: "#fbfbfb" }}>
-                        <PracticeForm contents={practiceContents} getContents={getNoteContents} postData={useInsertPractice} onClose={() => { setMenu(-1) }} />
+                        <PracticeForm contents={practiceContents} postData={InsertPracticeContents} onClose={() => { setMenu(-1) }} />
                         <MenuSelectBox alignment={menu} setAlignment={setMenu} />
                     </Box>
                 </Container >

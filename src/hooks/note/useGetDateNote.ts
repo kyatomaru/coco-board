@@ -21,7 +21,7 @@ export const useGetNote = (user, date) => {
         setContents(await fetchNoteContents(query))
     }
 
-    return [contents, getContents]
+    return [contents, setContents]
 }
 
 const fetchNoteContents = async (query) => {

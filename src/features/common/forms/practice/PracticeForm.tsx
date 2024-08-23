@@ -25,12 +25,11 @@ import MenuItem from '@mui/material/MenuItem';
 
 type pageProps = {
     contents: any,
-    getContents: any
     postData: any,
     onClose: any
 }
 
-export default function PracticeForm({ contents, getContents, postData, onClose }: pageProps) {
+export default function PracticeForm({ contents, postData, onClose }: pageProps) {
     const router = useRouter()
     const params = useParams()
     const [waitFlag, setWaitFlag] = React.useState(false);
@@ -41,11 +40,7 @@ export default function PracticeForm({ contents, getContents, postData, onClose 
         const uid = await auth.currentUser?.uid;
         if (uid) {
             contents.uid = uid
-            const res = await postData(contents)
-            if (res.ok) {
-                await getContents()
-                onClose()
-            }
+            postData(contents)
         }
     }
 

@@ -45,6 +45,8 @@ export async function GET(
                     console.log("Error getting documents: ", error);
                 });
 
+            console.log(docRef)
+
             return NextResponse.json(docRef, { status: 200 })
         }
         else if (contentsId) {
@@ -101,7 +103,7 @@ export async function PATCH(
             });
     }
 
-    return NextResponse.json(contentsId, { status: 200 })
+    return NextResponse.json(updateData, { status: 200 })
 }
 
 export async function POST(
@@ -122,7 +124,9 @@ export async function POST(
             console.log("Error getting documents: ", error);
         });
 
-    return NextResponse.json(docId, { status: 200 })
+    insertData.contentsId = docId
+
+    return NextResponse.json(insertData, { status: 200 })
 }
 
 export async function DELETE(

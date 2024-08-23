@@ -92,7 +92,7 @@ export async function PATCH(
             });
     }
 
-    return NextResponse.json({ status: 200 })
+    return NextResponse.json(updateData, { status: 200 })
 }
 
 export async function POST(
@@ -105,16 +105,19 @@ export async function POST(
     insertData.updateDate = new Date()
 
     if (insertData) {
-        db.collection(COLLECTION_NAME).add(insertData)
+        const docId = await db.collection(COLLECTION_NAME).add(insertData)
             .then((res) => {
                 console.log("Document successfully created!");
+                return res.id
             })
             .catch((error) => {
                 console.log("Error getting documents: ", error);
             });
+
+        insertData.contentsId = docId
     }
 
-    return NextResponse.json({ status: 200 })
+    return NextResponse.json(insertData, { status: 200 })
 }
 
 export async function DELETE(

@@ -21,7 +21,7 @@ export const useGetBoard = (user, date) => {
         setContents(await fetchBoardContents(query))
     }
 
-    return [contents, getContents]
+    return [contents, setContents]
 }
 
 const fetchBoardContents = async (query) => {

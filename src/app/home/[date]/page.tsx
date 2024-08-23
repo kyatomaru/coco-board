@@ -28,8 +28,8 @@ export default function Home() {
   const [isNoteCreateModal, setIsNoteCreateModal] = React.useState(-1)
   const [isTaskAddModal, setIsTaskAddModal] = React.useState(false)
 
-  const [board, getBoard] = useGetBoard(user, dayjs(String(date)).format('YYYY-MM-DD'))
-  const [note, getNote] = useGetNote(user, dayjs(String(date)).format('YYYY-MM-DD'))
+  const [board, setBoard] = useGetBoard(user, dayjs(String(date)).format('YYYY-MM-DD'))
+  const [note, setNote] = useGetNote(user, dayjs(String(date)).format('YYYY-MM-DD'))
 
   useIsAuth(router)
 
@@ -53,13 +53,13 @@ export default function Home() {
             {displayMenu == 0 &&
               <Box sx={{ mb: 3, borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(0) }} />
-                <BoardCardBox user={user} contents={board} getContents={getBoard} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
+                <BoardCardBox user={user} contents={board} setContents={setBoard} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
             }
             {displayMenu == 1 &&
               <Box sx={{ mb: 3, borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(1) }} />
-                <NoteCardBox user={user} contents={note} getContents={getNote} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
+                <NoteCardBox user={user} contents={note} setContents={setNote} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
             }
           </Container >

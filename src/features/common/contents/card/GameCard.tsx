@@ -19,11 +19,12 @@ import { useUpdateGame } from '@/hooks/game/useUpdateGame';
 import GameForm from '@/features/common/forms/game/GameForm';
 
 type PageProps = {
+    allContents: any,
     contents: GameContentsType
-    getContents: any
+    setContents: any
 }
 
-export default function GameCard({ contents, getContents }: PageProps) {
+export default function GameCard({ allContents, contents, setContents }: PageProps) {
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [editModalOpen, setEditModalOpen] = React.useState<boolean>(false)
     const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -52,7 +53,8 @@ export default function GameCard({ contents, getContents }: PageProps) {
     const DeleteGameContents = async () => {
         const res = await useDeleteGame(contents.contentsId)
         if (res.ok) {
-            getContents(contents.contentsId)
+            const newData = allContents.filter((value) => { return value.contentsId != contents.contentsId })
+            setContents([...newData])
             setDeleteModalOpen(false)
             setMenuModalOpen(false)
         }

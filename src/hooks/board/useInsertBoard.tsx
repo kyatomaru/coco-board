@@ -1,5 +1,5 @@
 export const useInsertBoard = async (board, image) => {
-    return await fetch(`/api/board/`, {
+    const newData = await fetch(`/api/board/`, {
         method: 'POST',
         body: JSON.stringify(board),
         headers: {
@@ -7,14 +7,16 @@ export const useInsertBoard = async (board, image) => {
         },
     }).then((response) => response.json())
         .then(async (data) => {
-            const res = await fetch(`/api/board/image/`, {
+            const url = await fetch(`/api/board/image/`, {
                 method: 'POST',
-                body: JSON.stringify({ image: image, id: data }),
+                body: JSON.stringify({ image: image, id: data.contentsId }),
                 headers: {
                     'content-type': 'application/json'
                 }
-            })
-            return res
+            }).then((response) => { return response.json() })
+            data.imagePath = url
+            return data
         })
 
+    return newData
 }

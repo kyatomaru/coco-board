@@ -26,7 +26,7 @@ export default function Home() {
   const router = useRouter()
   const [user, setUser] = React.useState<User | undefined>(null);
 
-  const [contents, getContents] = useGetBoard(user, params.contentsId)
+  const [contents, setContents] = useGetBoard(user, params.contentsId)
 
   useIsAuth(router)
 
@@ -44,7 +44,7 @@ export default function Home() {
       <LoadingPage />
       {user !== null &&
         <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative", overflowX: "hidden" }}>
-          <BoardContentsBox contents={contents} getContents={getContents} />
+          <BoardContentsBox contents={contents} setContents={setContents} />
         </Container>
       }
     </main >

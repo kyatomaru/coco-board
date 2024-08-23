@@ -1,5 +1,5 @@
 export const useUpdateBoard = async (board, image) => {
-    const res = await fetch(`/api/board/`, {
+    const newData = await fetch(`/api/board/`, {
         method: 'PATCH',
         body: JSON.stringify(board),
         headers: {
@@ -7,15 +7,15 @@ export const useUpdateBoard = async (board, image) => {
         },
     }).then((response) => response.json())
         .then(async (data) => {
-            const res = await fetch(`/api/board/image/`, {
+            await fetch(`/api/board/image/`, {
                 method: 'POST',
-                body: JSON.stringify({ image: image, id: data }),
+                body: JSON.stringify({ image: image, id: data.contentsId }),
                 headers: {
                     'content-type': 'application/json'
                 }
             })
-            return res
+            return data
         })
 
-    return res
+    return newData
 }

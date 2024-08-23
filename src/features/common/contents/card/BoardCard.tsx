@@ -17,11 +17,12 @@ import { boardModalTitle, deleteNoteMs } from '@/constants/ModalMessage';
 import MoreHorizButton from '@/features/common/contents/button/MoreHorizButton';
 
 type PageProps = {
+    allContents: Array<any>,
     contents: any,
-    getContents: any
+    setContents: any
 }
 
-export default function BoardCard({ contents, getContents }: PageProps) {
+export default function BoardCard({ allContents, contents, setContents }: PageProps) {
     const router = useRouter()
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [menuModalOpen, setMenuModalOpen] = React.useState<boolean>(false)
@@ -46,7 +47,8 @@ export default function BoardCard({ contents, getContents }: PageProps) {
     const DeleteBoardContents = async () => {
         const res = await useDeleteBoard(contents.contentsId)
         if (res.ok) {
-            getContents()
+            const newData = allContents.filter((value) => { return value.contentsId != contents.contentsId })
+            setContents([...newData])
             setDeleteModalOpen(false)
             setMenuModalOpen(false)
         }
@@ -56,7 +58,6 @@ export default function BoardCard({ contents, getContents }: PageProps) {
         <>
             <DeleteConfirmModal open={deleteModalOpen} setOpen={setDeleteModalOpen} title={boardModalTitle} message={deleteNoteMs} confirmText="削除" onSubmit={DeleteBoardContents} />
             <ContentsMenuModal open={menuModalOpen} setOpen={setMenuModalOpen} Delete={DeleteButtonClick} Edit={EditButtonClick} View={ViewButtonClick} />
-
             <Card sx={{ minWidth: 275 }}>
                 <Box sx={{ width: '100%', bgcolor: 'background.paper', position: "relative" }}>
                     <Box sx={{ position: "relative" }}>
@@ -76,7 +77,7 @@ export default function BoardCard({ contents, getContents }: PageProps) {
                             <Box sx={{ width: "100%" }}>
                                 <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} justifyContent="space-between"  >
                                     <Box sx={{ width: "100%", px: 2, my: 1 }}>
-                                        < CardMedia
+                                        <CardMedia
                                             component="img"
                                             // height="194"
                                             image={contents.imagePath}
