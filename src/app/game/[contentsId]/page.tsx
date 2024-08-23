@@ -24,7 +24,7 @@ export default function Home() {
   const params = useParams()
   const router = useRouter()
   const [user, setUser] = React.useState<User | undefined>(null);
-  const [contents, getContents] = useGetGame(user, params.contentsId)
+  const [contents, setContents] = useGetGame(user, params.contentsId)
 
   useIsAuth(router)
 
@@ -41,7 +41,7 @@ export default function Home() {
       <LoadingPage />
       {user !== null &&
         <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative" }}>
-          <GameContentsBox contents={contents} getContents={getContents} />
+          <GameContentsBox contents={contents} setContents={setContents} />
         </Container>
       }
     </main >

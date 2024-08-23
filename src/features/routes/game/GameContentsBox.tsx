@@ -35,7 +35,7 @@ import GameForm from '@/features/common/forms/game/GameForm';
 
 type PageProps = {
     contents: GameContentsType
-    getContents: any
+    setContents: any
 }
 
 const DataFormat = (date: String) => {
@@ -43,7 +43,7 @@ const DataFormat = (date: String) => {
 }
 
 
-export default function GameContentsBox({ contents, getContents }: PageProps) {
+export default function GameContentsBox({ contents, setContents }: PageProps) {
     const router = useRouter()
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [editModalOpen, setEditModalOpen] = React.useState<boolean>(false)
@@ -63,11 +63,18 @@ export default function GameContentsBox({ contents, getContents }: PageProps) {
         }
     }
 
+    const UpdateGameContents = async (contents) => {
+        await useUpdateGame(contents).then((data) => {
+            setContents(data)
+            setEditModalOpen(false)
+        })
+    }
+
     return (
         <>
             <DeleteConfirmModal open={deleteModalOpen} setOpen={setDeleteModalOpen} title={gameModalTitle} message={deleteNoteMs} confirmText="削除" onSubmit={DeleteGameContents} />
             {editModalOpen ?
-                <GameForm contents={contents} getContents={getContents} postData={useUpdateGame} onClose={() => { setEditModalOpen(false) }} />
+                <GameForm contents={contents} postData={UpdateGameContents} onClose={() => { setEditModalOpen(false) }} />
                 :
                 <Box>
                     <NoteContentsBar contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />

@@ -25,14 +25,14 @@ import { useUpdatePractice } from '@/hooks/practice/useUpdatePractice';
 
 type PageProps = {
     contents: PracticeContentsType,
-    getContents: any
+    setContents: any
 }
 
 const DataFormat = (date: String) => {
     return useDateFormat(date)
 }
 
-export default function PracticeContentsBox({ contents, getContents }: PageProps) {
+export default function PracticeContentsBox({ contents, setContents }: PageProps) {
     const router = useRouter()
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [editModalOpen, setEditModalOpen] = React.useState<boolean>(false)
@@ -52,11 +52,18 @@ export default function PracticeContentsBox({ contents, getContents }: PageProps
         }
     }
 
+    const UpdatePracticeContents = async (contents) => {
+        await useUpdatePractice(contents).then((data) => {
+            setContents(data)
+            setEditModalOpen(false)
+        })
+    }
+
     return (
         <>
             <DeleteConfirmModal open={deleteModalOpen} setOpen={setDeleteModalOpen} title={practiceModalTitle} message={deleteNoteMs} confirmText="削除" onSubmit={DeletePracticeContents} />
             {editModalOpen ?
-                <PracticeForm contents={contents} getContents={getContents} postData={useUpdatePractice} onClose={() => { setEditModalOpen(false) }} />
+                <PracticeForm contents={contents} postData={UpdatePracticeContents} onClose={() => { setEditModalOpen(false) }} />
                 :
                 <Box>
                     <NoteContentsBar contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
