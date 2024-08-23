@@ -15,8 +15,11 @@ const GoogleSignIn = async (router) => {
         prompt: "select_account"
     });
 
+    console.log("test")
+
     await signInWithPopup(auth, GoogleProvider)
         .then((res) => {
+            console.log("test2")
             router.replace('/home')
         }).catch((error) => {
             const errorCode = error.code;
