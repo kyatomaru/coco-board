@@ -8,10 +8,10 @@ export const useIsAuth = async (router) => {
     React.useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user == undefined) {
-                router.replace('/accounts/login')
+                router.push('/accounts/login')
             }
             else if (!user.emailVerified) {
-                router.replace('/accounts/signup/emailsend')
+                router.push('/accounts/signup/emailsend')
             }
         })
     });

@@ -16,7 +16,7 @@ export default function Home() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(auth.currentUser)
-        router.replace('/home')
+        router.push('/home')
       }
     })
   });
