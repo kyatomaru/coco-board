@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from 'react';
+import LoadingPage from '@/components/LoadingPage';
 import GoogleSignInButton from '../../../common/auth/google/GoogleSignInButton';
 // import LineSignInButton from '../../../components/auths/line/LineSignInButton';
 // import XSignInButton from '../../../components/auths/x/XSignInButton';
@@ -22,17 +23,6 @@ import LoginBox from './LoginBox';
 
 export default function LoginPage() {
     const router = useRouter()
-    const [user, setUser] = React.useState<User | undefined>()
-
-    React.useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                if (user.emailVerified) {
-                    router.replace('/home')
-                }
-            }
-        })
-    });
 
     return (
         <Container maxWidth="xs" fixed sx={{ mt: "70px", mb: "30px" }}>
@@ -65,6 +55,6 @@ export default function LoginPage() {
                 {/* <LineSignInButton /> */}
                 {/* <XSignInButton /> */}
             </Box>
-        </Container>
+        </Container >
     );
 }
