@@ -33,8 +33,6 @@ export const setRatio = (innerWidth, innerHeight) => {
     let besideHeight = (window_height - 5)
     let besideWidth = ((court_besideWidth_ratio * (window_height - 5)) / court_besideHeight_ratio);
 
-    console.log(window_width)
-    console.log(besideWidth)
     if (besideWidth > window_width) {
         besideWidth = window_width
         besideHeight = (court_besideHeight_ratio * window_width / court_besideWidth_ratio);
