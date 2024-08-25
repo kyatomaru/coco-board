@@ -143,6 +143,9 @@ export default function Player({ board, beforeCourtId, courtWidth, courtHeight, 
 
             frameArray[frameIndex].players[index].x = getNewX(x, y, frameIndex)
             frameArray[frameIndex].players[index].y = getNewY(x, y, frameIndex)
+
+            console.log(frameArray[frameIndex].players[index].x, frameArray[frameIndex].players[index].y)
+
         })
         setFrame(frameArray)
     }
