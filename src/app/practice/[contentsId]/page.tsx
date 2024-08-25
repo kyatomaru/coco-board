@@ -12,6 +12,7 @@ import type { User } from 'firebase/auth';
 import { useGetPractice } from '@/hooks/practice/useGetPractice';
 import PracticeContentsBox from '@/features/routes/practice/PracticeContentsBox';
 import LoginPage from '@/features/routes/accounts/login/LoginPage';
+import NotPage from '@/components/NotPage';
 
 const containterStyle = {
   borderRight: "solid 0.5px #b2b2b2",
@@ -39,11 +40,14 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <LoadingPage />
-      {user !== null &&
-        <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative" }}>
-          <PracticeContentsBox contents={contents} setContents={setContents} />
-        </Container>
-      }
+      {contents != undefined && user &&
+        (user.uid !== contents.uid ?
+          <NotPage />
+          :
+          <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative" }}>
+            <PracticeContentsBox contents={contents} setContents={setContents} />
+          </Container>
+        )}
     </main >
   )
 }

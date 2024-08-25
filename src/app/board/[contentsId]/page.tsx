@@ -12,6 +12,7 @@ import type { User } from 'firebase/auth';
 import BoardContentsBox from '@/features/routes/board/BoardContentsBox';
 import { BoardType, BoardModel } from '@/types/board/Board';
 import { useGetBoard } from '@/hooks/board/useGetBoard';
+import NotPage from '@/components/NotPage';
 
 const containterStyle = {
   // borderRight: "solid 0.5px #b2b2b2",
@@ -31,7 +32,6 @@ export default function Home() {
   useIsAuth(router)
 
   React.useEffect(() => {
-    // const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(auth.currentUser)
@@ -42,11 +42,14 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <LoadingPage />
-      {user !== null &&
-        <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative", overflowX: "hidden" }}>
-          <BoardContentsBox contents={contents} setContents={setContents} />
-        </Container>
-      }
+      {contents != undefined && user &&
+        (user.uid !== contents.uid ?
+          <NotPage />
+          :
+          <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative", overflowX: "hidden" }}>
+            <BoardContentsBox contents={contents} setContents={setContents} />
+          </Container>
+        )}
     </main >
   )
 }
