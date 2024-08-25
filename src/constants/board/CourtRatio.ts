@@ -17,9 +17,9 @@ export const CourtRatio = [
 ]
 
 export const setRatio = (innerWidth, innerHeight) => {
-    const frame_menu_width = 85
-    const window_width = innerWidth - frame_menu_width;
-    const window_height = innerHeight - frame_menu_width;
+    const frame_menu_Height = 85
+    const window_width = innerWidth;
+    const window_height = innerHeight - frame_menu_Height;
 
     const court_verticalWidth_ratio = CourtRatio[0].width
     const court_verticalHeight_ratio = CourtRatio[0].height
@@ -30,8 +30,15 @@ export const setRatio = (innerWidth, innerHeight) => {
     const court_besideWidth_ratio = CourtRatio[1].width
     const court_besideHeight_ratio = CourtRatio[1].height
 
-    const besideHeight = (window_height - 5)
-    const besideWidth = ((court_besideWidth_ratio * (window_height - 5)) / court_besideHeight_ratio);
+    let besideHeight = (window_height - 5)
+    let besideWidth = ((court_besideWidth_ratio * (window_height - 5)) / court_besideHeight_ratio);
+
+    console.log(window_width)
+    console.log(besideWidth)
+    if (besideWidth > window_width) {
+        besideWidth = window_width
+        besideHeight = (court_besideHeight_ratio * window_width / court_besideWidth_ratio);
+    }
 
     return [verticalWidth, verticalHeight, besideWidth, besideHeight]
 }

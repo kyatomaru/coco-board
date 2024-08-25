@@ -120,12 +120,11 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
     React.useEffect(() => {
         setBeforeCourtId(board.courtId)
         setWindow()
-
     }, [board.courtId])
 
-    React.useEffect(() => {
-        window.addEventListener("resize", setWindow);
-    })
+    // React.useEffect(() => {
+    //     window.addEventListener("resize", setWindow);
+    // })
 
     React.useEffect(() => {
         const playView = async () => {
@@ -186,9 +185,10 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
                     <TopSubControlBar board={board} frame={frame} setFrame={setFrame} setSelectItem={setSelectItem} selectItem={selectItem} menu={menu} setMenu={setMenu} isPlay={isPlay} />
                 </>
             }
-            <Box onMouseDown={() => isItemSelect()} sx={{ backgroundColor: "grey", position: "relative", height: courtHeight + "px", width: "100%", display: "flex", justifyContent: "center", border: "solid 0.5px #b2b2b2" }}>
+            <Box onMouseDown={() => isItemSelect()} sx={{ backgroundColor: "grey", position: "relative", height: window.innerHeight - 85 + "px", width: "100%", display: "flex", justifyContent: "center", border: "solid 0.5px #b2b2b2" }}>
                 <Box sx={{ backgroundColor: "white", flexGrow: 1, position: "relative", zIndex: 1900 }} />
                 <Box sx={{ width: courtWidth }}>
+                    <Box sx={{ backgroundColor: "white", position: "absolute", top: 0, zIndex: 1900, width: "100%", height: (window.innerHeight - courtHeight - 85) / 2 }} />
                     <Box sx={courtFilterStyle(courtWidth, courtHeight)} display={(isPlay || isView) ? "block" : "none"} />
                     <Box ref={courtRef} sx={courtStyle(courtWidth, courtHeight, board.courtId)} id="board">
                         {courtRef.current != null && frame[currentFrame] != undefined &&
@@ -199,6 +199,7 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
                             </>
                         }
                     </Box>
+                    <Box sx={{ backgroundColor: "white", position: "absolute", bottom: 0, zIndex: 1900, width: "100%", height: (window.innerHeight - courtHeight - 85) / 2 }} />
                 </Box>
                 <Box sx={{ backgroundColor: "white", flexGrow: 1, position: "relative", zIndex: 1900 }} />
             </Box>
