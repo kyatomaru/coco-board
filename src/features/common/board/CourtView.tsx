@@ -188,7 +188,7 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
             <Box onMouseDown={() => isItemSelect()} sx={{ backgroundColor: "grey", position: "relative", height: window.innerHeight - 85 + "px", width: "100%", display: "flex", justifyContent: "center", border: "solid 0.5px #b2b2b2" }}>
                 <Box sx={{ backgroundColor: "white", flexGrow: 1, position: "relative", zIndex: 1900 }} />
                 <Box sx={{ width: courtWidth }}>
-                    <Box sx={{ backgroundColor: "white", position: "absolute", top: 0, zIndex: 1900, width: "100%", height: (window.innerHeight - courtHeight - 85) / 2 }} />
+                    <Box sx={{ backgroundColor: "white", position: "absolute", top: -1, left: 0, right: 0, zIndex: 1900, width: "100%", height: (window.innerHeight - courtHeight - 85) / 2 }} />
                     <Box sx={courtFilterStyle(courtWidth, courtHeight)} display={(isPlay || isView) ? "block" : "none"} />
                     <Box ref={courtRef} sx={courtStyle(courtWidth, courtHeight, board.courtId)} id="board">
                         {courtRef.current != null && frame[currentFrame] != undefined &&
@@ -199,7 +199,7 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
                             </>
                         }
                     </Box>
-                    <Box sx={{ backgroundColor: "white", position: "absolute", bottom: 0, zIndex: 1900, width: "100%", height: (window.innerHeight - courtHeight - 85) / 2 }} />
+                    <Box sx={{ backgroundColor: "white", position: "absolute", left: 0, right: 0, bottom: -1, zIndex: 1900, width: "100%", height: (window.innerHeight - courtHeight - 85) / 2 }} />
                 </Box>
                 <Box sx={{ backgroundColor: "white", flexGrow: 1, position: "relative", zIndex: 1900 }} />
             </Box>
