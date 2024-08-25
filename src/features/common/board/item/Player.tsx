@@ -38,7 +38,7 @@ const circleStyle = (diameter, x, y, maxX, maxY, isSelect, isPlay) => {
         position: "absolute",
         pointerEvent: "none",
         border: isSelect && !isPlay ? "1px #66FFFF solid" : "none",
-        display: (x < -diameter || maxX + diameter < x || y < -diameter || maxY + diameter < y) ? "none" : "flex",
+        display: (x < -diameter - 5 || maxX + diameter + 5 < x || y < -diameter - 5 || maxY + diameter + 5 < y) ? "none" : "flex",
         alignItems: "center",
         justifyContent: "center",
     }
@@ -54,7 +54,7 @@ const playerStyle = (diameter, x, y, maxX, maxY, color) => {
         height: diameter,
         position: "absolute",
         pointerEvent: "none",
-        display: (x < -diameter || maxX + diameter < x || y < -diameter || maxY + diameter < y) ? "none" : "flex",
+        display: (x < -diameter - 5 || maxX + diameter + 5 < x || y < -diameter - 5 || maxY + diameter + 5 < y) ? "none" : "flex",
         alignItems: "center",
         justifyContent: "center",
     }
