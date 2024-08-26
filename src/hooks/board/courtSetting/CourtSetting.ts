@@ -99,8 +99,10 @@ export const restoreCoordinate = (frame, courtWidth, courtHeight) => {
 
     frameArray.map((value, index) => {
         value.players.map((player, playerIndex) => {
-            player.x *= courtWidth
-            player.y *= courtHeight
+            if (player.x * courtWidth < courtWidth && player.y * courtHeight < courtHeight) {
+                player.x *= courtWidth
+                player.y *= courtHeight
+            }
         })
 
         value.ball.x *= courtWidth
