@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { useScrollLock } from '@/hooks/common/useScrollLock';
+import { useSwipeLock } from '@/hooks/common/useSwipeLock';
 import dayjs from 'dayjs';
 import TopControlBar from './TopControlBar';
 import BottomControlBar from './BottomControlBar';
@@ -28,6 +29,7 @@ export default function BoardViewForm({ contents, postData, onClose }: PageProps
     const [playFrame, setPlayFrame] = React.useState<Array<FrameType>>([]);
 
     useScrollLock()
+    useSwipeLock()
 
     React.useEffect(() => {
         if (contents != undefined) {
