@@ -74,3 +74,38 @@ export const setBesideCoordinate = (courtId, beforeCourtId, verticalWidth, verti
         return [newX, newY]
     }
 }
+
+export const ajustCoordinate = (frame, courtWidth, courtHeight) => {
+    const frameArray = []
+    frame.forEach((item) => {
+        frameArray.push(item)
+    })
+
+    frameArray.map((value, index) => {
+        value.players.map((player, playerIndex) => {
+            player.x /= courtWidth
+            player.y /= courtHeight
+        })
+
+        value.ball.x /= courtWidth
+        value.ball.y /= courtHeight
+    })
+
+    return frame
+}
+
+export const restoreCoordinate = (frame, courtWidth, courtHeight) => {
+    const frameArray = frame
+
+    frameArray.map((value, index) => {
+        value.players.map((player, playerIndex) => {
+            player.x *= courtWidth
+            player.y *= courtHeight
+        })
+
+        value.ball.x *= courtWidth
+        value.ball.y *= courtHeight
+    })
+
+    return frame
+}

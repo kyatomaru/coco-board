@@ -20,6 +20,8 @@ import BoardViewForm from '@/features/common/forms/board/BoardViewForm';
 import { useUpdateBoard } from '@/hooks/board/useUpdateBoard';
 import Modal from '@mui/material/Modal';
 import Container from '@mui/material/Container';
+import { setRatio } from '@/constants/board/CourtRatio';
+import { restoreCoordinate } from '@/hooks/board/courtSetting/CourtSetting';
 
 type pageProps = {
     contents: BoardType
@@ -40,31 +42,35 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
     const [isPlay, setIsPlay] = React.useState(false)
 
     const setWindow = () => {
-        const frame_menu_width = 85
-        const window_width = window.innerWidth - frame_menu_width;
-        const window_height = window.innerHeight - frame_menu_width;
+        const courtLength = setRatio(window.innerWidth, window.innerHeight)
 
-        const court_width_ratio = 400
-        const court_height_ratio = 620
-
-        setCourtHeight(window_height - 40)
-        setCourtWidth((court_width_ratio * (window_height - 40)) / court_height_ratio);
+        if (contents.courtId == 0) {
+            setCourtWidth(courtLength[0])
+            setCourtHeight(courtLength[1])
+        } else {
+            setCourtWidth(courtLength[2])
+            setCourtHeight(courtLength[3])
+        }
     }
 
-    React.useEffect(() => {
-        setWindow()
-        window.addEventListener("resize", setWindow);
-    })
+    // React.useEffect(() => {
+    //     setWindow()
+    //     window.addEventListener("resize", setWindow);
+    // })
 
     React.useEffect(() => {
         if (contents != undefined) {
             if (contents.frame.length != 0) {
-                const frameArray = []
-                contents.frame.forEach(value => {
-                    frameArray.push(value)
-                })
-                console.log(frameArray)
-                setFrame(frameArray)
+                setWindow()
+
+                const courtLength = setRatio(window.innerWidth, window.innerHeight)
+                let newFrame
+                if (contents.courtId == 0)
+                    newFrame = restoreCoordinate(JSON.parse(JSON.stringify(contents.frame)), courtLength[0], courtLength[1])
+                else
+                    newFrame = restoreCoordinate(JSON.parse(JSON.stringify(contents.frame)), courtLength[3], courtLength[2])
+
+                setFrame(newFrame)
             }
         }
     }, [contents])

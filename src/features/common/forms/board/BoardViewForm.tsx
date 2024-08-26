@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { useScrollLock } from '@/hooks/common/useScrollLock';
+import { useSwipeLock } from '@/hooks/common/useSwipeLock';
 import dayjs from 'dayjs';
 import TopControlBar from './TopControlBar';
 import BottomControlBar from './BottomControlBar';
@@ -12,6 +13,8 @@ import html2canvas from 'html2canvas';
 import { auth } from '@/app/firebase';
 import { BallModel } from '@/types/board/Ball';
 import { PlayerModel } from '@/types/board/Player';
+import { ajustCoordinate, restoreCoordinate } from '@/hooks/board/courtSetting/CourtSetting';
+import { setRatio } from '@/constants/board/CourtRatio';
 
 type PageProps = {
     contents: any,
@@ -26,6 +29,7 @@ export default function BoardViewForm({ contents, postData, onClose }: PageProps
     const [playFrame, setPlayFrame] = React.useState<Array<FrameType>>([]);
 
     useScrollLock()
+    useSwipeLock()
 
     React.useEffect(() => {
         if (contents != undefined) {
@@ -39,7 +43,14 @@ export default function BoardViewForm({ contents, postData, onClose }: PageProps
 
     React.useEffect(() => {
         if (contents.frame.length != 0) {
-            setFrame(contents.frame)
+            const courtLength = setRatio(window.innerWidth, window.innerHeight)
+            let newFrame
+            if (contents.courtId == 0)
+                newFrame = restoreCoordinate(JSON.parse(JSON.stringify(contents.frame)), courtLength[0], courtLength[1])
+            else
+                newFrame = restoreCoordinate(JSON.parse(JSON.stringify(contents.frame)), courtLength[3], courtLength[2])
+
+            setFrame(newFrame)
         }
     }, [contents])
 
@@ -48,8 +59,15 @@ export default function BoardViewForm({ contents, postData, onClose }: PageProps
 
         const uid = await auth.currentUser?.uid;
         if (uid) {
+            const courtLength = setRatio(window.innerWidth, window.innerHeight)
+            let newFrame
+            if (contents.courtId == 0)
+                newFrame = ajustCoordinate(frame, courtLength[0], courtLength[1])
+            else
+                newFrame = ajustCoordinate(frame, courtLength[3], courtLength[2])
+
             contents.uid = uid
-            contents.frame = frame
+            contents.frame = newFrame
 
             // make icon
             let image;
