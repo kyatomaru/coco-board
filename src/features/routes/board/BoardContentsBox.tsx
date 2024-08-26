@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
+import { useSwipeLock } from '@/hooks/common/useSwipeLock';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
@@ -40,6 +41,8 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
 
     const [playFrame, setPlayFrame] = React.useState<Array<FrameType>>([]);
     const [isPlay, setIsPlay] = React.useState(false)
+
+    useSwipeLock()
 
     const setWindow = () => {
         const courtLength = setRatio(window.innerWidth, window.innerHeight)
