@@ -18,7 +18,7 @@ export const useSwipeLock = () => {
      * モバイルスクロール禁止処理
      */
     const scrollNo = useCallback((e) => {
-        if (e.touches[0].pageX > 16 && e.touches[0].pageX < window.innerWidth)
+        if (e.touches[0].pageX < 16 && e.touches[0].pageX > window.innerWidth + 16)
             e.preventDefault();
     }, []);
 };

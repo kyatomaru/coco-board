@@ -29,7 +29,6 @@ export default function BoardViewForm({ contents, postData, onClose }: PageProps
     const [playFrame, setPlayFrame] = React.useState<Array<FrameType>>([]);
 
     useScrollLock()
-    useSwipeLock()
 
     React.useEffect(() => {
         if (contents != undefined) {

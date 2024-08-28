@@ -43,6 +43,7 @@ export async function GET(
 
                 }).catch((error) => {
                     console.log("Error getting documents: ", error);
+                    return NextResponse.json(null, { status: 500 })
                 });
 
             console.log(docRef)
@@ -59,6 +60,7 @@ export async function GET(
                 })
                 .catch((error) => {
                     console.log("Error getting documents: ", error);
+                    return NextResponse.json(null, { status: 500 })
                 });
             console.log(docRef)
 
@@ -78,6 +80,7 @@ export async function GET(
                 })
                 .catch((error) => {
                     console.log("Error getting documents: ", error);
+                    return NextResponse.json(null, { status: 500 })
                 });
 
             return NextResponse.json(docRef, { status: 200 })

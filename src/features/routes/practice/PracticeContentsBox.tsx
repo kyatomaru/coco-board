@@ -53,9 +53,9 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
     }
 
     const UpdatePracticeContents = async (contents) => {
+        setEditModalOpen(false)
         await useUpdatePractice(contents).then((data) => {
             setContents(data)
-            setEditModalOpen(false)
         })
     }
 

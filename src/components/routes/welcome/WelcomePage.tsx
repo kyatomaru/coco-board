@@ -49,7 +49,7 @@ export default function WelcomePage() {
                         color: "aliceblue", fontSize: { xs: 33, md: 45, lg: 54 },
                         pt: { xs: "250px", md: "200px" },
                         mb: 1
-                    }}>サッカーの全てを簡単記録</Typography>
+                    }}>サッカーの戦術を簡単記録</Typography>
                     <Box>
                         <Button onClick={() => router.push('/home')} size="large" variant="contained"
                             sx={{ textTransform: "none", mt: 2, borderRadius: 3, backgroundColor: "#1976d2 !important" }}>
@@ -70,36 +70,23 @@ export default function WelcomePage() {
                         autoPlay
                         muted
                         loop
-                        image="/images/welcomePage/tacticsImage.mp4"
+                        image="/images/welcomePage/tacticsImage.mov"
                         sx={{ width: { xs: 210, sm: 260 }, margin: "auto", mt: 3 }}
                     />
                 </Box>
 
                 <Divider />
 
-                <Box sx={{ textAlign: "center", width: "100%", minHeight: 380, backgroundImage: "url(/images/welcomePage/commuteImage.png)", backgroundSize: "cover" }}>
+                <Box sx={{ textAlign: "center", width: "100%", minHeight: 350, backgroundImage: "url(/images/welcomePage/commuteImage.png)", backgroundSize: "cover" }}>
                     <Box sx={{ textAlign: "center", py: 7, px: 3, maxWidth: 450, margin: "auto" }}>
                         <Typography sx={{ color: "white", fontSize: 25, mb: 3 }}>いつでもどこでも練習・試合の内容を記録しよう</Typography>
                         <Typography sx={{ color: "white" }}>
-                            練習・試合の内容を3分で記録できます。ノートの持ち運びは不要です。帰り道、寝る前など、思い立った時にスマホひとつで記録が可能です。いつでもどこでもアプリを開いて効率良く振り返ることができます。
+                            ノートの持ち運びは不要です。帰り道、寝る前など、思い立った時にスマホひとつで記録が可能です。いつでもどこでもアプリを開いて効率良く振り返ることができます。
                         </Typography>
                     </Box>
                 </Box>
-
-                <Divider />
-
-                <Box sx={{ textAlign: "center", py: 7, maxWidth: 450, margin: "auto" }}>
-                    <Typography sx={{ fontSize: 25, mb: 3, px: 3 }}>取り組むことをチェックしよう</Typography>
-                    <Typography sx={{ px: 3 }}>
-                        曜日ごとに取り組むことを登録することができます。継続的に取り組み、成長に繋げましょう。
-                    </Typography>
-                    <CardMedia
-                        image="/images/welcomePage/taskImage.png"
-                        sx={{ width: { xs: 240, sm: 360 }, height: { xs: 320, sm: 480 }, margin: "auto", mt: 3 }}
-                    />
-                </Box>
             </Box>
-            <Box sx={{ height: 100 }} />
+            {/* <Box sx={{ height: 100 }} /> */}
             <InfoFooter />
         </Box>
     );
