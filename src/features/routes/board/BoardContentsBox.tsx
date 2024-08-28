@@ -97,9 +97,9 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
     }
 
     const UpdateBoardContents = async (contents, image) => {
+        setEditModalOpen(false)
         await useUpdateBoard(contents, image).then((data) => {
             setContents(data)
-            setEditModalOpen(false)
         })
     }
 

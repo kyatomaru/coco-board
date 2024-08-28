@@ -64,9 +64,9 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
     }
 
     const UpdateGameContents = async (contents) => {
+        setEditModalOpen(false)
         await useUpdateGame(contents).then((data) => {
             setContents(data)
-            setEditModalOpen(false)
         })
     }
 

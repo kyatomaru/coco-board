@@ -105,8 +105,10 @@ export const restoreCoordinate = (frame, courtWidth, courtHeight) => {
             }
         })
 
-        value.ball.x *= courtWidth
-        value.ball.y *= courtHeight
+        if (value.ball.x * courtWidth < courtWidth && value.ball.y * courtHeight < courtHeight) {
+            value.ball.x *= courtWidth
+            value.ball.y *= courtHeight
+        }
     })
 
     return frame

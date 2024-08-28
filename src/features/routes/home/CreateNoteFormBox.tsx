@@ -42,21 +42,21 @@ export default function CreateNoteFormBox({ allContents, setContents, menu, setM
 
 
     const InsertGameContents = async (contents) => {
+        setMenu(-1)
         await useInsertGame(contents).then((data) => {
             const resultContents = allContents.slice()
             resultContents.unshift(data)
             console.log(resultContents)
             setContents([...resultContents])
-            setMenu(-1)
         })
     }
 
     const InsertPracticeContents = async (contents) => {
+        setMenu(-1)
         await useInsertPractice(contents).then((data) => {
             const resultContents = allContents.slice()
             resultContents.unshift(data)
             setContents([...resultContents])
-            setMenu(-1)
         })
     }
 

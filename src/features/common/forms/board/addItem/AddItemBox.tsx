@@ -16,6 +16,8 @@ type PageProps = {
 }
 
 export default function AddItemBox({ frame, setFrame, board }: PageProps) {
+
+
     const addBall = () => {
         const frameArray = []
         frame.forEach((item) => {
@@ -49,8 +51,6 @@ export default function AddItemBox({ frame, setFrame, board }: PageProps) {
                 item.players.push(new PlayerModel(team, teamLength + 1, name, board.setting.color[team]))
             }
         })
-
-        console.log(frameArray)
 
         setFrame(frameArray)
     }

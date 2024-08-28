@@ -40,11 +40,11 @@ export default function CreateBoardFormBox({ allContents, setContents, menu, set
     const [boardContents, setBoardContents] = React.useState(new BoardModel(dayjs(String(date)).format('YYYY-MM-DD')));
 
     const InsertBoardContents = async (contents, image) => {
+        setMenu(-1)
         await useInsertBoard(contents, image).then((data) => {
             const resultContents = allContents.slice()
             resultContents.unshift(data)
             setContents([...resultContents])
-            setMenu(-1)
         })
     }
 

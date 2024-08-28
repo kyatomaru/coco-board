@@ -15,6 +15,7 @@ import DeleteConfirmModal from '@/features/common/contents/modal/ConfirmModal';
 import ContentsMenuModal from '@/features/common/contents/modal/NoteMenuModal';
 import { boardModalTitle, deleteNoteMs } from '@/constants/ModalMessage';
 import MoreHorizButton from '@/features/common/contents/button/MoreHorizButton';
+import Skeleton from '@mui/material/Skeleton';
 
 type PageProps = {
     allContents: Array<any>,
@@ -77,11 +78,14 @@ export default function BoardCard({ allContents, contents, setContents }: PagePr
                             <Box sx={{ width: "100%" }}>
                                 <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} justifyContent="space-between"  >
                                     <Box sx={{ width: "100%", px: 2, my: 1 }}>
-                                        <CardMedia
-                                            component="img"
-                                            // height="194"
-                                            image={contents.imagePath}
-                                        />
+                                        {!contents.imagePath ?
+                                            <Skeleton variant="rectangular" width="100%" height={300} sx={{ m: 0 }} />
+                                            : <CardMedia
+                                                component="img"
+                                                // height="194"
+                                                image={contents.imagePath}
+                                            />
+                                        }
                                     </Box>
                                     <Box sx={{ width: "100%", px: 2, my: 1 }}>
                                         <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
