@@ -98,9 +98,7 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                 <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
                     <Grid >
                         <Button size="small" sx={{ color: 'black' }} variant='text' onClick={onClose}>
-                            <Typography fontSize={13} component="p">
-                                キャンセル
-                            </Typography>
+                            キャンセル
                         </Button>
                     </Grid>
                     <Grid >
@@ -191,7 +189,7 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                             </Button>
                         </Stack>
                         {contents.details.map((input, index) => (
-                            <FormControl fullWidth sx={{ mb: 1 }}>
+                            <FormControl key={index} fullWidth sx={{ mb: 1 }}>
                                 <OutlinedInput
                                     id="outlined-adornment-input"
                                     value={contents.details[index].context}

@@ -151,9 +151,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                 <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
                     <Grid >
                         <Button size="small" sx={{ color: 'black' }} variant='text' onClick={onClose}>
-                            <Typography fontSize={13} component="p">
-                                キャンセル
-                            </Typography>
+                            キャンセル
                         </Button>
                     </Grid>
                     <Grid>
@@ -414,7 +412,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                             </Button>
                         </Stack>
                         {contents.goodPoints.map((input, index) => (
-                            <FormControl fullWidth sx={{ mb: 1 }}>
+                            <FormControl key={index} fullWidth sx={{ mb: 1 }}>
                                 <OutlinedInput
                                     value={contents.goodPoints[index].context}
                                     onChange={newValue => ChangeGoodPointsContext(newValue.target.value, index)}
@@ -433,7 +431,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                             </Button>
                         </Stack>
                         {contents.badPoints.map((input, index) => (
-                            <FormControl fullWidth sx={{ mb: 1 }}>
+                            <FormControl key={index} fullWidth sx={{ mb: 1 }}>
                                 <OutlinedInput
                                     id="outlined-adornment-input"
                                     value={contents.badPoints[index].context}
