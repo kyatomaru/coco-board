@@ -166,7 +166,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
     }
 
     return (
-        <Box sx={{ overflowY: "auto", top: "24px", position: "absolute", zIndex: 2000, height: verticalHeight + 1 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid", borderBottom: "0.5px #666 solid", borderTop: "1px #666 solid" }}>
+        <Box sx={{ overflowY: "auto", top: "26px", position: "absolute", zIndex: 2000, height: verticalHeight + 1 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid", borderBottom: "0.5px #666 solid", borderTop: "1px #666 solid" }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={team} onChange={changeTeam} >
                     <Tab label="Home" value={0} sx={{ fontSize: 12 }} />

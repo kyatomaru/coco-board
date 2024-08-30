@@ -88,7 +88,7 @@ export default function SettingBox({ frame, setFrame, board }: PageProps) {
 
 
     return (
-        <Box sx={{ position: "absolute", zIndex: 2000, top: "24px", height: courtHeight + 1 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid", borderBottom: "0.5px #666 solid", borderTop: "1px #666 solid" }}>
+        <Box sx={{ position: "absolute", zIndex: 2000, top: "26px", height: courtHeight + 1 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid", borderBottom: "0.5px #666 solid", borderTop: "1px #666 solid" }}>
             <Stack direction="row" justifyContent="flex-end" sx={{ mx: 1 }}>
                 <Button size='small' onClick={submit} >
                     変更
