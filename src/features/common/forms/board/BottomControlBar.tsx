@@ -105,7 +105,7 @@ export default function BottomControlBar({ frame, setFrame, currentFrame, setCur
                     max={frame.length - 1}
                     onChange={frameHandleChange}
                 />
-                <Typography sx={{ mx: 2, fontSize: 14 }}>
+                <Typography sx={{ mx: 2, fontSize: 14, color: "black" }}>
                     {currentFrame + 1}/{frame.length}
                 </Typography>
             </Stack>
