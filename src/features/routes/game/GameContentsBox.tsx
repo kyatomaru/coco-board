@@ -215,8 +215,8 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                     <Divider />
 
                     {contents != undefined ?
-                        <Box sx={{ px: 2, my: 1 }}>
-                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                        <Box sx={{ px: 2, my: 2 }}>
+                            <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#ff5e00">
                                 良かったところ
                             </Typography>
                             {contents.goodPoints[0] != null ?
@@ -225,7 +225,10 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                         <Box key={index}>
                                             {
                                                 goodPoint.context != "" &&
-                                                <ListText primary={goodPoint.context} secondary={elementsCategories[Number(goodPoint.type)].title} />
+                                                // <ListText primary={goodPoint.context} secondary={elementsCategories[Number(goodPoint.type)].title} />
+                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                                    ・{goodPoint.context}
+                                                </Typography>
                                             }
                                         </Box>
                                     ))
@@ -241,11 +244,10 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                         <Skeleton variant="rectangular" height={62} />
                     }
 
-                    <Divider />
 
                     {contents != undefined ?
-                        <Box sx={{ px: 2, my: 1 }}>
-                            <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                        <Box sx={{ px: 2, my: 2 }}>
+                            <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#007eff">
                                 悪かった点
                             </Typography>
                             {contents.badPoints[0] != null ?
@@ -254,7 +256,10 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                         <Box key={index}>
                                             {
                                                 badPoint.context != "" &&
-                                                <ListText primary={badPoint.context} secondary={elementsCategories[Number(badPoint.type)].title} />
+                                                // <ListText primary={badPoint.context} secondary={elementsCategories[Number(badPoint.type)].title} />
+                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                                    ・{badPoint.context}
+                                                </Typography>
                                             }
                                         </Box>
                                     ))
@@ -263,6 +268,21 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                 :
                                 <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
                                     なし
+                                </Typography>
+                            }
+                        </Box>
+                        :
+                        <Skeleton variant="rectangular" height={62} />
+                    }
+
+                    {contents != undefined ?
+                        <Box sx={{ px: 2, my: 2 }}>
+                            <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#16b41e">
+                                次に向けて
+                            </Typography>
+                            {contents.next &&
+                                <Typography variant="body2" sx={{ fontSize: 14 }}>
+                                    {contents.next}
                                 </Typography>
                             }
                         </Box>

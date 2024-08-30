@@ -106,8 +106,9 @@ export default function LeftBar(props) {
                                 coco-board
                             </Typography>
                         </Stack>
+
                         <Button sx={{ my: 1, justifyContent: "flex-start", color: value == 0 ? "black" : "#666" }}>
-                            <Stack direction="row" alignItems="center" onClick={ClickHomeButton}>
+                            <Stack direction="row" alignItems="center" onClick={ClickHomeButton} sx={{ width: "100%" }}>
                                 <HomeIcon sx={{ fontSize: 32 }} />
                                 <Typography sx={{ fontSize: 17, px: 2, fontWeight: value == 0 && "bold", display: { md: "none", lg: "block" } }}>ホーム</Typography>
                             </Stack>
@@ -121,7 +122,7 @@ export default function LeftBar(props) {
                         </Button> */}
 
                         <Button sx={{ my: 1, justifyContent: "flex-start", color: value == 2 ? "black" : "#666" }}>
-                            <Stack direction="row" justifyItems="center" alignItems="center" onClick={ClickCalendarButton} >
+                            <Stack direction="row" justifyItems="center" alignItems="center" onClick={ClickCalendarButton} sx={{ width: "100%" }}>
                                 <EventIcon sx={{ fontSize: 32 }} />
                                 <Typography sx={{ fontSize: 17, px: 2, fontWeight: value == 2 && "bold", display: { md: "none", lg: "block" } }}>カレンダー</Typography>
                             </Stack>
@@ -183,7 +184,7 @@ const HeaderMenusButton = () => {
     };
 
     return (
-        <div>
+        <Box sx={{ width: "100%" }}>
             <LogoutConfirmModal open={logoutModalOpen} setOpen={setLogoutModalOpen} />
             <Stack direction="row" justifyItems="center" alignItems="center" onClick={handleClick} >
                 <MenuIcon sx={{ fontSize: { md: 32 } }} />
@@ -215,7 +216,7 @@ const HeaderMenusButton = () => {
                     ログアウト
                 </MenuItem>
             </StyledMenu>
-        </div>
+        </Box>
     );
 }
 

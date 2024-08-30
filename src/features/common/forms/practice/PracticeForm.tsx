@@ -22,6 +22,8 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import ConfirmCloseModal from '../../contents/modal/ConfirmModal';
+import { backTitle, backMs } from '@/constants/ModalMessage'
 
 type pageProps = {
     contents: any,
@@ -32,8 +34,8 @@ type pageProps = {
 export default function PracticeForm({ contents, postData, onClose }: pageProps) {
     const router = useRouter()
     const params = useParams()
+    const [isConfirmCloseModal, setIsConfirmCloseModal] = React.useState<boolean>(false)
     const [waitFlag, setWaitFlag] = React.useState(false);
-    const [titleError, setTitleError] = React.useState(false);
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -48,6 +50,7 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
     const [place, setPlace] = React.useState(contents.place);
     const [weather, setWeather] = React.useState(contents.weather);
     const [details, setDetails] = React.useState(contents.details);
+    const [next, setNext] = React.useState(contents.next);
     const [comment, setComment] = React.useState(contents.comment);
 
     const AddDetails = () => {
@@ -82,109 +85,92 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
 
 
     return (
-        <Box
-            component="form"
-            onSubmit={onSubmit}
-            sx={{
-                '& .MuiTextField-root': { m: 1 },
-                marginBottom: "30px",
-                minHeight: "100vh"
-            }}
-            noValidate
-            autoComplete="off"
-            method='POST'
-        >
-            <Box sx={{ position: 'sticky', top: 0, backgroundColor: "white", zIndex: 100 }} >
-                <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
-                    <Grid >
-                        <Button size="small" sx={{ color: 'black' }} variant='text' onClick={onClose}>
-                            <Typography fontSize={13} component="p">
+        <>
+            <ConfirmCloseModal open={isConfirmCloseModal} setOpen={setIsConfirmCloseModal} title={backTitle} message={backMs} confirmText="中止する" onSubmit={onClose} />
+            <Box
+                component="form"
+                onSubmit={onSubmit}
+                sx={{
+                    '& .MuiTextField-root': { m: 1 },
+                    marginBottom: "30px",
+                    minHeight: "100vh"
+                }}
+                noValidate
+                autoComplete="off"
+                method='POST'
+            >
+                <Box sx={{ position: 'sticky', top: 0, backgroundColor: "white", zIndex: 100 }} >
+                    <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
+                        <Grid >
+                            <Button size="small" sx={{ color: 'black' }} variant='text' onClick={onClose}>
                                 キャンセル
-                            </Typography>
-                        </Button>
-                    </Grid>
-                    <Grid >
-                        <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>
-                            <Typography fontSize={13} component="p">
+                            </Button>
+                        </Grid>
+                        <Grid >
+                            <Button size="small" sx={{ backgroundColor: "#2e7d32 !important" }} variant='filled' type='submit'>
                                 記録する
-                            </Typography>
-                        </Button>
+                            </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
 
-                <Divider />
-            </Box>
-
-            <Box>
-                <Box sx={{ mx: "auto", px: 2 }}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
-                        <DemoContainer components={['DatePicker']}>
-                            <DatePicker sx={{ mx: "0 !important", width: "auto !important", backgroundColor: "background.paper" }} format='yyyy年MM月dd日'
-                                value={new Date(String(contents.date))}
-                                disableFuture
-                                onChange={(newValue) => { contents.date = dayjs(String(newValue)).format('YYYY-MM-DD') }} />
-                        </DemoContainer>
-                    </LocalizationProvider>
+                    <Divider />
                 </Box>
 
-                <Box >
-                    <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
-                            基本情報
-                        </Typography>
-                        <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
-                            <InputLabel sx={{ fontSize: 14 }} shrink={contents.title != ""} htmlFor="outlined-adornment-title">タイトル</InputLabel>
-                            <Select
-                                labelId="outlined-adornment-title-label"
-                                name="title"
-                                id="outlined-adornment-title"
-                                value={contents.title}
-                                label="タイトル"
-                                onChange={newValue => {
-                                    setTitle(newValue.target.value)
-                                    contents.title = newValue.target.value
-                                }}
-                                sx={{ fontSize: 14, backgroundColor: "background.paper" }}
-                                notched={contents.title != ""}
-                            >
-                                <MenuItem sx={{ fontSize: 14 }} value="自主練習">自主練習</MenuItem>
-                                <MenuItem sx={{ fontSize: 14 }} value="チーム練習">チーム練習</MenuItem>
-                            </Select>
-                        </FormControl>
+                <Box>
+                    <Box sx={{ mx: "auto", px: 2 }}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
+                            <DemoContainer components={['DatePicker']}>
+                                <DatePicker sx={{ mx: "0 !important", width: "auto !important", backgroundColor: "background.paper" }} format='yyyy年MM月dd日'
+                                    value={new Date(String(contents.date))}
+                                    disableFuture
+                                    onChange={(newValue) => { contents.date = dayjs(String(newValue)).format('YYYY-MM-DD') }} />
+                            </DemoContainer>
+                        </LocalizationProvider>
+                    </Box>
 
-                        <Stack spacing={2} sx={{ mb: 2 }} direction="row" alignItems="center">
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel sx={{ fontSize: 14 }} shrink={contents.place != undefined} htmlFor="outlined-adornment-place">場所</InputLabel>
+                    <Box sx={{ my: 3 }}>
+                        <Box sx={{ my: 2, px: 2 }}>
+                            <InputLabel sx={{ mb: 1, fontSize: 14, color: "black" }} >タイトル</InputLabel>
+                            <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
                                 <OutlinedInput
-                                    id="outlined-adornment-place"
+                                    required
+                                    name="title"
+                                    value={contents.title}
+                                    onChange={newValue => {
+                                        setTitle(newValue.target.value)
+                                        contents.title = newValue.target.value
+                                    }}
+                                    sx={{ fontSize: 14, backgroundColor: "background.paper" }}
+                                />
+                            </FormControl>
+                        </Box>
+
+                        <Box sx={{ my: 2, px: 2 }}>
+                            <InputLabel sx={{ mb: 1, fontSize: 14, color: "black" }} >場所</InputLabel>
+                            <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
+                                <OutlinedInput
+                                    sx={{ fontSize: 14, backgroundColor: "background.paper" }}
                                     name="place"
-                                    aria-describedby="outlined-place-helper-text"
-                                    label="場所"
                                     value={contents.place}
                                     onChange={newValue => {
                                         setPlace(newValue.target.value)
                                         contents.place = newValue.target.value
                                     }}
-                                    sx={{ fontSize: 14, backgroundColor: "background.paper" }}
-                                    notched={contents.place != undefined}
                                 />
                             </FormControl>
+                        </Box>
 
-
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel sx={{ fontSize: 14 }} shrink={contents.weather != ""} htmlFor="outlined-adornment-weather">天気</InputLabel>
+                        <Box sx={{ my: 2, px: 2 }}>
+                            <InputLabel sx={{ mb: 1, fontSize: 14, color: "black" }} >天気</InputLabel>
+                            <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
                                 <Select
-                                    labelId="outlined-adornment-weather-label"
+                                    sx={{ fontSize: 14, backgroundColor: "background.paper" }}
                                     name="weather"
-                                    id="outlined-adornment-weather"
                                     value={contents.weather}
-                                    label="天気"
                                     onChange={newValue => {
                                         setWeather(newValue.target.value)
                                         contents.weather = newValue.target.value
                                     }}
-                                    sx={{ fontSize: 14, backgroundColor: "background.paper" }}
-                                    notched={contents.weather != ""}
                                 >
                                     <MenuItem sx={{ fontSize: 14 }} value="晴れ">晴れ</MenuItem>
                                     <MenuItem sx={{ fontSize: 14 }} value="曇り">曇り</MenuItem>
@@ -192,47 +178,30 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                                     <MenuItem sx={{ fontSize: 14 }} value="雪">雪</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Stack>
+                        </Box>
                     </Box>
 
                     <Divider />
 
-                    <Box sx={{ my: 1, px: 2 }}>
+                    <Box sx={{ my: 3, px: 2 }}>
                         <Box sx={{ mb: 1 }}>
                             <Stack sx={{ mb: 1 }} spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-                                <Typography variant="h6" sx={{ fontSize: 14, color: "black" }} component="div">
+                                <Typography variant="h6" sx={{ fontSize: 14, color: "black" }} >
                                     練習内容
                                 </Typography>
-                                <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddDetails}>
-                                    <Typography fontSize={13} component="p">
-                                        追加
-                                    </Typography>
+                                <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85 }} onClick={AddDetails}>
+                                    追加
                                 </Button>
                             </Stack>
                             {contents.details.map((input, index) => (
-                                <Stack spacing={1} key={index} direction="row" sx={{ alignItems: "center", mb: 2 }}>
-                                    <Select sx={{ fontSize: 14, minWidth: "120px" }}
-                                        labelId="outlined-adornment-weather-label"
-                                        name="weather"
-                                        id="outlined-adornment-weather"
-                                        value={contents.details[index].type}
-                                        onChange={newValue => {
-                                            ChangeDetailsType(Number(newValue.target.value), index)
-                                        }}
-                                    >
-                                        {elementsCategories.map((type, index2) => (
-                                            <MenuItem sx={{ fontSize: 14 }} key={index2} value={index2}>{type.title}</MenuItem>
-                                        ))}
-                                    </Select>
-                                    <FormControl fullWidth sx={{ mb: 1 }}>
-                                        <OutlinedInput
-                                            id="outlined-adornment-input"
-                                            value={contents.details[index].context}
-                                            onChange={newValue => ChangeDetailsContext(newValue.target.value, index)}
-                                            sx={{ fontSize: 14 }}
-                                        />
-                                    </FormControl>
-                                </Stack>
+                                <FormControl key={index} fullWidth sx={{ mb: 1 }}>
+                                    <OutlinedInput
+                                        id="outlined-adornment-input"
+                                        value={contents.details[index].context}
+                                        onChange={newValue => ChangeDetailsContext(newValue.target.value, index)}
+                                        sx={{ fontSize: 14 }}
+                                    />
+                                </FormControl>
                             ))}
                         </Box>
 
@@ -241,7 +210,28 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
 
                     <Divider />
 
-                    <Box sx={{ my: 1, px: 2 }}>
+                    <Box sx={{ my: 3 }}>
+                        <Box sx={{ my: 2, px: 2 }}>
+                            <InputLabel sx={{ mb: 1, fontSize: 14, color: "#16b41e", fontWeight: "bold" }}>次に向けて</InputLabel>
+                            <FormControl fullWidth sx={{ fontSize: 14 }} variant="outlined">
+                                <OutlinedInput
+                                    sx={{ m: "0 !important", fontSize: 14, backgroundColor: "background.paper" }}
+                                    multiline
+                                    minRows={2}
+                                    value={contents.next}
+                                    onChange={newValue => {
+                                        setNext(newValue.target.value)
+                                        contents.next = newValue.target.value
+                                    }}
+                                    placeholder='次に向けての目標や取り組むことなど'
+                                />
+                            </FormControl>
+                        </Box>
+                    </Box>
+
+                    <Divider />
+
+                    <Box sx={{ my: 3, px: 2 }}>
                         <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
                             コメント
                         </Typography>
@@ -249,6 +239,7 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                             <OutlinedInput
                                 sx={{ m: "0 !important", fontSize: 14, backgroundColor: "background.paper" }}
                                 multiline
+                                minRows={2}
                                 value={contents.comment}
                                 onChange={newValue => {
                                     setComment(newValue.target.value)
@@ -261,7 +252,6 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                 </Box >
                 {/* <MenuSelectBox date={dayjs(String(dateValue)).format('YYYY-MM-DD')} /> */}
             </Box >
-        </Box >
-
+        </>
     )
 }

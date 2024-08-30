@@ -6,6 +6,9 @@ export const problemModalTitle = "課題"
 export const growthModalTitle = "成長記録"
 export const taskModalTitle = "取り組むこと"
 
+export const backTitle = "記録を中止しますか？"
+export const backMs = "保存していない記録は元に戻すことができません。"
+
 // delete modal 
 export const deleteNoteMs = "削除した記録は元に戻すことができません。"
 
