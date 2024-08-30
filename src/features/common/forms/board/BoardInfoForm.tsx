@@ -95,7 +95,7 @@ export default function BoardInfoForm({ setOpen, board, onSubmit }: pageProps) {
                     </Box>
 
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 1 }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 1, color: "black" }} component="div">
                             タイトル
                         </Typography>
                         <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
@@ -127,7 +127,7 @@ export default function BoardInfoForm({ setOpen, board, onSubmit }: pageProps) {
                     </Box>
 
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 1 }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 1, color: "black" }} component="div">
                             コメント
                         </Typography>
                         <FormControl fullWidth sx={{ fontSize: 14 }} variant="outlined">

@@ -129,7 +129,7 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
 
                 <Box >
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
                             基本情報
                         </Typography>
                         <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
@@ -200,7 +200,7 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                     <Box sx={{ my: 1, px: 2 }}>
                         <Box sx={{ mb: 1 }}>
                             <Stack sx={{ mb: 1 }} spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-                                <Typography variant="h6" sx={{ fontSize: 14 }} component="div">
+                                <Typography variant="h6" sx={{ fontSize: 14, color: "black" }} component="div">
                                     練習内容
                                 </Typography>
                                 <Button sx={{ fontSize: 13, minWidth: 85 }} onClick={AddDetails}>
@@ -242,7 +242,7 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                     <Divider />
 
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
                             コメント
                         </Typography>
                         <FormControl fullWidth sx={{ fontSize: 14 }} variant="outlined">

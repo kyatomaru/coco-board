@@ -178,7 +178,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
 
                 <Box>
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
                             基本情報
                         </Typography>
                         <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
@@ -253,7 +253,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                     <Divider />
 
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
                             コンディション
                         </Typography>
                         <Box sx={{ mb: 3 }}>
@@ -301,7 +301,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                             </Stack>
                         </Box>
                         <Box sx={{ mb: 3 }}>
-                            <InputLabel sx={{ mb: 1, fontSize: 14 }} >怪我</InputLabel>
+                            <InputLabel sx={{ mb: 1, fontSize: 14, color: "black" }} >怪我</InputLabel>
                             <FormControl fullWidth sx={{ mb: 1, }} variant="outlined">
                                 <OutlinedInput sx={{ fontSize: 14, backgroundColor: "background.paper" }}
                                     value={contents.injury}
@@ -317,7 +317,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                     <Divider />
 
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
                             チーム情報
                         </Typography>
                         <InputLabel sx={{ mb: 1, fontSize: 14 }} >チーム1</InputLabel>
@@ -391,7 +391,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                     <Divider />
 
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
                             ポジション
                         </Typography>
                         <FormControl fullWidth sx={{ my: 1 }} variant="outlined">
@@ -414,7 +414,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                     <Divider />
 
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
                             振り返り
                         </Typography>
                         <Box sx={{ mb: 1 }}>
@@ -486,7 +486,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                     <Divider />
 
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2 }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
                             コメント
                         </Typography>
                         <FormControl fullWidth sx={{ fontSize: 14, mb: 4 }} variant="outlined">
