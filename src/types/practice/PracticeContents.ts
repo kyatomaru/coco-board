@@ -9,8 +9,9 @@ export interface PracticeContentsType {
     place: String,
     createDate: Date,
     contentsId: String,
-    comment: string,
     details: Array<PracticeDetailsType>,
+    next: String,
+    comment: string,
 }
 
 
@@ -24,6 +25,7 @@ export class PracticeContentsModel implements PracticeContentsType {
     place: String
     createDate: Date
     contentsId: String
+    next: String
     comment: string
 
     constructor(date) {
@@ -32,11 +34,12 @@ export class PracticeContentsModel implements PracticeContentsType {
             contentsId: undefined,
             createDate: new Date(),
             updateDate: new Date(),
-            title: "",
+            title: undefined,
             date: date,
             details: [new PracticeDetailsModel()],
             weather: "",
             place: undefined,
+            next: undefined,
             comment: undefined,
         }
     }

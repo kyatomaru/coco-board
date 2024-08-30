@@ -4,12 +4,12 @@ export interface GameContentsType {
     contentsId: String,
     createDate: Date,
     updateDate: Date,
-    uid: string,
+    uid: String,
     date: String,
     title: String,
     weather: String,
     place: String,
-    injury: string,
+    injury: String,
     condition: Number,
     fatigue: Number,
     name1: String,
@@ -19,7 +19,8 @@ export interface GameContentsType {
     position: String,
     goodPoints: Array<GameFeedbackType>,
     badPoints: Array<GameFeedbackType>,
-    comment: string,
+    next: String,
+    comment: String,
 }
 
 export class GameContentsModel implements GameContentsType {
@@ -41,7 +42,8 @@ export class GameContentsModel implements GameContentsType {
     position: String
     goodPoints: Array<GameFeedbackType>
     badPoints: Array<GameFeedbackType>
-    comment: string
+    next: String
+    comment: String
 
     constructor(date) {
         return {
@@ -63,6 +65,7 @@ export class GameContentsModel implements GameContentsType {
             position: undefined,
             goodPoints: [new GameFeedbackModel()],
             badPoints: [new GameFeedbackModel()],
+            next: undefined,
             comment: undefined
         }
     }

@@ -126,7 +126,10 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
                                         <Box key={index}>
                                             {
                                                 detail.context != "" &&
-                                                <ListText primary={detail.context} secondary={elementsCategories[Number(detail.type)].title} />
+                                                // <ListText primary={detail.context} secondary={elementsCategories[Number(detail.type)].title} />
+                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                                    ・{detail.context}
+                                                </Typography>
                                             }
                                         </Box>
                                     ))
@@ -135,6 +138,23 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
                                 :
                                 <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
                                     なし
+                                </Typography>
+                            }
+                        </Box>
+                        :
+                        <Skeleton variant="rectangular" height={62} />
+                    }
+
+                    <Divider />
+
+                    {contents != undefined ?
+                        <Box sx={{ px: 2, my: 2 }}>
+                            <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#16b41e">
+                                次に向けて
+                            </Typography>
+                            {contents.next &&
+                                <Typography variant="body2" sx={{ fontSize: 14 }}>
+                                    {contents.next}
                                 </Typography>
                             }
                         </Box>
