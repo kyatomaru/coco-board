@@ -102,7 +102,7 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                 <Box sx={{ position: 'sticky', top: 0, backgroundColor: "white", zIndex: 100 }} >
                     <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
                         <Grid >
-                            <Button size="small" sx={{ color: 'black' }} variant='text' onClick={onClose}>
+                            <Button size="small" sx={{ color: 'black' }} variant='text' onClick={() => setIsConfirmCloseModal(true)}>
                                 キャンセル
                             </Button>
                         </Grid>

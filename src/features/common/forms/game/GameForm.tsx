@@ -429,7 +429,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                         <Box sx={{ my: 2 }}>
                             <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ alignItems: "center", mb: 1 }}>
                                 <InputLabel sx={{ mx: 1, fontSize: 14, color: "#007eff", fontWeight: "bold" }}>悪い点</InputLabel>
-                                <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85, color: "#2e7d32" }} onClick={AddBadPoints}>
+                                <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85 }} onClick={AddBadPoints}>
                                     追加
                                 </Button>
                             </Stack>
