@@ -196,7 +196,8 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                             {contents.details.map((input, index) => (
                                 <FormControl key={index} fullWidth sx={{ mb: 1 }}>
                                     <OutlinedInput
-                                        id="outlined-adornment-input"
+                                        multiline
+                                        minRows={2}
                                         value={contents.details[index].context}
                                         onChange={newValue => ChangeDetailsContext(newValue.target.value, index)}
                                         sx={{ fontSize: 14 }}

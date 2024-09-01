@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material-next/Button';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
@@ -33,6 +34,7 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import ConfirmCloseModal from '../../contents/modal/ConfirmModal';
 import { backTitle, backMs } from '@/constants/ModalMessage'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 type pageProps = {
     contents: any,
@@ -104,6 +106,17 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
         contents.goodPoints = input
     }
 
+    const deleteGoodPoint = (index) => {
+        const input = []
+        goodPoints.map((item, itemIndex) => {
+            if (itemIndex != index) {
+                input.push(item)
+            }
+        })
+        setGoodPoints(input)
+        contents.goodPoints = input
+    }
+
     const ChangeBadPointsContext = (newValue: String, index) => {
         const input = []
         badPoints.forEach((item) => {
@@ -130,6 +143,17 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
             input.push(item)
         })
         input.push(new GameFeedbackModel())
+        setBadPoints(input)
+        contents.badPoints = input
+    }
+
+    const deleteBadPoint = (index) => {
+        const input = []
+        badPoints.map((item, itemIndex) => {
+            if (itemIndex != index) {
+                input.push(item)
+            }
+        })
         setBadPoints(input)
         contents.badPoints = input
     }
@@ -415,13 +439,21 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                                 </Button>
                             </Stack>
                             {contents.goodPoints.map((input, index) => (
-                                <FormControl key={index} fullWidth sx={{ mb: 1 }}>
+                                <FormControl key={index} fullWidth sx={{ mb: 1, position: "relative" }}>
                                     <OutlinedInput
+                                        multiline
+                                        minRows={2}
                                         value={contents.goodPoints[index].context}
                                         onChange={newValue => ChangeGoodPointsContext(newValue.target.value, index)}
                                         sx={{ fontSize: 14 }}
                                         placeholder={index == 0 && "良かったところや良かったプレーなど"}
+                                        startAdornment
                                     />
+                                    {index != 0 && !contents.goodPoints[index].context &&
+                                        <IconButton onClick={() => deleteGoodPoint(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white" }}>
+                                            <HighlightOffIcon sx={{ width: "20px", height: "20px" }} />
+                                        </IconButton>
+                                    }
                                 </FormControl>
                             ))}
                         </Box>
@@ -436,12 +468,18 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                             {contents.badPoints.map((input, index) => (
                                 <FormControl key={index} fullWidth sx={{ mb: 1 }}>
                                     <OutlinedInput
-                                        id="outlined-adornment-input"
+                                        multiline
+                                        minRows={2}
                                         value={contents.badPoints[index].context}
                                         onChange={newValue => ChangeBadPointsContext(newValue.target.value, index)}
                                         sx={{ fontSize: 14 }}
                                         placeholder={index == 0 && "悪かったところや悪かったプレーなど"}
                                     />
+                                    {index != 0 && !contents.badPoints[index].context &&
+                                        <IconButton onClick={() => deleteBadPoint(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white" }}>
+                                            <HighlightOffIcon sx={{ width: "20px", height: "20px" }} />
+                                        </IconButton>
+                                    }
                                 </FormControl>
                             ))}
                         </Box>
