@@ -79,7 +79,7 @@ export default function BoardCard({ allContents, contents, setContents }: PagePr
                                 <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} justifyContent="space-between"  >
                                     <Box sx={{ width: "100%", px: 2, my: 1 }}>
                                         {!contents.imagePath ?
-                                            <Skeleton variant="rectangular" width="100%" height={300} sx={{ m: 0 }} />
+                                            <Skeleton variant="rectangular" width="100%" height={Math.min(window.innerWidth / 2, window.innerHeight / 2)} sx={{ m: 0 }} />
                                             : <CardMedia
                                                 component="img"
                                                 // height="194"

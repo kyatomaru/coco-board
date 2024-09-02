@@ -47,7 +47,7 @@ export default function VerifyemailErrorPage() {
                     />
                     <Typography sx={{
                         fontSize: { xs: 25, md: 30 },
-                        fontWeight: "bold"
+                        fontWeight: "bold", color: "black"
                     }}>
                         coco-board
                     </Typography>

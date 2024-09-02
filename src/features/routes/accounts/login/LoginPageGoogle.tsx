@@ -25,7 +25,7 @@ export default function LoginPage() {
     const router = useRouter()
 
     return (
-        <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
+        <Container maxWidth="xs" fixed sx={{ mt: "70px", mb: "30px" }}>
             <Box sx={{ alignItems: "center", px: "25px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
                 <Stack
                     direction="row"
@@ -33,7 +33,7 @@ export default function LoginPage() {
                     justifyContent="center"
                     spacing={2}
                     sx={{ mb: "40px" }}>
-                    <CardMedia
+                    < CardMedia
                         component="img"
                         sx={{ width: 50, height: 50 }}
                         image="/images/icon.png"
@@ -47,24 +47,14 @@ export default function LoginPage() {
                     </Typography>
                 </Stack>
                 <LoginBox />
-                <Divider>
-                    <Typography variant="body1" sx={{ fontSize: 13 }}>
-                        または
-                    </Typography>
-                </Divider>
+                <Box sx={{ mb: 3 }}>
+                    <p style={{ textAlign: "center", fontSize: "1em", fontWeight: 400, color: "black" }}>
+                        ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。
+                    </p>
+                </Box>
                 <GoogleSignInButton />
                 {/* <LineSignInButton /> */}
                 {/* <XSignInButton /> */}
-            </Box>
-            <Box sx={{ mt: "12px", p: "20px 20px 10px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
-                <Typography variant="h5" sx={{ fontSize: 13, color: "black" }}>
-                    アカウントをお持ちでない場合
-                </Typography>
-                <Typography>
-                    <Button href='/accounts/signup' size="medium" sx={{ height: "30px", fontSize: 13 }} >
-                        登録する
-                    </Button>
-                </Typography>
             </Box>
         </Container >
     );

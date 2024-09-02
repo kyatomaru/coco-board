@@ -113,7 +113,7 @@ export default function ResetPasswordPage() {
                     />
                     <Typography sx={{
                         fontSize: { xs: 25, md: 30 },
-                        fontWeight: "bold"
+                        fontWeight: "bold", color: "black"
                     }}>
                         coco-board
                     </Typography>
@@ -122,7 +122,7 @@ export default function ResetPasswordPage() {
                 {isReset ?
                     <Box>
                         <Box >
-                            <Typography variant="h5" sx={{ fontSize: 13 }}>
+                            <Typography variant="h5" sx={{ fontSize: 13, color: "black" }}>
                                 新しいパスワードを設定しました。
                             </Typography>
                         </Box>
@@ -137,7 +137,7 @@ export default function ResetPasswordPage() {
                             marginBottom: "5px",
                         }}>
                         <Box sx={{ mb: "10px" }}>
-                            <Typography variant="h5" sx={{ fontSize: 13 }}>
+                            <Typography variant="h5" sx={{ fontSize: 13, color: "black" }}>
                                 新しいパスワードを設定してください。
                             </Typography>
                         </Box>
