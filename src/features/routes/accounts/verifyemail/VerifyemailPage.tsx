@@ -47,13 +47,13 @@ export default function VerifyemailPage() {
                     />
                     <Typography sx={{
                         fontSize: { xs: 25, md: 30 },
-                        fontWeight: "bold"
+                        fontWeight: "bold", color: "black"
                     }}>
                         coco-board
                     </Typography>
                 </Stack>
                 <Box sx={{ mb: "10px" }}>
-                    <Typography variant="h5" sx={{ fontSize: 13 }}>
+                    <Typography variant="h5" sx={{ fontSize: 13, color: "black" }}>
                         メールアドレスを認証しました。
                     </Typography>
                 </Box>

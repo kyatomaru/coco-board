@@ -79,7 +79,7 @@ export default function ResetPasswordEmailsendPage() {
                     />
                     <Typography sx={{
                         fontSize: { xs: 25, md: 30 },
-                        fontWeight: "bold"
+                        fontWeight: "bold", color: "black"
                     }}>
                         coco-board
                     </Typography>

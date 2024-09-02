@@ -48,7 +48,7 @@ export default function SignupPage() {
                     />
                     <Typography sx={{
                         fontSize: { xs: 25, md: 30 },
-                        fontWeight: "bold"
+                        fontWeight: "bold", color: "black"
                     }}>
                         coco-board
                     </Typography>
@@ -57,7 +57,7 @@ export default function SignupPage() {
                     <SignupBox />
                 </Box>
                 <Divider>
-                    <Typography variant="body1" sx={{ fontSize: 13 }}>
+                    <Typography variant="body1" sx={{ fontSize: 13, color: "black" }}>
                         または
                     </Typography>
                 </Divider>
@@ -66,7 +66,7 @@ export default function SignupPage() {
                 {/* <XSignInButton /> */}
             </Box>
             <Box sx={{ mt: "12px", p: "20px 20px 10px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
-                <Typography variant="h5" sx={{ fontSize: 13, }}>
+                <Typography variant="h5" sx={{ fontSize: 13, color: "black" }}>
                     アカウントをお持ちの場合
                 </Typography>
                 <Typography  >

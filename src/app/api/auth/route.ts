@@ -39,10 +39,12 @@ export async function GET(
         // handleResetPassword(auth, actionCode, continueUrl, lang);
 
         case 'recoverEmail':
-        // Display email recovery handler and UI.
-        // handleRecoverEmail(auth, actionCode, lang);
-        // break;
+            // Display email recovery handler and UI.
+            // handleRecoverEmail(auth, actionCode, lang);
+            // break;
+            console.log("aa")
         case 'verifyEmail':
+            console.log('verifyEmail')
             // Display email verification handler and UI.
             // return NextResponse.redirect(`/accounts/verifyemail/${actionCode}`)
             if (handleVerifyEmail(auth, actionCode, continueUrl, lang))
@@ -110,6 +112,7 @@ const handleVerifyEmail = async (auth, actionCode, continueUrl, lang) => {
     }).catch((error) => {
         // Code is invalid or expired. Ask the user to verify their email address
         // again.
+        console.log(error)
         return false
     });
 

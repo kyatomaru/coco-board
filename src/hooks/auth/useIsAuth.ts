@@ -11,7 +11,7 @@ export const useIsAuth = async (router) => {
                 router.replace('/accounts/login')
             }
             else if (!user.emailVerified) {
-                router.push('/accounts/signup/emailsend')
+                router.replace('/accounts/signup/emailsend')
             }
         })
     });
