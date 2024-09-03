@@ -58,7 +58,7 @@ export default function ResetPasswordEmailsendPage() {
     }
 
     return (
-        <Container maxWidth="xs" fixed sx={{ my: "20px" }}>
+        <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
             {isSendLink &&
                 <Alert sx={{ mb: 1 }} icon={<CheckIcon fontSize="inherit" />} severity="success">
                     リンクを送信しました。
