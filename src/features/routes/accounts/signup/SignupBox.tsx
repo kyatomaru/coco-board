@@ -15,8 +15,11 @@ import { actionCodeSettings } from '@/constants/Auth';
 
 const REGEX_NUMBER = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i;
 
+type PageProps = {
+    setIsLoading: any
+}
 
-export default function SignupBox() {
+export default function SignupBox({ setIsLoading }: PageProps) {
     const router = useRouter()
     const [email, setEmail] = React.useState(undefined)
     const [password, setPassword] = React.useState(undefined)
@@ -38,6 +41,7 @@ export default function SignupBox() {
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        setIsLoading(true)
 
         validateEmail()
         validatePassword()
@@ -107,7 +111,7 @@ export default function SignupBox() {
             }
             noValidate
             autoComplete="off"
-            method='POST' >
+            method='POST'>
             <Box sx={{ fontSize: "13px !important", mt: "15px" }}>
                 <FormControl fullWidth size='small' variant="outlined">
                     <InputLabel sx={{ fontSize: 13 }} shrink={email != undefined} htmlFor="email">メールアドレス</InputLabel>

@@ -53,6 +53,9 @@ export default function LoginPage() {
                     </Typography>
                 </Divider>
                 <GoogleSignInButton />
+                <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
+                    ※ Googleでログインする場合はSafariもしくはChromeからアプリをご利用ください。
+                </Typography>
                 {/* <LineSignInButton /> */}
                 {/* <XSignInButton /> */}
             </Box>

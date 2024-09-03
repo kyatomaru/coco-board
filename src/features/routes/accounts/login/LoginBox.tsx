@@ -35,7 +35,7 @@ export default function LoginBox() {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 if (userCredential.user.emailVerified) {
-                    router.replace('/')
+                    router.replace("/home")
                 } else {
                     sendEmailVerification(userCredential.user, actionCodeSettings)
                         .then((res) => {
