@@ -77,7 +77,7 @@ export default function BottomViewBar({ frame, setFrame, currentFrame, setCurren
                     max={frame.length - 1}
                     onChange={frameHandleChange}
                 />
-                <Typography sx={{ mx: 2, fontSize: 14 }}>
+                <Typography sx={{ mx: 1, fontSize: 14 }}>
                     {currentFrame + 1}/{frame.length}
                 </Typography>
             </Stack>
