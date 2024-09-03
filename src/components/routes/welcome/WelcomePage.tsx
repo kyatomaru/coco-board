@@ -68,6 +68,7 @@ export default function WelcomePage() {
                     <CardMedia
                         component='video'
                         autoPlay
+                        playsInline
                         muted
                         loop
                         image="/images/welcomePage/tacticsImage.mov"

@@ -18,6 +18,7 @@ import CreateButton from '@/features/common/button/CreateButton'
 import { useGetNote } from '@/hooks/note/useGetDateNote';
 import { useGetBoard } from '@/hooks/board/useGetDateBoard';
 import dayjs from 'dayjs';
+import InviteModal from '@/components/common/InviteModal';
 
 export default function Home() {
   const router = useRouter()
@@ -63,7 +64,7 @@ export default function Home() {
               </Box>
             }
           </Container >
-          {/* <Footer /> */}
+          <InviteModal />
         </>
       }
     </main >
