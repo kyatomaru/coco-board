@@ -153,53 +153,56 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                         <Skeleton variant="rectangular" height={87} />
                     }
 
-                    <Divider />
 
                     {contents != undefined ?
-                        <Box sx={{ width: "100%", my: 1 }}>
-                            {contents.condition &&
-                                <Box sx={{ px: 2, mb: 2 }}>
-                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                        体調
-                                    </Typography>
-                                    <Stack direction="row" alignItems="center">
-                                        <span>{customIcons[Number(contents.condition)].icon}</span>
-                                        <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
-                                            {customIcons[Number(contents.condition)].label}
+                        contents.condition != 0 && contents.fatigue != 0 && contents.injury &&
+                        <>
+                            <Divider />
+                            <Box sx={{ width: "100%", my: 1 }}>
+                                {contents.condition != 0 &&
+                                    <Box sx={{ px: 2, mb: 2 }}>
+                                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                            体調
                                         </Typography>
-                                    </Stack>
-                                </Box>
-                            }
-                            {contents.fatigue &&
-                                <Box sx={{ px: 2, mb: 2 }}>
-                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                        疲労感
-                                    </Typography>
-                                    <Stack direction="row" alignItems="center">
-                                        <span>{customIcons[Number(contents.fatigue)].icon}</span>
-                                        <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
-                                            {customIcons[Number(contents.fatigue)].label}
+                                        <Stack direction="row" alignItems="center">
+                                            <span>{customIcons[Number(contents.condition)].icon}</span>
+                                            <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                                {customIcons[Number(contents.condition)].label}
+                                            </Typography>
+                                        </Stack>
+                                    </Box>
+                                }
+                                {contents.fatigue != 0 &&
+                                    <Box sx={{ px: 2, mb: 2 }}>
+                                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                            疲労感
                                         </Typography>
-                                    </Stack>
-                                </Box>
-                            }
-                            {contents.injury &&
-                                <Box sx={{ px: 2 }}>
-                                    <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                        怪我
-                                    </Typography>
-                                    <Typography variant="body2" sx={{}}>
-                                        {String(contents.injury)}
-                                    </Typography>
-                                </Box>
-                            }
-                        </Box>
+                                        <Stack direction="row" alignItems="center">
+                                            <span>{customIcons[Number(contents.fatigue)].icon}</span>
+                                            <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                                {customIcons[Number(contents.fatigue)].label}
+                                            </Typography>
+                                        </Stack>
+                                    </Box>
+                                }
+                                {contents.injury &&
+                                    <Box sx={{ px: 2 }}>
+                                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
+                                            怪我
+                                        </Typography>
+                                        <Typography variant="body2" sx={{}}>
+                                            {String(contents.injury)}
+                                        </Typography>
+                                    </Box>
+                                }
+                            </Box>
+                        </>
                         :
                         <Skeleton variant="rectangular" height={189} />
                     }
 
 
-                    {contents != undefined && contents.position != null &&
+                    {contents != undefined && contents.position &&
                         <>
                             <Divider />
                             <Box sx={{ px: 2, my: 1 }}>
@@ -290,7 +293,7 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                         <Skeleton variant="rectangular" height={62} />
                     }
 
-                    {contents != undefined && contents.comment != "" &&
+                    {contents != undefined && contents.comment != undefined &&
                         <>
                             <Divider />
                             <Box sx={{ px: 2, my: 1 }}>
@@ -302,9 +305,9 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                     {contents.comment}
                                 </Typography>
                             </Box>
-                            <Divider />
                         </>
                     }
+                    <Divider />
                 </Box >
             }
         </>

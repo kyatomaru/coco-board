@@ -45,11 +45,21 @@ export default function WelcomePage() {
             <Box sx={mainImageStyle} />
             <Box sx={{ height: { xs: 460, md: 500, lg: 540 }, ml: { md: 0, lg: 30 } }}>
                 <Box sx={{ p: "0 20px", textAlign: { xs: "center", md: "unset" } }}>
-                    <Typography variant="h1" sx={{
+                    {/* <Typography variant="h1" sx={{
                         color: "aliceblue", fontSize: { xs: 33, md: 45, lg: 54 },
                         pt: { xs: "250px", md: "200px" },
                         mb: 1
-                    }}>サッカーの戦術を簡単記録</Typography>
+                    }}>サッカーの戦術を簡単記録</Typography> */}
+                    <Box sx={{ pt: { xs: "200px", md: "150px" }, }}>
+                        <Typography variant="h1" sx={{
+                            color: "aliceblue", fontSize: { xs: 33, md: 45, lg: 54 },
+                            mb: 1
+                        }}>サッカーノートアプリ</Typography>
+                        <Typography variant="h2" sx={{
+                            color: "aliceblue", fontSize: { xs: 20, md: 27, lg: 36 },
+                            mb: 1
+                        }}>戦術・試合・練習を記録</Typography>
+                    </Box>
                     <Box>
                         <Button onClick={() => router.push('/home')} size="large" variant="contained"
                             sx={{ textTransform: "none", mt: 2, borderRadius: 3, backgroundColor: "#1976d2 !important" }}>
@@ -59,6 +69,17 @@ export default function WelcomePage() {
                 </Box>
             </Box>
             <Box sx={{ zIndex: 1200, background: "white", width: "100%", mt: 5 }} >
+                <Box sx={{ textAlign: "center", py: 7, maxWidth: 450, margin: "auto" }}>
+                    <Typography sx={{ fontSize: 25, mb: 3, px: 3 }}>coco-boardとは？</Typography>
+                    <Typography sx={{ px: 3 }}>
+                        スマホだけで振り返りができるサッカーノートアプリです。
+                        戦術・試合・練習を記録することができます。
+                        練習の帰り道や寝る前など、いつでもどこでもアプリを開いて効率良く振り返ることができます。
+                    </Typography>
+                </Box>
+
+                <Divider />
+
                 <Box sx={{ textAlign: "center", py: 7, maxWidth: 450, margin: "auto" }}>
                     <Typography sx={{ fontSize: 25, mb: 3, px: 3 }}>戦術を記録しよう</Typography>
                     <Typography sx={{ px: 3 }}>
@@ -78,16 +99,24 @@ export default function WelcomePage() {
 
                 <Divider />
 
-                <Box sx={{ textAlign: "center", width: "100%", minHeight: 350, backgroundImage: "url(/images/welcomePage/commuteImage.png)", backgroundSize: "cover" }}>
-                    <Box sx={{ textAlign: "center", py: 7, px: 3, maxWidth: 450, margin: "auto" }}>
-                        <Typography sx={{ color: "white", fontSize: 25, mb: 3 }}>いつでもどこでも練習・試合の内容を記録しよう</Typography>
-                        <Typography sx={{ color: "white" }}>
+                {/* <Box sx={{ textAlign: "center", width: "100%", minHeight: 350, backgroundImage: "url(/images/welcomePage/commuteImage.png)", backgroundSize: "cover" }}> */}
+                <Box sx={{ textAlign: "center", py: 7, maxWidth: 450, margin: "auto" }}>
+                    <Typography sx={{ fontSize: 25, mb: 3, px: 3 }}>練習・試合の内容を記録しよう</Typography>
+                    {/* <Typography sx={{ color: "white" }}>
                             ノートの持ち運びは不要です。帰り道、寝る前など、思い立った時にスマホひとつで記録が可能です。いつでもどこでもアプリを開いて効率良く振り返ることができます。
-                        </Typography>
-                    </Box>
+                        </Typography> */}
+                    <Typography sx={{ px: 2 }}>
+                        試合と練習の内容を詳細に記録できます。
+                    </Typography>
+                    <CardMedia
+                        component='img'
+                        image="/images/welcomePage/note.png"
+                        sx={{ width: { xs: 210, sm: 260 }, margin: "auto", mt: 3 }}
+                    />
                 </Box>
+                {/* </Box> */}
             </Box>
-            {/* <Box sx={{ height: 100 }} /> */}
+            <Box sx={{ height: 100 }} />
             <InfoFooter />
         </Box>
     );
