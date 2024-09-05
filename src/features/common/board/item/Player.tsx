@@ -68,7 +68,8 @@ const playerNameStyle = (diameter, color) => {
         fontWeight: "bold",
         position: "absolute",
         zIndex: 100,
-        display: "block"
+        display: "block",
+        width: "max-content"
     }
 }
 

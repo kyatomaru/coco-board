@@ -53,7 +53,7 @@ export default function Footer() {
                     justifyContent="center"
                     sx={{ px: 2 }}
                 >
-                    <Button size='small' sx={{ fontSize: 12, color: "gray" }} onClick={ClickHelpButton}>ヘルプ</Button>
+                    {/* <Button size='small' sx={{ fontSize: 12, color: "gray" }} onClick={ClickHelpButton}>ヘルプ</Button> */}
                     <Button size='small' sx={{ fontSize: 12, color: "gray" }} onClick={ClickPrivacyButton}>プライバシー</Button>
                     <Button size='small' sx={{ fontSize: 12, color: "gray" }} onClick={ClickTermsButton}>利用規約</Button>
                 </Stack>
@@ -64,7 +64,7 @@ export default function Footer() {
                     justifyContent="center"
                     sx={{ height: 30 }}
                 >
-                    <Button size='small' sx={{ fontSize: 11, color: "gray" }} onClick={ClickHelpButton}>ヘルプ</Button>
+                    {/* <Button size='small' sx={{ fontSize: 11, color: "gray" }} onClick={ClickHelpButton}>ヘルプ</Button> */}
                     <Button size='small' sx={{ fontSize: 11, color: "gray" }} onClick={ClickPrivacyButton}>プライバシー</Button>
                     <Button size='small' sx={{ fontSize: 11, color: "gray" }} onClick={ClickTermsButton}>利用規約</Button>
                 </Stack>
