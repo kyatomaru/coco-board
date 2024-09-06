@@ -36,6 +36,7 @@ export default function SignupPage() {
 
     return (
         <>
+            あいう
             {!isLoading ?
                 <LoadingPage />
                 :
