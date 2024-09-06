@@ -24,19 +24,8 @@ export default function SignupPage() {
     const [isLoading, setIsLoading] = React.useState(false)
     const [user, setUser] = React.useState<User | undefined>()
 
-    React.useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                if (user.emailVerified) {
-                    router.replace('/home')
-                }
-            }
-        })
-    });
-
     return (
         <>
-            あいう
             {!isLoading ?
                 <LoadingPage />
                 :
