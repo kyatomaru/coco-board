@@ -167,35 +167,35 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
     }
 
     return (
-        <AllowPartialScrolling>
-            <Box sx={{ overflowY: "auto", position: "absolute", zIndex: 2000, height: verticalHeight + 26 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid" }}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={team} onChange={changeTeam} >
-                        <Tab label="Home" value={0} sx={{ fontSize: 12 }} />
-                        <Tab label="Away" value={1} sx={{ fontSize: 12 }} />
-                    </Tabs>
-                </Box>
-                <Box sx={{ p: 1, my: 1 }}>
-                    <Stack height="25px" direction="row" justifyContent="flex-start" spacing={2} sx={{ mb: 2 }}>
-                        <Select
-                            value={formation[team]}
-                            onChange={(event) => changeFormation(event)}
-                            sx={{ height: 30, width: 100 }}
-                        >
-                            {formationMenu()}
-                        </Select>
-                        <Button onClick={() => putPlayers()} size="small">
-                            配置
-                        </Button>
-                    </Stack>
+        // <AllowPartialScrolling>
+        <Box sx={{ overflowY: "auto", position: "absolute", zIndex: 2000, height: verticalHeight + 26 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid" }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={team} onChange={changeTeam} >
+                    <Tab label="Home" value={0} sx={{ fontSize: 12 }} />
+                    <Tab label="Away" value={1} sx={{ fontSize: 12 }} />
+                </Tabs>
+            </Box>
+            <Box sx={{ p: 1, my: 1 }}>
+                <Stack height="25px" direction="row" justifyContent="flex-start" spacing={2} sx={{ mb: 2 }}>
+                    <Select
+                        value={formation[team]}
+                        onChange={(event) => changeFormation(event)}
+                        sx={{ height: 30, width: 100 }}
+                    >
+                        {formationMenu()}
+                    </Select>
+                    <Button onClick={() => putPlayers()} size="small">
+                        配置
+                    </Button>
+                </Stack>
 
-                    <Divider />
+                <Divider />
 
-                    <Box sx={{ mt: 2 }}>
-                        {playersField()}
-                    </Box>
+                <Box sx={{ mt: 2 }}>
+                    {playersField()}
                 </Box>
             </Box>
-        </AllowPartialScrolling>
+        </Box>
+        // </AllowPartialScrolling >
     )
 }
