@@ -88,14 +88,17 @@ export default function SettingBox({ frame, setFrame, board }: PageProps) {
 
 
     return (
-        <Box sx={{ position: "absolute", zIndex: 2000, top: "26px", height: courtHeight + 1 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid", borderBottom: "0.5px #666 solid", borderTop: "1px #666 solid" }}>
-            <Stack direction="row" justifyContent="flex-end" sx={{ mx: 1 }}>
-                <Button size='small' onClick={submit} >
-                    変更
-                </Button>
-            </Stack>
+        // <AllowPartialScrolling>
+        <Box sx={{ touchAction: "none", overflowY: "auto", position: "absolute", zIndex: 2000, height: courtHeight + 26 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid" }}>
+            <Box sx={{ position: "sticky", top: 0, backgroundColor: "white", zIndex: 2001 }}>
+                <Stack direction="row" justifyContent="flex-end" sx={{ mx: 1 }}>
+                    <Button size='small' onClick={submit} >
+                        変更
+                    </Button>
+                </Stack>
 
-            <Divider />
+                <Divider />
+            </Box>
 
             <Box sx={{ my: 1, px: 1 }}>
                 <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
@@ -158,5 +161,6 @@ export default function SettingBox({ frame, setFrame, board }: PageProps) {
                 })
             }
         </Box >
+        // </AllowPartialScrolling>
     )
 }

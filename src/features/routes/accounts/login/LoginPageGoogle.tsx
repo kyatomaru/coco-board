@@ -3,6 +3,7 @@
 import * as React from 'react';
 import LoadingPage from '@/components/LoadingPage';
 import GoogleSignInButton from '../../../common/auth/google/GoogleSignInButton';
+import AppleSignInButton from '@/features/common/auth/apple/AppleSignInButton';
 // import LineSignInButton from '../../../components/auths/line/LineSignInButton';
 // import XSignInButton from '../../../components/auths/x/XSignInButton';
 import GoogleSignOutButton from '../../../common/auth/google/GoogleSignOutButton';
@@ -68,6 +69,10 @@ export default function LoginPage() {
                             </p>
                         </Box>
                         <GoogleSignInButton />
+                        <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
+                            ※ Googleでログインする場合はSafariもしくはChromeからアプリをご利用ください。
+                        </Typography>
+                        {/* <AppleSignInButton /> */}
                         {/* <LineSignInButton /> */}
                         {/* <XSignInButton /> */}
                     </Box>

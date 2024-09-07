@@ -8,6 +8,7 @@ import ItemSettingBox from './itemSetting/ItemSettingBox';
 import PlayersSettingBox from './playersSetting/PlayersSettingBox';
 import CourtSettingBox from './courtSetting/CourtSettingBox';
 import SettingBox from './setting/SettingBox';
+import { useScrollLock } from '@/hooks/common/useScrollLock';
 
 type PageProps = {
     board: any,
@@ -22,6 +23,8 @@ type PageProps = {
 
 
 export default function TopSubControlBar({ board, frame, setFrame, selectItem, setSelectItem, menu, setMenu, isPlay }: PageProps) {
+    useScrollLock()
+
     return (
         <>
             {isPlay ?

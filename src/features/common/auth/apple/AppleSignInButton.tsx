@@ -2,20 +2,20 @@
 
 import * as React from 'react';
 import { createButton } from "react-social-login-buttons";
-import { signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+import { signInWithRedirect, signInWithPopup, OAuthProvider } from "firebase/auth"
 import { auth } from "@/app/firebase"
 import Box from '@mui/material/Box';
 import Image from "next/image"
 import { useRouter } from 'next/navigation'
 
 
-const GoogleSignIn = async (router) => {
-    const GoogleProvider = new GoogleAuthProvider();
-    GoogleProvider.setCustomParameters({
-        prompt: "select_account"
-    });
+const AppleSignIn = async (router) => {
+    const AppleProvider = new OAuthProvider('apple.com');
+    // AppleProvider.setCustomParameters({
+    //     locale: 'ja'
+    // });
 
-    await signInWithPopup(auth, GoogleProvider)
+    await signInWithPopup(auth, AppleProvider)
         .then((res) => {
             router.replace("/home")
         }).catch((error) => {
@@ -24,16 +24,6 @@ const GoogleSignIn = async (router) => {
             const errorMessage = error.message;
         });
 }
-
-// const config = {
-//     activeStyle: { background: "#EFF0EE" },
-//     icon: Icon,
-//     style: { background: "white", color: "black", height: "40px", fontSize: "13px", justifyContent: "center" },
-//     text: "Googleでログイン",
-//     onclick: { GoogleSignIn },
-//     align: "center",
-//     size: "50px"
-// };
 
 const loginBtnStyle = {
     background: "white",
@@ -50,18 +40,18 @@ const loginBtnStyle = {
     cursor: "pointer"
 }
 
-export default function GoogleSignInButton() {
+export default function AppleSignInButton() {
     const router = useRouter()
     return (
-        <button onClick={() => { GoogleSignIn(router) }} style={loginBtnStyle}>
+        <button onClick={() => { AppleSignIn(router) }} style={loginBtnStyle}>
             <span className="icon" style={{ marginRight: "10px" }}><Icon /></span>
-            <span className="buttonText" style={{ color: "black", fontWeight: "600" }}>Googleでログイン</span>
+            <span className="buttonText" style={{ color: "black", fontWeight: "600" }}>Appleのアカウントでログイン</span>
         </button >
     );
 }
 
 function Icon() {
     return (
-        <Image src="/images/auth/google-icon.svg" width={20} height={20} alt="google_img" />
+        <Image src="/images/auth/apple-icon.svg" width={20} height={20} alt="apple_img" />
     );
 }
