@@ -61,7 +61,7 @@ export default function WelcomePage() {
                         }}>戦術・試合・練習を記録</Typography>
                     </Box>
                     <Box>
-                        <Button onClick={() => router.push('/home')} size="large" variant="contained"
+                        <Button onClick={() => router.push('/home?openExternalBrowser=1')} size="large" variant="contained"
                             sx={{ textTransform: "none", mt: 2, borderRadius: 3, backgroundColor: "#1976d2 !important" }}>
                             coco-boardを使ってみる
                         </Button>
