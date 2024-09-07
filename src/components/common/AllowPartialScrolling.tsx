@@ -81,8 +81,8 @@ const AllowPartialScrolling = React.memo(function useAllowPartialScrolling(props
 
 
     return (
-        <Box sx={{ overflowY: "scroll", height: "100vh", "-webkit-overflow-scrolling": "touch", }} id="scroll_item">
-            <Box sx={{ overflowY: "scroll", minHeight: "100vh", "-webkit-overflow-scrolling": "touch" }}>{props.children}</Box>
+        <Box sx={{ overflowY: "scroll", height: "100%", "-webkit-overflow-scrolling": "touch", }} id="scroll_item">
+            <Box sx={{ overflowY: "scroll", minHeight: "100%", "-webkit-overflow-scrolling": "touch" }}>{props.children}</Box>
         </Box>
     );
 });
