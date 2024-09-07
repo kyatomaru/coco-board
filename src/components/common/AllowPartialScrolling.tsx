@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback } from "react";
 
-const AllowPartialScrolling = React.memo((props: any) => {
+const AllowPartialScrolling = React.memo(function useAllowPartialScrolling(props: any) {
     // スクロール可能DOM格納
     const scrollArea = useRef(null);
 
