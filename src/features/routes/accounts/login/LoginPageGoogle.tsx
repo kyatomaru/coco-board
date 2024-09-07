@@ -21,18 +21,15 @@ import CardMedia from '@mui/material/CardMedia';
 import LoginBox from './LoginBox';
 import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
 
-const isInstagramWebBrowser = () => {
-    /** User Agent 文字列 */
-    const userAgent = window.navigator.userAgent
-    /** Instagram という文字列が含まれているかどうか? を判定する */
-    const isInstagramWebOpen = /Instagram/i.test(userAgent)
-    // console.log('Insta 判定', isInstagramWebOpen)
-    return isInstagramWebOpen
-};
-
-
 export default function LoginPage() {
-    const router = useRouter()
+    const isInstagramWebBrowser = () => {
+        /** User Agent 文字列 */
+        const userAgent = window.navigator.userAgent
+        /** Instagram という文字列が含まれているかどうか? を判定する */
+        const isInstagramWebOpen = /Instagram/i.test(userAgent)
+        // console.log('Insta 判定', isInstagramWebOpen)
+        return isInstagramWebOpen
+    };
 
     return (
         <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
