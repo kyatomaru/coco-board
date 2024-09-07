@@ -22,7 +22,13 @@ import LoginBox from './LoginBox';
 import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
 
 export default function LoginPage() {
-    const isInstagramWebBrowser = () => {
+    const [isInstagramWebBrowser, setIsInstagramWebBrowser] = React.useState(false)
+
+    React.useEffect(() => {
+        setIsInstagramWebBrowser(checkInstagramWebBrowser())
+    }, [])
+
+    const checkInstagramWebBrowser = () => {
         /** User Agent 文字列 */
         const userAgent = window.navigator.userAgent
         /** Instagram という文字列が含まれているかどうか? を判定する */
@@ -53,7 +59,7 @@ export default function LoginPage() {
                         coco-board
                     </Typography>
                 </Stack>
-                {isInstagramWebBrowser()
+                {isInstagramWebBrowser
                     ? <DefaultBrowserModal />
                     : <Box>
                         <Box sx={{ mb: 3 }}>
