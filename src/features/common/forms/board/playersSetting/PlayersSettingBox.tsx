@@ -167,7 +167,12 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
     }
 
     return (
-        <Box sx={{ overflowY: "scroll", position: "absolute", zIndex: 2000, height: verticalHeight + 26 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid" }}>
+        <Box sx={{
+            overflowY: "scroll", position: "absolute", zIndex: 2000,
+            height: verticalHeight + 26 + "px",
+            backgroundColor: "white", borderRight: "0.5px #666 solid"
+        }}>
+            {verticalHeight}
             {/* <AllowPartialScrolling> */}
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={team} onChange={changeTeam} >
