@@ -23,7 +23,7 @@ import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
 
 const isInstagramWebBrowser = () => {
     /** User Agent 文字列 */
-    const userAgent = navigator.userAgent
+    const userAgent = window.navigator.userAgent
     /** Instagram という文字列が含まれているかどうか? を判定する */
     const isInstagramWebOpen = /Instagram/i.test(userAgent)
     // console.log('Insta 判定', isInstagramWebOpen)
