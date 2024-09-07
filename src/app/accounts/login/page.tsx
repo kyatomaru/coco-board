@@ -6,7 +6,8 @@ import type { User } from 'firebase/auth';
 import { auth } from '@/app/firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import LoadingPage from '@/components/LoadingPage';
-import LoginPage from '@/features/routes/accounts/login/LoginPage';
+import LoginPage from '@/features/routes/accounts/login/LoginPageGoogle';
+import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
 
 export default function Home() {
   const router = useRouter()
