@@ -19,13 +19,26 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import CardMedia from '@mui/material/CardMedia';
 import LoginBox from './LoginBox';
-
+import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
 
 export default function LoginPage() {
-    const router = useRouter()
+    const [isInstagramWebBrowser, setIsInstagramWebBrowser] = React.useState(false)
+
+    React.useEffect(() => {
+        setIsInstagramWebBrowser(checkInstagramWebBrowser())
+    }, [])
+
+    const checkInstagramWebBrowser = () => {
+        /** User Agent 文字列 */
+        const userAgent = window.navigator.userAgent
+        /** Instagram という文字列が含まれているかどうか? を判定する */
+        const isInstagramWebOpen = /Instagram/i.test(userAgent)
+        // console.log('Insta 判定', isInstagramWebOpen)
+        return isInstagramWebOpen
+    };
 
     return (
-        <Container maxWidth="xs" fixed sx={{ mt: "70px", mb: "30px" }}>
+        <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
             <Box sx={{ alignItems: "center", px: "25px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
                 <Stack
                     direction="row"
@@ -33,7 +46,7 @@ export default function LoginPage() {
                     justifyContent="center"
                     spacing={2}
                     sx={{ mb: "40px" }}>
-                    < CardMedia
+                    <CardMedia
                         component="img"
                         sx={{ width: 50, height: 50 }}
                         image="/images/icon.png"
@@ -46,15 +59,19 @@ export default function LoginPage() {
                         coco-board
                     </Typography>
                 </Stack>
-                <LoginBox />
-                <Box sx={{ mb: 3 }}>
-                    <p style={{ textAlign: "center", fontSize: "1em", fontWeight: 400, color: "black" }}>
-                        ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。
-                    </p>
-                </Box>
-                <GoogleSignInButton />
-                {/* <LineSignInButton /> */}
-                {/* <XSignInButton /> */}
+                {isInstagramWebBrowser
+                    ? <DefaultBrowserModal />
+                    : <Box>
+                        <Box sx={{ mb: 3 }}>
+                            <p style={{ textAlign: "center", fontSize: "1em", fontWeight: 400, color: "black" }}>
+                                ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。
+                            </p>
+                        </Box>
+                        <GoogleSignInButton />
+                        {/* <LineSignInButton /> */}
+                        {/* <XSignInButton /> */}
+                    </Box>
+                }
             </Box>
         </Container >
     );
