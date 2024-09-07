@@ -169,6 +169,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
     return (
         <Box sx={{
             overflowY: "scroll", position: "absolute", zIndex: 2000,
+            width: "40vh",
             height: verticalHeight + 26 + "px",
             backgroundColor: "white", borderRight: "0.5px #666 solid"
         }}>
