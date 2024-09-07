@@ -15,6 +15,7 @@ import { MuiColorInput } from 'mui-color-input'
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import AllowPartialScrolling from '@/components/common/AllowPartialScrolling';
 
 type PageProps = {
     frame: any,
@@ -88,75 +89,79 @@ export default function SettingBox({ frame, setFrame, board }: PageProps) {
 
 
     return (
-        <Box sx={{ position: "absolute", zIndex: 2000, top: "26px", height: courtHeight + 1 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid", borderBottom: "0.5px #666 solid", borderTop: "1px #666 solid" }}>
-            <Stack direction="row" justifyContent="flex-end" sx={{ mx: 1 }}>
-                <Button size='small' onClick={submit} >
-                    変更
-                </Button>
-            </Stack>
+        <AllowPartialScrolling>
+            <Box sx={{ overflowY: "auto", position: "absolute", zIndex: 2000, height: courtHeight + 26 + "px", backgroundColor: "white", borderRight: "0.5px #666 solid" }}>
+                <Box sx={{ position: "sticky", top: 0, backgroundColor: "white", zIndex: 2001 }}>
+                    <Stack direction="row" justifyContent="flex-end" sx={{ mx: 1 }}>
+                        <Button size='small' onClick={submit} >
+                            変更
+                        </Button>
+                    </Stack>
 
-            <Divider />
+                    <Divider />
+                </Box>
 
-            <Box sx={{ my: 1, px: 1 }}>
-                <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                    <Typography fontSize={13} sx={{ width: "80px" }}>背番号</Typography>
-                    <IconButton onClick={() => { setIsSeeNumber(!isSeeNumber), setIsSeePosition(!isSeePosition) }}>
-                        {isSeeNumber ? <Visibility sx={{ fontSize: 18, color: "#444" }} /> : <VisibilityOff sx={{ fontSize: 18, color: "#444" }} />}
-                    </IconButton>
-                </Stack>
+                <Box sx={{ my: 1, px: 1 }}>
+                    <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
+                        <Typography fontSize={13} sx={{ width: "80px" }}>背番号</Typography>
+                        <IconButton onClick={() => { setIsSeeNumber(!isSeeNumber), setIsSeePosition(!isSeePosition) }}>
+                            {isSeeNumber ? <Visibility sx={{ fontSize: 18, color: "#444" }} /> : <VisibilityOff sx={{ fontSize: 18, color: "#444" }} />}
+                        </IconButton>
+                    </Stack>
 
-                <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                    <Typography fontSize={13} sx={{ width: "80px" }}>ポジション</Typography>
-                    <IconButton onClick={() => { setIsSeeNumber(!isSeeNumber), setIsSeePosition(!isSeePosition) }}>
-                        {isSeePosition ? <Visibility sx={{ fontSize: 18, color: "#444" }} /> : <VisibilityOff sx={{ fontSize: 18, color: "#444" }} />}
-                    </IconButton>
-                </Stack>
+                    <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
+                        <Typography fontSize={13} sx={{ width: "80px" }}>ポジション</Typography>
+                        <IconButton onClick={() => { setIsSeeNumber(!isSeeNumber), setIsSeePosition(!isSeePosition) }}>
+                            {isSeePosition ? <Visibility sx={{ fontSize: 18, color: "#444" }} /> : <VisibilityOff sx={{ fontSize: 18, color: "#444" }} />}
+                        </IconButton>
+                    </Stack>
 
-                <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                    <Typography fontSize={13} sx={{ width: "80px" }}>名前</Typography>
-                    <IconButton onClick={() => { setIsSeeName(!isSeeName) }}>
-                        {isSeeName ? <Visibility sx={{ fontSize: 18, color: "#444" }} /> : <VisibilityOff sx={{ fontSize: 18, color: "#444" }} />}
-                    </IconButton>
-                </Stack>
-            </Box>
+                    <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
+                        <Typography fontSize={13} sx={{ width: "80px" }}>名前</Typography>
+                        <IconButton onClick={() => { setIsSeeName(!isSeeName) }}>
+                            {isSeeName ? <Visibility sx={{ fontSize: 18, color: "#444" }} /> : <VisibilityOff sx={{ fontSize: 18, color: "#444" }} />}
+                        </IconButton>
+                    </Stack>
+                </Box>
 
-            {
-                team.map((value, index) => {
-                    return (<>
-                        <Divider />
-                        <Box sx={{ my: 1, px: 1 }}>
-                            <Typography fontSize={13} sx={{ width: "40px" }}>{value}</Typography>
-                            <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                                <Typography fontSize={13} sx={{ width: "40px" }}>本体</Typography>
-                                <MuiColorInput sx={{ width: "150px", fontSize: 13, border: "none" }} format="hex" value={mainColor[index]}
-                                    onChange={(newValue) => {
-                                        const newColor = mainColor.concat()
-                                        newColor[index] = newValue
-                                        setMainColor(newColor)
-                                    }} />
-                            </Stack>
-                            <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                                <Typography fontSize={13} sx={{ width: "40px" }}>背番号</Typography>
-                                <MuiColorInput sx={{ width: "150px", fontSize: 13, border: "none" }} format="hex" value={numberColor[index]}
-                                    onChange={(newValue) => {
-                                        const newColor = numberColor.concat()
-                                        newColor[index] = newValue
-                                        setNumberColor(newColor)
-                                    }} />
-                            </Stack>
-                            <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                                <Typography fontSize={13} sx={{ width: "40px" }}>名前</Typography>
-                                <MuiColorInput sx={{ width: "150px", fontSize: 13, border: "none" }} format="hex" value={nameColor[index]}
-                                    onChange={(newValue) => {
-                                        const newColor = nameColor.concat()
-                                        newColor[index] = newValue
-                                        setNameColor(newColor)
-                                    }} />
-                            </Stack>
-                        </Box>
-                    </>)
-                })
-            }
-        </Box >
+                {
+                    team.map((value, index) => {
+                        return (<>
+                            <Divider />
+                            <Box sx={{ my: 1, px: 1 }}>
+                                <Typography fontSize={13} sx={{ width: "40px" }}>{value}</Typography>
+                                <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
+                                    <Typography fontSize={13} sx={{ width: "40px" }}>本体</Typography>
+                                    <MuiColorInput sx={{ width: "150px", fontSize: 13, border: "none" }} format="hex" value={mainColor[index]}
+                                        onChange={(newValue) => {
+                                            const newColor = mainColor.concat()
+                                            newColor[index] = newValue
+                                            setMainColor(newColor)
+                                        }} />
+                                </Stack>
+                                <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
+                                    <Typography fontSize={13} sx={{ width: "40px" }}>背番号</Typography>
+                                    <MuiColorInput sx={{ width: "150px", fontSize: 13, border: "none" }} format="hex" value={numberColor[index]}
+                                        onChange={(newValue) => {
+                                            const newColor = numberColor.concat()
+                                            newColor[index] = newValue
+                                            setNumberColor(newColor)
+                                        }} />
+                                </Stack>
+                                <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
+                                    <Typography fontSize={13} sx={{ width: "40px" }}>名前</Typography>
+                                    <MuiColorInput sx={{ width: "150px", fontSize: 13, border: "none" }} format="hex" value={nameColor[index]}
+                                        onChange={(newValue) => {
+                                            const newColor = nameColor.concat()
+                                            newColor[index] = newValue
+                                            setNameColor(newColor)
+                                        }} />
+                                </Stack>
+                            </Box>
+                        </>)
+                    })
+                }
+            </Box >
+        </AllowPartialScrolling>
     )
 }

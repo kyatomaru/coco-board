@@ -51,7 +51,7 @@ export default function CourtSettingBox({ frame, setFrame, board, setMenu }: Pag
     }
 
     return (
-        <Box sx={{ overflowY: "auto", top: "24px", position: "absolute", zIndex: 2000, backgroundColor: "white", borderRight: "0.5px #666 solid", borderBottom: "0.5px #666 solid", borderTop: "1px #666 solid" }}>
+        <Box sx={{ overflowY: "auto", position: "absolute", zIndex: 2000, backgroundColor: "white", borderRight: "0.5px #666 solid", borderBottom: "0.5px #666 solid" }}>
             <Box >
                 <Stack height="25px" direction="row" justifyContent="flex-end" sx={{ mx: 1 }} >
                     <Button size="small" onClick={() => submitCourt()}>
