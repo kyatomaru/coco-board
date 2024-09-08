@@ -115,9 +115,6 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
 
     React.useEffect(() => {
         setWindow()
-        const el = document.getElementById("mainCourt");
-        el.addEventListener("touchmove", scrollNo, { passive: false });
-        el.removeEventListener("touchmove", scrollNo);
     }, [])
 
     const scrollNo = React.useCallback((e) => {
@@ -186,7 +183,8 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
     }
 
     return (
-        <Box id="mainCourt" onMouseMove={(e) => { }}>
+        <Box id="mainCourt" onTouchStart={(e) => { document.addEventListener("touchmove", scrollNo, { passive: false }); }}
+            onTouchEnd={(e) => { document.removeEventListener("touchmove", scrollNo); }} >
             {!isView &&
                 <>
                     <TopControlBar onClose={onClose} frame={frame} setFrame={setFrame} setCurrentFrame={setCurrentFrame} board={board} onSubmit={onSubmit} menu={menu} setMenu={setMenu} isPlay={isPlay} />
