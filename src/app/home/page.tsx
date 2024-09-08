@@ -51,11 +51,11 @@ export default function Home() {
           {/* <Header /> */}
           <LeftBar />
           <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
-          <Container maxWidth="md" sx={{ position: "relative", mx: 0, mt: { xs: "146px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
+          <Container id="test" maxWidth="md" sx={{ position: "relative", mx: 0, mt: { xs: "146px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
 
             {displayMenu == 0 &&
               <Box sx={{ mb: 3, borderRadius: 2, px: 2 }}>
-                <CreateButton onClick={() => { setIsNoteCreateModal(0) }} />
+                <CreateButton onClick={() => { window.scrollTo(0, 0); setIsNoteCreateModal(0) }} />
                 <BoardCardBox user={user} contents={board} setContents={setBoard} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
             }
