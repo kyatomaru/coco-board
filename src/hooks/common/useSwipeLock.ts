@@ -6,7 +6,7 @@ export const useSwipeLock = () => {
      */
     useEffect(() => {
         // モバイルスクロール禁止処理
-        document.addEventListener("touchmove", scrollNo, { passive: false });
+        document.addEventListener("touchmove", scrollNo);
 
         return () => {
             // イベントの設定解除
@@ -18,7 +18,7 @@ export const useSwipeLock = () => {
      * モバイルスクロール禁止処理
      */
     const scrollNo = useCallback((e) => {
-        if (e.touches[0].pageX < 16 && e.touches[0].pageX > window.innerWidth + 16)
+        if (e.clientX < 16 && e.clientX > window.innerWidth + 16)
             e.preventDefault();
     }, []);
 };
