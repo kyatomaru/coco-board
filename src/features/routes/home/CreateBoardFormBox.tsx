@@ -49,7 +49,7 @@ export default function CreateBoardFormBox({ allContents, setContents, menu, set
     }
 
     return (
-        <Container maxWidth="sm" sx={{ px: 0, minHeight: "100vh", overflowY: "hidden", position: "fixed", zIndex: 1500 }}>
+        <Container maxWidth="sm" sx={{ px: 0, minHeight: "100vh", overflowY: "hidden", position: "relative", zIndex: 1500 }}>
             <BoardViewForm contents={boardContents} postData={InsertBoardContents} onClose={() => { setMenu(-1) }} />
         </Container>
     )
