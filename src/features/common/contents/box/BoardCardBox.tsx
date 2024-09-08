@@ -42,7 +42,7 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
 
     return (
         <Box>
-            {menu != -1 &&
+            {menu != -1 ?
                 <Modal
                     open={menu != -1}
                     onClose={() => { }}
@@ -50,35 +50,36 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                 >
                     <CreateBoardFormBox allContents={contents} setContents={setContents} menu={menu} setMenu={setMenu} date={date} />
                 </Modal>
+                :
+                <Box sx={{ my: 1 }}>
+                    {contents == undefined || isDateLoding ?
+                        <Skeleton variant="rounded" height={131} />
+                        :
+                        <>
+                            {contents[0] != undefined ?
+                                contents.map((value, index) => {
+                                    return (
+                                        <Card key={index} sx={{ minWidth: 250, mb: 2 }} elevation={2}>
+                                            <BoardCard allContents={contents} contents={value} setContents={setContents} />
+                                        </Card>)
+                                })
+                                :
+                                <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center">
+                                    <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", mb: 1, color: "black" }} component="h2">
+                                        戦術・フォーメーションを記録しよう。
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14, textAlign: "center", color: "black" }} component="h2">
+                                        まだ記録がありません。次の勝利のために、今すぐ記録を残しましょう。
+                                    </Typography>
+                                    <Box sx={{ mt: 2 }}>
+                                        <Button onClick={(event) => setMenu(0)}>記録する</Button>
+                                    </Box>
+                                </Stack>
+                            }
+                        </>
+                    }
+                </Box>
             }
-            <Box sx={{ my: 1 }}>
-                {contents == undefined || isDateLoding ?
-                    <Skeleton variant="rounded" height={131} />
-                    :
-                    <>
-                        {contents[0] != undefined ?
-                            contents.map((value, index) => {
-                                return (
-                                    <Card key={index} sx={{ minWidth: 250, mb: 2 }} elevation={2}>
-                                        <BoardCard allContents={contents} contents={value} setContents={setContents} />
-                                    </Card>)
-                            })
-                            :
-                            <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center">
-                                <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", mb: 1, color: "black" }} component="h2">
-                                    戦術・フォーメーションを記録しよう。
-                                </Typography>
-                                <Typography sx={{ fontSize: 14, textAlign: "center", color: "black" }} component="h2">
-                                    まだ記録がありません。次の勝利のために、今すぐ記録を残しましょう。
-                                </Typography>
-                                <Box sx={{ mt: 2 }}>
-                                    <Button onClick={(event) => setMenu(0)}>記録する</Button>
-                                </Box>
-                            </Stack>
-                        }
-                    </>
-                }
-            </Box>
         </Box>
     )
 }
