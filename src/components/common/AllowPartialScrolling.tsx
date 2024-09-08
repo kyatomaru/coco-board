@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import Box from '@mui/material/Box';
 
-const AllowPartialScrolling = React.memo(function useAllowPartialScrolling(props: any) {
+const AllowPartialScrolling = (props: any) => {
     // スクロール可能DOM格納
     const scrollArea = useRef(null);
 
@@ -82,9 +82,9 @@ const AllowPartialScrolling = React.memo(function useAllowPartialScrolling(props
 
     return (
         <Box sx={{ overflowY: "scroll", height: "100%", "-webkit-overflow-scrolling": "touch", }} id="scroll_item">
-            <Box sx={{ "overscroll-behavior-y": "contain", overflowY: "scroll", minHeight: "100%", "-webkit-overflow-scrolling": "touch" }}>{props.children}</Box>
+            <Box sx={{ overflowY: "scroll", minHeight: "100%", "-webkit-overflow-scrolling": "touch" }}>{props.children}</Box>
         </Box>
     );
-});
+};
 
 export default AllowPartialScrolling;
