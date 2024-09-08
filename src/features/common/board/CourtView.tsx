@@ -117,10 +117,6 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
         setWindow()
     }, [])
 
-    const scrollNo = (e) => {
-        e.preventDefault();
-    };
-
     React.useEffect(() => {
         setBeforeCourtId(board.courtId)
         setWindow()
@@ -182,7 +178,7 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
     }
 
     return (
-        <Box id="mainCourt" sx={{ touchAction: "none" }} >
+        <Box sx={{ touchAction: "none" }} >
             {!isView &&
                 <>
                     <TopControlBar onClose={onClose} frame={frame} setFrame={setFrame} setCurrentFrame={setCurrentFrame} board={board} onSubmit={onSubmit} menu={menu} setMenu={setMenu} isPlay={isPlay} />
