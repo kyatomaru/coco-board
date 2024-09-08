@@ -56,7 +56,7 @@ export default function Home() {
             {displayMenu == 0 &&
               <Box sx={{ mb: 3, borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => {
-                  window.scroll({ top: 0, behavior: 'smooth' }); setIsNoteCreateModal(0)
+                  setIsNoteCreateModal(0)
                 }} />
                 <BoardCardBox user={user} contents={board} setContents={setBoard} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
