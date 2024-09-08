@@ -45,7 +45,6 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                 <Modal
                     open={menu != -1}
                     onClose={(event) => { }}
-                    // menu != 0 && 
                     sx={{ overflowY: "auto", scrollbarWidth: "none" }}
                 >
                     <CreateNoteFormBox allContents={contents} setContents={setContents} menu={menu} setMenu={setMenu} date={date} />
