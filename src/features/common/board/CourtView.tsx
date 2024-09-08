@@ -117,7 +117,7 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
         setWindow()
         const el = document.getElementById("mainCourt");
         el.addEventListener("touchmove", scrollNo, { passive: false });
-        el.removeEventListener("touchmove", scrollNo, { passive: false });
+        el.removeEventListener("touchmove", scrollNo);
     }, [])
 
     const scrollNo = React.useCallback((e) => {
