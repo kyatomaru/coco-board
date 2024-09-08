@@ -167,8 +167,8 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
     }
 
     return (
-        <Box sx={{ position: "absolute", zIndex: 2000, backgroundColor: "white", borderRight: "0.5px #666 solid" }}>
-            <Box sx={{ "overscroll-behavior-y": "contain", overflowY: "scroll", height: verticalHeight + 26 + "px" }}>
+        <Box sx={{ backgroundColor: "white", borderRight: "0.5px #666 solid" }}>
+            <Box sx={{ "overscroll-behavior-y": "contain", overflowY: "scroll", height: verticalHeight + 26 + "px", backgroundColor: "white" }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={team} onChange={changeTeam} >
                         <Tab label="Home" value={0} sx={{ fontSize: 12 }} />
@@ -190,6 +190,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
                     </Stack>
 
                     <Divider />
+                    {/* position: "relative", zIndex: 2000, */}
 
                     <Box sx={{ mt: 2 }}>
                         {playersField()}
