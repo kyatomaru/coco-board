@@ -31,7 +31,7 @@ export default function TopSubControlBar({ board, frame, setFrame, selectItem, s
                 <Box sx={{ height: 25, width: "100%", backgroundColor: "white", position: "relative", zIndex: 2000 }}></Box>
                 :
                 <>
-                    <Stack direction="row" justifyContent="flex-start" spacing={2} sx={{ height: "25px", position: "relative", zIndex: 2000, margin: "auto", backgroundColor: "white", borderTop: "solid 0.5px #b2b2b2", borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", }}>
+                    <Stack direction="row" justifyContent="flex-start" spacing={2} sx={{ height: "25px", position: "absolute", zIndex: 2000, margin: "auto", backgroundColor: "white", borderTop: "solid 0.5px #b2b2b2", borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", }}>
 
                     </Stack>
                     {
