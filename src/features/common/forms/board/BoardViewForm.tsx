@@ -30,10 +30,10 @@ export default function BoardViewForm({ contents, postData, onClose }: PageProps
 
     // useScrollLock()
 
-    // React.useEffect(() => {
-    //     document.addEventListener("touchmove", scrollNo, { passive: false });
-    //     document.removeEventListener("touchmove", scrollNo);
-    // },[])
+    React.useEffect(() => {
+        document.addEventListener("touchmove", scrollNo, { passive: false });
+        document.removeEventListener("touchmove", scrollNo);
+    }, [])
 
     const scrollNo = React.useCallback((e) => {
         e.preventDefault();
