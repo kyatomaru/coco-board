@@ -46,7 +46,7 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                 <Modal
                     open={menu != -1}
                     onClose={() => { }}
-                    sx={{ overflowY: menu != 0 && "auto", scrollbarWidth: "none" }}
+                    sx={{ overflowY: "hidden", scrollbarWidth: "none" }}
                 >
                     <CreateBoardFormBox allContents={contents} setContents={setContents} menu={menu} setMenu={setMenu} date={date} />
                 </Modal>
