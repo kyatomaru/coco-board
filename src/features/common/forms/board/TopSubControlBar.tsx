@@ -23,8 +23,6 @@ type PageProps = {
 
 
 export default function TopSubControlBar({ board, frame, setFrame, selectItem, setSelectItem, menu, setMenu, isPlay }: PageProps) {
-    useScrollLock()
-
     return (
         <>
             {isPlay ?
