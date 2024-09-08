@@ -167,34 +167,32 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
     }
 
     return (
-        <Box sx={{ backgroundColor: "white", borderRight: "0.5px #666 solid" }}>
-            <Box sx={{ "webkit-overflow-scrolling": "touch", "overscroll-behavior-y": "contain", overflowY: "scroll", width: "300px", height: verticalHeight + 26 + "px", backgroundColor: "white" }}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={team} onChange={changeTeam} >
-                        <Tab label="Home" value={0} sx={{ fontSize: 12 }} />
-                        <Tab label="Away" value={1} sx={{ fontSize: 12 }} />
-                    </Tabs>
-                </Box>
-                <Box sx={{ p: 1, my: 1 }}>
-                    <Stack height="25px" direction="row" justifyContent="flex-start" spacing={2} sx={{ mb: 2 }}>
-                        <Select
-                            value={formation[team]}
-                            onChange={(event) => changeFormation(event)}
-                            sx={{ height: 30, width: 100 }}
-                        >
-                            {formationMenu()}
-                        </Select>
-                        <Button onClick={() => putPlayers()} size="small">
-                            配置
-                        </Button>
-                    </Stack>
+        <Box sx={{ backgroundColor: "white", borderRight: "0.5px #666 solid", "webkit-overflow-scrolling": "touch", "overscroll-behavior-y": "contain", overflowY: "scroll", width: "300px", height: "100px" }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={team} onChange={changeTeam} >
+                    <Tab label="Home" value={0} sx={{ fontSize: 12 }} />
+                    <Tab label="Away" value={1} sx={{ fontSize: 12 }} />
+                </Tabs>
+            </Box>
+            <Box sx={{ p: 1, my: 1 }}>
+                <Stack height="25px" direction="row" justifyContent="flex-start" spacing={2} sx={{ mb: 2 }}>
+                    <Select
+                        value={formation[team]}
+                        onChange={(event) => changeFormation(event)}
+                        sx={{ height: 30, width: 100 }}
+                    >
+                        {formationMenu()}
+                    </Select>
+                    <Button onClick={() => putPlayers()} size="small">
+                        配置
+                    </Button>
+                </Stack>
 
-                    <Divider />
-                    {/* position: "relative", zIndex: 2000, */}
+                <Divider />
+                {/* position: "relative", zIndex: 2000, */}
 
-                    <Box sx={{ mt: 2 }}>
-                        {playersField()}
-                    </Box>
+                <Box sx={{ mt: 2 }}>
+                    {playersField()}
                 </Box>
             </Box>
         </Box >
