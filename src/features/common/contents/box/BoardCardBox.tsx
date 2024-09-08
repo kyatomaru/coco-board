@@ -43,11 +43,13 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
     return (
         <Box>
             {menu != -1 ?
-                <Box
-                    sx={{ position: "fixed", zIndex: 2000, top: 0, left: 0, right: 0, overflowY: "hidden", scrollbarWidth: "none" }}
+                <Modal
+                    open={menu != -1}
+                    onClose={() => { }}
+                    sx={{ overflowY: "hidden", scrollbarWidth: "none" }}
                 >
                     <CreateBoardFormBox allContents={contents} setContents={setContents} menu={menu} setMenu={setMenu} date={date} />
-                </Box>
+                </Modal>
                 :
                 <Box sx={{ my: 1 }}>
                     {contents == undefined || isDateLoding ?
