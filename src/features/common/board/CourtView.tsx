@@ -115,7 +115,12 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
 
     React.useEffect(() => {
         setWindow()
+        document.addEventListener("touchmove", scrollNo, { passive: false });
     }, [])
+
+    const scrollNo = React.useCallback((e) => {
+        e.preventDefault();
+    }, []);
 
     React.useEffect(() => {
         setBeforeCourtId(board.courtId)
