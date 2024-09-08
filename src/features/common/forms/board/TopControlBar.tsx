@@ -138,12 +138,12 @@ export default function TopControlBar({ onClose, frame, setFrame, setCurrentFram
 
                         <Divider orientation="vertical" flexItem />
                     </Stack >
-                    {408 - 25 > windowWidth && scrollX <= 0 &&
+                    {408 > windowWidth && scrollX <= 0 &&
                         <IconButton onClick={() => { const el = document.getElementById("top-controlbar"); el.scroll({ left: 408 }); setScrollX(el.scrollLeft) }} sx={{ position: "absolute", zIndex: 2010, right: 0, top: 0, width: "25px", height: "25px", backgroundColor: "white", ":hover": { backgroundColor: "#eee" }, borderRadius: 0, border: "solid 0.5px #b2b2b2" }}>
                             <ArrowForwardIosIcon sx={{ width: "12px", height: "12px" }} />
                         </IconButton>
                     }
-                    {408 - 25 > windowWidth && scrollX > 0 &&
+                    {408 > windowWidth && scrollX > 0 &&
                         <IconButton onClick={() => { const el = document.getElementById("top-controlbar"); el.scroll({ left: 0 }); setScrollX(el.scrollLeft) }} sx={{ position: "absolute", zIndex: 2010, left: 0, top: 0, width: "25px", height: "25px", backgroundColor: "white", ":hover": { backgroundColor: "#eee" }, borderRadius: 0, border: "solid 0.5px #b2b2b2" }}>
                             <ArrowBackIosNewIcon sx={{ width: "12px", height: "12px" }} />
                             {/* {scrollX} */}
