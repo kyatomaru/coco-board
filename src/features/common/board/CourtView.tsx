@@ -122,6 +122,7 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
 
     const scrollNo = React.useCallback((e) => {
         e.preventDefault();
+        e.off()
     }, []);
 
     React.useEffect(() => {
