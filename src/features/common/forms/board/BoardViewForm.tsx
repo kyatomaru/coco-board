@@ -28,7 +28,7 @@ export default function BoardViewForm({ contents, postData, onClose }: PageProps
     const [isPlay, setIsPlay] = React.useState(false)
     const [playFrame, setPlayFrame] = React.useState<Array<FrameType>>([]);
 
-    useScrollLock()
+    // useScrollLock()
 
     React.useEffect(() => {
         if (contents != undefined) {
