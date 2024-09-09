@@ -1,24 +1,28 @@
 import React, { useEffect, useCallback } from "react";
 
 export const useSwipeLock = () => {
+    let sw = false
+
     /**
      * イベントリスナーの設定
      */
     useEffect(() => {
         // モバイルスクロール禁止処理
-        document.addEventListener("touchmove", scrollNo);
+        document.addEventListener("touchstart", (e) => { if (e.touches[0].clientX < 16 || e.touches[0].clientX > window.innerWidth + 16) sw = true }, false);
+        document.addEventListener("touchmove", scrollNo, false);
+        document.addEventListener("touchend", () => { sw && (sw = false) }, false);
 
-        return () => {
-            // イベントの設定解除
-            document.removeEventListener("touchmove", scrollNo);
-        };
     }, []);
 
     /**
      * モバイルスクロール禁止処理
      */
-    const scrollNo = useCallback((e) => {
-        if (e.touches[0].clientX > 16 && e.touches[0].clientX < window.innerWidth + 16) return
-        e.preventDefault();
-    }, []);
+    const scrollNo = (e) => {
+        if (sw) {
+            if (e.touches[0].clientX < 16 || e.touches[0].clientX > window.innerWidth + 16) {
+                alert('test')
+                e.preventDefault();
+            }
+        }
+    };
 };
