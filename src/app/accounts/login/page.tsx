@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import type { User } from 'firebase/auth';
 import { auth } from '@/app/firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
-import LoadingPage from '@/components/LoadingPage';
+import LoadingPage from '@/components/AuthLoadingPage';
 import LoginPage from '@/features/routes/accounts/login/LoginPageGoogle';
 import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
 

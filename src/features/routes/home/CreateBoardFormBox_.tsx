@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
-import LoadingPage from '@/components/LoadingPage';
+import LoadingPage from '@/components/AuthLoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';

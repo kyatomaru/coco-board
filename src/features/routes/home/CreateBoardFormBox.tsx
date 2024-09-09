@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
-import LoadingPage from '@/components/LoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -25,26 +24,30 @@ import { TaskModel } from '@/types/task/Task';
 import { useInsertTask } from '@/hooks/task/useInsertTask';
 import LeftBar from '@/components/LeftBar';
 import dayjs from 'dayjs';
+import LoadingPage from '@/components/LoadingPage';
 
 type PageProps = {
     allContents: Array<any>,
     setContents: any,
-    menu: Number,
+    setIsLoading: Function,
     setMenu: Function,
     date: Date | String
 }
 
-export default function CreateBoardFormBox({ allContents, setContents, menu, setMenu, date }: PageProps) {
+export default function CreateBoardFormBox({ allContents, setContents, setIsLoading, setMenu, date }: PageProps) {
     const params = useParams()
     const router = useRouter()
     const [boardContents, setBoardContents] = React.useState(new BoardModel(dayjs(String(date)).format('YYYY-MM-DD')));
 
+
     const InsertBoardContents = async (contents, image) => {
+        setIsLoading(true)
         setMenu(-1)
         await useInsertBoard(contents, image).then((data) => {
             const resultContents = allContents.slice()
             resultContents.unshift(data)
             setContents([...resultContents])
+            setIsLoading(false)
         })
     }
 

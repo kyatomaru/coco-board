@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 import SignupBox from './SignupBox';
 import Stack from '@mui/material/Stack';
 import CardMedia from '@mui/material/CardMedia';
-import LoadingPage from '@/components/LoadingPage';
+import LoadingPage from '@/components/AuthLoadingPage';
 
 export default function SignupPage() {
     const router = useRouter()

@@ -8,7 +8,7 @@ export const useSwipeLock = () => {
      */
     useEffect(() => {
         // モバイルスクロール禁止処理
-        document.addEventListener("touchstart", (e) => { if (e.touches[0].clientX < 16 || e.touches[0].clientX > window.innerWidth + 16) sw = true }, false);
+        document.addEventListener("touchstart", (e) => { if (e.touches[0].clientX < 30 || e.touches[0].clientX > window.innerWidth + 30) sw = true; }, false);
         document.addEventListener("touchmove", scrollNo, false);
         document.addEventListener("touchend", () => { sw && (sw = false) }, false);
 
@@ -19,10 +19,7 @@ export const useSwipeLock = () => {
      */
     const scrollNo = (e) => {
         if (sw) {
-            if (e.touches[0].clientX < 16 || e.touches[0].clientX > window.innerWidth + 16) {
-                alert('test')
-                e.preventDefault();
-            }
+            e.preventDefault();
         }
     };
 };

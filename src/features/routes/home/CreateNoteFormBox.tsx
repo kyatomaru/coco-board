@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
-import LoadingPage from '@/components/LoadingPage';
+import LoadingPage from '@/components/AuthLoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -29,12 +29,13 @@ import dayjs from 'dayjs';
 type PageProps = {
     allContents: any,
     setContents: any,
+    setIsLoading: Function,
     menu: Number,
     setMenu: Function,
     date: Date | String
 }
 
-export default function CreateNoteFormBox({ allContents, setContents, menu, setMenu, date }: PageProps) {
+export default function CreateNoteFormBox({ allContents, setContents, setIsLoading, menu, setMenu, date }: PageProps) {
     const params = useParams()
     const router = useRouter()
     const [gameContents, setGameContents] = React.useState(new GameContentsModel(dayjs(String(date)).format('YYYY-MM-DD')));
@@ -42,21 +43,25 @@ export default function CreateNoteFormBox({ allContents, setContents, menu, setM
 
 
     const InsertGameContents = async (contents) => {
+        setIsLoading(true)
         setMenu(-1)
         await useInsertGame(contents).then((data) => {
             const resultContents = allContents.slice()
             resultContents.unshift(data)
             console.log(resultContents)
             setContents([...resultContents])
+            setIsLoading(false)
         })
     }
 
     const InsertPracticeContents = async (contents) => {
+        setIsLoading(true)
         setMenu(-1)
         await useInsertPractice(contents).then((data) => {
             const resultContents = allContents.slice()
             resultContents.unshift(data)
             setContents([...resultContents])
+            setIsLoading(false)
         })
     }
 
