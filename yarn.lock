@@ -1201,6 +1201,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/gtag.js@0.0.20":
+  "integrity" "sha512-wwAbk3SA2QeU67unN7zPxjEHmPmlXwZXZvQEpbEUQuMCRGgKyE1m6XDuTUA9b6pCGb/GqJmdfMOY5LuDjJSbbg=="
+  "resolved" "https://registry.npmjs.org/@types/gtag.js/-/gtag.js-0.0.20.tgz"
+  "version" "0.0.20"
+
 "@types/http-errors@*":
   "integrity" "sha512-pP0P/9BnCj1OVvQR2lF41EkDG/lWWnDyA203b/4Fmi2eTyORnBtcDoKDwjWQthELrBvWkMOrvSOnZ8OVlW6tXA=="
   "resolved" "https://registry.npmjs.org/@types/http-errors/-/http-errors-2.0.3.tgz"

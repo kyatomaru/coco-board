@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Roboto_Mono } from 'next/font/google'
 import '@/app/globals.css'
+import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics'
 
 const inter = Inter({ subsets: ['latin'] })
 const robot_mono = Roboto_Mono({ subsets: ['latin'] })
@@ -24,6 +25,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
+      <head>
+        <GoogleAnalytics />
+      </head>
       <body className={robot_mono.className}> {children}</body>
     </html >
   )
