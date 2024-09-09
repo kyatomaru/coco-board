@@ -11,24 +11,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 export default function LoadingPage() {
-    const router = useRouter()
-    const [user, setUser] = React.useState<User | undefined>(null)
-
-    React.useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user)
-            }
-        })
-    });
-
     return (
-        <>
-            {user == null &&
-                <Box sx={{ display: 'flex', width: "100%", height: "90vh", alignItems: "center", justifyContent: "center" }}>
-                    <CircularProgress />
-                </Box>
-            }
-        </>
+        <Box sx={{
+            display: 'flex', width: "100%", height: "90vh", alignItems: "center", justifyContent: "center"
+        }}>
+            <CircularProgress sx={{ zIndex: 2000 }} />
+        </Box>
     );
 }

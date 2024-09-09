@@ -17,6 +17,7 @@ import PracticeCard from '@/features/common/contents/card/PracticeCard';
 import BoardCard from '@/features/common/contents/card/BoardCard';
 import Modal from '@mui/material/Modal';
 import CreateNoteFormBox from '@/features/routes/home/CreateNoteFormBox';
+import LinearProgress from '@mui/material/LinearProgress';
 
 type PageProps = {
     user: User,
@@ -29,6 +30,7 @@ type PageProps = {
 
 export default function NoteCardBox({ user, contents, setContents, date, menu, setMenu }: PageProps) {
     const router = useRouter()
+    const [isLoading, setIsLoading] = React.useState(false);
     const [isDateLoding, setIsDateLoding] = React.useState(false);
 
     React.useEffect(() => {
@@ -47,7 +49,7 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                     onClose={(event) => { }}
                     sx={{ overflowY: "auto", scrollbarWidth: "none" }}
                 >
-                    <CreateNoteFormBox allContents={contents} setContents={setContents} menu={menu} setMenu={setMenu} date={date} />
+                    <CreateNoteFormBox allContents={contents} setContents={setContents} setIsLoading={setIsLoading} menu={menu} setMenu={setMenu} date={date} />
                 </Modal>
             }
             <Box sx={{ my: 1 }}>
@@ -55,6 +57,14 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                     <Skeleton variant="rounded" height={131} />
                     :
                     <>
+                        {isLoading &&
+                            <Card sx={{ minWidth: 250, mb: 2 }} elevation={2}>
+                                <Typography sx={{ fontSize: 13, textAlign: "center", my: 1, color: "black" }} component="h2">
+                                    ボードを保存しています。
+                                </Typography>
+                                <LinearProgress />
+                            </Card>
+                        }
                         {contents[0] != undefined ?
                             (contents.map((value, index) => {
                                 return (
