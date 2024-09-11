@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ja">
+    <html lang="ja" style={{ overflow: "hidden", height: "100vh" }}>
       <body className={inter.className} style={{ overscrollBehaviorY: "none", overflow: "hidden", height: "100vh" }}>{children}</body>
     </html >
   )
