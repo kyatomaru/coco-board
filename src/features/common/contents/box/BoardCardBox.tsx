@@ -54,7 +54,7 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                     <CreateBoardFormBox allContents={contents} setContents={setContents} setIsLoading={setIsLoading} setMenu={setMenu} date={date} />
                 </Modal>
                 :
-                <Box sx={{ my: 1 }}>
+                <Box>
                     {contents == undefined || isDateLoding ?
                         <Skeleton variant="rounded" height={131} />
                         :
