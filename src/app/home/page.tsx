@@ -54,7 +54,7 @@ export default function Home() {
           <Container id="test" maxWidth="md" sx={{ position: "relative", overflowY: "auto", height: "100vh", mx: 0, mt: { xs: "146px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
 
             {displayMenu == 0 &&
-              <Box sx={{ mt: 2, pb: "250px", borderRadius: 2, px: 2 }}>
+              <Box sx={{ pt: 2, pb: "250px", borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { window.scrollTo(0, 0); setIsNoteCreateModal(0) }} />
                 <BoardCardBox user={user} contents={board} setContents={setBoard} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
