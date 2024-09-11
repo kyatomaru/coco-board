@@ -26,8 +26,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <GoogleAnalytics gaId={`${GA_TAG_ID}`} />
-      <body className={robot_mono.className}>{GA_TAG_ID}{children}</body>
+      <GoogleAnalytics gaId={process.env.GA_TAG_ID ?? ""} />
+      <body className={robot_mono.className}>{children}</body>
     </html >
   )
 }
