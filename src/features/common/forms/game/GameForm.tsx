@@ -439,7 +439,9 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                             <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ alignItems: "center", mb: 1 }}>
                                 <InputLabel sx={{ mx: 1, fontSize: 14, color: "#ff5e00", fontWeight: "bold" }}>良い点</InputLabel>
                                 <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85 }} onClick={AddGoodPoints}>
-                                    追加
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
                                 </Button>
                             </Stack>
                             {contents.goodPoints.map((input, index) => (
@@ -466,7 +468,9 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                             <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ alignItems: "center", mb: 1 }}>
                                 <InputLabel sx={{ mx: 1, fontSize: 14, color: "#007eff", fontWeight: "bold" }}>悪い点</InputLabel>
                                 <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85 }} onClick={AddBadPoints}>
-                                    追加
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
                                 </Button>
                             </Stack>
                             {contents.badPoints.map((input, index) => (

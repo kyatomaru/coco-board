@@ -194,7 +194,9 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                                     練習内容
                                 </Typography>
                                 <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85 }} onClick={AddDetails}>
-                                    追加
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
                                 </Button>
                             </Stack>
                             {contents.details.map((input, index) => (
