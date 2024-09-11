@@ -24,6 +24,7 @@ import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
 
 export default function LoginPage() {
     const [isInstagramWebBrowser, setIsInstagramWebBrowser] = React.useState(false)
+    const [isLoading, setIsLoading] = React.useState(false)
 
     React.useEffect(() => {
         setIsInstagramWebBrowser(checkInstagramWebBrowser())
@@ -39,45 +40,51 @@ export default function LoginPage() {
     };
 
     return (
-        <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
-            <Box sx={{ alignItems: "center", px: "25px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
-                <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="center"
-                    spacing={2}
-                    sx={{ mb: "40px" }}>
-                    <CardMedia
-                        component="img"
-                        sx={{ width: 50, height: 50 }}
-                        image="/images/icon.png"
-                    />
-                    <Typography sx={{
-                        fontSize: { xs: 25, md: 30 },
-                        fontWeight: "bold",
-                        color: "black"
-                    }}>
-                        coco-board
-                    </Typography>
-                </Stack>
-                {isInstagramWebBrowser
-                    ? <DefaultBrowserModal />
-                    : <Box>
-                        <Box sx={{ mb: 3 }}>
-                            <p style={{ textAlign: "center", fontSize: "1em", fontWeight: 400, color: "black" }}>
-                                ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。
-                            </p>
-                        </Box>
-                        <GoogleSignInButton />
-                        <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
-                            ※ Googleでログインする場合はSafariもしくはChromeからアプリをご利用ください。
-                        </Typography>
-                        {/* <AppleSignInButton /> */}
-                        {/* <LineSignInButton /> */}
-                        {/* <XSignInButton /> */}
+        <>
+            {isLoading ?
+                <LoadingPage />
+                :
+                <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
+                    <Box sx={{ alignItems: "center", px: "25px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
+                        <Stack
+                            direction="row"
+                            alignItems="center"
+                            justifyContent="center"
+                            spacing={2}
+                            sx={{ mb: "40px" }}>
+                            <CardMedia
+                                component="img"
+                                sx={{ width: 50, height: 50 }}
+                                image="/images/icon.png"
+                            />
+                            <Typography sx={{
+                                fontSize: { xs: 25, md: 30 },
+                                fontWeight: "bold",
+                                color: "black"
+                            }}>
+                                coco-board
+                            </Typography>
+                        </Stack>
+                        {isInstagramWebBrowser
+                            ? <DefaultBrowserModal />
+                            : <Box>
+                                <Box sx={{ mb: 3 }}>
+                                    <p style={{ textAlign: "center", fontSize: "1em", fontWeight: 400, color: "black" }}>
+                                        ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。
+                                    </p>
+                                </Box>
+                                <GoogleSignInButton setIsLoading={setIsLoading} />
+                                <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
+                                    ※ Googleでログインする場合はSafariもしくはChromeからアプリをご利用ください。
+                                </Typography>
+                                {/* <AppleSignInButton /> */}
+                                {/* <LineSignInButton /> */}
+                                {/* <XSignInButton /> */}
+                            </Box>
+                        }
                     </Box>
-                }
-            </Box>
-        </Container >
+                </Container >
+            }
+        </>
     );
 }
