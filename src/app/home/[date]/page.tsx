@@ -50,16 +50,16 @@ export default function Home() {
         <>
           <LeftBar />
           <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
-          <Container maxWidth="md" sx={{ position: "relative", overflowY: "auto", height: "100vh", mx: 0, mt: { xs: "150px", md: "110px" }, pb: "250px", px: 0, pl: { md: "120px", lg: "250px" } }}>
+          <Container maxWidth="md" sx={{ overflowY: "auto", height: "100vh", position: "relative", mx: 0, mt: { xs: "150px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
 
             {displayMenu == 0 &&
-              <Box sx={{ my: 2, borderRadius: 2, px: 2 }}>
+              <Box sx={{ pt: 2, pb: "250px", borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(0) }} />
                 <BoardCardBox user={user} contents={board} setContents={setBoard} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
             }
             {displayMenu == 1 &&
-              <Box sx={{ my: 2, borderRadius: 2, px: 2 }}>
+              <Box sx={{ pt: 2, pb: "250px", borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(1) }} />
                 <NoteCardBox user={user} contents={note} setContents={setNote} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
