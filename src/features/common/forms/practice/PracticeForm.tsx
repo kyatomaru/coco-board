@@ -103,12 +103,16 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                     <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
                         <Grid >
                             <Button size="small" sx={{ color: 'black' }} variant='text' onClick={() => setIsConfirmCloseModal(true)}>
-                                キャンセル
+                                <Typography fontSize={13} component="p">
+                                    キャンセル
+                                </Typography>
                             </Button>
                         </Grid>
                         <Grid >
                             <Button size="small" sx={{ backgroundColor: "#2e7d32 !important" }} variant='filled' type='submit'>
-                                記録する
+                                <Typography fontSize={13} component="p">
+                                    記録する
+                                </Typography>
                             </Button>
                         </Grid>
                     </Grid>
