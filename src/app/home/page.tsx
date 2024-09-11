@@ -44,7 +44,7 @@ export default function Home() {
   });
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-white" style={{ height: "100vh", overflow: "hidden", position: "relative" }}>
+    <main className="flex min-h-screen flex-col items-center justify-between bg-white" style={{ overflow: "hidden", position: "relative" }}>
       <LoadingPage />
       {user !== null &&
         <>
