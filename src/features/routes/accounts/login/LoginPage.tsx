@@ -23,6 +23,7 @@ import LoginBox from './LoginBox';
 
 export default function LoginPage() {
     const router = useRouter()
+    const [isLoading, setIsLoading] = React.useState(false)
 
     return (
         <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
@@ -52,7 +53,7 @@ export default function LoginPage() {
                         または
                     </Typography>
                 </Divider>
-                <GoogleSignInButton />
+                <GoogleSignInButton setIsLoading={setIsLoading} />
                 <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
                     ※ Googleでログインする場合はSafariもしくはChromeからアプリをご利用ください。
                 </Typography>
@@ -69,6 +70,6 @@ export default function LoginPage() {
                     </Button>
                 </Typography>
             </Box>
-        </Container >
+        </Container>
     );
 }

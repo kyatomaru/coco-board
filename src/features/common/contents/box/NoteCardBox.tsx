@@ -52,7 +52,7 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                     <CreateNoteFormBox allContents={contents} setContents={setContents} setIsLoading={setIsLoading} menu={menu} setMenu={setMenu} date={date} />
                 </Modal>
             }
-            <Box sx={{ my: 1 }}>
+            <Box>
                 {contents == undefined || isDateLoding ?
                     <Skeleton variant="rounded" height={131} />
                     :

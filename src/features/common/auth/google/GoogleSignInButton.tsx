@@ -8,21 +8,8 @@ import Box from '@mui/material/Box';
 import Image from "next/image"
 import { useRouter } from 'next/navigation'
 
-
-const GoogleSignIn = async (router) => {
-    const GoogleProvider = new GoogleAuthProvider();
-    GoogleProvider.setCustomParameters({
-        prompt: "select_account"
-    });
-
-    await signInWithPopup(auth, GoogleProvider)
-        .then((res) => {
-            router.replace("/home")
-        }).catch((error) => {
-            console.log(error)
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        });
+type PageProps = {
+    setIsLoading: any
 }
 
 // const config = {
@@ -50,12 +37,34 @@ const loginBtnStyle = {
     cursor: "pointer"
 }
 
-export default function GoogleSignInButton() {
+export default function GoogleSignInButton({ setIsLoading }: PageProps) {
     const router = useRouter()
+    const [error, setError] = React.useState(undefined)
+
+    const GoogleSignIn = async () => {
+
+        const GoogleProvider = new GoogleAuthProvider();
+        GoogleProvider.setCustomParameters({
+            prompt: "select_account"
+        });
+
+        await signInWithPopup(auth, GoogleProvider)
+            .then((res) => {
+                setIsLoading(true)
+                router.replace("/home")
+            }).catch((error) => {
+                setError(error)
+                console.log(error)
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
+    }
+
     return (
-        <button onClick={() => { GoogleSignIn(router) }} style={loginBtnStyle}>
+        <button onClick={() => { GoogleSignIn() }} style={loginBtnStyle}>
             <span className="icon" style={{ marginRight: "10px" }}><Icon /></span>
             <span className="buttonText" style={{ color: "black", fontWeight: "600" }}>Googleでログイン</span>
+            {error}
         </button >
     );
 }
