@@ -67,7 +67,7 @@ export default function SignupPage() {
                                 または
                             </Typography>
                         </Divider>
-                        <GoogleSignInButton />
+                        <GoogleSignInButton setIsLoading={setIsLoading} />
                         <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
                             ※ Googleでログインする場合はSafariもしくはChromeからアプリをご利用ください。
                         </Typography>
