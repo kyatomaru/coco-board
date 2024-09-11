@@ -51,7 +51,7 @@ export default function Home() {
           {/* <Header /> */}
           <LeftBar />
           <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
-          <Container id="test" maxWidth="md" sx={{ overflowY: "auto", height: "100vh", mx: 0, mt: { xs: "146px", md: "110px" }, px: 0, pb: "250px", pl: { md: "120px", lg: "250px" } }}>
+          <Container id="test" maxWidth="md" sx={{ position: "relative", overflowY: "auto", height: "100vh", mx: 0, mt: { xs: "146px", md: "110px" }, px: 0, pb: "250px", pl: { md: "120px", lg: "250px" } }}>
 
             {displayMenu == 0 &&
               <Box sx={{ my: 2, borderRadius: 2, px: 2 }}>
