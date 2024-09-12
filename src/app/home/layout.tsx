@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja" style={{ overflow: "hidden", position: "relative", height: "85vh" }}>
-      <body className={inter.className} style={{ overscrollBehaviorY: "none", overflow: "hidden", position: "relative", height: "90vh" }}>{children}</body>
+      <body className={inter.className} style={{ overscrollBehaviorY: "none", overflow: "hidden", position: "relative", height: "85vh" }}>{children}</body>
     </html >
   )
 }
