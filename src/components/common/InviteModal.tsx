@@ -71,8 +71,8 @@ export default function InviteModal() {
                     </MenuList>
                 </Paper>
             </Modal >
-            {openMs &&
-                <Box sx={{ display: { md: "none", xs: "flex" }, position: "absolute", zIndex: 2000, bottom: "30px", width: "100%", justifyContent: "center" }}>
+            {!openMs &&
+                <Box sx={{ display: { md: "none", xs: "flex" }, position: "absolute", zIndex: 2000, bottom: "10vh", width: "100%", justifyContent: "center" }}>
                     <Box sx={{ backgroundColor: "#333", display: "flex", p: 2, width: "400px", minWidth: "300px", alignItems: "center" }}>
                         <Box>
                             <Typography variant="body1" sx={{ color: "white", fontSize: 14 }}>
