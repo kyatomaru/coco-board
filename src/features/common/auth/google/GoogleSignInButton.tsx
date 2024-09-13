@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { createButton } from "react-social-login-buttons";
-import { signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+import { signInWithRedirect, signInWithPopup, GoogleAuthProvider, getAdditionalUserInfo } from "firebase/auth"
 import { auth } from "@/app/firebase"
 import Box from '@mui/material/Box';
 import Image from "next/image"
@@ -50,6 +50,9 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
 
         await signInWithPopup(auth, GoogleProvider)
             .then((res) => {
+                if (getAdditionalUserInfo(res)?.isNewUser) {
+                    localStorage.setItem('isNewUser', "true")
+                }
                 setIsLoading(true)
                 router.replace("/home")
             }).catch((error) => {
