@@ -17,6 +17,7 @@ import HomeHeader from '@/components/routes/home/HomeHeader';
 import CreateButton from '@/features/common/button/CreateButton'
 import { useGetNote } from '@/hooks/note/useGetDateNote';
 import { useGetBoard } from '@/hooks/board/useGetDateBoard';
+import WelcomeModal from '@/features/routes/home/welcomeModal/WelcomeModal';
 import dayjs from 'dayjs';
 import InviteModal from '@/components/common/InviteModal';
 
@@ -49,6 +50,8 @@ export default function Home() {
       <LoadingPage />
       {user !== null &&
         <>
+          <WelcomeModal />
+
           <LeftBar />
           <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
           <Container maxWidth="md" sx={{ overflowY: "auto", height: "100vh", position: "relative", mx: 0, pt: { xs: "150px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
