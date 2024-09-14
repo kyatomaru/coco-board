@@ -383,7 +383,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                                             }}
                                             highlightSelectedOnly
                                         />
-                                        {contents.condition != 0 &&
+                                        {contents.condition <= 0 &&
                                             <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
                                                 {customIcons[Number(contents.condition)].label}
                                             </Typography>
@@ -405,7 +405,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                                             }}
                                             highlightSelectedOnly
                                         />
-                                        {contents.fatigue != 0 &&
+                                        {contents.fatigue <= 0 &&
                                             <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
                                                 {customIcons[Number(contents.fatigue)].label}
                                             </Typography>
