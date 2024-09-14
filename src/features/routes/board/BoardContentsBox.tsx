@@ -4,7 +4,9 @@ import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
 import { useSwipeLock } from '@/hooks/common/useSwipeLock';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
+import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import BottomViewBar from './BottomViewBar';
 import CourtView from '@/features/common/board/CourtView';
@@ -29,8 +31,24 @@ type pageProps = {
     setContents: any
 }
 
+const modalStyle = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    minWidth: 320,
+    width: "400px",
+    maxWidth: '100%',
+    zIndex: 2200,
+    outline: "none",
+};
+
 export default function BoardContentsBox({ contents, setContents }: pageProps) {
     const router = useRouter()
+    const [isEditLoading, setIsEditLoading] = React.useState(false)
+
     const [menu, setMenu] = React.useState(0);
 
     const [courtHeight, setCourtHeight] = React.useState(0);
@@ -41,8 +59,6 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
 
     const [playFrame, setPlayFrame] = React.useState<Array<FrameType>>([]);
     const [isPlay, setIsPlay] = React.useState(false)
-
-    useSwipeLock()
 
     const setWindow = () => {
         const courtLength = setRatio(window.innerWidth, window.innerHeight)
@@ -98,14 +114,27 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
 
     const UpdateBoardContents = async (contents, image) => {
         setEditModalOpen(false)
+        setIsEditLoading(true)
+
         await useUpdateBoard(contents, image).then((data) => {
             setContents(data)
+            setIsEditLoading(false)
         })
     }
 
     return (
         <>
             <DeleteConfirmModal open={deleteModalOpen} setOpen={setDeleteModalOpen} title={boardModalTitle} message={deleteNoteMs} confirmText="削除" onSubmit={DeleteBoardContents} />
+
+            <Modal sx={{ zIndex: 2100 }} open={isEditLoading}>
+                <Card elevation={2} sx={modalStyle}>
+                    <Typography sx={{ fontSize: 13, textAlign: "center", my: 1, color: "black" }} component="h2">
+                        ボードを保存しています。
+                    </Typography>
+                    <LinearProgress />
+                </Card>
+            </Modal>
+
             {editModalOpen ?
                 <Modal
                     open={editModalOpen}
@@ -118,7 +147,7 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
                 :
                 <Box>
                     {contents != undefined
-                        ? <NoteContentsBar contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
+                        ? <NoteContentsBar title="ボード" contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
                         : <Skeleton variant="rectangular" height={30} />
                     }
                     {contents != undefined
@@ -131,29 +160,20 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
                     }
 
                     {contents != undefined ?
-                        <Box sx={{ borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }}>
-                            <Box sx={{ p: 1, mx: 1 }} >
-                                <Box sx={{ width: "100%", alignItems: "center" }} >
-                                    <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
+                        <Box sx={{ px: 1, borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }}>
+                            {contents.title != undefined &&
+                                <Box sx={{ p: 1 }} >
+                                    <Typography variant="h6" sx={{ fontWeight: "400", fontSize: 14, color: "black" }} component="div">
                                         {String(contents.title)}
                                     </Typography>
-                                    {/* <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} /> */}
                                 </Box>
-                            </Box>
-                            <Divider />
-                            {contents.comment != "" &&
-                                <>
-                                    <Box sx={{ px: 2, py: 1 }}>
-                                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                            コメント
-                                        </Typography>
-
-                                        <Typography variant="body2" sx={{ pb: 1 }}>
-                                            {contents.comment}
-                                        </Typography>
-                                    </Box>
-                                    <Divider />
-                                </>
+                            }
+                            {contents.comment != undefined &&
+                                <Box sx={{ px: 1, pb: 1 }}>
+                                    <Typography variant="body2" sx={{ fontSize: 13, color: "black" }}>
+                                        {contents.comment}
+                                    </Typography>
+                                </Box>
                             }
                         </Box>
                         :

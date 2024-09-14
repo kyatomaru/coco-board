@@ -4,6 +4,9 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import Modal from '@mui/material/Modal';
+import LinearProgress from '@mui/material/LinearProgress';
 import dayjs from 'dayjs';
 import type { PracticeContentsType } from '@/types/practice/PracticeContents';
 import { useDeletePractice } from '@/hooks/practice/useDeletePractice';
@@ -28,12 +31,28 @@ type PageProps = {
     setContents: any
 }
 
+const modalStyle = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    minWidth: 320,
+    width: "400px",
+    maxWidth: '100%',
+    zIndex: 2200,
+    outline: "none",
+};
+
 const DataFormat = (date: String) => {
     return useDateFormat(date)
 }
 
 export default function PracticeContentsBox({ contents, setContents }: PageProps) {
     const router = useRouter()
+    const [isEditLoading, setIsEditLoading] = React.useState(false)
+
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [editModalOpen, setEditModalOpen] = React.useState<boolean>(false)
 
@@ -54,27 +73,39 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
 
     const UpdatePracticeContents = async (contents) => {
         setEditModalOpen(false)
+        setIsEditLoading(true)
+
         await useUpdatePractice(contents).then((data) => {
             setContents(data)
+            setIsEditLoading(false)
         })
     }
 
     return (
         <>
             <DeleteConfirmModal open={deleteModalOpen} setOpen={setDeleteModalOpen} title={practiceModalTitle} message={deleteNoteMs} confirmText="削除" onSubmit={DeletePracticeContents} />
+            <Modal sx={{ zIndex: 2100 }} open={isEditLoading}>
+                <Card elevation={2} sx={modalStyle}>
+                    <Typography sx={{ fontSize: 13, textAlign: "center", my: 1, color: "black" }} component="h2">
+                        ノートを保存しています。
+                    </Typography>
+                    <LinearProgress />
+                </Card>
+            </Modal>
+
             {editModalOpen ?
                 <PracticeForm contents={contents} postData={UpdatePracticeContents} onClose={() => { setEditModalOpen(false) }} />
                 :
                 <Box>
-                    <NoteContentsBar contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
+                    <NoteContentsBar title="練習" contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
 
                     {contents != undefined ?
                         <Stack direction="row" sx={{ p: 1, mx: 1 }} >
                             <Box sx={{ width: "100%", alignItems: "center" }} >
-                                <Typography sx={{ fontSize: 17 }} variant="h6" component="div">
+                                <Typography sx={{ fontSize: 17, color: "black" }} variant="h6" component="div">
                                     {DataFormat(contents.date)}
                                 </Typography>
-                                <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
+                                <Typography variant="h6" sx={{ fontSize: 16, color: "black" }} component="div">
                                     {String(contents.title)}
                                 </Typography>
                                 <Chip label="練習" color="primary" size="small" sx={{ fontSize: 9 }} />
@@ -93,7 +124,7 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
                                     場所
                                 </Typography>
                                 {contents.place &&
-                                    <Typography variant="body2" sx={{}}>
+                                    <Typography variant="body2" sx={{ color: "black" }}>
                                         {String(contents.place)}
                                     </Typography>
                                 }
@@ -103,7 +134,7 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
                                     天気
                                 </Typography>
                                 {contents.weather &&
-                                    <Typography variant="body2" sx={{}}>
+                                    <Typography variant="body2" sx={{ color: "black" }}>
                                         {String(contents.weather)}
                                     </Typography>
                                 }
@@ -120,21 +151,21 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
                             <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                 練習メニュー
                             </Typography>
-                            {contents.details[0] != null ?
+                            {contents.details[0].context ?
                                 <List sx={{ px: 0, my: 1, py: 0 }}>
                                     {contents.details.map((detail, index) => (
                                         <Box key={index}>
                                             {
-                                                detail.context != "" &&
+                                                detail.context != undefined &&
                                                 // <ListText primary={detail.context} secondary={elementsCategories[Number(detail.type)].title} />
-                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1, color: "black" }}>
                                                     ・{detail.context}
                                                 </Typography>
                                             }
                                         </Box>
                                     ))
                                     }
-                                </List >
+                                </List>
                                 :
                                 <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
                                     なし
@@ -152,9 +183,13 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
                             <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#16b41e">
                                 次に向けて
                             </Typography>
-                            {contents.next &&
-                                <Typography variant="body2" sx={{ fontSize: 14 }}>
+                            {contents.next ?
+                                <Typography variant="body2" sx={{ fontSize: 14, color: "black" }}>
                                     {contents.next}
+                                </Typography>
+                                :
+                                <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14, color: "black" }}>
+                                    なし
                                 </Typography>
                             }
                         </Box>
@@ -171,7 +206,7 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
                                     コメント
                                 </Typography>
 
-                                <Typography variant="body2" sx={{ pb: 1 }}>
+                                <Typography variant="body2" sx={{ pb: 1, color: "black" }}>
                                     {contents.comment}
                                 </Typography>
                             </Box>

@@ -17,7 +17,6 @@ export default function LoginBox() {
     const router = useRouter()
     const [email, setEmail] = React.useState(undefined)
     const [password, setPassword] = React.useState(undefined)
-    const [user, setUser] = React.useState<User | undefined | null>(undefined)
 
     const [credentialsError, setCredentialsError] = React.useState(false);
 

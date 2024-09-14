@@ -29,7 +29,7 @@ export default function Home() {
 
   const [contents, setContents] = useGetBoard(user, params.contentsId)
 
-  useIsAuth(router)
+  // useIsAuth(router)
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -42,8 +42,8 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <LoadingPage />
-      {contents != undefined && user &&
-        (user.uid !== contents.uid || !contents ?
+      {contents != undefined &&
+        (!contents ?
           <NotPage />
           :
           <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative", overflowX: "hidden" }}>

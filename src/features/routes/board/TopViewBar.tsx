@@ -45,23 +45,19 @@ export default function TopViewBar({ contents }: PageProps) {
 
     return (
         <Box sx={{ position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 1900, borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }} >
-            <Grid sx={{ px: 1 }} container direction="row" alignItems="center" justifyContent="space-between">
-                <Grid >
-                    <IconButton size='small' onClick={(event) => router.push(`/calendar/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`)} ><ArrowBackIosNewIcon /></IconButton>
-                </Grid>
-                <Grid>
+            <Stack sx={{ px: 1 }} direction="row" alignItems="center" justifyContent="space-between">
+                <IconButton sx={{ width: "150px" }} size='small' onClick={(event) => router.push(`/calendar/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`)} ><ArrowBackIosNewIcon /></IconButton>
+                <Box>
                     <Typography variant="h6" sx={{ fontSize: 14 }} component="div">
                         記録
                     </Typography>
-                </Grid>
-                <Grid >
-                    <Stack direction="row" spacing={1}>
-                        <IconButton size='small' onClick={EditButtonClick} ><EditIcon /></IconButton>
-                        <IconButton size='small' onClick={DeleteButtonClick} ><DeleteIcon /></IconButton>
-                    </Stack>
-                    {/* <NextButton size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>記録する</NextButton> */}
-                </Grid>
-            </Grid>
+                </Box>
+                <Stack sx={{ width: "150px" }} direction="row" spacing={1} >
+                    <IconButton size='small' onClick={EditButtonClick} ><EditIcon /></IconButton>
+                    <IconButton size='small' onClick={DeleteButtonClick} ><DeleteIcon /></IconButton>
+                </Stack>
+                {/* <NextButton size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>記録する</NextButton> */}
+            </Stack>
             <Divider />
         </Box>
     )

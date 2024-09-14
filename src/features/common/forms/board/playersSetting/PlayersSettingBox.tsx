@@ -100,7 +100,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
                             setPlayers(playersArray)
                         }}
                     />
-                    <Box sx={{ lineHeight: "40px" }}>
+                    <Box sx={{ lineHeight: "40px", color: "black" }}>
                         {(FormationList(verticalWidth, verticalHeight)[formation[team]].formation[index].position)}
                     </Box>
                     <Divider />
