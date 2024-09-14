@@ -102,21 +102,21 @@ export default function SettingBox({ frame, setFrame, board }: PageProps) {
 
             <Box sx={{ my: 1, px: 1 }}>
                 <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                    <Typography fontSize={13} sx={{ width: "80px" }}>背番号</Typography>
+                    <Typography fontSize={13} sx={{ width: "80px", color: "black" }}>背番号</Typography>
                     <IconButton onClick={() => { setIsSeeNumber(!isSeeNumber), setIsSeePosition(!isSeePosition) }}>
                         {isSeeNumber ? <Visibility sx={{ fontSize: 18, color: "#444" }} /> : <VisibilityOff sx={{ fontSize: 18, color: "#444" }} />}
                     </IconButton>
                 </Stack>
 
                 <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                    <Typography fontSize={13} sx={{ width: "80px" }}>ポジション</Typography>
+                    <Typography fontSize={13} sx={{ width: "80px", color: "black" }}>ポジション</Typography>
                     <IconButton onClick={() => { setIsSeeNumber(!isSeeNumber), setIsSeePosition(!isSeePosition) }}>
                         {isSeePosition ? <Visibility sx={{ fontSize: 18, color: "#444" }} /> : <VisibilityOff sx={{ fontSize: 18, color: "#444" }} />}
                     </IconButton>
                 </Stack>
 
                 <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                    <Typography fontSize={13} sx={{ width: "80px" }}>名前</Typography>
+                    <Typography fontSize={13} sx={{ width: "80px", color: "black" }}>名前</Typography>
                     <IconButton onClick={() => { setIsSeeName(!isSeeName) }}>
                         {isSeeName ? <Visibility sx={{ fontSize: 18, color: "#444" }} /> : <VisibilityOff sx={{ fontSize: 18, color: "#444" }} />}
                     </IconButton>
@@ -128,7 +128,7 @@ export default function SettingBox({ frame, setFrame, board }: PageProps) {
                     return (<>
                         <Divider />
                         <Box sx={{ my: 1, px: 1 }}>
-                            <Typography fontSize={13} sx={{ width: "40px" }}>{value}</Typography>
+                            <Typography fontSize={13} sx={{ width: "40px", color: "black" }}>{value}</Typography>
                             <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
                                 <Typography fontSize={13} sx={{ width: "40px" }}>本体</Typography>
                                 <MuiColorInput sx={{ width: "150px", fontSize: 13, border: "none" }} format="hex" value={mainColor[index]}
@@ -139,7 +139,7 @@ export default function SettingBox({ frame, setFrame, board }: PageProps) {
                                     }} />
                             </Stack>
                             <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                                <Typography fontSize={13} sx={{ width: "40px" }}>背番号</Typography>
+                                <Typography fontSize={13} sx={{ width: "40px", color: "black" }}>背番号</Typography>
                                 <MuiColorInput sx={{ width: "150px", fontSize: 13, border: "none" }} format="hex" value={numberColor[index]}
                                     onChange={(newValue) => {
                                         const newColor = numberColor.concat()
@@ -148,7 +148,7 @@ export default function SettingBox({ frame, setFrame, board }: PageProps) {
                                     }} />
                             </Stack>
                             <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                                <Typography fontSize={13} sx={{ width: "40px" }}>名前</Typography>
+                                <Typography fontSize={13} sx={{ width: "40px", color: "black" }}>名前</Typography>
                                 <MuiColorInput sx={{ width: "150px", fontSize: 13, border: "none" }} format="hex" value={nameColor[index]}
                                     onChange={(newValue) => {
                                         const newColor = nameColor.concat()

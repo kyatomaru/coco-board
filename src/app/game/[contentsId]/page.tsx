@@ -27,7 +27,7 @@ export default function Home() {
   const [user, setUser] = React.useState<User | undefined>(null);
   const [contents, setContents] = useGetGame(user, params.contentsId)
 
-  useIsAuth(router)
+  // useIsAuth(router)
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {

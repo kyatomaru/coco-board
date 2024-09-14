@@ -178,7 +178,7 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
     }
 
     return (
-        <Box sx={{ touchAction: "none" }} >
+        <Box sx={{ touchAction: !isView && "none" }} >
             {!isView &&
                 <>
                     <TopControlBar onClose={onClose} frame={frame} setFrame={setFrame} setCurrentFrame={setCurrentFrame} board={board} onSubmit={onSubmit} menu={menu} setMenu={setMenu} isPlay={isPlay} />

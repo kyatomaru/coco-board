@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import Modal from '@mui/material/Modal';
+import LinearProgress from '@mui/material/LinearProgress';
 import dayjs from 'dayjs';
 import type { GameContentsType } from '@/types/game/GameContents';
 import Typography from '@mui/material/Typography';
@@ -38,6 +41,20 @@ type PageProps = {
     setContents: any
 }
 
+const modalStyle = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    minWidth: 320,
+    width: "400px",
+    maxWidth: '100%',
+    zIndex: 2200,
+    outline: "none",
+};
+
 const DataFormat = (date: String) => {
     return useDateFormat(date)
 }
@@ -45,6 +62,8 @@ const DataFormat = (date: String) => {
 
 export default function GameContentsBox({ contents, setContents }: PageProps) {
     const router = useRouter()
+    const [isEditLoading, setIsEditLoading] = React.useState(false)
+
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [editModalOpen, setEditModalOpen] = React.useState<boolean>(false)
 
@@ -65,27 +84,40 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
 
     const UpdateGameContents = async (contents) => {
         setEditModalOpen(false)
+        setIsEditLoading(true)
+
         await useUpdateGame(contents).then((data) => {
             setContents(data)
+            setIsEditLoading(false)
         })
     }
 
     return (
         <>
             <DeleteConfirmModal open={deleteModalOpen} setOpen={setDeleteModalOpen} title={gameModalTitle} message={deleteNoteMs} confirmText="削除" onSubmit={DeleteGameContents} />
+
+            <Modal sx={{ zIndex: 2100 }} open={isEditLoading}>
+                <Card elevation={2} sx={modalStyle}>
+                    <Typography sx={{ fontSize: 13, textAlign: "center", my: 1, color: "black" }} component="h2">
+                        ノートを保存しています。
+                    </Typography>
+                    <LinearProgress />
+                </Card>
+            </Modal>
+
             {editModalOpen ?
                 <GameForm contents={contents} postData={UpdateGameContents} onClose={() => { setEditModalOpen(false) }} />
                 :
                 <Box>
-                    <NoteContentsBar contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
+                    <NoteContentsBar title="試合" contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
 
                     {contents != undefined ?
                         <Stack direction="row" sx={{ p: 1, mx: 1 }} >
                             <Box sx={{ width: "100%", alignItems: "center" }} >
-                                <Typography sx={{ fontSize: 17 }} variant="h6" component="div">
+                                <Typography sx={{ fontSize: 17, color: "black" }} variant="h6" component="div">
                                     {DataFormat(contents.date)}
                                 </Typography>
-                                <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
+                                <Typography variant="h6" sx={{ fontSize: 16, color: "black" }} component="div">
                                     {String(contents.title)}
                                 </Typography>
                                 <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} />
@@ -104,7 +136,7 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                     場所
                                 </Typography>
                                 {contents.place &&
-                                    <Typography variant="body2" sx={{}}>
+                                    <Typography variant="body2" sx={{ color: "black" }}>
                                         {String(contents.place)}
                                     </Typography>
                                 }
@@ -114,7 +146,7 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                     天気
                                 </Typography>
                                 {contents.weather &&
-                                    <Typography variant="body2" sx={{}}>
+                                    <Typography variant="body2" sx={{ color: "black" }}>
                                         {String(contents.weather)}
                                     </Typography>
                                 }
@@ -132,18 +164,18 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                             </Typography>
                             <Stack direction="row" sx={{}} >
                                 <Box sx={{ width: "100%" }}>
-                                    <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                    <Typography variant="body2" sx={{ fontSize: 14, mb: 1, color: "black" }}>
                                         {String(contents.name1)}
                                     </Typography>
-                                    <Typography variant="body2" sx={{}}>
+                                    <Typography variant="body2" sx={{ color: "black" }}>
                                         {String(contents.score1)}
                                     </Typography>
                                 </Box>
                                 <Box sx={{ width: "100%" }}>
-                                    <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                    <Typography variant="body2" sx={{ fontSize: 14, mb: 1, color: "black" }}>
                                         {String(contents.name2)}
                                     </Typography>
-                                    <Typography variant="body2" sx={{}}>
+                                    <Typography variant="body2" sx={{ color: "black" }}>
                                         {String(contents.score2)}
                                     </Typography>
                                 </Box>
@@ -159,27 +191,27 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                         <>
                             <Divider />
                             <Box sx={{ width: "100%", my: 1 }}>
-                                {contents.condition != 0 &&
+                                {Number(contents.condition) <= 0 &&
                                     <Box sx={{ px: 2, mb: 2 }}>
                                         <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                             体調
                                         </Typography>
                                         <Stack direction="row" alignItems="center">
                                             <span>{customIcons[Number(contents.condition)].icon}</span>
-                                            <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                            <Typography variant="h6" sx={{ px: 1, fontSize: 14, color: "black" }}>
                                                 {customIcons[Number(contents.condition)].label}
                                             </Typography>
                                         </Stack>
                                     </Box>
                                 }
-                                {contents.fatigue != 0 &&
+                                {Number(contents.fatigue) <= 0 &&
                                     <Box sx={{ px: 2, mb: 2 }}>
                                         <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                             疲労感
                                         </Typography>
                                         <Stack direction="row" alignItems="center">
                                             <span>{customIcons[Number(contents.fatigue)].icon}</span>
-                                            <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
+                                            <Typography variant="h6" sx={{ px: 1, fontSize: 14, color: "black" }}>
                                                 {customIcons[Number(contents.fatigue)].label}
                                             </Typography>
                                         </Stack>
@@ -190,7 +222,7 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                         <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                             怪我
                                         </Typography>
-                                        <Typography variant="body2" sx={{}}>
+                                        <Typography variant="body2" sx={{ color: "black" }}>
                                             {String(contents.injury)}
                                         </Typography>
                                     </Box>
@@ -209,7 +241,7 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                 <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                     ポジション
                                 </Typography>
-                                <Typography variant="body2" sx={{}}>
+                                <Typography variant="body2" sx={{ color: "black" }}>
                                     {String(contents.position)}
                                 </Typography>
                             </Box>
@@ -222,14 +254,14 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                             <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#ff5e00">
                                 良かったところ
                             </Typography>
-                            {contents.goodPoints[0] != null ?
+                            {contents.goodPoints[0].context ?
                                 <List sx={{ px: 0, my: 1, py: 0 }}>
                                     {contents.goodPoints.map((goodPoint, index) => (
                                         <Box key={index}>
                                             {
-                                                goodPoint.context != "" &&
+                                                goodPoint.context != undefined &&
                                                 // <ListText primary={goodPoint.context} secondary={elementsCategories[Number(goodPoint.type)].title} />
-                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1, color: "black" }}>
                                                     ・{goodPoint.context}
                                                 </Typography>
                                             }
@@ -238,7 +270,7 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                     }
                                 </List >
                                 :
-                                <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
+                                <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14, color: "black" }}>
                                     なし
                                 </Typography>
                             }
@@ -253,14 +285,14 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                             <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#007eff">
                                 悪かった点
                             </Typography>
-                            {contents.badPoints[0] != null ?
+                            {contents.badPoints[0].context ?
                                 <List sx={{ px: 0, my: 1, py: 0 }}>
                                     {contents.badPoints.map((badPoint, index) => (
                                         <Box key={index}>
                                             {
-                                                badPoint.context != "" &&
+                                                badPoint.context != undefined &&
                                                 // <ListText primary={badPoint.context} secondary={elementsCategories[Number(badPoint.type)].title} />
-                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1 }}>
+                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1, color: "black" }}>
                                                     ・{badPoint.context}
                                                 </Typography>
                                             }
@@ -269,7 +301,7 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                     }
                                 </List >
                                 :
-                                <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14 }}>
+                                <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14, color: "black" }}>
                                     なし
                                 </Typography>
                             }
@@ -283,9 +315,13 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                             <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#16b41e">
                                 次に向けて
                             </Typography>
-                            {contents.next &&
-                                <Typography variant="body2" sx={{ fontSize: 14 }}>
+                            {contents.next ?
+                                <Typography variant="body2" sx={{ fontSize: 14, color: "black" }}>
                                     {contents.next}
+                                </Typography>
+                                :
+                                <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14, color: "black" }}>
+                                    なし
                                 </Typography>
                             }
                         </Box>
@@ -301,7 +337,7 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                     コメント
                                 </Typography>
 
-                                <Typography variant="body2" sx={{ pb: 1 }}>
+                                <Typography variant="body2" sx={{ pb: 1, color: "black" }}>
                                     {contents.comment}
                                 </Typography>
                             </Box>

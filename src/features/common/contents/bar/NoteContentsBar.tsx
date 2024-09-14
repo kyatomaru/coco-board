@@ -5,7 +5,7 @@ import type { User } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -13,37 +13,58 @@ import Divider from '@mui/material/Divider';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import { auth } from '@/app/firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 type PageProps = {
+    title: String,
     contents: any,
     EditButtonClick: any,
     DeleteButtonClick: any,
 }
 
-export default function NoteContentsBar({ contents, EditButtonClick, DeleteButtonClick }: PageProps) {
+export default function NoteContentsBar({ title, contents, EditButtonClick, DeleteButtonClick }: PageProps) {
     const router = useRouter()
+
+    const [user, setUser] = React.useState<User | undefined>(null);
+
+    React.useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(auth.currentUser)
+            }
+        })
+    }, [])
 
     return (
         <Box sx={{
             position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 1900,
             borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2",
         }} >
-            <Grid sx={{ px: 1, height: "40px" }} container direction="row" alignItems="center" justifyContent="space-between">
-                <Grid>
-                    <IconButton onClick={(event) => { contents != undefined && router.push(`/home/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`) }} ><ArrowLeftIcon /></IconButton>
-                </Grid>
-                <Grid>
-                    <Typography variant="h6" sx={{ fontSize: 14 }} component="div">
-                        記録
+            <Stack sx={{ px: 1, height: "40px" }} direction="row" alignItems="center" justifyContent="center">
+                <Box sx={{ width: "100%" }}>
+                    {user &&
+                        <IconButton onClick={(event) => { contents != undefined && router.push(`/home/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`) }} ><ArrowLeftIcon /></IconButton>
+                    }
+                </Box>
+                <Box sx={{ width: "100%", textAlign: "center" }}>
+                    <Typography variant="h6" sx={{ fontSize: 14, color: "black" }} component="div">
+                        {title}
                     </Typography>
-                </Grid>
-                <Grid >
-                    <Stack direction="row" spacing={1}>
-                        <IconButton onClick={EditButtonClick} ><EditIcon sx={{ fontSize: "1.25rem" }} /></IconButton>
-                        <IconButton onClick={DeleteButtonClick} ><DeleteIcon sx={{ fontSize: "1.25rem" }} /></IconButton>
-                    </Stack>
-                </Grid>
-            </Grid>
+                </Box>
+                <Stack direction="row" justifyContent="flex-end" spacing={1} sx={{ width: "100%" }}>
+                    {user ?
+                        <>
+                            <IconButton onClick={EditButtonClick} size='small'><EditIcon sx={{ fontSize: "1.25rem" }} /></IconButton>
+                            <IconButton onClick={DeleteButtonClick} size='small'><DeleteIcon sx={{ fontSize: "1.25rem" }} /></IconButton>
+                        </>
+                        :
+                        <Button size="medium" onClick={() => router.push('/accounts/login')}>
+                            <Typography sx={{ fontSize: 13 }}>ログイン</Typography>
+                        </Button>
+                    }
+                </Stack>
+            </Stack>
             <Divider />
         </Box>
     )
