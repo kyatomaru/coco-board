@@ -68,8 +68,7 @@ export default function Home() {
                 <NoteCardBox user={user} contents={note} setContents={setNote} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
             }
-          </Container >
-          <InviteModal />
+          </Container>
         </>
       }
     </main >
