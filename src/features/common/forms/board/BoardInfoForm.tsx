@@ -70,7 +70,7 @@ export default function BoardInfoForm({ setOpen, board, onSubmit }: pageProps) {
                             </Button>
                         </Grid>
                         <Grid >
-                            <Button size="small" sx={{ backgroundColor: "#1976d2 !important" }} variant='filled' type='submit'>
+                            <Button size="small" sx={{ backgroundColor: "#2e7d32 !important" }} variant='filled' type='submit'>
                                 <Typography fontSize={13} component="p">
                                     記録する
                                 </Typography>
