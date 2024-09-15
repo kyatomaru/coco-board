@@ -58,7 +58,7 @@ export default function InfoFooter() {
                     <Button size='small' target='_blank' href='/terms' sx={{ fontSize: 12, color: "gray" }}>利用規約</Button>
                 </Stack>
             </Stack>
-            <Box sx={{ background: "white", display: { xs: 'block', sm: 'none' }, py: 1 }}>
+            <Box sx={{ background: "white", display: { xs: 'block', sm: 'none' }, pb: 1 }}>
                 <Stack
                     direction="row"
                     justifyContent="center"

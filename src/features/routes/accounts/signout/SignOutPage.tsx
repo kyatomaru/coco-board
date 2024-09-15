@@ -14,8 +14,8 @@ export default function SignOutPage() {
     const router = useRouter()
 
     return (
-        <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
-            <Box sx={{ px: "20px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
+        <Container maxWidth="xs" fixed sx={{ m: "auto" }}>
+            <Box sx={{ px: "20px", pt: "30px", pb: "15px", textAlign: "center" }}>
                 <Stack
                     direction="row"
                     alignItems="center"
@@ -35,13 +35,15 @@ export default function SignOutPage() {
                     </Typography>
                 </Stack>
                 <Box sx={{ mb: "10px" }}>
-                    <Typography variant="h5" sx={{ fontSize: 14, color: "black" }}>
+                    <Typography variant="body1" sx={{ color: "black" }}>
                         ログアウトしました。
+                        <br />
+                        再度ログインしてください。
                     </Typography>
                 </Box>
                 <Typography sx={{ mt: "5px" }}>
                     <Button href='/accounts/login' size="medium" sx={{ height: "30px", fontSize: 14 }} >
-                        確認した
+                        OK
                     </Button>
                 </Typography>
             </Box>

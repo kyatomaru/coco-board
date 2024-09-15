@@ -8,6 +8,9 @@ import { onAuthStateChanged, getAuth } from "firebase/auth"
 import LoadingPage from '@/components/AuthLoadingPage';
 import LoginPage from '@/features/routes/accounts/login/LoginPageGoogle';
 import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import InfoFooter from '@/components/InfoFooter';
 
 export default function Home() {
   const router = useRouter()
@@ -29,6 +32,10 @@ export default function Home() {
         :
         <LoginPage />
       }
+      <Box sx={{ width: "100%" }}>
+        <Divider />
+        <InfoFooter />
+      </Box>
     </main>
   )
 }
