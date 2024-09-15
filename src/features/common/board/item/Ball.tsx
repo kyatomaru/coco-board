@@ -27,36 +27,35 @@ type PageProps = {
     setMenu: any
 }
 
-const circleStyle = (ballSize, x, y, maxX, maxY, isSelect, isPlay) => {
+const circleStyle = (diameter, x, y, maxX, maxY, isSelect, isPlay) => {
     return {
         borderRadius: "50%",
-        width: ballSize + 12,
-        height: ballSize + 12,
+        width: diameter + 12,
+        height: diameter + 12,
         position: "absolute",
         pointerEvent: "none",
         border: isSelect && !isPlay ? "1px #66FFFF solid" : "none",
-        display: (x < 0 || maxX < x || y < 0 || maxY < y) ? "none" : "flex",
+        display: (x < -diameter - 5 || maxX + diameter + 5 < x || y < -diameter - 5 || maxY + diameter + 5 < y) ? "none" : "flex",
         alignItems: "center",
         justifyContent: "center",
     }
 }
 
-const ballStyle = (ballSize, x, y, maxX, maxY) => {
+const ballStyle = (diameter, x, y, maxX, maxY) => {
     return {
         backgroundColor: "white !important",
         color: "black",
-        width: ballSize,
-        height: ballSize,
+        width: diameter,
+        height: diameter,
         position: "absolute",
         pointerEvent: "none",
-        display: (x < 0 || maxX < x || y < 0 || maxY < y) ? "none" : "flex",
+        display: (x < -diameter - 5 || maxX + diameter + 5 < x || y < -diameter - 5 || maxY + diameter + 5 < y) ? "none" : "flex",
         zIndex: 200
     }
 }
 
 export default function Ball({ board, beforeCourtId, courtWidth, courtHeight, verticalWidth, verticalHeight, besideWidth, besideHeight, isPlay, frame, setFrame, currentFrame, selectItem, setSelectItem, setMenu }: PageProps) {
     const [isDrag, setIsDrag] = React.useState(false);
-    const [ballSize, setBallSize] = React.useState(frame[0].ball.diameter);
 
     const getX = (frameIndex) => { return frame[frameIndex].ball.x }
     const getY = (frameIndex) => { return frame[frameIndex].ball.y }
@@ -137,17 +136,17 @@ export default function Ball({ board, beforeCourtId, courtWidth, courtHeight, ve
         <Draggable
             handle='.ball'
             bounds={{ left: 0, top: 0, right: courtWidth - (2 * getDiameter()), bottom: courtHeight - (2 * getDiameter()) }}
-            position={{ x: isDrag ? getX(currentFrame) : getX(currentFrame) + ballSize / 4, y: isDrag ? getY(currentFrame) : getY(currentFrame) + ballSize / 4 }}
+            position={{ x: isDrag ? getX(currentFrame) : getX(currentFrame) + getDiameter() / 4, y: isDrag ? getY(currentFrame) : getY(currentFrame) + getDiameter() / 4 }}
             onStart={onDragStart} onStop={onDragEnd} >
             <Box sx={{ position: "relative", zIndex: 200 }} className={`ball`}>
-                <Box sx={circleStyle(isDrag ? ballSize + 10 : ballSize, getX(currentFrame), getY(currentFrame), courtWidth - getDiameter(), courtHeight - getDiameter(), isSelect(), isPlay)}>
+                <Box sx={circleStyle(isDrag ? getDiameter() + 10 : getDiameter(), getX(currentFrame), getY(currentFrame), courtWidth - getDiameter(), courtHeight - getDiameter(), isSelect(), isPlay)}>
                     <Avatar
                         className='ball'
-                        sx={ballStyle(isDrag ? ballSize + 10 : ballSize, getX(currentFrame), getY(currentFrame), courtWidth - getDiameter(), courtHeight - getDiameter())}
+                        sx={ballStyle(isDrag ? getDiameter() + 10 : getDiameter(), getX(currentFrame), getY(currentFrame), courtWidth - getDiameter(), courtHeight - getDiameter())}
                     >
                         <SportsSoccerIcon
                             id="ball"
-                            sx={{ width: isDrag ? ballSize + 10 : ballSize + "px", height: isDrag ? ballSize + 10 : ballSize + "px" }}
+                            sx={{ width: isDrag ? getDiameter() + 10 : getDiameter() + "px", height: isDrag ? getDiameter() + 10 : getDiameter() + "px" }}
                         />
                     </Avatar >
                 </Box>
