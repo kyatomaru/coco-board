@@ -26,8 +26,8 @@ export default function AddItemBox({ frame, setFrame, board }: PageProps) {
 
         if (frameArray[0].ball.x < 0) {
             frame.map((item, index) => {
-                frameArray[index].ball.x = 0
-                frameArray[index].ball.y = 0
+                frameArray[index].ball.x = 10
+                frameArray[index].ball.y = 10
             })
         }
         setFrame(frameArray)

@@ -163,7 +163,7 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
     const Players = () => {
         const players = []
         frame[currentFrame].players.map((value, index) => {
-            players.push(<Player board={board} beforeCourtId={beforeCourtId} courtWidth={courtWidth} courtHeight={courtHeight} verticalWidth={verticalWidth} verticalHeight={verticalHeight} besideWidth={besideWidth} besideHeight={besideHeight} isPlay={isPlay} key={index} index={index} frame={isPlay ? playFrame : frame} setFrame={setFrame} currentFrame={isPlay ? playCurrentFrame : currentFrame} selectItem={selectItem} setSelectItem={setSelectItem} />
+            players.push(<Player board={board} beforeCourtId={beforeCourtId} courtWidth={courtWidth} courtHeight={courtHeight} verticalWidth={verticalWidth} verticalHeight={verticalHeight} besideWidth={besideWidth} besideHeight={besideHeight} isPlay={isPlay} key={index} index={index} frame={isPlay ? playFrame : frame} setFrame={setFrame} currentFrame={isPlay ? playCurrentFrame : currentFrame} selectItem={selectItem} setSelectItem={setSelectItem} setMenu={setMenu} />
             )
         })
         return players
@@ -194,7 +194,7 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
                         {courtRef.current != null && frame[currentFrame] != undefined &&
                             <>
                                 {Players()}
-                                <Ball board={board} beforeCourtId={beforeCourtId} courtWidth={courtWidth} courtHeight={courtHeight} verticalWidth={verticalWidth} verticalHeight={verticalHeight} besideWidth={besideWidth} besideHeight={besideHeight} isPlay={isPlay} frame={isPlay ? playFrame : frame} setFrame={setFrame} currentFrame={isPlay ? playCurrentFrame : currentFrame} selectItem={selectItem} setSelectItem={setSelectItem} />
+                                <Ball board={board} beforeCourtId={beforeCourtId} courtWidth={courtWidth} courtHeight={courtHeight} verticalWidth={verticalWidth} verticalHeight={verticalHeight} besideWidth={besideWidth} besideHeight={besideHeight} isPlay={isPlay} frame={isPlay ? playFrame : frame} setFrame={setFrame} currentFrame={isPlay ? playCurrentFrame : currentFrame} selectItem={selectItem} setSelectItem={setSelectItem} setMenu={setMenu} />
                                 <Box sx={courtInnerStyle(courtWidth, courtHeight)} onMouseDown={cancelSelectItem}></Box>
                             </>
                         }

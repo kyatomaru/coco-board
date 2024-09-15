@@ -23,7 +23,8 @@ type PageProps = {
     currentFrame: number,
     selectItem: any,
     setSelectItem: any,
-    isPlay: boolean
+    isPlay: boolean,
+    setMenu: any
 }
 
 const circleStyle = (ballSize, x, y, maxX, maxY, isSelect, isPlay) => {
@@ -53,7 +54,7 @@ const ballStyle = (ballSize, x, y, maxX, maxY) => {
     }
 }
 
-export default function Ball({ board, beforeCourtId, courtWidth, courtHeight, verticalWidth, verticalHeight, besideWidth, besideHeight, isPlay, frame, setFrame, currentFrame, selectItem, setSelectItem }: PageProps) {
+export default function Ball({ board, beforeCourtId, courtWidth, courtHeight, verticalWidth, verticalHeight, besideWidth, besideHeight, isPlay, frame, setFrame, currentFrame, selectItem, setSelectItem, setMenu }: PageProps) {
     const [isDrag, setIsDrag] = React.useState(false);
     const [ballSize, setBallSize] = React.useState(frame[0].ball.diameter);
 
@@ -85,8 +86,8 @@ export default function Ball({ board, beforeCourtId, courtWidth, courtHeight, ve
 
     const onDragStart = (e, dragElement) => {
         setIsDrag(true)
-
         onSelect()
+        setMenu(0)
     }
 
     const onDragEnd = (e, dragElement) => {
