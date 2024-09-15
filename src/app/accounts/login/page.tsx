@@ -32,7 +32,7 @@ export default function Home() {
         :
         <LoginPage />
       }
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%", position: "fixed", bottom: 0 }}>
         <Divider />
         <InfoFooter />
       </Box>
