@@ -14,7 +14,7 @@ export default function SignOutPage() {
     const router = useRouter()
 
     return (
-        <Container maxWidth="xs" fixed sx={{ m: "auto" }}>
+        <Container maxWidth="xs" fixed sx={{ m: 3 }}>
             <Box sx={{ px: "20px", pt: "30px", pb: "15px", textAlign: "center" }}>
                 <Stack
                     direction="row"

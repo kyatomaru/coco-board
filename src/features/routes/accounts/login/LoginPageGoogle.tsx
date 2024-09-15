@@ -44,7 +44,7 @@ export default function LoginPage() {
             {isLoading ?
                 <LoadingPage />
                 :
-                <Container maxWidth="xs" fixed sx={{ m: "auto" }}>
+                <Container maxWidth="xs" fixed sx={{ m: 3 }}>
                     <Box sx={{ alignItems: "center", px: "25px", pt: "30px", pb: "15px", textAlign: "center" }}>
                         <Stack
                             direction="row"

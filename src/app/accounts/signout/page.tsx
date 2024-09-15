@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
       <SignOutPage />
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%", position: "fixed", bottom: 0 }}>
         <Divider />
         <InfoFooter />
       </Box>
