@@ -13,7 +13,7 @@ export default function PrivacyPage() {
             <Header title="プライバシーポリシー" />
             <Container sx={{ mt: "90px" }}>
                 <Box sx={{ py: 4 }}>
-                    <Typography variant="h1" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: 1 }}>
+                    <Typography variant="h1" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: 1, color: "black" }}>
                         プライバシーポリシー
                     </Typography>
                     <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
@@ -23,7 +23,7 @@ export default function PrivacyPage() {
 
                 <Box sx={{ my: 8 }}>
                     <Box sx={{ py: 4 }}>
-                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px" }}>1. はじめに</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>1. はじめに</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             coco-board（以下「本アプリ」）は、ユーザーのプライバシーを尊重し、ユーザーの個人情報を保護することをお約束します。本プライバシーポリシーは、本アプリにおいて収集する個人情報の種類、その利用方法、およびユーザーの権利について説明します。
                         </Typography>
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
                     </Box>
 
                     <Box sx={{ py: 4 }}>
-                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px" }}>2. 収集する情報</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>2. 収集する情報</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             本アプリは、以下の情報を収集します：
                         </Typography>
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
                     </Box>
 
                     <Box sx={{ py: 4 }}>
-                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px" }}>3. 情報の収集方法</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>3. 情報の収集方法</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             ・メールアドレス認証の場合、メールアドレスとパスワードをユーザーから入力してもらいます。
                         </Typography>
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
                     </Box>
 
                     <Box sx={{ py: 4 }}>
-                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px" }}>4. 情報の利用方法</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>4. 情報の利用方法</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             収集した情報は、ユーザー認証の目的で利用します。
                         </Typography>
@@ -75,7 +75,7 @@ export default function PrivacyPage() {
                     </Box>
 
                     <Box sx={{ py: 4 }}>
-                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px" }}>5. 情報の共有と開示</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>5. 情報の共有と開示</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             本アプリは、収集した情報を第三者と共有しません。
                         </Typography>
@@ -83,7 +83,7 @@ export default function PrivacyPage() {
                     </Box>
 
                     <Box sx={{ py: 4 }}>
-                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px" }}>6. クッキーとトラッキング技術</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>6. クッキーとトラッキング技術</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             本アプリは、ログイン認証のためにクッキーを使用します。
                         </Typography>
@@ -91,7 +91,7 @@ export default function PrivacyPage() {
                     </Box>
 
                     <Box sx={{ py: 4 }}>
-                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px" }}>7. データの保護</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>7. データの保護</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             本アプリは、Firebaseを使用してデータベースと認証のセキュリティを確保しています。
                         </Typography>
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
                     </Box>
 
                     <Box sx={{ py: 4 }}>
-                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px" }}>8. ユーザーの権利</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>8. ユーザーの権利</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             ユーザーは、以下の権利を有します：
                         </Typography>
@@ -119,7 +119,7 @@ export default function PrivacyPage() {
                     </Box>
 
                     <Box sx={{ py: 4 }}>
-                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px" }}>9. プライバシーポリシーの変更</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>9. プライバシーポリシーの変更</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             本プライバシーポリシーの変更がある場合、ユーザーには本アプリ内で通知します。ユーザーは定期的に本ポリシーを確認することをお勧めします。
                         </Typography>
@@ -127,7 +127,7 @@ export default function PrivacyPage() {
                     </Box>
 
                     <Box sx={{ py: 4 }}>
-                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px" }}>10. お問い合わせ</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>10. お問い合わせ</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             プライバシーポリシーについてのご質問やご意見がある場合は、「cocoboard125@gmail.com」の連絡先までお問い合わせください
                         </Typography>

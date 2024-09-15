@@ -199,13 +199,12 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
 
                     <Divider />
 
-                    {contents != undefined && contents.comment != "" &&
+                    {contents != undefined && contents.comment != undefined &&
                         <>
                             <Box sx={{ px: 2, my: 1 }}>
                                 <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                     コメント
                                 </Typography>
-
                                 <Typography variant="body2" sx={{ pb: 1, color: "black" }}>
                                     {contents.comment}
                                 </Typography>
