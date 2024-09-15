@@ -96,7 +96,7 @@ export default function PlayerEditBox({ frame, setFrame, index, setIsOpenEditBox
 
             <Box sx={{ my: 2, px: 1 }}>
                 <Stack direction="row" spacing={2} sx={{ m: 1 }}>
-                    <Typography fontSize={12} sx={{ lineHeight: "40px", width: "65px" }}>名前</Typography>
+                    <Typography fontSize={12} sx={{ lineHeight: "40px", width: "65px", color: "black" }}>名前</Typography>
                     <TextField
                         placeholder='名前'
                         size='small'
@@ -108,7 +108,7 @@ export default function PlayerEditBox({ frame, setFrame, index, setIsOpenEditBox
                 </Stack>
 
                 <Stack direction="row" spacing={2} sx={{ m: 1 }}>
-                    <Typography fontSize={12} sx={{ lineHeight: "40px", width: "65px" }}>背番号</Typography>
+                    <Typography fontSize={12} sx={{ lineHeight: "40px", width: "65px", color: "black" }}>背番号</Typography>
                     <TextField
                         placeholder='背番号'
                         size='small'
@@ -120,7 +120,7 @@ export default function PlayerEditBox({ frame, setFrame, index, setIsOpenEditBox
                 </Stack>
 
                 <Stack direction="row" spacing={2} sx={{ m: 1 }}>
-                    <Typography fontSize={12} sx={{ lineHeight: "40px", width: "65px" }}>ポジション</Typography>
+                    <Typography fontSize={12} sx={{ lineHeight: "40px", width: "65px", color: "black" }}>ポジション</Typography>
                     <TextField
                         placeholder='ポジション'
                         size='small'
@@ -136,15 +136,15 @@ export default function PlayerEditBox({ frame, setFrame, index, setIsOpenEditBox
 
             <Box sx={{ my: 2, px: 1 }}>
                 <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ m: 1 }}>
-                    <Typography fontSize={12} sx={{ width: "60px" }}>本体</Typography>
+                    <Typography fontSize={12} sx={{ width: "60px", color: "black" }}>本体</Typography>
                     <MuiColorInput size='small' sx={{ width: "20ch", fontSize: 10, border: "none" }} format="hex" value={mainColor} onChange={(newValue) => setMainColor(newValue)} />
                 </Stack>
                 <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ m: 1 }}>
-                    <Typography fontSize={12} sx={{ width: "60px" }}>背番号</Typography>
+                    <Typography fontSize={12} sx={{ width: "60px", color: "black" }}>背番号</Typography>
                     <MuiColorInput size='small' sx={{ width: "20ch", fontSize: 10, border: "none" }} format="hex" value={numberColor} onChange={(newValue) => setNumberColor(newValue)} />
                 </Stack>
                 <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ m: 1 }}>
-                    <Typography fontSize={12} sx={{ width: "60px" }}>名前</Typography>
+                    <Typography fontSize={12} sx={{ width: "60px", color: "black" }}>名前</Typography>
                     <MuiColorInput size='small' sx={{ width: "20ch", fontSize: 10, border: "none" }} format="hex" value={nameColor} onChange={(newValue) => setNameColor(newValue)} />
                 </Stack>
             </Box>

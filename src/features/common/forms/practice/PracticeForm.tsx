@@ -24,6 +24,8 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import ConfirmCloseModal from '../../contents/modal/ConfirmModal';
 import { backTitle, backMs } from '@/constants/ModalMessage'
+import IconButton from '@mui/material/IconButton'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 type pageProps = {
     contents: any,
@@ -59,6 +61,17 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
             input.push(item)
         })
         input.push(new PracticeDetailsModel())
+        setDetails(input)
+        contents.details = input
+    }
+
+    const deleteDetail = (index) => {
+        const input = []
+        details.map((item, itemIndex) => {
+            if (itemIndex != index) {
+                input.push(item)
+            }
+        })
         setDetails(input)
         contents.details = input
     }
@@ -208,6 +221,11 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                                         onChange={newValue => ChangeDetailsContext(newValue.target.value, index)}
                                         sx={{ fontSize: 14 }}
                                     />
+                                    {index != 0 && !contents.details[index].context &&
+                                        <IconButton onClick={() => deleteDetail(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white !important" }}>
+                                            <HighlightOffIcon sx={{ width: "20px", height: "20px" }} />
+                                        </IconButton>
+                                    }
                                 </FormControl>
                             ))}
                         </Box>
