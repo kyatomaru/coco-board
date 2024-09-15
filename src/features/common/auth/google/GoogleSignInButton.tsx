@@ -50,10 +50,10 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
 
         await signInWithPopup(auth, GoogleProvider)
             .then((res) => {
+                setIsLoading(true)
                 if (getAdditionalUserInfo(res)?.isNewUser) {
                     localStorage.setItem('isNewUser', "true")
                 }
-                setIsLoading(true)
                 router.push("/home")
             }).catch((error) => {
                 setError(error)
@@ -67,8 +67,8 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
         <button onClick={() => { GoogleSignIn() }} style={loginBtnStyle}>
             <span className="icon" style={{ marginRight: "10px" }}><Icon /></span>
             <span className="buttonText" style={{ color: "black", fontWeight: "600" }}>Googleでログイン</span>
-            {error}
-        </button >
+            {String(error?.message)}
+        </button>
     );
 }
 
