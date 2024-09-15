@@ -26,7 +26,8 @@ type PageProps = {
     index: number,
     selectItem: any,
     setSelectItem: any,
-    isPlay: boolean
+    isPlay: boolean,
+    setMenu: any
 }
 
 
@@ -73,7 +74,7 @@ const playerNameStyle = (diameter, color) => {
     }
 }
 
-export default function Player({ board, beforeCourtId, courtWidth, courtHeight, verticalWidth, verticalHeight, besideWidth, besideHeight, isPlay, frame, setFrame, currentFrame, index, selectItem, setSelectItem }: PageProps) {
+export default function Player({ board, beforeCourtId, courtWidth, courtHeight, verticalWidth, verticalHeight, besideWidth, besideHeight, isPlay, frame, setFrame, currentFrame, index, selectItem, setSelectItem, setMenu }: PageProps) {
     const [isDrag, setIsDrag] = React.useState(false);
 
     const getX = (frameIndex) => { return frame[frameIndex].players[index].x }
@@ -105,6 +106,7 @@ export default function Player({ board, beforeCourtId, courtWidth, courtHeight, 
     const onDragStart = (e, dragElement) => {
         setIsDrag(true)
         onSelect()
+        setMenu(0)
     }
 
     const onDragEnd = (e, dragElement) => {
