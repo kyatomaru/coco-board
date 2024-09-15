@@ -383,7 +383,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                                             }}
                                             highlightSelectedOnly
                                         />
-                                        {contents.condition <= 0 &&
+                                        {contents.condition > 0 &&
                                             <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
                                                 {customIcons[Number(contents.condition)].label}
                                             </Typography>
@@ -405,7 +405,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                                             }}
                                             highlightSelectedOnly
                                         />
-                                        {contents.fatigue <= 0 &&
+                                        {contents.fatigue > 0 &&
                                             <Typography variant="h6" sx={{ px: 1, fontSize: 14 }}>
                                                 {customIcons[Number(contents.fatigue)].label}
                                             </Typography>
@@ -456,7 +456,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                                         startAdornment
                                     />
                                     {index != 0 && !contents.goodPoints[index].context &&
-                                        <IconButton onClick={() => deleteGoodPoint(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white" }}>
+                                        <IconButton onClick={() => deleteGoodPoint(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white !important" }}>
                                             <HighlightOffIcon sx={{ width: "20px", height: "20px" }} />
                                         </IconButton>
                                     }
@@ -484,7 +484,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                                         placeholder={index == 0 && "悪かったところや悪かったプレーなど"}
                                     />
                                     {index != 0 && !contents.badPoints[index].context &&
-                                        <IconButton onClick={() => deleteBadPoint(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white" }}>
+                                        <IconButton onClick={() => deleteBadPoint(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white !important" }}>
                                             <HighlightOffIcon sx={{ width: "20px", height: "20px" }} />
                                         </IconButton>
                                     }

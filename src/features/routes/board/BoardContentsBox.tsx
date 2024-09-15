@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
 import { useSwipeLock } from '@/hooks/common/useSwipeLock';
+import { useDateFormat } from '@/utils/useDateFormat';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
@@ -44,6 +45,10 @@ const modalStyle = {
     zIndex: 2200,
     outline: "none",
 };
+
+const DataFormat = (date: String) => {
+    return useDateFormat(date)
+}
 
 export default function BoardContentsBox({ contents, setContents }: pageProps) {
     const router = useRouter()
@@ -162,8 +167,11 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
                     {contents != undefined ?
                         <Box sx={{ px: 1, borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }}>
                             {contents.title != undefined &&
-                                <Box sx={{ p: 1 }} >
-                                    <Typography variant="h6" sx={{ fontWeight: "400", fontSize: 14, color: "black" }} component="div">
+                                <Box sx={{ width: "100%", alignItems: "center" }} >
+                                    <Typography sx={{ fontSize: 15, color: "black" }} variant="h6" component="div">
+                                        {DataFormat(contents.date)}
+                                    </Typography>
+                                    <Typography variant="h6" sx={{ fontSize: 14, color: "black" }} component="div">
                                         {String(contents.title)}
                                     </Typography>
                                 </Box>

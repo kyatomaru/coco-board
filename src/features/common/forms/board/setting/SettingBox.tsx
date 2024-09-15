@@ -130,7 +130,7 @@ export default function SettingBox({ frame, setFrame, board }: PageProps) {
                         <Box sx={{ my: 1, px: 1 }}>
                             <Typography fontSize={13} sx={{ width: "40px", color: "black" }}>{value}</Typography>
                             <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} sx={{ my: 1 }}>
-                                <Typography fontSize={13} sx={{ width: "40px" }}>本体</Typography>
+                                <Typography fontSize={13} sx={{ width: "40px", color: "black" }}>本体</Typography>
                                 <MuiColorInput sx={{ width: "150px", fontSize: 13, border: "none" }} format="hex" value={mainColor[index]}
                                     onChange={(newValue) => {
                                         const newColor = mainColor.concat()
