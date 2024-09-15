@@ -187,11 +187,11 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
 
 
                     {contents != undefined ?
-                        contents.condition != 0 && contents.fatigue != 0 && contents.injury &&
+                        Number(contents.condition) > 0 && Number(contents.fatigue) > 0 && contents.injury &&
                         <>
                             <Divider />
                             <Box sx={{ width: "100%", my: 1 }}>
-                                {Number(contents.condition) <= 0 &&
+                                {Number(contents.condition) > 0 &&
                                     <Box sx={{ px: 2, mb: 2 }}>
                                         <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                             体調
@@ -204,7 +204,7 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                         </Stack>
                                     </Box>
                                 }
-                                {Number(contents.fatigue) <= 0 &&
+                                {Number(contents.fatigue) > 0 &&
                                     <Box sx={{ px: 2, mb: 2 }}>
                                         <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                             疲労感
