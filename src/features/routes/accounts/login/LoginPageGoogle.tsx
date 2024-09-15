@@ -44,8 +44,8 @@ export default function LoginPage() {
             {isLoading ?
                 <LoadingPage />
                 :
-                <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
-                    <Box sx={{ alignItems: "center", px: "25px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
+                <Container maxWidth="xs" fixed sx={{ m: "auto" }}>
+                    <Box sx={{ alignItems: "center", px: "25px", pt: "30px", pb: "15px", textAlign: "center" }}>
                         <Stack
                             direction="row"
                             alignItems="center"
@@ -69,9 +69,9 @@ export default function LoginPage() {
                             ? <DefaultBrowserModal />
                             : <Box>
                                 <Box sx={{ mb: 3 }}>
-                                    <p style={{ textAlign: "center", fontSize: "1em", fontWeight: 400, color: "black" }}>
+                                    <Typography variant="body1" sx={{ textAlign: "center", fontSize: "1em", fontWeight: 400, color: "black" }}>
                                         ようこそ。coco-boardを使用するにはGoogleアカウントでのログインが必要となります。
-                                    </p>
+                                    </Typography>
                                 </Box>
                                 <GoogleSignInButton setIsLoading={setIsLoading} />
                                 <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>

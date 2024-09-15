@@ -5,6 +5,8 @@ import { createButton } from "react-social-login-buttons";
 import { signInWithRedirect, signInWithPopup, GoogleAuthProvider, getAdditionalUserInfo } from "firebase/auth"
 import { auth } from "@/app/firebase"
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Image from "next/image"
 import { useRouter } from 'next/navigation'
 
@@ -56,7 +58,6 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
                 }
                 router.push("/home")
             }).catch((error) => {
-                setError(error)
                 console.log(error)
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -64,11 +65,12 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
     }
 
     return (
-        <button onClick={() => { GoogleSignIn() }} style={loginBtnStyle}>
+        <Button onClick={() => { GoogleSignIn() }} style={loginBtnStyle}>
             <span className="icon" style={{ marginRight: "10px" }}><Icon /></span>
-            <span className="buttonText" style={{ color: "black", fontWeight: "600" }}>Googleでログイン</span>
-            {String(error?.message)}
-        </button>
+            <Typography variant="body1" sx={{ fontSize: 14, fontWeight: 600, color: "#7F7F7F", textTransform: "capitalize" }}>
+                Googleでログイン
+            </Typography>
+        </Button>
     );
 }
 
