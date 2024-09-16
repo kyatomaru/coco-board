@@ -57,13 +57,13 @@ export default function Home() {
           <Container maxWidth="md" sx={{ overflowY: "auto", height: "90vh", position: "relative", mx: 0, pt: { xs: "146px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
 
             {displayMenu == 0 &&
-              <Box sx={{ pt: 2, pb: "200px", borderRadius: 2, px: 2 }}>
+              <Box sx={{ pt: 2, pb: "150px", borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { window.scrollTo(0, 0); setIsNoteCreateModal(0) }} />
                 <BoardCardBox user={user} contents={board} setContents={setBoard} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
             }
             {displayMenu == 1 &&
-              <Box sx={{ pt: 2, pb: "200px", borderRadius: 2, px: 2 }}>
+              <Box sx={{ pt: 2, pb: "150px", borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(1) }} />
                 <NoteCardBox user={user} contents={note} setContents={setNote} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
