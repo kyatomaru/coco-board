@@ -24,21 +24,7 @@ export default function SignupPage() {
     const [isLoading, setIsLoading] = React.useState(false)
     const [user, setUser] = React.useState<User | undefined>()
 
-    React.useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                if (user.emailVerified) {
-                    router.replace('/home')
-                }
-            }
-        })
-    });
-
     return (
-        <>
-            {!isLoading ?
-                <LoadingPage />
-                :
                 <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
                     <Box sx={{ px: "20px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
                         <Stack
@@ -85,7 +71,5 @@ export default function SignupPage() {
                         </Typography>
                     </Box>
                 </Container>
-            }
-        </>
     );
 }
