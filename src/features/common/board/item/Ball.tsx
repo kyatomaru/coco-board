@@ -122,8 +122,10 @@ export default function Ball({ board, beforeCourtId, courtWidth, courtHeight, ve
             const x = frameArray[frameIndex].ball.x
             const y = frameArray[frameIndex].ball.y
 
-            frameArray[frameIndex].ball.x = getNewX(x, y, frameIndex)
-            frameArray[frameIndex].ball.y = getNewY(x, y, frameIndex)
+            if (y > 0) {
+                frameArray[frameIndex].ball.x = getNewX(x, y, frameIndex)
+                frameArray[frameIndex].ball.y = getNewY(x, y, frameIndex)
+            }
         })
         setFrame(frameArray)
     }
@@ -135,7 +137,7 @@ export default function Ball({ board, beforeCourtId, courtWidth, courtHeight, ve
     return (
         <Draggable
             handle='.ball'
-            bounds={{ left: 0, top: 0, right: courtWidth - (2 * getDiameter()), bottom: courtHeight - (2 * getDiameter()) }}
+            bounds={{ left: -getDiameter(), top: -getDiameter(), right: courtWidth - getDiameter(), bottom: courtHeight - getDiameter() }}
             position={{ x: isDrag ? getX(currentFrame) : getX(currentFrame) + getDiameter() / 4, y: isDrag ? getY(currentFrame) : getY(currentFrame) + getDiameter() / 4 }}
             onStart={onDragStart} onStop={onDragEnd} >
             <Box sx={{ position: "relative", zIndex: 200 }} className={`ball`}>

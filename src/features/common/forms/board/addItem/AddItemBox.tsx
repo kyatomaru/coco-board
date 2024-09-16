@@ -16,15 +16,15 @@ type PageProps = {
 }
 
 export default function AddItemBox({ frame, setFrame, board }: PageProps) {
-
-
     const addBall = () => {
         const frameArray = []
         frame.forEach((item) => {
             frameArray.push(item)
         })
 
-        if (frameArray[0].ball.x < 0) {
+        console.log(frameArray[0].ball.x)
+
+        if (frameArray[0].ball.y < 0) {
             frame.map((item, index) => {
                 frameArray[index].ball.x = 10
                 frameArray[index].ball.y = 10

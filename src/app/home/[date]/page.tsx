@@ -45,7 +45,7 @@ export default function Home() {
   });
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-white">
+    <main className="flex min-h-screen flex-col items-center justify-between bg-white" style={{ overflow: "hidden", position: "relative" }}>
       <Box sx={{ position: "fixed", backgroundColor: "white", height: "100vh", width: "100%" }} />
       <LoadingPage />
       {user !== null &&
@@ -57,13 +57,13 @@ export default function Home() {
           <Container maxWidth="md" sx={{ overflowY: "auto", height: "100vh", position: "relative", mx: 0, pt: { xs: "150px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
 
             {displayMenu == 0 &&
-              <Box sx={{ pt: 2, pb: "200px", borderRadius: 2, px: 2 }}>
+              <Box sx={{ pt: 2, pb: "150px", borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(0) }} />
                 <BoardCardBox user={user} contents={board} setContents={setBoard} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
             }
             {displayMenu == 1 &&
-              <Box sx={{ pt: 2, pb: "200px", borderRadius: 2, px: 2 }}>
+              <Box sx={{ pt: 2, pb: "150px", borderRadius: 2, px: 2 }}>
                 <CreateButton onClick={() => { setIsNoteCreateModal(1) }} />
                 <NoteCardBox user={user} contents={note} setContents={setNote} date={date} menu={isNoteCreateModal} setMenu={setIsNoteCreateModal} />
               </Box>
