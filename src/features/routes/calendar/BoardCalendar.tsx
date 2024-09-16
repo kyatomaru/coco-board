@@ -62,7 +62,8 @@ export default function BoardCalendar({ user, selectedMonth, setSelectedMonth, c
                                 <Grid item xs={12 / 7} key={index} sx={{
                                     textAlign: 'center',
                                     border: '0.5px solid rgba(0, 0, 0, 0.12)',
-                                    overflow: "hidden"
+                                    overflow: "hidden",
+                                    backgroundColor: isToday(day) && 'lightsteelblue',
                                 }}>
                                     <Box
                                         onClick={(event) => { router.push(`/home/${dayjs(String(day)).format('YYYY-MM-DD')}`) }}
@@ -83,7 +84,7 @@ export default function BoardCalendar({ user, selectedMonth, setSelectedMonth, c
                                             borderBottom: days.length - 7 <= index && '1.5px solid rgba(0, 0, 0, 0.12)',
                                         }}
                                     >
-                                        <Box sx={{ width: "22px", height: "22px", display: "flex", borderRadius: "20px", backgroundColor: isToday(day) && 'lightsteelblue', mt: "3px" }}>
+                                        <Box sx={{ width: "22px", height: "15px", display: "flex", borderRadius: "15px", mt: "1px" }}>
                                             <Typography fontSize={13} sx={{ m: "auto" }}  >
                                                 {day.getDate()}
                                             </Typography>

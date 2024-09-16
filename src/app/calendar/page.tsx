@@ -7,8 +7,8 @@ import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Container from '@mui/material/Container';
-import NoteCalendar from '@/features/routes/calendar/NoteCalendar';
-import BoardCalendar from '@/features/routes/calendar/BoardCalendar';
+import NoteCalendar from '@/features/routes/calendar/Calendar';
+import BoardCalendar from '@/features/routes/calendar/Calendar';
 import type { User } from 'firebase/auth';
 import { auth } from '../firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
@@ -45,7 +45,7 @@ export default function Home(props) {
         <>
           <CalendarHeader date={new Date()} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
           <LeftBar />
-          <Container maxWidth="md" sx={{ mt: { xs: "96px", sm: "65px" }, mb: { xs: "50px", sm: "75px" }, px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
+          <Container maxWidth="md" sx={{ mt: { xs: "96px", md: "65px" }, mb: { xs: "50px", sm: "75px" }, px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
             {pageMenu == 0 ?
               <NoteCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={boardContents} />
               :

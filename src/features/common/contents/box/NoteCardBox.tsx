@@ -34,6 +34,7 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
     const [isDateLoding, setIsDateLoding] = React.useState(false);
 
     React.useEffect(() => {
+        // setContents(undefined)
         setIsDateLoding(true)
     }, [date]);
 
@@ -78,7 +79,7 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                                     </Card>
                                 )
                             }))
-                            :
+                            : !isLoading &&
                             <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center">
                                 <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", mb: 1, color: "black" }} component="h2">
                                     試合・練習を記録しよう。
