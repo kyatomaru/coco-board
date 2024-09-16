@@ -45,7 +45,7 @@ export default function Home() {
   });
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-white" style={{  }}>
+    <main className="flex min-h-screen flex-col items-center justify-between bg-white" style={{ overflow: "hidden", position: "relative" }}>
       <Box sx={{ position: "fixed", backgroundColor: "white", height: "100vh", width: "100%" }} />
       <LoadingPage />
       {user !== null &&
@@ -54,7 +54,7 @@ export default function Home() {
 
           <LeftBar />
           <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
-          <Container maxWidth="md" sx={{ overflowY: "auto", height: { sm: "90vh", md: "100vh" }, position: "relative", mx: 0, pt: { xs: "146px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
+          <Container maxWidth="md" sx={{ overflowY: "auto", height: { sm: "90vh", md: "100vh" }, position: "relative", mx: 0,pb:"200px", pt: { xs: "146px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
 
             {displayMenu == 0 &&
               <Box sx={{ pt: 2, pb: "200px", borderRadius: 2, px: 2 }}>
