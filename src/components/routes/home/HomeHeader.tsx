@@ -34,7 +34,8 @@ const barStyle = {
     boxShadow: "none",
     borderBottom: "solid 1px rgb(219, 219, 219)",
     // display: { sm: "none", md: "block" },
-    pl: { md: "120px", lg: "250px" }
+    pl: { md: "120px", lg: "250px" },
+    touchAction: "none"
 }
 
 type PageProps = {
