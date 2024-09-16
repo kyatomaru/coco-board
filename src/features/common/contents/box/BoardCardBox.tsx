@@ -33,9 +33,9 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
     const router = useRouter()
     const [isLoading, setIsLoading] = React.useState(false);
     const [isDateLoding, setIsDateLoding] = React.useState(false);
-    const [data, setData] = React.useState([])
 
     React.useEffect(() => {
+        // setContents(undefined)
         setIsDateLoding(true)
     }, [date]);
 
@@ -75,8 +75,8 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                                             <BoardCard allContents={contents} contents={value} setContents={setContents} />
                                         </Card>)
                                 })
-                                :
-                                <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center">
+                                : !isLoading &&
+                                <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center", height: "100%", width: "100%", touchAction: "none" }} alignContent="center" justifyContent="center">
                                     <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", mb: 1, color: "black" }} component="h2">
                                         戦術・フォーメーションを記録しよう。
                                     </Typography>

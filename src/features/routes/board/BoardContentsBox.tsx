@@ -165,7 +165,7 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
                     }
 
                     {contents != undefined ?
-                        <Box sx={{ px: 1, borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }}>
+                        <Box sx={{ p: 1, borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }}>
                             {contents.title != undefined &&
                                 <Box sx={{ width: "100%", alignItems: "center" }} >
                                     <Typography sx={{ fontSize: 15, color: "black" }} variant="h6" component="div">
