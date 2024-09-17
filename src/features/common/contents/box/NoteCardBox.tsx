@@ -53,7 +53,7 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                     <CreateNoteFormBox allContents={contents} setContents={setContents} setIsLoading={setIsLoading} menu={menu} setMenu={setMenu} date={date} />
                 </Modal>
             }
-            <Box>
+            <>
                 {contents == undefined || isDateLoding ?
                     <Skeleton variant="rounded" height={131} />
                     :
@@ -80,7 +80,7 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                                 )
                             }))
                             : !isLoading &&
-                            <Stack direction="column" sx={{ mx: 1, p: 1, textAlign: "center" }} alignContent="center" justifyContent="center">
+                            <Box sx={{ position: "fixed", p: 1, textAlign: "center", height: "100%", width: "100%" }}  >
                                 <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", mb: 1, color: "black" }} component="h2">
                                     試合・練習を記録しよう。
                                 </Typography>
@@ -90,11 +90,11 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                                 <Box sx={{ mt: 2 }}>
                                     <Button onClick={(event) => setMenu(1)}>記録する</Button>
                                 </Box>
-                            </Stack>
+                            </Box>
                         }
                     </>
                 }
-            </Box>
+            </>
         </Box>
     )
 }
