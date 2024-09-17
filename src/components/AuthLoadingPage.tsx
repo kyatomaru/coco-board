@@ -26,7 +26,7 @@ export default function AuthLoadingPage() {
         <>
             {user == null &&
                 <Box sx={{ overflow: "hidden", position: "relative", display: 'flex', width: "100%", height: "100vh", alignItems: "center", justifyContent: "center" }}>
-                    <CircularProgress />
+                    <CircularProgress sx={{ zIndex: 2000 }} color="success" />
                 </Box>
             }
         </>

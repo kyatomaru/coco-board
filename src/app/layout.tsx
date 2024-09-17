@@ -10,7 +10,7 @@ const style = { margin: 0 }
 
 export const metadata: Metadata = {
   title: 'coco board',
-  description: 'soccer note app',
+  description: 'スマホ1つで簡単に記録できるサッカーノートアプリ。戦術ボードの作成や試合・練習の記録を手軽に管理できる便利なアプリです。',
 }
 
 export const viewport: Viewport = {

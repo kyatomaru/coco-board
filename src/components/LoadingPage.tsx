@@ -12,10 +12,8 @@ import Box from '@mui/material/Box';
 
 export default function LoadingPage() {
     return (
-        <Box sx={{
-            overflow: "hidden", position: "relative", display: 'flex', width: "100%", height: "100vh", alignItems: "center", justifyContent: "center"
-        }}>
-            <CircularProgress sx={{ zIndex: 2000 }} />
+        <Box sx={{ overflow: "hidden", position: "relative", display: 'flex', width: "100%", height: "100vh", alignItems: "center", justifyContent: "center" }}>
+            <CircularProgress sx={{ zIndex: 2000 }} color="success" />
         </Box>
     );
 }
