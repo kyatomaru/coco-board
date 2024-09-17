@@ -75,7 +75,7 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                                     </Card>)
                             })
                             : !isLoading &&
-                            <Box sx={{ position: "fixed", mx: 1, p: 1, textAlign: "center", height: "100%", width: "100%" }} >
+                            <Box sx={{ position: "fixed", p: 1, textAlign: "center", height: "100%", width: "100%" }} >
                                 <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", mb: 1, color: "black" }} component="h2">
                                     戦術・フォーメーションを記録しよう。
                                 </Typography>
