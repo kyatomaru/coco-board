@@ -54,7 +54,7 @@ export default function Home() {
 
           <LeftBar />
           <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
-          <Box sx={{ overflowY: "scroll", position: "relative", zIndex: 2000 }}>
+          <Box sx={{ overflowY: "scroll", position: "relative", zIndex: 1000 }}>
             <Container maxWidth="md" sx={{ height: "100vh", position: "relative", mx: 0, pt: { xs: "146px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
 
               {displayMenu == 0 &&
