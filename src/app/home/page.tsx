@@ -46,7 +46,6 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white" style={{ overflow: "hidden", position: "relative" }}>
-      <Box sx={{ position: "fixed", backgroundColor: "white", height: "100vh", width: "100%" }} />
       <LoadingPage />
       {user !== null &&
         <>
