@@ -80,7 +80,7 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                                 )
                             }))
                             : !isLoading &&
-                            <Box sx={{ position: "fixed", p: 1, textAlign: "center", height: "100%", width: "100%" }}  >
+                            <Box sx={{ p: 1, textAlign: "center", height: "100%", width: "100%" }}  >
                                 <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", mb: 1, color: "black" }} component="h2">
                                     試合・練習を記録しよう。
                                 </Typography>
