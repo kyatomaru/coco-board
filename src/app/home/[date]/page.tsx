@@ -36,7 +36,6 @@ export default function Home() {
   useIsAuth(router)
 
   React.useEffect(() => {
-    // const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(auth.currentUser)
@@ -52,7 +51,7 @@ export default function Home() {
           <WelcomeModal />
 
           <LeftBar />
-          <HomeHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
+          <HomeHeader isLoading={board == undefined || note == undefined} date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
           <Box sx={{ background: "white", overflowY: "scroll", position: "fixed", zIndex: 1000, width: "100%", height: "100vh" }}>
             <Container maxWidth="md" sx={{ position: "relative", pt: { xs: "150px", md: "110px" }, px: 0, pl: { md: "120px", lg: "250px" } }}>
 

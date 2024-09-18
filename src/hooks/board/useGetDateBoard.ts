@@ -19,6 +19,7 @@ export const useGetBoard = (user, date) => {
                     }
                 }
             }
+            setContents(undefined)
             init()
         }
     }, [user, date])
