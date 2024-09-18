@@ -1,0 +1,1 @@
+export const mainColor = "#2e7d32 !important"
