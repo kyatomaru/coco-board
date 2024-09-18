@@ -48,8 +48,8 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
     const [isConfirmCloseModal, setIsConfirmCloseModal] = React.useState<boolean>(false)
     const [waitFlag, setWaitFlag] = React.useState(false);
 
-    const [onPosition, setOnPosition] = React.useState(false)
-    const [onCondition, setOnCondition] = React.useState(false)
+    const [onPosition, setOnPosition] = React.useState(contents.position != undefined)
+    const [onCondition, setOnCondition] = React.useState(contents.condition > 0 || contents.fatigue > 0 || contents.injury != undefined)
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -59,6 +59,10 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
             postData(contents)
         }
     }
+
+    React.useEffect(() => {
+
+    }, [contents])
 
     const [title, setTitle] = React.useState(contents.title);
     const [place, setPlace] = React.useState(contents.place);
@@ -341,7 +345,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                             <Typography variant="h6" sx={{ fontSize: 14, color: "black" }} component="div">
                                 ポジション
                             </Typography>
-                            <Switch size='small' onChange={() => setOnPosition(!onPosition)} />
+                            <Switch defaultChecked={onPosition} size='small' onChange={() => setOnPosition(!onPosition)} />
                         </Stack>
                         {onPosition &&
                             <FormControl fullWidth sx={{ my: 1 }} variant="outlined">
@@ -364,7 +368,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                             <Typography variant="h6" sx={{ fontSize: 14, color: "black" }} component="div">
                                 コンディション
                             </Typography>
-                            <Switch size='small' onChange={() => setOnCondition(!onCondition)} />
+                            <Switch defaultChecked={onCondition} size='small' onChange={() => setOnCondition(!onCondition)} />
                         </Stack>
                         {onCondition &&
                             <Box>
