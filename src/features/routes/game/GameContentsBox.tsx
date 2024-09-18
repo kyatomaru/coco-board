@@ -187,7 +187,7 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
 
 
                     {contents != undefined ?
-                        Number(contents.condition) > 0 && Number(contents.fatigue) > 0 && contents.injury &&
+                        (Number(contents.condition) > 0 || Number(contents.fatigue) > 0 || contents.injury) &&
                         <>
                             <Divider />
                             <Box sx={{ width: "100%", my: 1 }}>
