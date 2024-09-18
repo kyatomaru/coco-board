@@ -23,6 +23,7 @@ import dayjs from 'dayjs';
 import { Chip } from '@mui/material';
 import MuiTextField, { TextFieldProps } from '@mui/material/TextField';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import { mainColor } from '@/constants/Color';
 
 const barStyle = {
     bgcolor: 'background.paper',
