@@ -27,65 +27,64 @@ export async function GET(
     const date = req.nextUrl.searchParams.get("date")
     const contentsId = req.nextUrl.searchParams.get("contentsId")
 
-    if (uid) {
-        if (date) {
-            const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).orderBy('updateDate', 'desc').get()
-                .then(snapshot => {
-                    const data = Array()
-                    snapshot.forEach(doc => {
-                        const ob = doc.data()
-                        ob.contentsId = doc.id
-                        ob.collection = "board"
+    if (date && uid) {
+        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).where("date", "==", date).orderBy('updateDate', 'desc').get()
+            .then(snapshot => {
+                const data = Array()
+                snapshot.forEach(doc => {
+                    const ob = doc.data()
+                    ob.contentsId = doc.id
+                    ob.collection = "board"
 
-                        data.push(ob)
-                    })
-                    return data
-
-                }).catch((error) => {
-                    console.log("Error getting documents: ", error);
-                    return NextResponse.json(null, { status: 500 })
-                });
-
-            console.log(docRef)
-
-            return NextResponse.json(docRef, { status: 200 })
-        }
-        else if (contentsId) {
-            const docRef = await db.collection(COLLECTION_NAME).doc(contentsId).get()
-                .then(snapshot => {
-                    const data = snapshot.data()
-                    data.contentsId = contentsId
-
-                    return data
+                    data.push(ob)
                 })
-                .catch((error) => {
-                    console.log("Error getting documents: ", error);
-                    return NextResponse.json(null, { status: 500 })
-                });
-            console.log(docRef)
+                return data
 
-            return NextResponse.json(docRef, { status: 200 })
-        }
-        else {
-            const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('date', 'desc').orderBy('updateDate', 'desc').get()
-                .then(snapshot => {
-                    const data = Array()
-                    snapshot.forEach((doc) => {
-                        const ob = doc.data()
-                        ob.contentsId = doc.id
-                        ob.collection = "board"
-                        data.push(ob)
-                    })
-                    return data
-                })
-                .catch((error) => {
-                    console.log("Error getting documents: ", error);
-                    return NextResponse.json(null, { status: 500 })
-                });
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+                return NextResponse.json(null, { status: 500 })
+            });
 
-            return NextResponse.json(docRef, { status: 200 })
-        }
+        console.log(docRef)
+
+        return NextResponse.json(docRef, { status: 200 })
     }
+    else if (contentsId) {
+        const docRef = await db.collection(COLLECTION_NAME).doc(contentsId).get()
+            .then(snapshot => {
+                const data = snapshot.data()
+                data.contentsId = contentsId
+
+                return data
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+                return NextResponse.json(null, { status: 500 })
+            });
+        console.log(docRef)
+
+        return NextResponse.json(docRef, { status: 200 })
+    }
+    else {
+        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('date', 'desc').orderBy('updateDate', 'desc').get()
+            .then(snapshot => {
+                const data = Array()
+                snapshot.forEach((doc) => {
+                    const ob = doc.data()
+                    ob.contentsId = doc.id
+                    ob.collection = "board"
+                    data.push(ob)
+                })
+                return data
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+                return NextResponse.json(null, { status: 500 })
+            });
+
+        return NextResponse.json(docRef, { status: 200 })
+    }
+
 }
 
 export async function PATCH(

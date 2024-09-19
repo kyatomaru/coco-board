@@ -5,8 +5,9 @@ import { useParams, useRouter } from 'next/navigation'
 import { useSwipeLock } from '@/hooks/common/useSwipeLock';
 import { useDateFormat } from '@/utils/useDateFormat';
 import Box from '@mui/material/Box';
+import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
-import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import BottomViewBar from './BottomViewBar';
@@ -26,6 +27,8 @@ import Modal from '@mui/material/Modal';
 import Container from '@mui/material/Container';
 import { setRatio } from '@/constants/board/CourtRatio';
 import { restoreCoordinate } from '@/hooks/board/courtSetting/CourtSetting';
+import { LineShareButton, LineIcon } from "react-share";
+import { shareMessage } from '@/constants/ShareMessage';
 
 type pageProps = {
     contents: BoardType
@@ -166,16 +169,32 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
 
                     {contents != undefined ?
                         <Box sx={{ p: 1, borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }}>
-                            {contents.title != undefined &&
-                                <Box sx={{ width: "100%", alignItems: "center" }} >
-                                    <Typography sx={{ fontSize: 15, color: "black" }} variant="h6" component="div">
-                                        {DataFormat(contents.date)}
-                                    </Typography>
-                                    <Typography variant="h6" sx={{ fontSize: 14, color: "black" }} component="div">
-                                        {String(contents.title)}
-                                    </Typography>
+                            <Stack direction="row" justifyContent="space-between">
+                                <Box>
+                                    {contents.title != undefined &&
+                                        <Box sx={{ width: "100%", alignItems: "center" }} >
+                                            <Typography sx={{ fontSize: 15, color: "black" }} variant="h6" component="div">
+                                                {DataFormat(contents.date)}
+                                            </Typography>
+                                            <Typography variant="h6" sx={{ fontSize: 14, color: "black" }} component="div">
+                                                {String(contents.title)}
+                                            </Typography>
+                                        </Box>
+                                    }
                                 </Box>
-                            }
+                                <Box>
+                                    {/* {contents.uid ==  */}
+                                    <LineShareButton url={`/board/${contents.contentsId}`} title={`${shareMessage} - 戦術ボード:${contents.title}`}>
+                                        {/* <LineIcon size={24} round /> */}
+                                        <CardMedia
+                                            component='img'
+                                            image="/images/welcomePage/LINE-icon.png"
+                                            sx={{ width: 35, height: 35 }}
+                                        />
+                                    </LineShareButton>
+                                    {/* } */}
+                                </Box>
+                            </Stack>
                             {contents.comment != undefined &&
                                 <Box sx={{ px: 1, pb: 1 }}>
                                     <Typography variant="body2" sx={{ fontSize: 13, color: "black" }}>

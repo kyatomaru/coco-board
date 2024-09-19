@@ -4,15 +4,14 @@ export const useGetBoard = (user, contentsId) => {
     const [contents, setContents] = React.useState<any>(undefined);
 
     React.useEffect(() => {
-        if (user) {
-            const init = async () => {
-                const getParams = { uid: user.uid, contentsId: contentsId };
-                const query = new URLSearchParams(getParams);
+        const init = async () => {
+            const getParams = { uid: user?.uid, contentsId: contentsId };
+            const query = new URLSearchParams(getParams);
 
-                setContents(await fetchBoardContents(query))
-            }
-            init()
+            setContents(await fetchBoardContents(query))
         }
+        init()
+
     }, [user, contentsId])
 
     const getContents = async () => {

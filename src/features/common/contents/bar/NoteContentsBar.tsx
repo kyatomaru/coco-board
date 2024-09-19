@@ -54,6 +54,7 @@ export default function NoteContentsBar({ title, contents, EditButtonClick, Dele
                 </Box>
                 <Stack direction="row" justifyContent="flex-end" spacing={1} sx={{ width: "100%" }}>
                     {user ?
+                        user.uid == contents.uid &&
                         <>
                             <IconButton onClick={EditButtonClick} size='small'><EditIcon sx={{ fontSize: "1.25rem" }} /></IconButton>
                             <IconButton onClick={DeleteButtonClick} size='small'><DeleteIcon sx={{ fontSize: "1.25rem" }} /></IconButton>

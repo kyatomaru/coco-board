@@ -1,0 +1,1 @@
+export const shareMessage = "サッカーノートアプリ「coco-board」 "
