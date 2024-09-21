@@ -183,7 +183,7 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
                                     }
                                 </Box>
                                 <Box>
-                                    <a href={`https://api.line.me/social-plugin/metrics?url=https://board/${contents.contentsId}&text=${shareMessage}-試合:${contents.title}`} target="_blank" rel="nofollow noopener">
+                                    <a href={`https://social-plugins.line.me/lineit/share?url=https://cocoboard.jp/board/${contents.contentsId}&text=${shareMessage}-試合:${contents.title}`} target="_blank" rel="nofollow noopener">
                                         <CardMedia
                                             component='img'
                                             image="/images/welcomePage/LINE-icon.png"
