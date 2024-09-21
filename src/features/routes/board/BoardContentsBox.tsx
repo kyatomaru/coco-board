@@ -183,16 +183,13 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
                                     }
                                 </Box>
                                 <Box>
-                                    {/* {contents.uid ==  */}
-                                    <LineShareButton url={`/board/${contents.contentsId}`} title={`${shareMessage} - 戦術ボード:${contents.title}`}>
-                                        {/* <LineIcon size={24} round /> */}
+                                    <a href={`https://api.line.me/social-plugin/metrics?url=https://board/${contents.contentsId}&text=${shareMessage}-試合:${contents.title}`} target="_blank" rel="nofollow noopener">
                                         <CardMedia
                                             component='img'
                                             image="/images/welcomePage/LINE-icon.png"
                                             sx={{ width: 35, height: 35 }}
                                         />
-                                    </LineShareButton>
-                                    {/* } */}
+                                    </a>
                                 </Box>
                             </Stack>
                             {contents.comment != undefined &&
