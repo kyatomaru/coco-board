@@ -98,47 +98,49 @@ export default function WelcomePage() {
                     </Box>
 
                     {/* <Box sx={{ textAlign: "center", width: "100%", minHeight: 350, backgroundImage: "url(/images/welcomePage/commuteImage.png)", backgroundSize: "cover" }}> */}
-                    <Box sx={{ textAlign: "center", py: 10, maxWidth: 450, margin: "auto" }}>
-                        <Typography sx={{ fontSize: 25, mb: 3, mx: 3, fontWeight: 600, color: mainColor }}>フォーマットに沿って試合・練習の内容を記録</Typography>
-                        {/* <Typography sx={{ color: "white" }}>
+                    <Box sx={{ width: "100%", backgroundColor: "#f2f2f2" }}>
+                        <Box sx={{ textAlign: "center", py: 10, maxWidth: 450, margin: "auto" }}>
+                            <Typography sx={{ fontSize: 25, mb: 3, mx: 3, fontWeight: 600, color: mainColor }}>フォーマットに沿って試合・練習の内容を記録</Typography>
+                            {/* <Typography sx={{ color: "white" }}>
                             ノートの持ち運びは不要です。帰り道、寝る前など、思い立った時にスマホひとつで記録が可能です。いつでもどこでもアプリを開いて効率良く振り返ることができます。
                         </Typography> */}
-                        <Typography sx={{ px: 2 }}>
-                            coco-boardには試合と練習を記録するためのフォーマットが用意されています。
-                            そのフォーマットに沿って入力するだけで短時間で試合と練習について記録できます。
-                            {/* 試合と練習の内容を詳細に記録できます。 */}
-                        </Typography>
-                        {/* <CardMedia
+                            <Typography sx={{ px: 2 }}>
+                                coco-boardには試合と練習を記録するためのフォーマットが用意されています。
+                                そのフォーマットに沿って入力するだけで短時間で試合と練習について記録できます。
+                                {/* 試合と練習の内容を詳細に記録できます。 */}
+                            </Typography>
+                            {/* <CardMedia
                             component='img'
                             image="/images/welcomePage/note.png"
                             sx={{ width: { xs: 210, sm: 260 }, margin: "auto", mt: 3 }}
                         /> */}
-                        <Stack direction="row" spacing={1} sx={{ mx: 1, mt: 3 }}>
-                            <Box sx={{ maxWidth: 210, mx: "auto" }}>
-                                <CardMedia
-                                    component='img'
-                                    image="/images/welcomePage/note1.jpg"
-                                    sx={{}}
-                                />
-                                <Typography sx={{ fontSize: 13, mt: 1 }}>入力ページ</Typography>
-                            </Box>
-                            <Box sx={{ maxWidth: 210, mx: "auto" }}>
-                                <CardMedia
-                                    component='img'
-                                    image="/images/welcomePage/note2.jpg"
-                                    sx={{}}
-                                />
-                                <Typography sx={{ fontSize: 13, mt: 1 }}>閲覧ページ</Typography>
-                            </Box>
-                        </Stack>
+                            <Stack direction="row" spacing={1} sx={{ mx: 1, mt: 3 }}>
+                                <Box sx={{ maxWidth: 210, mx: "auto" }}>
+                                    <CardMedia
+                                        component='img'
+                                        image="/images/welcomePage/note1.jpg"
+                                        sx={{}}
+                                    />
+                                    <Typography sx={{ fontSize: 13, mt: 1 }}>入力ページ</Typography>
+                                </Box>
+                                <Box sx={{ maxWidth: 210, mx: "auto" }}>
+                                    <CardMedia
+                                        component='img'
+                                        image="/images/welcomePage/note2.jpg"
+                                        sx={{}}
+                                    />
+                                    <Typography sx={{ fontSize: 13, mt: 1 }}>閲覧ページ</Typography>
+                                </Box>
+                            </Stack>
+                        </Box>
                     </Box>
                     <Box sx={{ textAlign: "center", py: 10, maxWidth: 450, margin: "auto" }}>
                         <Typography sx={{ fontSize: 25, mb: 3, mx: 3, fontWeight: 600, color: mainColor }}>LINEで記録を共有</Typography>
                         <Typography sx={{ px: 2 }}>
                             coco-boardで取った記録はLINEで共有できます。チームメイトやコーチ、家族とノートを共有することで成長に繋がります。
                         </Typography>
-                        <Stack direction="row" spacing={1} sx={{ mx: 4, mt: 3, maxWidth: 400 }}>
-                            <Box sx={{ maxWidth: 200, width: "100%", mx: "auto" }}>
+                        <Stack direction="row" spacing={1} sx={{ mx: 4, mt: 3, maxWidth: 360 }}>
+                            <Box sx={{ maxWidth: 180, width: "100%", mx: "auto" }}>
                                 <CardMedia
                                     component='img'
                                     image="/images/icon.png"
@@ -148,7 +150,7 @@ export default function WelcomePage() {
                             <Stack justifyContent="center" alignContent="center" sx={{ width: "100%" }}>
                                 <RepeatIcon sx={{ width: "70%", height: "70%", m: "auto", color: "#555" }} />
                             </Stack>
-                            <Box sx={{ maxWidth: 200, width: "100%", mx: "auto" }}>
+                            <Box sx={{ maxWidth: 180, width: "100%", mx: "auto" }}>
                                 <CardMedia
                                     component='img'
                                     image="/images/welcomePage/LINE-icon.png"
