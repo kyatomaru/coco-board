@@ -10,13 +10,13 @@ import RepeatIcon from '@mui/icons-material/Repeat';
 const mainImageStyle = {
     top: 0,
     left: 0,
-    backgroundColor: "#999",
+    backgroundColor: "#222",
     minHeight: "100vh",
     position: "fixed",
     transform: "translateZ(0)",
     width: "100%",
     zIndex: -1,
-    backgroundImage: "url(/images/welcomePage/mainImage.jpg)",
+    // backgroundImage: "url(/images/welcomePage/mainImage.jpg)",
     backgroundSize: "cover",
 }
 
@@ -59,7 +59,7 @@ export default function WelcomePage() {
                     </Box>
                     <Box>
                         <Button onClick={() => router.push('/home')} size="large" variant="contained"
-                            sx={{ textTransform: "none", mt: 2, borderRadius: 3, backgroundColor: "#1976d2 !important" }}>
+                            sx={{ textTransform: "none", mt: 2, borderRadius: 3, backgroundColor: "#070 !important" }}>
                             coco-boardを使ってみる
                         </Button>
                     </Box>
@@ -161,7 +161,7 @@ export default function WelcomePage() {
                     </Box>
                     <Box>
                         <Button onClick={() => router.push('/home')} size="large" variant="contained"
-                            sx={{ textTransform: "none", mt: 2, borderRadius: 3, backgroundColor: "#1976d2 !important" }}>
+                            sx={{ textTransform: "none", mt: 2, borderRadius: 3, backgroundColor: "#070 !important" }}>
                             coco-boardを使ってみる
                         </Button>
                     </Box>
