@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Modal from '@mui/material/Modal';
@@ -35,8 +36,11 @@ import { useDeleteGame } from '@/hooks/game/useDeleteGame';
 import NoteContentsBar from '@/features/common/contents/bar/NoteContentsBar';
 import { useUpdateGame } from '@/hooks/game/useUpdateGame';
 import GameForm from '@/features/common/forms/game/GameForm';
+import { LineShareButton, LineIcon } from "react-share";
+import { shareMessage } from '@/constants/ShareMessage';
 
 type PageProps = {
+    user: any,
     contents: GameContentsType
     setContents: any
 }
@@ -60,7 +64,7 @@ const DataFormat = (date: String) => {
 }
 
 
-export default function GameContentsBox({ contents, setContents }: PageProps) {
+export default function GameContentsBox({ user, contents, setContents }: PageProps) {
     const router = useRouter()
     const [isEditLoading, setIsEditLoading] = React.useState(false)
 
@@ -121,6 +125,17 @@ export default function GameContentsBox({ contents, setContents }: PageProps) {
                                     {String(contents.title)}
                                 </Typography>
                                 <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} />
+                            </Box>
+                            <Box sx={{ mr: 1 }}>
+                                {contents.contentsId == user?.uid &&
+                                    <a href={`https://social-plugins.line.me/lineit/share?url=https://cocoboard.jp/game/${contents.contentsId}&text=${shareMessage} - 試合:${contents.title}`} target="_blank" rel="nofollow noopener">
+                                        <CardMedia
+                                            component='img'
+                                            image="/images/welcomePage/LINE-icon.png"
+                                            sx={{ width: 35, height: 35 }}
+                                        />
+                                    </a>
+                                }
                             </Box>
                         </Stack>
                         :

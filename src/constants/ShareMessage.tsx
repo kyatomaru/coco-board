@@ -1,1 +1,1 @@
-export const shareMessage = "サッカーノートアプリ「coco-board」 "
+export const shareMessage = "サッカーノートアプリ「coco-board」をチェック！\n "
