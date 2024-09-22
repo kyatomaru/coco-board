@@ -127,7 +127,7 @@ export default function GameContentsBox({ user, contents, setContents }: PagePro
                                 <Chip label="試合" color="success" size="small" sx={{ fontSize: 9 }} />
                             </Box>
                             <Box sx={{ mr: 1 }}>
-                                {contents.contentsId == user?.uid &&
+                                {contents.uid == user?.uid &&
                                     <a href={`https://social-plugins.line.me/lineit/share?url=https://cocoboard.jp/game/${contents.contentsId}&text=${shareMessage} - 試合:${contents.title}`} target="_blank" rel="nofollow noopener">
                                         <CardMedia
                                             component='img'

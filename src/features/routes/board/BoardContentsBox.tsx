@@ -184,7 +184,7 @@ export default function BoardContentsBox({ user, contents, setContents }: pagePr
                                     }
                                 </Box>
                                 <Box sx={{ mr: 1 }}>
-                                    {contents.contentsId == user?.uid &&
+                                    {contents.uid == user?.uid &&
                                         < a href={`https://social-plugins.line.me/lineit/share?url=https://cocoboard.jp/board/${contents.contentsId}&text=${shareMessage} - 戦術ボード:${contents.title}`} target="_blank" rel="nofollow noopener">
                                             <CardMedia
                                                 component='img'

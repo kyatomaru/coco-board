@@ -115,7 +115,7 @@ export default function PracticeContentsBox({ user, contents, setContents }: Pag
                                 <Chip label="練習" color="primary" size="small" sx={{ fontSize: 9 }} />
                             </Box>
                             <Box sx={{ mr: 1 }}>
-                                {contents.contentsId == user?.uid &&
+                                {contents.uid == user?.uid &&
                                     <a href={`https://social-plugins.line.me/lineit/share?url=https://cocoboard.jp/practice/${contents.contentsId}&text=${shareMessage} - 練習:${contents.title}`} target="_blank" rel="nofollow noopener">
                                         <CardMedia
                                             component='img'
