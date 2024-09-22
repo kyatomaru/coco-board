@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
 import Modal from '@mui/material/Modal';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -25,8 +26,11 @@ import { elementsCategories } from '@/types/Category';
 import NoteContentsBar from '@/features/common/contents/bar/NoteContentsBar';
 import PracticeForm from '@/features/common/forms/practice/PracticeForm';
 import { useUpdatePractice } from '@/hooks/practice/useUpdatePractice';
+import { LineShareButton, LineIcon } from "react-share";
+import { shareMessage } from '@/constants/ShareMessage';
 
 type PageProps = {
+    user: any,
     contents: PracticeContentsType,
     setContents: any
 }
@@ -49,7 +53,7 @@ const DataFormat = (date: String) => {
     return useDateFormat(date)
 }
 
-export default function PracticeContentsBox({ contents, setContents }: PageProps) {
+export default function PracticeContentsBox({ user, contents, setContents }: PageProps) {
     const router = useRouter()
     const [isEditLoading, setIsEditLoading] = React.useState(false)
 
@@ -109,6 +113,17 @@ export default function PracticeContentsBox({ contents, setContents }: PageProps
                                     {String(contents.title)}
                                 </Typography>
                                 <Chip label="練習" color="primary" size="small" sx={{ fontSize: 9 }} />
+                            </Box>
+                            <Box sx={{ mr: 1 }}>
+                                {contents.contentsId == user?.uid &&
+                                    <a href={`https://social-plugins.line.me/lineit/share?url=https://cocoboard.jp/practice/${contents.contentsId}&text=${shareMessage} - 練習:${contents.title}`} target="_blank" rel="nofollow noopener">
+                                        <CardMedia
+                                            component='img'
+                                            image="/images/welcomePage/LINE-icon.png"
+                                            sx={{ width: 35, height: 35 }}
+                                        />
+                                    </a>
+                                }
                             </Box>
                         </Stack>
                         :

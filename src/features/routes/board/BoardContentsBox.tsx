@@ -31,6 +31,7 @@ import { LineShareButton, LineIcon } from "react-share";
 import { shareMessage } from '@/constants/ShareMessage';
 
 type pageProps = {
+    user: any,
     contents: BoardType
     setContents: any
 }
@@ -53,7 +54,7 @@ const DataFormat = (date: String) => {
     return useDateFormat(date)
 }
 
-export default function BoardContentsBox({ contents, setContents }: pageProps) {
+export default function BoardContentsBox({ user, contents, setContents }: pageProps) {
     const router = useRouter()
     const [isEditLoading, setIsEditLoading] = React.useState(false)
 
@@ -182,14 +183,16 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
                                         </Box>
                                     }
                                 </Box>
-                                <Box>
-                                    <a href={`https://social-plugins.line.me/lineit/share?url=https://cocoboard.jp/board/${contents.contentsId}&text=${shareMessage}-試合:${contents.title}`} target="_blank" rel="nofollow noopener">
-                                        <CardMedia
-                                            component='img'
-                                            image="/images/welcomePage/LINE-icon.png"
-                                            sx={{ width: 35, height: 35 }}
-                                        />
-                                    </a>
+                                <Box sx={{ mr: 1 }}>
+                                    {contents.contentsId == user?.uid &&
+                                        < a href={`https://social-plugins.line.me/lineit/share?url=https://cocoboard.jp/board/${contents.contentsId}&text=${shareMessage} - 戦術ボード:${contents.title}`} target="_blank" rel="nofollow noopener">
+                                            <CardMedia
+                                                component='img'
+                                                image="/images/welcomePage/LINE-icon.png"
+                                                sx={{ width: 35, height: 35 }}
+                                            />
+                                        </a>
+                                    }
                                 </Box>
                             </Stack>
                             {contents.comment != undefined &&
@@ -199,11 +202,11 @@ export default function BoardContentsBox({ contents, setContents }: pageProps) {
                                     </Typography>
                                 </Box>
                             }
-                        </Box>
+                        </Box >
                         :
                         <Skeleton variant="rectangular" height={87} />
                     }
-                </Box>
+                </Box >
             }
         </>
     )

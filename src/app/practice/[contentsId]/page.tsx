@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useRouter, useParams } from 'next/navigation'
-import LoadingPage from '@/components/AuthLoadingPage';
+import LoadingPage from '@/components/LoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import { auth } from '@/app/firebase';
 import Container from '@mui/material/Container';
@@ -39,13 +39,13 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
-      <LoadingPage />
-      {contents != undefined && user &&
-        (user.uid !== contents.uid || !contents ?
+      {contents == undefined ?
+        <LoadingPage /> :
+        (!contents ?
           <NotPage />
           :
           <Container maxWidth="sm" sx={{ ...containterStyle, px: "0 !important", position: "relative" }}>
-            <PracticeContentsBox contents={contents} setContents={setContents} />
+            <PracticeContentsBox user={user} contents={contents} setContents={setContents} />
           </Container>
         )}
     </main >
