@@ -19,18 +19,6 @@ import XIcon from '@mui/icons-material/X';
 export default function InfoFooter() {
     const router = useRouter()
 
-    const ClickHelpButton = () => {
-        router.push('/help')
-    };
-
-    const ClickPrivacyButton = () => {
-        router.push("/privacy")
-    };
-
-    const ClickTermsButton = () => {
-        router.push('/terms')
-    };
-
     return (
         <Box>
             <Stack
