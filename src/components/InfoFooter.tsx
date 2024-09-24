@@ -64,7 +64,7 @@ export default function InfoFooter() {
                     justifyContent="center"
                     sx={{ height: 30 }}
                 >
-                    <Button size='small' sx={{ fontSize: 11, color: "gray" }} onClick={ClickHelpButton}>ヘルプ</Button>
+                    {/* <Button size='small' sx={{ fontSize: 11, color: "gray" }} onClick={ClickHelpButton}>ヘルプ</Button> */}
                     <Button size='small' target='_blank' href='/privacy' sx={{ fontSize: 11, color: "gray" }}>プライバシー</Button>
                     <Button size='small' target='_blank' href='/terms' sx={{ fontSize: 11, color: "gray" }}>利用規約</Button>
                 </Stack>
