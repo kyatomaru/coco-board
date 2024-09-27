@@ -18,6 +18,7 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { addDays } from 'date-fns';
 import { useDateFormat } from '@/utils/useDateFormat';
+import { useIsToday } from '@/utils/useIsToday';
 import ArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import EventIcon from '@mui/icons-material/Event';
@@ -44,6 +45,10 @@ type PageProps = {
     displayMenu: any
     setDisplayMenu: any
     isLoading: any
+}
+
+const IsToday = (date) => {
+    return useIsToday(date)
 }
 
 
@@ -79,20 +84,20 @@ export default function HomeHeader({ date, setDate, displayMenu, setDisplayMenu,
                     <IconButton href={`/calendar/${dayjs(String(date)).format('YYYY-MM-DD')}`}>
                         <EventIcon />
                     </IconButton>
-                    <Typography component="h2" fontSize={15}>
+                    <Typography component="h2" fontSize={15} fontWeight={500}>
                         {useDateFormat(String(date))}
                     </Typography>
                 </Stack>
                 <IconButton size='large'
                     onClick={() => { setDate(addDays(new Date(String(date)), 1)) }}
                     sx={{ width: 40, height: 40 }}
-                    disabled={isLoading}>
+                    disabled={isLoading || IsToday(date)}>
                     <ArrowRightIcon />
                 </IconButton>
             </Stack>
             <StyledTabs value={displayMenu} sx={{ mx: "auto" }} onChange={(event, newValue) => { setDisplayMenu(newValue) }}>
-                <StyledTab label="ボード" sx={{ height: 32, m: "auto", fontSize: 13 }} />
-                <StyledTab label="ノート" sx={{ height: 32, m: "auto", fontSize: 13 }} />
+                <StyledTab label="ボード" sx={{ height: 32, m: "auto", fontSize: 12, fontWeight: 600 }} />
+                <StyledTab label="ノート" sx={{ height: 32, m: "auto", fontSize: 12, fontWeight: 600 }} />
             </StyledTabs>
         </AppBar >
     );

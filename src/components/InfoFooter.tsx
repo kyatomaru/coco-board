@@ -17,8 +17,6 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import XIcon from '@mui/icons-material/X';
 
 export default function InfoFooter() {
-    const router = useRouter()
-
     return (
         <Box>
             <Stack

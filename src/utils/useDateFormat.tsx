@@ -22,5 +22,4 @@ export const useDateFormat = (date: String) => {
     else {
         return dayjs(String(date)).format('YYYY/M/D ') + recordDay;
     }
-
 }
