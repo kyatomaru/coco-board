@@ -47,6 +47,10 @@ type PageProps = {
     isLoading: any
 }
 
+const isToday = (date) => {
+    return useIsToday(date)
+}
+
 
 export default function HomeHeader({ date, setDate, displayMenu, setDisplayMenu, isLoading }: PageProps) {
     return (
@@ -87,7 +91,7 @@ export default function HomeHeader({ date, setDate, displayMenu, setDisplayMenu,
                 <IconButton size='large'
                     onClick={() => { setDate(addDays(new Date(String(date)), 1)) }}
                     sx={{ width: 40, height: 40 }}
-                    disabled={isLoading || useIsToday(date)}>
+                    disabled={isLoading || isToday(date)}>
                     <ArrowRightIcon />
                 </IconButton>
             </Stack>
