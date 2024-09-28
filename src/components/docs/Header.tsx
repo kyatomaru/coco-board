@@ -27,9 +27,7 @@ export default function Header({ title }: PageProps) {
                 alignItems="center"
                 spacing={2}
                 sx={{ height: { xs: 50, sm: 64 }, px: { xs: 2, sm: 4 }, background: "white" }}>
-                <IconButton sx={{ p: "0" }}>
-                    <Box sx={{ width: 45, height: 45, backgroundImage: "url(images/icon.png)", backgroundSize: "cover" }} />
-                </IconButton>
+                <Box sx={{ width: 45, height: 45, backgroundImage: "url(images/icon.png)", backgroundSize: "cover" }} />
                 <Typography variant="h6" component="h6" sx={{ fontWeight: 700 }}>
                     {title}
                 </Typography>
