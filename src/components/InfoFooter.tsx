@@ -42,6 +42,7 @@ export default function InfoFooter() {
                     {/* <Button size='small' sx={{ fontSize: 12, color: "gray" }} onClick={ClickHelpButton}>ヘルプ</Button> */}
                     <Button size='small' target='_blank' href='/privacy' sx={{ fontSize: 12, color: "gray" }}>プライバシー</Button>
                     <Button size='small' target='_blank' href='/terms' sx={{ fontSize: 12, color: "gray" }}>利用規約</Button>
+                    <Button size='small' target='_blank' href='/contact' sx={{ fontSize: 12, color: "gray" }}>お問い合わせ</Button>
                 </Stack>
             </Stack>
             <Box sx={{ background: "white", display: { xs: 'block', sm: 'none' }, pb: 1 }}>
@@ -53,6 +54,7 @@ export default function InfoFooter() {
                     {/* <Button size='small' sx={{ fontSize: 11, color: "gray" }} onClick={ClickHelpButton}>ヘルプ</Button> */}
                     <Button size='small' target='_blank' href='/privacy' sx={{ fontSize: 11, color: "gray" }}>プライバシー</Button>
                     <Button size='small' target='_blank' href='/terms' sx={{ fontSize: 11, color: "gray" }}>利用規約</Button>
+                    <Button size='small' target='_blank' href='/contact' sx={{ fontSize: 11, color: "gray" }}>お問い合わせ</Button>
                 </Stack>
                 <Box sx={{ width: "100%", height: 30, display: "inline-flex", alignItems: "center" }}>
                     <Typography sx={{ fontSize: 11, color: "gray", mx: "auto", alignItems: "center", letterSpacing: 0.8 }}>© 2024 coco-board</Typography>
