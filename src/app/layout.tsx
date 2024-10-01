@@ -26,6 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
+      <meta name="google-adsense-account" content="ca-pub-2002981317413430" />
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID ?? null} />
       <body className={robot_mono.className}>{children}</body>
     </html >
