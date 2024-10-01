@@ -35,7 +35,7 @@ export default function SignOutPage() {
                     </Typography>
                 </Stack>
                 <Box sx={{ mb: "10px" }}>
-                    <Typography variant="body1" sx={{ color: "black" }}>
+                    <Typography variant="body1" sx={{ fontSize: "1em", fontWeight: 400, color: "black" }}>
                         ログアウトしました。
                         <br />
                         再度ログインしてください。
