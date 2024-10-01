@@ -34,9 +34,6 @@ export default function ContactPage() {
                     </Box>
                 </Box>
             </Container >
-            <Box sx={{ position: "absolute", bottom: 0, width: "100%" }}>
-                <Footer />
-            </Box>
         </Box >
     );
 }
