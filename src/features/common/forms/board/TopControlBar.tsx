@@ -96,6 +96,12 @@ export default function TopControlBar({ onClose, frame, setFrame, setCurrentFram
 
                         <Divider orientation="vertical" flexItem />
 
+                        <IconButton onClick={() => { !isPlay && setIsOpenSaveModal(true) }} sx={buttonStyle(menu, -1)}>
+                            <SaveIcon sx={{ width: "20px", height: "20px" }} />
+                        </IconButton>
+
+                        <Divider orientation="vertical" flexItem />
+
                         <IconButton onClick={() => { !isPlay && setMenu(0) }} sx={buttonStyle(menu, 0)}>
                             <NearMeIcon sx={{ transform: "rotate(270deg)", width: "20px", height: "20px" }} />
                         </IconButton>
@@ -128,12 +134,6 @@ export default function TopControlBar({ onClose, frame, setFrame, setCurrentFram
 
                         <IconButton onClick={() => { !isPlay && setIsOpenResetBoardModal(true) }} sx={buttonStyle(menu, -1)}>
                             <SyncIcon sx={{ width: "20px", height: "20px" }} />
-                        </IconButton>
-
-                        <Divider orientation="vertical" flexItem />
-
-                        <IconButton onClick={() => { !isPlay && setIsOpenSaveModal(true) }} sx={buttonStyle(menu, -1)}>
-                            <SaveIcon sx={{ width: "20px", height: "20px" }} />
                         </IconButton>
 
                         <Divider orientation="vertical" flexItem />
