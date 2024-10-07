@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Container, Box, Typography, Button, Divider, CardMedia, Stack, IconButton } from '@mui/material';
-import InfoFooter from '@/components/InfoFooter';
+import InfoFooter from '@/components/common/InfoFooter';
 
 const mainImageStyle = {
     top: 0,

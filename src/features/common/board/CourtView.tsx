@@ -23,7 +23,9 @@ type PageProps = {
     isPlay: boolean,
     isView: boolean,
     setIsPlay: Function,
-    playFrame: Array<FrameType>
+    playFrame: Array<FrameType>,
+    tutorialId: number,
+    setTutorialId: Function
 }
 
 const courtStyle = (courtWidth, courtHeight, courtId) => {
@@ -73,7 +75,7 @@ const courtFilterStyle = (courtWidth, courtHeight) => {
     }
 }
 
-export default function CourtView({ board, onClose, onSubmit, frame, setFrame, currentFrame, setCurrentFrame, isPlay, isView, setIsPlay, playFrame }: PageProps) {
+export default function CourtView({ board, onClose, onSubmit, frame, setFrame, currentFrame, setCurrentFrame, isPlay, isView, setIsPlay, playFrame, tutorialId, setTutorialId }: PageProps) {
     const courtRef = React.useRef(null)
 
     const [playCurrentFrame, setPlayCurrentFrame] = React.useState(0)
@@ -163,7 +165,7 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
     const Players = () => {
         const players = []
         frame[currentFrame].players.map((value, index) => {
-            players.push(<Player board={board} beforeCourtId={beforeCourtId} courtWidth={courtWidth} courtHeight={courtHeight} verticalWidth={verticalWidth} verticalHeight={verticalHeight} besideWidth={besideWidth} besideHeight={besideHeight} isPlay={isPlay} key={index} index={index} frame={isPlay ? playFrame : frame} setFrame={setFrame} currentFrame={isPlay ? playCurrentFrame : currentFrame} selectItem={selectItem} setSelectItem={setSelectItem} setMenu={setMenu} />
+            players.push(<Player board={board} beforeCourtId={beforeCourtId} courtWidth={courtWidth} courtHeight={courtHeight} verticalWidth={verticalWidth} verticalHeight={verticalHeight} besideWidth={besideWidth} besideHeight={besideHeight} isPlay={isPlay} key={index} index={index} frame={isPlay ? playFrame : frame} setFrame={setFrame} currentFrame={isPlay ? playCurrentFrame : currentFrame} selectItem={selectItem} setSelectItem={setSelectItem} setMenu={setMenu} tutorialId={tutorialId} setTutorialId={setTutorialId} />
             )
         })
         return players
@@ -181,8 +183,8 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
         <Box sx={{ touchAction: !isView && "none" }} >
             {!isView &&
                 <>
-                    <TopControlBar onClose={onClose} frame={frame} setFrame={setFrame} setCurrentFrame={setCurrentFrame} board={board} onSubmit={onSubmit} menu={menu} setMenu={setMenu} isPlay={isPlay} />
-                    <TopSubControlBar board={board} frame={frame} setFrame={setFrame} setSelectItem={setSelectItem} selectItem={selectItem} menu={menu} setMenu={setMenu} isPlay={isPlay} />
+                    <TopControlBar onClose={onClose} frame={frame} setFrame={setFrame} setCurrentFrame={setCurrentFrame} board={board} onSubmit={onSubmit} menu={menu} setMenu={setMenu} isPlay={isPlay} tutorialId={tutorialId} setTutorialId={setTutorialId} />
+                    <TopSubControlBar board={board} frame={frame} setFrame={setFrame} setSelectItem={setSelectItem} selectItem={selectItem} menu={menu} setMenu={setMenu} isPlay={isPlay} tutorialId={tutorialId} setTutorialId={setTutorialId} />
                 </>
             }
             <Box onMouseDown={() => isItemSelect()} sx={{ backgroundColor: "grey", position: "relative", height: window.innerHeight - 85 + "px", width: "100%", display: "flex", justifyContent: "center", border: "solid 0.5px #b2b2b2" }}>

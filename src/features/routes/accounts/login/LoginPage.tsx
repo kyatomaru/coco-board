@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from 'react';
-import LoadingPage from '@/components/AuthLoadingPage';
+import LoadingPage from '@/components/common/AuthLoadingPage';
 import GoogleSignInButton from '../../../common/auth/google/GoogleSignInButton';
 // import LineSignInButton from '../../../components/auths/line/LineSignInButton';
 // import XSignInButton from '../../../components/auths/x/XSignInButton';

@@ -22,10 +22,12 @@ type PageProps = {
     setCurrentFrame: Function
     setPlayFrame: Function,
     isPlay: Boolean,
-    setIsPlay: Function
+    setIsPlay: Function,
+    tutorialId: number,
+    setTutorialId: Function
 }
 
-export default function BottomControlBar({ frame, setFrame, currentFrame, setCurrentFrame, setPlayFrame, isPlay, setIsPlay }: PageProps) {
+export default function BottomControlBar({ frame, setFrame, currentFrame, setCurrentFrame, setPlayFrame, isPlay, setIsPlay, tutorialId, setTutorialId }: PageProps) {
     const [frameDig, setframeDig] = React.useState(100);
 
     const frameHandleChange = (event: Event, newValue: number | number[]) => {
@@ -89,12 +91,21 @@ export default function BottomControlBar({ frame, setFrame, currentFrame, setCur
         }
     }
 
+
     React.useEffect(() => {
         // const frameArray = Array()
         // frameArray.push(new FrameModel([], new BallModel()))
         // setFrame(frameArray)
         // console.log(frameArray)
     }, [])
+
+    React.useEffect(() => {
+        if (tutorialId == 13) {
+            if (!isPlay) {
+                setTutorialId(tutorialId + 1)
+            }
+        }
+    }, [isPlay])
 
     return (
         <Stack direction="row" justifyContent="space-between" sx={{ position: "relative", zIndex: 2000, px: 2, margin: "auto", backgroundColor: "white", border: "solid 0.5px #b2b2b2" }}>
@@ -114,7 +125,7 @@ export default function BottomControlBar({ frame, setFrame, currentFrame, setCur
                     <SkipPreviousIcon />
                 </IconButton>
 
-                <IconButton size='small' onClick={playFrame}>
+                <IconButton size='small' onClick={() => { playFrame(), tutorialId == 12 && setTutorialId(tutorialId + 1) }} id="tutorial-button4">
                     {isPlay
                         ? <PauseIcon />
                         : <PlayArrowIcon />
@@ -126,7 +137,7 @@ export default function BottomControlBar({ frame, setFrame, currentFrame, setCur
                 </IconButton>
             </Stack>
             <Stack sx={{ width: "30%" }} direction="row" justifyContent="space-around">
-                <IconButton size='small' onClick={addFrame}>
+                <IconButton size='small' onClick={() => { addFrame(), tutorialId == 5 && setTutorialId(tutorialId + 1) }} id="tutorial-button3">
                     <AddIcon />
                 </IconButton>
 

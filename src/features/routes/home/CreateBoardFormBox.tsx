@@ -22,9 +22,9 @@ import { useInsertPractice } from '@/hooks/practice/useInsertPractice'
 import TaskForm from '@/features/common/forms/task/TaskForm';
 import { TaskModel } from '@/types/task/Task';
 import { useInsertTask } from '@/hooks/task/useInsertTask';
-import LeftBar from '@/components/LeftBar';
+import LeftBar from '@/components/common/LeftBar';
 import dayjs from 'dayjs';
-import LoadingPage from '@/components/LoadingPage';
+import LoadingPage from '@/components/common/LoadingPage';
 
 type PageProps = {
     allContents: Array<any>,

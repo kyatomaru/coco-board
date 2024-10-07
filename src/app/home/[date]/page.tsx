@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useRouter, useParams } from 'next/navigation'
-import LoadingPage from '@/components/AuthLoadingPage';
+import LoadingPage from '@/components/common/AuthLoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -12,7 +12,7 @@ import TaskCardBox from '@/features/routes/home/TaskCardBox';
 import type { User } from 'firebase/auth';
 import { auth } from '@/app/firebase';
 import { onAuthStateChanged, getAuth } from "firebase/auth"
-import LeftBar from '@/components/LeftBar';
+import LeftBar from '@/components/common/LeftBar';
 import HomeHeader from '@/components/routes/home/HomeHeader';
 import CreateButton from '@/features/common/button/CreateButton'
 import { useGetNote } from '@/hooks/note/useGetDateNote';

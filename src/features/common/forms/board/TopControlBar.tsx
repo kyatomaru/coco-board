@@ -24,6 +24,7 @@ import { backTitle, resetTitle, backMs } from '@/constants/board/ModalMessage'
 import BoardCreateForm from './BoardInfoForm';
 import { BoardType } from '@/types/board/Board';
 import Divider from '@mui/material/Divider';
+import TutorialTopControlBar from './tutorial/TutorialTopControlBar';
 
 type PageProps = {
     onClose: any,
@@ -34,7 +35,9 @@ type PageProps = {
     onSubmit: Function,
     menu: Number,
     setMenu: Function,
-    isPlay: boolean
+    isPlay: boolean,
+    tutorialId: number,
+    setTutorialId: Function
 }
 
 const stackStyle = {
@@ -52,7 +55,7 @@ const buttonStyle = (menu, index) => {
     }
 }
 
-export default function TopControlBar({ onClose, frame, setFrame, setCurrentFrame, board, onSubmit, menu, setMenu, isPlay }: PageProps) {
+export default function TopControlBar({ onClose, frame, setFrame, setCurrentFrame, board, onSubmit, menu, setMenu, isPlay, tutorialId, setTutorialId }: PageProps) {
     const [isOpenResetBoardModal, setIsOpenResetBoardModal] = React.useState<boolean>(false)
     const [isOpenSaveModal, setIsOpenSaveModal] = React.useState<boolean>(false)
     const [isConfirmCloseModal, setIsConfirmCloseModal] = React.useState<boolean>(false)
@@ -108,7 +111,7 @@ export default function TopControlBar({ onClose, frame, setFrame, setCurrentFram
 
                         <Divider orientation="vertical" flexItem />
 
-                        <IconButton onClick={() => { !isPlay && setMenu(1) }} sx={buttonStyle(menu, 1)}>
+                        <IconButton onClick={() => { !isPlay && setMenu(1), tutorialId == 2 && setTutorialId(tutorialId + 1) }} sx={buttonStyle(menu, 1)} id="tutorial-button1">
                             <PersonAddAlt1Icon sx={{ width: "20px", height: "20px" }} />
                         </IconButton>
 

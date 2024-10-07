@@ -160,7 +160,7 @@ export default function BoardContentsBox({ user, contents, setContents }: pagePr
                         : <Skeleton variant="rectangular" height={30} />
                     }
                     {contents != undefined
-                        ? <CourtView board={contents} onClose={() => { }} onSubmit={() => { }} frame={frame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} isPlay={isPlay} isView={true} setIsPlay={setIsPlay} playFrame={playFrame} />
+                        ? <CourtView board={contents} onClose={() => { }} onSubmit={() => { }} frame={frame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} isPlay={isPlay} isView={true} setIsPlay={setIsPlay} playFrame={playFrame} tutorialId={-1} setTutorialId={() => { }} />
                         : <Skeleton variant="rectangular" height={courtHeight} />
                     }
                     {contents != undefined

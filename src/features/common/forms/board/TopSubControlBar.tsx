@@ -18,11 +18,13 @@ type PageProps = {
     setSelectItem: any,
     menu: number,
     setMenu: any,
-    isPlay: boolean
+    isPlay: boolean,
+    tutorialId: number,
+    setTutorialId: Function
 }
 
 
-export default function TopSubControlBar({ board, frame, setFrame, selectItem, setSelectItem, menu, setMenu, isPlay }: PageProps) {
+export default function TopSubControlBar({ board, frame, setFrame, selectItem, setSelectItem, menu, setMenu, isPlay, tutorialId, setTutorialId }: PageProps) {
     return (
         <>
             {isPlay ?
@@ -35,7 +37,7 @@ export default function TopSubControlBar({ board, frame, setFrame, selectItem, s
                     }
                     {
                         menu == 1 &&
-                        <AddItemBox frame={frame} setFrame={setFrame} board={board} />
+                        <AddItemBox frame={frame} setFrame={setFrame} board={board} tutorialId={tutorialId} setTutorialId={setTutorialId} />
                     }
                     {
                         menu == 2 &&
