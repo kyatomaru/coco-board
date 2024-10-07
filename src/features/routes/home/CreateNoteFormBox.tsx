@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
-import LoadingPage from '@/components/AuthLoadingPage';
+import LoadingPage from '@/components/common/AuthLoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -23,7 +23,7 @@ import { useInsertPractice } from '@/hooks/practice/useInsertPractice'
 import TaskForm from '@/features/common/forms/task/TaskForm';
 import { TaskModel } from '@/types/task/Task';
 import { useInsertTask } from '@/hooks/task/useInsertTask';
-import LeftBar from '@/components/LeftBar';
+import LeftBar from '@/components/common/LeftBar';
 import dayjs from 'dayjs';
 
 type PageProps = {

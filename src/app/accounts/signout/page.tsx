@@ -8,7 +8,7 @@ import { onAuthStateChanged, getAuth } from "firebase/auth"
 import SignOutPage from '@/features/routes/accounts/signout/SignOutPage';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import InfoFooter from '@/components/InfoFooter';
+import InfoFooter from '@/components/common/InfoFooter';
 
 
 export default function Home() {

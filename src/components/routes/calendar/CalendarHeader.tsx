@@ -25,7 +25,7 @@ import MuiTextField, { TextFieldProps } from '@mui/material/TextField';
 import HomeIcon from '@mui/icons-material/Home';
 // import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import CardMedia from '@mui/material/CardMedia';
-import HeaderMenus from '@/components/HeaderMenus';
+import HeaderMenus from '@/components/common/HeaderMenus';
 
 const barStyle = {
     bgcolor: 'background.paper',

@@ -15,6 +15,7 @@ import { BallModel } from '@/types/board/Ball';
 import { PlayerModel } from '@/types/board/Player';
 import { ajustCoordinate, restoreCoordinate } from '@/hooks/board/courtSetting/CourtSetting';
 import { setRatio } from '@/constants/board/CourtRatio';
+import TutorialStack from './tutorial/TutorialStack';
 
 type PageProps = {
     contents: any,
@@ -22,11 +23,20 @@ type PageProps = {
     onClose: any
 }
 
+
+
 export default function BoardViewForm({ contents, postData, onClose }: PageProps) {
     const [frame, setFrame] = React.useState<Array<FrameType>>([]);
     const [currentFrame, setCurrentFrame] = React.useState(0)
     const [isPlay, setIsPlay] = React.useState(false)
     const [playFrame, setPlayFrame] = React.useState<Array<FrameType>>([]);
+
+    const [tutorialId, setTutorialId] = React.useState(0)
+    const [isNewCreate, setIsNewCreate] = React.useState(false)
+
+    React.useEffect(() => {
+        if (localStorage.getItem("isNewCreateBoard")) setIsNewCreate(true)
+    }, [])
 
     useSwipeLock()
 
@@ -83,9 +93,15 @@ export default function BoardViewForm({ contents, postData, onClose }: PageProps
     }
 
     return (
-        <Box>
-            <CourtView board={contents} onClose={onClose} onSubmit={onSubmit} frame={frame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} isPlay={isPlay} isView={false} setIsPlay={setIsPlay} playFrame={playFrame} />
-            <BottomControlBar frame={frame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} setPlayFrame={setPlayFrame} isPlay={isPlay} setIsPlay={setIsPlay} />
+        <Box sx={{ position: "relative" }}>
+            {/* {tutorialId &&
+                <Box sx={{ zIndex: 3000, position: "absolute", width: "100%", height: "100%", backgroundColor: "rgb(1 1 1 / 30%)" }} />
+            } */}
+            {isNewCreate && tutorialId >= 0 &&
+                <TutorialStack tutorialId={tutorialId} setTutorialId={setTutorialId} />
+            }
+            <CourtView board={contents} onClose={onClose} onSubmit={onSubmit} frame={frame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} isPlay={isPlay} isView={false} setIsPlay={setIsPlay} playFrame={playFrame} tutorialId={tutorialId} setTutorialId={setTutorialId} />
+            <BottomControlBar frame={frame} setFrame={setFrame} currentFrame={currentFrame} setCurrentFrame={setCurrentFrame} setPlayFrame={setPlayFrame} isPlay={isPlay} setIsPlay={setIsPlay} tutorialId={tutorialId} setTutorialId={setTutorialId} />
         </Box>
     )
 }

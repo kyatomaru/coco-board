@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import { Box, TextField, FormControl, InputLabel, OutlinedInput, Button, InputAdornment, IconButton, FormHelperText, Typography } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import LoadingPage from '@/components/AuthLoadingPage';
+import LoadingPage from '@/components/common/AuthLoadingPage';
 import Alert from '@mui/material/Alert';
 import { actionCodeSettings } from '@/constants/Auth';
 import CheckIcon from '@mui/icons-material/Check';

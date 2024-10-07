@@ -2,17 +2,17 @@
 
 import * as React from 'react';
 import { useRouter, useParams } from 'next/navigation'
-import LoadingPage from '@/components/LoadingPage';
+import LoadingPage from '@/components/common/LoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import { auth } from '@/app/firebase';
 import Container from '@mui/material/Container';
-import Footer from "@/components/Footer";
+import Footer from "@/components/common/Footer";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import type { User } from 'firebase/auth';
 import { useGetGame } from '@/hooks/game/useGetGame';
 import GameContentsBox from '@/features/routes/game/GameContentsBox';
 import LoginPage from '@/features/routes/accounts/login/LoginPage';
-import NotPage from '@/components/NotPage';
+import NotPage from '@/components/common/NotPage';
 
 const containterStyle = {
   borderRight: "solid 0.5px #b2b2b2",

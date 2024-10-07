@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 import SignupBox from './SignupBox';
 import Stack from '@mui/material/Stack';
 import CardMedia from '@mui/material/CardMedia';
-import LoadingPage from '@/components/AuthLoadingPage';
+import LoadingPage from '@/components/common/AuthLoadingPage';
 
 export default function SignupPage() {
     const router = useRouter()
@@ -25,51 +25,51 @@ export default function SignupPage() {
     const [user, setUser] = React.useState<User | undefined>()
 
     return (
-                <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
-                    <Box sx={{ px: "20px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
-                        <Stack
-                            direction="row"
-                            alignItems="center"
-                            justifyContent="center"
-                            spacing={2}
-                            sx={{ mb: "40px" }}>
-                            < CardMedia
-                                component="img"
-                                sx={{ width: 50, height: 50 }}
-                                image="/images/icon.png"
-                            />
-                            <Typography sx={{
-                                fontSize: { xs: 25, md: 30 },
-                                fontWeight: "bold", color: "black"
-                            }}>
-                                coco-board
-                            </Typography>
-                        </Stack>
-                        <Box>
-                            <SignupBox setIsLoading={setIsLoading} />
-                        </Box>
-                        <Divider>
-                            <Typography variant="body1" sx={{ fontSize: 13, color: "black" }}>
-                                または
-                            </Typography>
-                        </Divider>
-                        <GoogleSignInButton setIsLoading={setIsLoading} />
-                        <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
-                            ※ Googleでログインする場合はSafariもしくはChromeからアプリをご利用ください。
-                        </Typography>
-                        {/* <LineSignInButton /> */}
-                        {/* <XSignInButton /> */}
-                    </Box>
-                    <Box sx={{ mt: "12px", p: "20px 20px 10px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
-                        <Typography variant="h5" sx={{ fontSize: 13, color: "black" }}>
-                            アカウントをお持ちの場合
-                        </Typography>
-                        <Typography  >
-                            <Button type="submit" href='/accounts/login' size="medium" sx={{ height: "30px", fontSize: 13, }} >
-                                ログインする
-                            </Button>
-                        </Typography>
-                    </Box>
-                </Container>
+        <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
+            <Box sx={{ px: "20px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
+                <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    spacing={2}
+                    sx={{ mb: "40px" }}>
+                    < CardMedia
+                        component="img"
+                        sx={{ width: 50, height: 50 }}
+                        image="/images/icon.png"
+                    />
+                    <Typography sx={{
+                        fontSize: { xs: 25, md: 30 },
+                        fontWeight: "bold", color: "black"
+                    }}>
+                        coco-board
+                    </Typography>
+                </Stack>
+                <Box>
+                    <SignupBox setIsLoading={setIsLoading} />
+                </Box>
+                <Divider>
+                    <Typography variant="body1" sx={{ fontSize: 13, color: "black" }}>
+                        または
+                    </Typography>
+                </Divider>
+                <GoogleSignInButton setIsLoading={setIsLoading} />
+                <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
+                    ※ Googleでログインする場合はSafariもしくはChromeからアプリをご利用ください。
+                </Typography>
+                {/* <LineSignInButton /> */}
+                {/* <XSignInButton /> */}
+            </Box>
+            <Box sx={{ mt: "12px", p: "20px 20px 10px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
+                <Typography variant="h5" sx={{ fontSize: 13, color: "black" }}>
+                    アカウントをお持ちの場合
+                </Typography>
+                <Typography  >
+                    <Button type="submit" href='/accounts/login' size="medium" sx={{ height: "30px", fontSize: 13, }} >
+                        ログインする
+                    </Button>
+                </Typography>
+            </Box>
+        </Container>
     );
 }

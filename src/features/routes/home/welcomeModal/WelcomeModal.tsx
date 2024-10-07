@@ -44,7 +44,7 @@ export default function WelcomeModal() {
     const previousPage = () => { setPage(page - 1) }
     const nextPage = () => { setPage(page + 1) }
 
-    const register = () => { setOpen(false), localStorage.removeItem('isNewUser') }
+    const register = () => { setOpen(false), localStorage.removeItem('isNewUser'), localStorage.setItem('isNewCreateBoard', "1") }
 
     return (
         <>

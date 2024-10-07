@@ -12,7 +12,7 @@ import Slide from '@mui/material/Slide';
 import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import HeaderMenus from '@/components/HeaderMenus';
+import HeaderMenus from '@/components/common/HeaderMenus';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 

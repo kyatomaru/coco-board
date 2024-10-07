@@ -55,6 +55,7 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
                 setIsLoading(true)
                 if (getAdditionalUserInfo(res)?.isNewUser) {
                     localStorage.setItem('isNewUser', "true")
+                    localStorage.setItem('isNewCreateBoard', "true")
                 }
                 router.push("/home")
             }).catch((error) => {

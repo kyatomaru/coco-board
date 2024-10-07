@@ -27,7 +27,9 @@ type PageProps = {
     selectItem: any,
     setSelectItem: any,
     isPlay: boolean,
-    setMenu: any
+    setMenu: any,
+    tutorialId: number,
+    setTutorialId: any
 }
 
 
@@ -74,7 +76,7 @@ const playerNameStyle = (diameter, color) => {
     }
 }
 
-export default function Player({ board, beforeCourtId, courtWidth, courtHeight, verticalWidth, verticalHeight, besideWidth, besideHeight, isPlay, frame, setFrame, currentFrame, index, selectItem, setSelectItem, setMenu }: PageProps) {
+export default function Player({ board, beforeCourtId, courtWidth, courtHeight, verticalWidth, verticalHeight, besideWidth, besideHeight, isPlay, frame, setFrame, currentFrame, index, selectItem, setSelectItem, setMenu, tutorialId, setTutorialId, }: PageProps) {
     const [isDrag, setIsDrag] = React.useState(false);
 
     const getX = (frameIndex) => { return frame[frameIndex].players[index].x }
@@ -120,6 +122,10 @@ export default function Player({ board, beforeCourtId, courtWidth, courtHeight, 
         frameArray[currentFrame].players[index].y = dragElement.y
 
         setFrame(frameArray)
+
+        if (tutorialId == 9) {
+            tutorialDragEnd(dragElement.y)
+        }
     }
 
     const onSelect = () => {
@@ -153,6 +159,14 @@ export default function Player({ board, beforeCourtId, courtWidth, courtHeight, 
     React.useEffect(() => {
         setWindow()
     }, [board.courtId])
+
+    const tutorialDragEnd = (y) => {
+        if (courtHeight / 2 <= y) {
+            setTutorialId(tutorialId + 2)
+        } else {
+            setTutorialId(tutorialId + 1)
+        }
+    }
 
     return (
         <Draggable

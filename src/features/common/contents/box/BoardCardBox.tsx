@@ -3,7 +3,7 @@
 import * as React from 'react';
 import type { User } from 'firebase/auth';
 import dayjs from 'dayjs';
-import LoadingPage from '@/components/LoadingPage';
+import LoadingPage from '@/components/common/LoadingPage';
 import { useRouter } from 'next/navigation'
 import { useGetNote } from '@/hooks/note/useGetDateNote';
 import Container from '@mui/material/Container';

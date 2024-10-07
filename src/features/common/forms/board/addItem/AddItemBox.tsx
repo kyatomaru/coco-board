@@ -12,10 +12,12 @@ import { PlayerModel } from '@/types/board/Player';
 type PageProps = {
     frame: any,
     setFrame: any,
-    board: any
+    board: any,
+    tutorialId: number,
+    setTutorialId: any
 }
 
-export default function AddItemBox({ frame, setFrame, board }: PageProps) {
+export default function AddItemBox({ frame, setFrame, board, tutorialId, setTutorialId }: PageProps) {
     const addBall = () => {
         const frameArray = []
         frame.forEach((item) => {
@@ -57,7 +59,7 @@ export default function AddItemBox({ frame, setFrame, board }: PageProps) {
 
     return (
         <>
-            <IconButton size='small' onClick={() => { addPlayer(0) }}>
+            <IconButton size='small' onClick={() => { addPlayer(0), tutorialId == 3 && setTutorialId(tutorialId + 1) }} id="tutorial-button2">
                 <Avatar sx={{ backgroundColor: "#444", width: { xs: "20px" }, height: { xs: "20px" }, fontSize: 10 }}>H</Avatar>
             </IconButton>
 
