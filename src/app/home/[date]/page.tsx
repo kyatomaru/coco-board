@@ -19,7 +19,6 @@ import { useGetNote } from '@/hooks/note/useGetDateNote';
 import { useGetBoard } from '@/hooks/board/useGetDateBoard';
 import WelcomeModal from '@/features/routes/home/welcomeModal/WelcomeModal';
 import dayjs from 'dayjs';
-import InviteModal from '@/components/common/InviteModal';
 
 export default function Home() {
   const router = useRouter()

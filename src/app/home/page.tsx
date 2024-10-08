@@ -17,7 +17,6 @@ import HomeHeader from '@/components/routes/home/HomeHeader';
 import CreateButton from '@/features/common/button/CreateButton';
 import { useGetNote } from '@/hooks/note/useGetDateNote';
 import { useGetBoard } from '@/hooks/board/useGetDateBoard';
-import InviteModal from '@/components/common/InviteModal';
 import WelcomeModal from '@/features/routes/home/welcomeModal/WelcomeModal';
 import dayjs from 'dayjs';
 
