@@ -67,7 +67,7 @@ export default function TutorialStack({ tutorialId, setTutorialId }: PageProps) 
                     <Box sx={{ width: courtWidth, position: "relative" }}>
                         <Box sx={{ backgroundColor: "rgb(1 1 1 / 30%)", position: "absolute", m: "auto", top: 0, left: 0, right: 0, zIndex: 3000, width: courtWidth, height: (window.innerHeight - courtHeight - 85) / 2 }} />
                         {tutorialId == 7 ?
-                            <Box sx={{ backgroundImage: `url(/images/board/court1.jpg)`, backgroundSize: "cover", position: "absolute", width: courtWidth + "px", height: courtHeight - 2 + "px", top: (window.innerHeight - courtHeight - 85) / 2, pointerEvents: "auto" }} >
+                            <Box sx={{ backgroundImage: `url(/images/board/court1.jpg)`, backgroundSize: "cover", m: "auto", position: "absolute", width: courtWidth + "px", height: courtHeight + "px", top: 0, bottom: 0, right: 0, left: 0, pointerEvents: "auto" }} >
                                 <DragTutorial courtWidth={courtWidth} courtHeight={courtHeight} isEnd={() => { setTutorialId(tutorialId + 1) }} />
                             </Box>
                             :
