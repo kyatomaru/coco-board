@@ -32,7 +32,7 @@ export default function BoardViewForm({ contents, postData, onClose }: PageProps
     const [playFrame, setPlayFrame] = React.useState<Array<FrameType>>([]);
 
     const [tutorialId, setTutorialId] = React.useState(0)
-    const [isNewCreate, setIsNewCreate] = React.useState(false)
+    const [isNewCreate, setIsNewCreate] = React.useState(true)
 
     React.useEffect(() => {
         if (localStorage.getItem("isNewCreateBoard")) setIsNewCreate(true)

@@ -53,7 +53,7 @@ export default function Footer() {
                     justifyContent="center"
                     sx={{ px: 2 }}
                 >
-                    {/* <Button size='small' sx={{ fontSize: 12, color: "gray" }} onClick={ClickHelpButton}>ヘルプ</Button> */}
+                    <Button size='small' href='/' sx={{ fontSize: 12, color: "gray" }}>coco-boardについて</Button>
                     <Button size='small' target='_blank' href='/privacy' sx={{ fontSize: 12, color: "gray" }}>プライバシー</Button>
                     <Button size='small' target='_blank' href='/terms' sx={{ fontSize: 12, color: "gray" }}>利用規約</Button>
                     <Button size='small' target='_blank' href='/contact' sx={{ fontSize: 12, color: "gray" }}>お問い合わせ</Button>
@@ -65,7 +65,7 @@ export default function Footer() {
                     justifyContent="center"
                     sx={{ height: 30 }}
                 >
-                    {/* <Button size='small' sx={{ fontSize: 11, color: "gray" }} onClick={ClickHelpButton}>ヘルプ</Button> */}
+                    <Button size='small' href='/' sx={{ fontSize: 12, color: "gray" }}>coco-boardについて</Button>
                     <Button size='small' target='_blank' href='/privacy' sx={{ fontSize: 11, color: "gray" }}>プライバシー</Button>
                     <Button size='small' target='_blank' href='/terms' sx={{ fontSize: 11, color: "gray" }}>利用規約</Button>
                     <Button size='small' target='_blank' href='/contact' sx={{ fontSize: 11, color: "gray" }}>お問い合わせ</Button>
