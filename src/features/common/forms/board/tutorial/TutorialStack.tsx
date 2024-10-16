@@ -62,7 +62,7 @@ export default function TutorialStack({ tutorialId, setTutorialId }: PageProps) 
                 </Box>
 
                 {/* main court */}
-                <Box sx={{ height: window.innerHeight - 85 + "px", width: "100%", zIndex: tutorialId == 6 ? 3100 : 3000, position: "relative", display: "flex" }} >
+                <Box sx={{ height: window.innerHeight - 85 + "px", width: "100%", zIndex: tutorialId == 7 || tutorialId == 9 || tutorialId == 13 ? 3000 : 3000, position: "relative", display: "flex" }} >
                     <Box sx={{ backgroundColor: "rgb(1 1 1 / 30%)", flexGrow: 1, position: "relative", zIndex: 3000 }} />
                     <Box sx={{ width: courtWidth, position: "relative" }}>
                         <Box sx={{ backgroundColor: "rgb(1 1 1 / 30%)", position: "absolute", m: "auto", top: 0, left: 0, right: 0, zIndex: 3000, width: courtWidth, height: (window.innerHeight - courtHeight - 85) / 2 }} />
