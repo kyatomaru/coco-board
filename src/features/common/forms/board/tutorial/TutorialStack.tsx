@@ -62,20 +62,20 @@ export default function TutorialStack({ tutorialId, setTutorialId }: PageProps) 
                 </Box>
 
                 {/* main court */}
-                <Box sx={{ height: window.innerHeight - 85 + "px", width: "100%", zIndex: tutorialId == 7 || tutorialId == 9 || tutorialId == 13 ? 3100 : 3000, position: "relative", display: "flex" }} >
+                {/* <Box sx={{ height: window.innerHeight - 85 + "px", width: "100%", zIndex: tutorialId == 7 || tutorialId == 9 || tutorialId == 13 ? 3100 : 3000, position: "relative", display: "flex" }} >
                     <Box sx={{ backgroundColor: "rgb(1 1 1 / 30%)", flexGrow: 1, position: "relative", zIndex: 3000 }} />
                     <Box sx={{ width: courtWidth, position: "relative" }}>
                         <Box sx={{ backgroundColor: "rgb(1 1 1 / 30%)", position: "absolute", m: "auto", top: 0, left: 0, right: 0, zIndex: 3000, width: courtWidth, height: (window.innerHeight - courtHeight - 85) / 2 }} />
-                        {/* {tutorialId == 7 &&
+                        {tutorialId == 7 &&
                             <Box sx={{ backgroundImage: `url(/images/board/court1.jpg)`, backgroundSize: "cover", zIndex: 3100, m: "auto", position: "absolute", width: courtWidth + "px", height: courtHeight + "px", top: 0, bottom: 0, right: 0, left: 0, pointerEvents: "auto" }} >
                                 <DragTutorial courtWidth={courtWidth} courtHeight={courtHeight} isEnd={() => { setTutorialId(tutorialId + 1) }} />
                             </Box>
-                        } */}
+                        }
                         <Box sx={{ backgroundColor: tutorialId == 9 || tutorialId == 13 ? "unset" : "rgb(1 1 1 / 30%)", position: "absolute", width: courtWidth + "px", height: courtHeight + "px", pointerEvents: tutorialId == 9 ? "none" : "auto", top: (window.innerHeight - courtHeight - 85) / 2 }} />
                         <Box sx={{ backgroundColor: "rgb(1 1 1 / 30%)", position: "absolute", m: "auto", bottom: 0, left: 0, right: 0, zIndex: 3000, width: courtWidth, height: (window.innerHeight - courtHeight - 85) / 2 }} />
                     </Box>
                     <Box sx={{ backgroundColor: "rgb(1 1 1 / 30%)", flexGrow: 1, position: "relative", zIndex: 3000 }} />
-                </Box>
+                </Box> */}
 
                 {/* bottom control bar */}
                 <Box sx={{ height: 35, width: "100%", zIndex: tutorialId == 5 || tutorialId == 12 ? 3100 : 3000, position: "relative", backgroundColor: tutorialId == 5 || tutorialId == 12 ? "unset" : "rgb(1 1 1 / 30%)", pointerEvents: tutorialId == 5 || tutorialId == 12 ? "none" : "auto" }} >
