@@ -79,9 +79,9 @@ export default function TutorialStack({ tutorialId, setTutorialId }: PageProps) 
 
                 {/* bottom control bar */}
                 <Box sx={{ height: 35, width: "100%", zIndex: tutorialId == 5 || tutorialId == 12 ? 3100 : 3000, position: "relative", backgroundColor: tutorialId == 5 || tutorialId == 12 ? "unset" : "rgb(1 1 1 / 30%)", pointerEvents: tutorialId == 5 || tutorialId == 12 ? "none" : "auto" }} >
-                    {tutorialId == 5 &&
+                    {/* {tutorialId == 5 &&
                         <TutorialArrow3 />
-                    }
+                    } */}
                     {tutorialId == 12 &&
                         <TutorialArrow4 />
                     }
