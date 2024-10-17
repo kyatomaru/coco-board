@@ -108,7 +108,7 @@ export default function BottomControlBar({ frame, setFrame, currentFrame, setCur
     }, [isPlay])
 
     return (
-        <Stack direction="row" justifyContent="space-between" sx={{ height: 35, position: "relative", zIndex: 2000, px: 2, margin: "auto", backgroundColor: "white", border: "solid 0.5px #b2b2b2", background: "red" }}>
+        <Stack direction="row" justifyContent="space-between" sx={{ height: 35, position: "relative", zIndex: 2000, px: 2, margin: "auto", backgroundColor: "white", border: "solid 0.5px #b2b2b2" }}>
             <Stack sx={{ width: "30%" }} direction="row" justifyContent="space-between" alignItems="center">
                 <Slider
                     size="small"
