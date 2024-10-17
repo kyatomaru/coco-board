@@ -106,7 +106,7 @@ export default function TutorialStack({ tutorialId, setTutorialId }: PageProps) 
             {/* before drag demo */}
             {
                 tutorialId == 6 &&
-                <TutorialDragModal register={() => { setTutorialId(tutorialId + 1) }} />
+                <TutorialDragModal register={() => { setTutorialId(tutorialId) }} />
             }
 
             {/* confirm demo */}
