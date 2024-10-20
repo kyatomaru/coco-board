@@ -84,7 +84,7 @@ export default function HomeHeader({ date, setDate, displayMenu, setDisplayMenu,
                     <IconButton href={`/calendar/${dayjs(String(date)).format('YYYY-MM-DD')}`} sx={{ mr: 1 }}>
                         <EventIcon />
                     </IconButton>
-                    <Typography component="h2" fontSize={17} fontWeight={500} sx={{ mt: "2px" }}>
+                    <Typography component="h2" fontSize={17} fontWeight={600} sx={{ mt: "2px", color: "rgba(0, 0, 0, 0.7)" }}>
                         {useDateFormat(String(date))}
                     </Typography>
                 </Stack>
