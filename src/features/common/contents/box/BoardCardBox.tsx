@@ -89,10 +89,10 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                         }
                     </>
                 }
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-                    <script src='https://fam-8.net/ad/js/fam8-tagify.min.js'></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" async></script>
+                    <script src='https://fam-8.net/ad/js/fam8-tagify.min.js' async></script>
                     <div id='div_fam8_async_98274_2'>
-                        <script lang='javascript'>fam8_js_async('https://fam-8.net/ad', '_site=16487&_loc=98274&_mstype=2');</script>
+                        <script lang='javascript' async>fam8_js_async('https://fam-8.net/ad', '_site=16487&_loc=98274&_mstype=2');</script>
                     </div>
                 </>
             }
