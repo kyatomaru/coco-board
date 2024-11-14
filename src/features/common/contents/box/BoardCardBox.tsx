@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from 'react';
+import Script from 'next/script'
 import type { User } from 'firebase/auth';
 import dayjs from 'dayjs';
 import LoadingPage from '@/components/common/LoadingPage';
@@ -89,10 +90,10 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                         }
                     </>
                 }
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" async></script>
-                    <script src='https://fam-8.net/ad/js/fam8-tagify.min.js' async></script>
+                    <Script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></Script>
+                    <Script src='https://fam-8.net/ad/js/fam8-tagify.min.js'></Script>
                     <div id='div_fam8_async_98274_2'>
-                        <script lang='javascript' async>fam8_js_async('https://fam-8.net/ad', '_site=16487&_loc=98274&_mstype=2');</script>
+                        <Script lang='javascript' async>fam8_js_async('https://fam-8.net/ad', '_site=16487&_loc=98274&_mstype=2');</Script>
                     </div>
                 </>
             }
