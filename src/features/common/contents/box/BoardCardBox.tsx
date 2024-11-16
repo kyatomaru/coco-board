@@ -44,6 +44,33 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
         setIsDateLoding(false)
     }, [contents]);
 
+    const iframeRef = React.useRef(null);
+    const [iframeHeight, setIframeHeight] = React.useState(10);
+
+    React.useEffect(() => {
+        const handleMessage = (event) => {
+            // メッセージの種類が 'setIframeHeight' の場合
+            if (event.data.type === 'setIframeHeight') {
+                // iframeの高さを更新
+                setIframeHeight(event.data.height);
+            }
+        };
+
+        // メッセージを受け取るリスナーを追加
+        window.addEventListener('message', handleMessage);
+
+        // クリーンアップ
+        return () => {
+            window.removeEventListener('message', handleMessage);
+        };
+    }, []);
+
+    // React.useEffect(() => {
+    //     if (iframeRef.current) {
+    //         iframeRef.current.style.height = `${iframeHeight}px`;
+    //     }
+    // }, [iframeHeight]);
+
     return (
         <Box>
             {menu != -1 ?
@@ -71,12 +98,28 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                         {contents[0] != undefined ?
                             contents.map((value, index) => {
                                 return (
-                                    <Card key={index} sx={{ minWidth: 250, mb: 2 }} elevation={2}>
-                                        <BoardCard allContents={contents} contents={value} setContents={setContents} />
-                                    </Card>)
+                                    <>
+                                        {index > 0 && (index + 1) % 2 == 0 &&
+                                            <Card sx={{ minWidth: 250, mb: 2 }} elevation={2}>
+                                                <iframe
+                                                    ref={iframeRef}
+                                                    src="/fam8/tag.html"
+                                                    width="100%"
+                                                    height={iframeHeight + 21}
+                                                    // style={{ padding: 5 }}
+                                                    aria-hidden="false"
+                                                ></iframe>
+                                            </Card>
+                                        }
+
+                                        <Card key={index} sx={{ minWidth: 250, mb: 2 }} elevation={2}>
+                                            <BoardCard allContents={contents} contents={value} setContents={setContents} />
+                                        </Card>
+                                    </>
+                                )
                             })
                             : !isLoading &&
-                            <Box sx={{ p: 1, textAlign: "center", height: "100%", width: "100%" }} >
+                            <Box sx={{ p: 1, textAlign: "center", height: "100%", width: "100%", mb: 2 }} >
                                 <Typography sx={{ fontSize: 15, textAlign: "center", fontWeight: "bold", mb: 1, color: "black" }} component="h2">
                                     戦術・フォーメーションを記録しよう。
                                 </Typography>
@@ -90,9 +133,16 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                         }
                     </>
                 }
-                    <Script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></Script>
-                    <Script src='https://fam-8.net/ad/js/fam8-tagify.min.js'></Script>
-                    <Script id='div_fam8_async_98274_2'>fam8_js_async(&apos;https://fam-8.net/ad&apos;, &apos;_site=16487&_loc=98274&_mstype=2&apos;);</Script>
+                    <Card sx={{ minWidth: 250, mb: 2 }} elevation={2}>
+                        <iframe
+                            ref={iframeRef}
+                            src="/fam8/tag.html"
+                            width="100%"
+                            height={iframeHeight + 21}
+                            // style={{ padding: 5 }}
+                            aria-hidden="false"
+                        ></iframe>
+                    </Card>
                 </>
             }
         </Box>

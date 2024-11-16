@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja" style="align-items: center;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>広告</title>
+</head>
+
+<body style="margin: 0;">
+    <div id="fam8_box">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src='https://fam-8.net/ad/js/fam8-tagify.min.js'></script>
+        <div id='div_fam8_async_98274_2'>
+            <script>fam8_js_async('https://fam-8.net/ad', '_site=16487&_loc=98274&_mstype=2');</Script>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const adContainer = document.getElementById('fam8_box');
+
+            // adContainerが存在するか確認してから監視を開始
+            if (adContainer) {
+                const observer = new MutationObserver(() => {
+                    // 高さを取得して親ページに送信
+                    const iframeHeight = adContainer.clientHeight;
+                    console.log("広告の高さ:", iframeHeight); // 高さをログで確認
+                    window.parent.postMessage({ type: 'setIframeHeight', height: iframeHeight }, '*');
+                });
+
+                // #ad-container 内の変化を監視
+                observer.observe(adContainer, { childList: true, subtree: true });
+            } else {
+                console.error("adContainerが見つかりません");
+            }
+        });
+    </script>
+</body>
+
+</html>
