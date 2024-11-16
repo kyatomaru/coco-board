@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@/app/globals.css'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja" style={{ overflow: "hidden", position: "relative", height: "85vh" }}>
-      <body className={inter.className} style={{ overscrollBehaviorY: "none", overflow: "hidden", position: "relative", height: "85vh" }}>{children}</body>
+      <Script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" strategy='afterInteractive' />
+      <Script src='https://fam-8.net/ad/js/fam8-tagify.min.js' strategy='afterInteractive' />
+      <body className={inter.className} style={{ overscrollBehaviorY: "none", overflow: "hidden", position: "relative", height: "85vh" }}>
+
+        {children}
+      </body>
     </html >
   )
 }
