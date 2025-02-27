@@ -99,7 +99,7 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                             contents.map((value, index) => {
                                 return (
                                     <>
-                                        {index > 0 && (index + 1) % 2 == 0 &&
+                                        {/* {index > 0 && (index + 1) % 2 == 0 &&
                                             <Card sx={{ minWidth: 250, mb: 2 }} elevation={2}>
                                                 <iframe
                                                     ref={iframeRef}
@@ -110,7 +110,7 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                                                     aria-hidden="false"
                                                 ></iframe>
                                             </Card>
-                                        }
+                                        } */}
 
                                         <Card key={index} sx={{ minWidth: 250, mb: 2 }} elevation={2}>
                                             <BoardCard allContents={contents} contents={value} setContents={setContents} />
