@@ -133,7 +133,7 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                         }
                     </>
                 }
-                    <Card sx={{ minWidth: 250, mb: 2 }} elevation={2}>
+                    {/* <Card sx={{ minWidth: 250, mb: 2 }} elevation={2}>
                         <iframe
                             ref={iframeRef}
                             src="/fam8/tag.html"
@@ -142,7 +142,7 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                             // style={{ padding: 5 }}
                             aria-hidden="false"
                         ></iframe>
-                    </Card>
+                    </Card> */}
                 </>
             }
         </Box>
