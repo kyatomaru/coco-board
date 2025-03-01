@@ -17,7 +17,7 @@ export default function TermsPage() {
                         利用規約
                     </Typography>
                     <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                        発行日: 2024年6月20日
+                        発行日: 2025年3月1日
                     </Typography>
                 </Box>
 
@@ -113,7 +113,7 @@ export default function TermsPage() {
                     <Box sx={{ py: 4 }}>
                         <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>12. お問い合わせ</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            プライバシーポリシーについてのご質問やご意見がある場合は、「cocoboard125@gmail.com」の連絡先までお問い合わせください
+                            利用規約についてのご質問やご意見がある場合は、「cocoboard125@gmail.com」の連絡先までお問い合わせください
                         </Typography>
                     </Box>
                 </Box>
