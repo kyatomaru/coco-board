@@ -211,6 +211,11 @@ const HeaderMenusButton = () => {
                         利用規約
                     </MenuItem>
                 </Link>
+                <Link target='_blank' href='/contact' underline="none" color="black">
+                    <MenuItem sx={{ fontSize: 14 }} disableRipple>
+                        お問い合わせ
+                    </MenuItem>
+                </Link>
                 <Divider />
                 <MenuItem sx={{ fontSize: 14 }} onClick={ClickLogoutButton} disableRipple>
                     ログアウト

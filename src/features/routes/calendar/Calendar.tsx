@@ -68,7 +68,9 @@ export default function Calendar({ user, selectedMonth, setSelectedMonth, conten
                                     backgroundColor: isToday(day) && mainLightColor,
                                 }}>
                                     <Box
-                                        onClick={(event) => { isAfter(new Date(), day) && router.push(`/home/${dayjs(String(day)).format('YYYY-MM-DD')}`) }}
+                                        onClick={(event) => {
+                                            !isAfter(day, new Date()) && router.push(`/home/${dayjs(String(day)).format('YYYY-MM-DD')}`)
+                                        }}
                                         sx={{
                                             display: 'flex',
                                             flexDirection: 'column',
@@ -77,9 +79,9 @@ export default function Calendar({ user, selectedMonth, setSelectedMonth, conten
                                             color: isSameMonth(day, selectedMonth) ? 'text.primary' : 'text.disabled',
                                             height: { xs: 70, md: 110 },
                                             px: '2px',
-                                            cursor: isAfter(new Date(), day) && "pointer",
+                                            cursor: !isAfter(day, new Date()) ? "pointer" : "default",
                                             '&:hover': {
-                                                bgcolor: isAfter(new Date(), day) && 'action.hover',
+                                                bgcolor: !isAfter(day, new Date()) && 'action.hover',
                                             },
                                             borderLeft: (index + 7) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',
                                             borderRight: (index + 1) % 7 == 0 && '1.5px solid rgba(0, 0, 0, 0.12)',

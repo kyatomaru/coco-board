@@ -49,13 +49,20 @@ type PageProps = {
 
 export default function CalendarHeader({ date, selectedMonth, setSelectedMonth }: PageProps) {
     const [openPicker, setOpenPicker] = React.useState(false);
+    // 現在の月の初日を取得
+    const currentMonth = startOfMonth(new Date());
 
     const previousMonth = () => {
         setSelectedMonth(subMonths(selectedMonth, 1));
     };
 
     const nextMonth = () => {
-        setSelectedMonth(addMonths(selectedMonth, 1));
+        // 選択された月の初日を取得
+        const nextMonthDate = startOfMonth(addMonths(selectedMonth, 1));
+        // 現在の月以降には進めないようにチェック
+        if (nextMonthDate <= currentMonth) {
+            setSelectedMonth(addMonths(selectedMonth, 1));
+        }
     };
 
     return (
@@ -82,25 +89,8 @@ export default function CalendarHeader({ date, selectedMonth, setSelectedMonth }
                 <IconButton size='large' onClick={previousMonth} sx={{ width: 30, height: 30 }}>
                     <ArrowLeftIcon />
                 </IconButton>
+
                 <Stack direction="row" alignItems="center">
-                    {/* <DatePicker
-                        views={['year', 'month']}
-                        timezone="ja"
-                        open={openPicker}
-                        openTo="month"
-                        value={selectedMonth}
-                        onMonthChange={(event) => setOpenPicker(false)}
-                        onChange={(newValue) => {
-                            setSelectedMonth(newValue);
-                        }}
-                        slots={{ textField: CustomTextField }}
-                    // slotProps={{ openPickerButton: { "", "", selectedDate, setOpenPicker } }}
-                    /> */}
-                    {/* <Button onClick={(event) => setOpenPicker(true)} >
-                        <Typography variant="h6" component="h2" fontSize={14}>
-                            {format(selectedMonth, 'yyyy年 M月')}
-                        </Typography>
-                    </Button> */}
                     <IconButton href={`/home/${dayjs(String(date)).format('YYYY-MM-DD')}`}>
                         <HomeIcon />
                     </IconButton>
@@ -109,7 +99,17 @@ export default function CalendarHeader({ date, selectedMonth, setSelectedMonth }
                     </Typography>
                 </Stack>
 
-                <IconButton size='large' onClick={nextMonth} sx={{ width: 30, height: 30 }}>
+                <IconButton
+                    size='large'
+                    onClick={nextMonth}
+                    sx={{
+                        width: 30,
+                        height: 30,
+                        // 現在の月以降の場合はボタンを無効化
+                        opacity: startOfMonth(addMonths(selectedMonth, 1)) > currentMonth ? 0.5 : 1,
+                        pointerEvents: startOfMonth(addMonths(selectedMonth, 1)) > currentMonth ? 'none' : 'auto'
+                    }}
+                >
                     <ArrowRightIcon />
                 </IconButton>
             </Stack>
