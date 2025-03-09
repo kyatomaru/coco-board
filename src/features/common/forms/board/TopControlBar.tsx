@@ -71,7 +71,7 @@ export default function TopControlBar({ onClose, frame, setFrame, setCurrentFram
         window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
 
         const el = document.getElementById("top-controlbar");
-        el.addEventListener("scroll", () => { setScrollX(el.scrollLeft) })
+        el?.addEventListener("scroll", () => { setScrollX(el.scrollLeft) })
     })
 
     const resetBoard = () => {
