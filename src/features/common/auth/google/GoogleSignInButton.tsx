@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { createButton } from "react-social-login-buttons";
-import { signInWithRedirect, GoogleAuthProvider, getAdditionalUserInfo, getRedirectResult } from "firebase/auth"
+import { signInWithPopup, GoogleAuthProvider, getAdditionalUserInfo } from "firebase/auth"
 import { auth } from "@/app/firebase"
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -43,28 +43,6 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
     const router = useRouter()
     const [error, setError] = React.useState(false)
 
-    // コンポーネントマウント時にリダイレクト結果をチェック
-    React.useEffect(() => {
-        const handleRedirectResult = async () => {
-            try {
-                const result = await getRedirectResult(auth);
-                if (result) {
-                    setIsLoading(true);
-                    if (getAdditionalUserInfo(result)?.isNewUser) {
-                        localStorage.setItem('isNewUser', "true");
-                        localStorage.setItem('isNewCreateBoard', "true");
-                    }
-                    router.push("/home");
-                }
-            } catch (error) {
-                console.error(error);
-                setError(true);
-            }
-        };
-
-        handleRedirectResult();
-    }, []);
-
     const GoogleSignIn = async () => {
         const GoogleProvider = new GoogleAuthProvider();
         GoogleProvider.setCustomParameters({
@@ -72,9 +50,13 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
         });
 
         try {
-            await signInWithRedirect(auth, GoogleProvider);
-            // リダイレクト後、ページがリロードされ
-            // 認証結果は useEffect 内の handleRedirectResult で処理される
+            const res = await signInWithPopup(auth, GoogleProvider);
+            setIsLoading(true);
+            if (getAdditionalUserInfo(res)?.isNewUser) {
+                localStorage.setItem('isNewUser', "true");
+                localStorage.setItem('isNewCreateBoard', "true");
+            }
+            router.push("/home");
         } catch (error) {
             console.error(error);
             setError(true);
