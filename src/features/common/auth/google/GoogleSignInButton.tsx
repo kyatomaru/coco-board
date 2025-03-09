@@ -60,7 +60,7 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
                 router.push("/home")
             }).catch((error) => {
                 console.log(error)
-                setError(error)
+                setError(error.message)
                 const errorCode = error.code;
                 const errorMessage = error.message;
             });
@@ -76,7 +76,7 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
             </Button>
 
             <Typography variant="body1" sx={{ fontSize: 12, color: "red" }}>
-                {error}
+                {String(error)}
             </Typography>
         </Box>
     );
