@@ -60,18 +60,25 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
                 router.push("/home")
             }).catch((error) => {
                 console.log(error)
+                setError(error)
                 const errorCode = error.code;
                 const errorMessage = error.message;
             });
     }
 
     return (
-        <Button onClick={() => { GoogleSignIn() }} style={loginBtnStyle}>
-            <span className="icon" style={{ marginRight: "10px" }}><Icon /></span>
-            <Typography variant="body1" sx={{ fontSize: 14, fontWeight: 600, color: "#7F7F7F", textTransform: "capitalize" }}>
-                Googleでログイン
+        <Box>
+            <Button onClick={() => { GoogleSignIn() }} style={loginBtnStyle}>
+                <span className="icon" style={{ marginRight: "10px" }}><Icon /></span>
+                <Typography variant="body1" sx={{ fontSize: 14, fontWeight: 600, color: "#7F7F7F", textTransform: "capitalize" }}>
+                    Googleでログイン
+                </Typography>
+            </Button>
+
+            <Typography variant="body1" sx={{ fontSize: 12, color: "red" }}>
+                {error}
             </Typography>
-        </Button>
+        </Box>
     );
 }
 
