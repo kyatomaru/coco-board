@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { createButton } from "react-social-login-buttons";
-import { signInWithRedirect, signInWithPopup, GoogleAuthProvider, getAdditionalUserInfo, getRedirectResult } from "firebase/auth"
+import { signInWithRedirect, GoogleAuthProvider, getAdditionalUserInfo, getRedirectResult } from "firebase/auth"
 import { auth } from "@/app/firebase"
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -72,29 +72,12 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
         });
 
         try {
-            // まずポップアップでログインを試みる
-            const res = await signInWithPopup(auth, GoogleProvider);
-            setIsLoading(true);
-            if (getAdditionalUserInfo(res)?.isNewUser) {
-                localStorage.setItem('isNewUser', "true");
-                localStorage.setItem('isNewCreateBoard', "true");
-            }
-            router.push("/home");
-        } catch (error: any) {
-            // ポップアップが閉じられた場合やブロックされた場合、リダイレクト認証を試みる
-            if (error.code === 'auth/popup-closed-by-user' || error.code === 'auth/popup-blocked') {
-                try {
-                    await signInWithRedirect(auth, GoogleProvider);
-                    // リダイレクト後、ページがリロードされるため
-                    // 認証結果は useEffect 内の handleRedirectResult で処理される
-                } catch (redirectError) {
-                    console.error(redirectError);
-                    setError(true);
-                }
-            } else {
-                console.error(error);
-                setError(true);
-            }
+            await signInWithRedirect(auth, GoogleProvider);
+            // リダイレクト後、ページがリロードされ
+            // 認証結果は useEffect 内の handleRedirectResult で処理される
+        } catch (error) {
+            console.error(error);
+            setError(true);
         }
     }
 
