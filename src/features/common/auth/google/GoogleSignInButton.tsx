@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { createButton } from "react-social-login-buttons";
-import { signInWithRedirect, signInWithPopup, GoogleAuthProvider, getAdditionalUserInfo } from "firebase/auth"
+import { signInWithRedirect, signInWithPopup, GoogleAuthProvider, getAdditionalUserInfo, getRedirectResult } from "firebase/auth"
 import { auth } from "@/app/firebase"
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -41,29 +41,61 @@ const loginBtnStyle = {
 
 export default function GoogleSignInButton({ setIsLoading }: PageProps) {
     const router = useRouter()
-    const [error, setError] = React.useState(undefined)
+    const [error, setError] = React.useState(false)
+
+    // コンポーネントマウント時にリダイレクト結果をチェック
+    React.useEffect(() => {
+        const handleRedirectResult = async () => {
+            try {
+                const result = await getRedirectResult(auth);
+                if (result) {
+                    setIsLoading(true);
+                    if (getAdditionalUserInfo(result)?.isNewUser) {
+                        localStorage.setItem('isNewUser', "true");
+                        localStorage.setItem('isNewCreateBoard', "true");
+                    }
+                    router.push("/home");
+                }
+            } catch (error) {
+                console.error(error);
+                setError(true);
+            }
+        };
+
+        handleRedirectResult();
+    }, []);
 
     const GoogleSignIn = async () => {
-
         const GoogleProvider = new GoogleAuthProvider();
         GoogleProvider.setCustomParameters({
             prompt: "select_account"
         });
 
-        await signInWithPopup(auth, GoogleProvider)
-            .then((res) => {
-                setIsLoading(true)
-                if (getAdditionalUserInfo(res)?.isNewUser) {
-                    localStorage.setItem('isNewUser', "true")
-                    localStorage.setItem('isNewCreateBoard', "true")
+        try {
+            // まずポップアップでログインを試みる
+            const res = await signInWithPopup(auth, GoogleProvider);
+            setIsLoading(true);
+            if (getAdditionalUserInfo(res)?.isNewUser) {
+                localStorage.setItem('isNewUser', "true");
+                localStorage.setItem('isNewCreateBoard', "true");
+            }
+            router.push("/home");
+        } catch (error: any) {
+            // ポップアップが閉じられた場合やブロックされた場合、リダイレクト認証を試みる
+            if (error.code === 'auth/popup-closed-by-user' || error.code === 'auth/popup-blocked') {
+                try {
+                    await signInWithRedirect(auth, GoogleProvider);
+                    // リダイレクト後、ページがリロードされるため
+                    // 認証結果は useEffect 内の handleRedirectResult で処理される
+                } catch (redirectError) {
+                    console.error(redirectError);
+                    setError(true);
                 }
-                router.push("/home")
-            }).catch((error) => {
-                console.log(error)
-                setError(error.message)
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
+            } else {
+                console.error(error);
+                setError(true);
+            }
+        }
     }
 
     return (
@@ -75,9 +107,16 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
                 </Typography>
             </Button>
 
-            <Typography variant="body1" sx={{ fontSize: 12, color: "red" }}>
-                {String(error)}
-            </Typography>
+            {error &&
+                <Box sx={{ mb: "5px" }}>
+                    <Typography variant="body1" sx={{ fontSize: 12, color: "red" }}>
+                        ログインに失敗しました。
+                    </Typography>
+                    <Typography variant="body1" sx={{ fontSize: 12, color: "red" }}>
+                        ブラウザをリロードして再度ログインしてください。
+                    </Typography>
+                </Box>
+            }
         </Box>
     );
 }
