@@ -3,6 +3,8 @@ export interface SettingType {
     isSeeNumber: boolean,
     isSeePosition: boolean,
     isSeeName: boolean,
+    teamSize?: number,
+    formation?: Array<number>
 }
 
 export const PlayerColor = [
@@ -15,6 +17,8 @@ export class SettingModel implements SettingType {
     isSeeNumber: boolean
     isSeePosition: boolean
     isSeeName: boolean
+    teamSize?: number
+    formation?: Array<number>
 
     constructor() {
         return {
@@ -22,6 +26,8 @@ export class SettingModel implements SettingType {
             isSeeNumber: true,
             isSeePosition: false,
             isSeeName: true,
+            teamSize: 11,
+            formation: [0, 0]
         }
     }
 }

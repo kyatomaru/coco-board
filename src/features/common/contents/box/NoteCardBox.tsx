@@ -88,7 +88,7 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                                     まだ記録がありません。次の勝利のために、今すぐ記録を残しましょう。
                                 </Typography>
                                 <Box sx={{ mt: 2 }}>
-                                    <Button onClick={(event) => setMenu(1)}>記録する</Button>
+                                    <Button onClick={(event) => setMenu(1)} sx={{ fontWeight: "bolder" }}>記録する</Button>
                                 </Box>
                             </Box>
                         }

@@ -164,8 +164,10 @@ export default function CourtView({ board, onClose, onSubmit, frame, setFrame, c
 
     const Players = () => {
         const players = []
+
         frame[currentFrame].players.map((value, index) => {
-            players.push(<Player board={board} beforeCourtId={beforeCourtId} courtWidth={courtWidth} courtHeight={courtHeight} verticalWidth={verticalWidth} verticalHeight={verticalHeight} besideWidth={besideWidth} besideHeight={besideHeight} isPlay={isPlay} key={index} index={index} frame={isPlay ? playFrame : frame} setFrame={setFrame} currentFrame={isPlay ? playCurrentFrame : currentFrame} selectItem={selectItem} setSelectItem={setSelectItem} setMenu={setMenu} tutorialId={tutorialId} setTutorialId={setTutorialId} />
+            players.push(
+                <Player board={board} beforeCourtId={beforeCourtId} courtWidth={courtWidth} courtHeight={courtHeight} verticalWidth={verticalWidth} verticalHeight={verticalHeight} besideWidth={besideWidth} besideHeight={besideHeight} isPlay={isPlay} key={index} index={index} frame={isPlay ? playFrame : frame} setFrame={setFrame} currentFrame={isPlay ? playCurrentFrame : currentFrame} selectItem={selectItem} setSelectItem={setSelectItem} setMenu={setMenu} tutorialId={tutorialId} setTutorialId={setTutorialId} />
             )
         })
         return players

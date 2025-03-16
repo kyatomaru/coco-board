@@ -5,7 +5,7 @@ export const useDateFormat = (date: String) => {
 
     const thisYear = dayjs(String(new Date)).format('YYYY');
     const recordYear = dayjs(String(date)).format('YYYY');
-    const recordDay = `(${day[Number(dayjs(String(date)).format('d'))]})`
+    const recordDay = `（${day[Number(dayjs(String(date)).format('d'))]}）`
 
     const recodeDate = dayjs(String(date)).format('YYYY/M/DD')
     const thisToday = dayjs(String(new Date())).format('YYYY/M/DD')
@@ -17,9 +17,9 @@ export const useDateFormat = (date: String) => {
     if (thisTomorrowday == recodeDate) return "明日 " + recordDay
 
     if (thisYear == recordYear) {
-        return dayjs(String(date)).format('M/D ') + recordDay;
+        return dayjs(String(date)).format('M/D') + recordDay;
     }
     else {
-        return dayjs(String(date)).format('YYYY/M/D ') + recordDay;
+        return dayjs(String(date)).format('YYYY/M/D') + recordDay;
     }
 }

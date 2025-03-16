@@ -46,7 +46,7 @@ export default function AddItemBox({ frame, setFrame, board, tutorialId, setTuto
         for (let index = 0; index < frameArray[0].players.length; index++) {
             if (team == frameArray[0].players[index].teamNumber) teamLength++;
         }
-        const name = "player" + String(frameArray[0].players.length + 1)
+        const name = "player" + String(teamLength + 1)
 
         frameArray.forEach((item) => {
             if (teamLength <= 10) {
