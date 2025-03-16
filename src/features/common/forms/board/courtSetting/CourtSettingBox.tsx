@@ -12,7 +12,6 @@ import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { PositionList } from '@/constants/board/PositionList';
-import { FormationList } from '@/constants/board/FormationList';
 import { TeamArray } from '@/constants/board/TeamArray';
 import { MuiColorInput } from 'mui-color-input'
 import { PlayerColor } from '@/types/board/Setting';
@@ -32,7 +31,7 @@ export default function CourtSettingBox({ frame, setFrame, board, setMenu }: Pag
 
         for (let index = 0; index < 3; index++) {
             menuItem.push((
-                <Button onClick={(event) => { changeCourt(event, index) }} key={index} sx={{ height: "120px", border: thisCourtId == index && "3px solid #1976d2", p: 0.5 }}>
+                <Button onClick={(event) => { changeCourt(event, index) }} key={index} sx={{ height: "120px", border: thisCourtId == index ? "3px solid #1976d2" : "3px solid white", p: 0.5 }}>
                     <img src={`/images/board/court${index + 1}.jpg`} style={{ height: "100%", }} />
                 </Button>
 
@@ -53,8 +52,8 @@ export default function CourtSettingBox({ frame, setFrame, board, setMenu }: Pag
     return (
         <Box sx={{ overflowY: "auto", position: "absolute", zIndex: 2000, backgroundColor: "white", borderRight: "0.5px #666 solid", borderBottom: "0.5px #666 solid" }}>
             <Box >
-                <Stack height="25px" direction="row" justifyContent="flex-end" sx={{ mx: 1 }} >
-                    <Button size="small" onClick={() => submitCourt()}>
+                <Stack direction="row" justifyContent="flex-end" sx={{ mx: 1, py: 1 }} >
+                    <Button onClick={() => submitCourt()} size="small" sx={{ height: "25px", fontWeight: "bolder" }}>
                         変更
                     </Button>
                 </Stack>

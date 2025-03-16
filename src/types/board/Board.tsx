@@ -2,11 +2,11 @@ import { FrameType } from "./Frame"
 import { SettingType, SettingModel } from "./Setting"
 
 export interface BoardType {
-    contentsId: String,
+    contentsId: string,
     createDate: Date,
     updateDate: Date,
     uid: string,
-    date: String,
+    date: string,
     title: string,
     comment: string,
     courtId: number,
@@ -15,11 +15,11 @@ export interface BoardType {
 }
 
 export class BoardModel implements BoardType {
-    contentsId: String
+    contentsId: string
     createDate: Date
     updateDate: Date
     uid: string
-    date: String
+    date: string
     title: string
     comment: string
     courtId: number

@@ -1,4 +1,4 @@
-export const FormationList = (width, height) => {
+export const FormationList11 = (width, height) => {
     return [
         {
             name: "4-4-2",

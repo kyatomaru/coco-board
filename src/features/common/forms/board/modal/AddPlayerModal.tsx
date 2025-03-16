@@ -42,7 +42,7 @@ export default function AddPlayerModal({ open, setOpen, AddPlayer }: PageProps) 
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Paper sx={style} >
+            <Paper sx={style}>
                 <Box sx={{ textAlign: "center", p: 2 }}>
                     <Typography variant="h4" sx={{ fontSize: 15 }}>
                         プレイヤーの追加

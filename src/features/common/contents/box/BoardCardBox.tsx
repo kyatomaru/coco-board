@@ -127,7 +127,7 @@ export default function BoardCardBox({ user, contents, setContents, date, menu, 
                                     まだ記録がありません。次の勝利のために、今すぐ記録を残しましょう。
                                 </Typography>
                                 <Box sx={{ mt: 2 }}>
-                                    <Button onClick={(event) => setMenu(0)}>記録する</Button>
+                                    <Button onClick={(event) => setMenu(0)} sx={{ fontWeight: "bolder" }}>記録する</Button>
                                 </Box>
                             </Box>
                         }
