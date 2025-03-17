@@ -44,10 +44,12 @@ type PageProps = {
     date: any
     selectedMonth: any
     setSelectedMonth: any
+    displayMenu: any
+    setDisplayMenu: any
 }
 
 
-export default function CalendarHeader({ date, selectedMonth, setSelectedMonth }: PageProps) {
+export default function CalendarHeader({ date, selectedMonth, setSelectedMonth, displayMenu, setDisplayMenu }: PageProps) {
     const [openPicker, setOpenPicker] = React.useState(false);
     // 現在の月の初日を取得
     const currentMonth = startOfMonth(new Date());
@@ -113,6 +115,10 @@ export default function CalendarHeader({ date, selectedMonth, setSelectedMonth }
                     <ArrowRightIcon />
                 </IconButton>
             </Stack>
+            <StyledTabs value={displayMenu} sx={{ mx: "auto" }} onChange={(event, newValue) => { setDisplayMenu(newValue) }}>
+                <StyledTab label="ボード" sx={{ height: 32, m: "auto", fontSize: 12, fontWeight: 600 }} />
+                <StyledTab label="ノート" sx={{ height: 32, m: "auto", fontSize: 12, fontWeight: 600 }} />
+            </StyledTabs>
         </AppBar>
     );
 }

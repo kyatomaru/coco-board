@@ -206,6 +206,9 @@ export default function PlayersSaveView({ isView, setPutDisabled, viewWidth, ver
                                         '-webkit-text-fill-color': "black"
                                     }
                                 }}
+                                inputProps={{
+                                    style: { fontSize: 14 }
+                                }}
                                 disabled
                             />
                             <TextField
@@ -216,6 +219,9 @@ export default function PlayersSaveView({ isView, setPutDisabled, viewWidth, ver
                                     '& .Mui-disabled': {
                                         '-webkit-text-fill-color': "black"
                                     }
+                                }}
+                                inputProps={{
+                                    style: { fontSize: 14 }
                                 }}
                                 disabled
                             />

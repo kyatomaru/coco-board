@@ -22,7 +22,7 @@ export default function Home(props) {
   const router = useRouter()
   const [user, setUser] = React.useState<User | undefined>(null);
   const [selectedMonth, setSelectedMonth] = React.useState(new Date());
-  const [pageMenu, setPageMenu] = React.useState(0);
+  const [displayMenu, setDisplayMenu] = React.useState(0);
 
   const [boardContents, getBoardContents] = useGetBoard(user)
   const [noteContents, getNoteContents] = useGetNote(user)
@@ -43,16 +43,15 @@ export default function Home(props) {
       <LoadingPage />
       {user !== null &&
         <>
-          <CalendarHeader date={new Date()} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
+          <CalendarHeader date={new Date()} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
           <LeftBar />
-          <Container maxWidth="md" sx={{ mt: { xs: "96px", md: "65px" }, mb: { xs: "50px", sm: "75px" }, px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
-            {pageMenu == 0 ?
+          <Container maxWidth="md" sx={{ mt: { xs: "126px", md: "95px" }, mb: { xs: "50px", sm: "75px" }, px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
+            {displayMenu == 0 ?
               <NoteCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={boardContents} />
               :
               <BoardCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={noteContents} />
             }
           </Container >
-          <CalendarFooter selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} pageMenu={pageMenu} setPageMenu={setPageMenu} />
         </>
       }
     </main >
