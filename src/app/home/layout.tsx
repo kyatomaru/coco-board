@@ -20,7 +20,6 @@ export default function RootLayout({
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" strategy='afterInteractive' />
       <Script src='https://fam-8.net/ad/js/fam8-tagify.min.js' strategy='afterInteractive' />
       <body className={inter.className} style={{ overscrollBehaviorY: "none", overflow: "hidden", position: "relative", height: "85vh" }}>
-
         {children}
       </body>
     </html >
