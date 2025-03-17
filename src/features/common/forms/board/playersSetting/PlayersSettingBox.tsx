@@ -385,7 +385,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
     }
 
     return (
-        <Box sx={{ height: verticalHeight + 27 + "px", position: "absolute", zIndex: 2000 }} id="teamSettingBox">
+        <Box sx={{ height: verticalHeight + 28 + "px", position: "absolute", zIndex: 2000 }} id="teamSettingBox">
             <Box sx={{ backgroundColor: "white", borderRight: "0.5px #666 solid", "-webkit-overflow-scrolling": "touch", overflowY: "scroll", height: "100%" }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <StyledTabs value={team} onChange={changeTeam}>
