@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import LoadingPage from '@/components/common/AuthLoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
+import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import NoteCalendar from '@/features/routes/calendar/Calendar';
 import BoardCalendar from '@/features/routes/calendar/Calendar';
@@ -45,13 +45,15 @@ export default function Home(props) {
         <>
           <CalendarHeader date={new Date()} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} />
           <LeftBar />
-          <Container maxWidth="md" sx={{ mt: { xs: "126px", md: "95px" }, mb: { xs: "50px", sm: "75px" }, px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
-            {displayMenu == 0 ?
-              <NoteCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={boardContents} />
-              :
-              <BoardCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={noteContents} />
-            }
-          </Container >
+          <Box sx={{ background: "white", overflowY: "scroll", position: "fixed", zIndex: 1000, width: "100%", height: "100vh" }}>
+            <Container maxWidth="md" sx={{ mt: { xs: "150px", md: "100px" }, mb: "10px", px: 0, pl: { md: "120px", lg: "250px" }, position: "relative" }}>
+              {displayMenu == 0 ?
+                <NoteCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={boardContents} />
+                :
+                <BoardCalendar user={user} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} contents={noteContents} />
+              }
+            </Container >
+          </Box>
         </>
       }
     </main >
