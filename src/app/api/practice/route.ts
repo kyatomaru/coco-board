@@ -1,13 +1,10 @@
 import { db } from '@/app/firebase-admin';
-// import { db } from '@/app/firebase';
+import { storage } from '@/app/firebase';
 import { FieldValue } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { NextRequest, NextResponse } from 'next/server';
+import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 
-
-type Data = {
-    data: Object
-}
 
 const COLLECTION_NAME = 'practice';
 
@@ -26,7 +23,7 @@ export async function GET(
                 snapshot.forEach((doc) => {
                     const ob = doc.data()
                     ob.contentsId = doc.id
-                    ob.collection = "practice"
+                    ob.collection = COLLECTION_NAME
                     data.push(ob)
                 })
                 return data
@@ -59,7 +56,7 @@ export async function GET(
                 snapshot.forEach((doc) => {
                     const ob = doc.data()
                     ob.contentsId = doc.id
-                    ob.collection = "practice"
+                    ob.collection = COLLECTION_NAME
                     data.push(ob)
                 })
                 return data
@@ -77,46 +74,105 @@ export async function PATCH(
     req: NextRequest,
     res: NextResponse
 ) {
-    const updateData = await req.json();
-    const contentsId = updateData.contentsId
+    try {
+        const formData = await req.formData();
+        const contentsJson = formData.get('contents') as string;
+        const updateData = JSON.parse(contentsJson);
 
-    if (updateData && contentsId) {
-        updateData.updateDate = new Date()
-        const docRef = await db.collection(COLLECTION_NAME).doc(contentsId).update(updateData)
-            .then(() => {
-                console.log("Document successfully updated!");
-            })
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
+        for (const imageUrl of updateData.images) {
+            // URLからファイルパスを抽出
+            const fileRef = ref(storage, imageUrl);
+            try {
+                await deleteObject(fileRef);
+            } catch (error) {
+                console.error('Error deleting image:', error);
+            }
+        }
+
+        // 画像のアップロード処理
+        const imageUrls: string[] = [];
+        for (let i = 0; formData.get(`image${i}`); i++) {
+            const file = formData.get(`image${i}`) as File;
+            const fileName = `${COLLECTION_NAME}/${updateData.uid}/${Date.now()}_${i}_${file.name}`;
+
+            // Firebase Storageにアップロード
+            const storageRef = ref(storage, fileName);
+            const fileBuffer = await file.arrayBuffer();
+            await uploadBytes(storageRef, new Uint8Array(fileBuffer));
+
+            // 公開URLを取得
+            const publicUrl = await getDownloadURL(storageRef);
+            imageUrls.push(publicUrl);
+        }
+
+        // 画像URLをinsertDataに追加
+        updateData.updateDate = new Date();
+        updateData.images = imageUrls;
+
+        if (updateData) {
+            updateData.updateDate = new Date()
+            const docRef = await db.collection(COLLECTION_NAME).doc(updateData.contentsId).update(updateData)
+                .then(() => {
+                    console.log("Document successfully updated!");
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+        }
+        return NextResponse.json(updateData, { status: 200 })
+    } catch (error) {
+        console.error('Error processing request:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
-
-    return NextResponse.json(updateData, { status: 200 })
 }
 
 export async function POST(
     req: NextRequest,
     res: NextResponse
 ) {
-    const insertData = await req.json();
+    try {
+        const formData = await req.formData();
+        const contentsJson = formData.get('contents') as string;
+        const insertData = JSON.parse(contentsJson);
 
-    insertData.createDate = new Date()
-    insertData.updateDate = new Date()
+        // 画像のアップロード処理
+        const imageUrls: string[] = [];
+        for (let i = 0; formData.get(`image${i}`); i++) {
+            const file = formData.get(`image${i}`) as File;
+            const fileName = `${COLLECTION_NAME}/${insertData.uid}/${Date.now()}_${i}_${file.name}`;
 
-    if (insertData) {
-        const docId = await db.collection(COLLECTION_NAME).add(insertData)
-            .then((res) => {
-                console.log("Document successfully created!");
-                return res.id
-            })
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
+            // Firebase Storageにアップロード
+            const storageRef = ref(storage, fileName);
+            const fileBuffer = await file.arrayBuffer();
+            await uploadBytes(storageRef, new Uint8Array(fileBuffer));
 
-        insertData.contentsId = docId
+            // 公開URLを取得
+            const publicUrl = await getDownloadURL(storageRef);
+            imageUrls.push(publicUrl);
+        }
+
+        insertData.createDate = new Date()
+        insertData.updateDate = new Date()
+        insertData.images = imageUrls;
+
+        if (insertData) {
+            const docId = await db.collection(COLLECTION_NAME).add(insertData)
+                .then((res) => {
+                    console.log("Document successfully created!");
+                    return res.id
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+
+            insertData.contentsId = docId
+        }
+
+        return NextResponse.json(insertData, { status: 200 })
+    } catch (error) {
+        console.error('Error processing request:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
-
-    return NextResponse.json(insertData, { status: 200 })
 }
 
 export async function DELETE(
@@ -125,7 +181,29 @@ export async function DELETE(
 ) {
     const contentsId = req.nextUrl.searchParams.get("contentsId")
     if (contentsId) {
-        await db.collection(COLLECTION_NAME).doc(contentsId).delete();
+        try {
+            // 1. ドキュメントから画像URLを取得
+            const doc = await db.collection(COLLECTION_NAME).doc(contentsId).get();
+            const data = doc.data();
+            const images = data?.images || [];
+
+            // 2. 画像を削除
+            for (const imageUrl of images) {
+                // URLからファイルパスを抽出
+                const fileRef = ref(storage, imageUrl);
+                try {
+                    await deleteObject(fileRef);
+                } catch (error) {
+                    console.error('Error deleting image:', error);
+                }
+            }
+
+            // 3. ドキュメントを削除
+            await db.collection(COLLECTION_NAME).doc(contentsId).delete();
+        } catch (error) {
+            console.error('Error deleting document:', error);
+            return NextResponse.json({ error: 'Delete failed' }, { status: 500 });
+        }
     }
-    return NextResponse.json({ status: 200 })
+    return NextResponse.json({ status: 200 });
 }

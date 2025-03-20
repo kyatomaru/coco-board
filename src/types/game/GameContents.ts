@@ -21,6 +21,7 @@ export interface GameContentsType {
     badPoints: Array<GameFeedbackType>,
     next: String,
     comment: String,
+    images?: string[]
 }
 
 export class GameContentsModel implements GameContentsType {
@@ -44,6 +45,7 @@ export class GameContentsModel implements GameContentsType {
     badPoints: Array<GameFeedbackType>
     next: String
     comment: String
+    images?: string[]
 
     constructor(date) {
         return {
@@ -66,7 +68,8 @@ export class GameContentsModel implements GameContentsType {
             goodPoints: [new GameFeedbackModel()],
             badPoints: [new GameFeedbackModel()],
             next: undefined,
-            comment: undefined
+            comment: undefined,
+            images: []
         }
     }
 }

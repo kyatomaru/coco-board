@@ -61,7 +61,7 @@ export default function NoteCardBox({ user, contents, setContents, date, menu, s
                         {isLoading &&
                             <Card sx={{ minWidth: 250, mb: 2 }} elevation={2}>
                                 <Typography sx={{ fontSize: 13, textAlign: "center", my: 1, color: "black" }} component="h2">
-                                    ボードを保存しています。
+                                    ノートを保存しています。
                                 </Typography>
                                 <LinearProgress />
                             </Card>

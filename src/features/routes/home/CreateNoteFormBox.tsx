@@ -42,10 +42,10 @@ export default function CreateNoteFormBox({ allContents, setContents, setIsLoadi
     const [practiceContents, setPracticeContents] = React.useState(new PracticeContentsModel(dayjs(String(date)).format('YYYY-MM-DD')));
 
 
-    const InsertGameContents = async (contents) => {
+    const InsertGameContents = async (contents, selectedFiles: File[]) => {
         setIsLoading(true)
         setMenu(-1)
-        await useInsertGame(contents).then((data) => {
+        await useInsertGame(contents, selectedFiles).then((data) => {
             const resultContents = allContents.slice()
             resultContents.unshift(data)
             console.log(resultContents)
@@ -54,10 +54,10 @@ export default function CreateNoteFormBox({ allContents, setContents, setIsLoadi
         })
     }
 
-    const InsertPracticeContents = async (contents) => {
+    const InsertPracticeContents = async (contents, selectedFiles: File[]) => {
         setIsLoading(true)
         setMenu(-1)
-        await useInsertPractice(contents).then((data) => {
+        await useInsertPractice(contents, selectedFiles).then((data) => {
             const resultContents = allContents.slice()
             resultContents.unshift(data)
             setContents([...resultContents])

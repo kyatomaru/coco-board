@@ -38,8 +38,7 @@ export default function NoteContentsBar({ title, contents, EditButtonClick, Dele
 
     return (
         <Box sx={{
-            position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 1900,
-            borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2",
+            position: 'sticky', top: 0, left: 0, right: 0, backgroundColor: "white", zIndex: 1900
         }} >
             <Stack sx={{ px: 1, height: "40px" }} direction="row" alignItems="center" justifyContent="center">
                 <Box sx={{ width: "100%" }}>

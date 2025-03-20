@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
 import { auth } from '@/app/firebase';
+import { storage } from '@/app/firebase';
+import { ref, getBlob } from "firebase/storage";
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
@@ -35,6 +37,9 @@ import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfi
 import ConfirmCloseModal from '../../contents/modal/ConfirmModal';
 import { backTitle, backMs } from '@/constants/ModalMessage'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { ImageSelectForm } from '../Input/ImageSelectForm';
+import { useGetGameImages } from '@/hooks/game/image/useGetGameImages';
 
 type pageProps = {
     contents: any,
@@ -50,19 +55,18 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
 
     const [onPosition, setOnPosition] = React.useState(contents.position != undefined)
     const [onCondition, setOnCondition] = React.useState(contents.condition > 0 || contents.fatigue > 0 || contents.injury != undefined)
+    const [isImagesLoading, setIsImagesLoading] = React.useState(false)
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        const uid = await auth.currentUser?.uid;
-        if (uid) {
-            contents.uid = uid
-            postData(contents)
+        if (!isImagesLoading) {
+            event.preventDefault()
+            const uid = await auth.currentUser?.uid;
+            if (uid) {
+                contents.uid = uid
+                postData(contents, selectedFiles)
+            }
         }
     }
-
-    React.useEffect(() => {
-
-    }, [contents])
 
     const [title, setTitle] = React.useState(contents.title);
     const [place, setPlace] = React.useState(contents.place);
@@ -79,6 +83,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
     const [badPoints, setBadPoints] = React.useState(contents.badPoints);
     const [next, setNext] = React.useState(contents.next);
     const [comment, setComment] = React.useState(contents.comment);
+    const [selectedFiles, setSelectedFiles] = useGetGameImages(contents.images ?? [], setIsImagesLoading)
 
     const ChangeGoodPointsContext = (newValue: String, index) => {
         const input = []
@@ -162,7 +167,6 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
         contents.badPoints = input
     }
 
-
     return (
         <>
             <ConfirmCloseModal open={isConfirmCloseModal} setOpen={setIsConfirmCloseModal} title={backTitle} message={backMs} confirmText="中止する" onSubmit={onClose} />
@@ -188,7 +192,7 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                             </Button>
                         </Grid>
                         <Grid>
-                            <Button size="small" sx={{ backgroundColor: "#2e7d32 !important" }} variant='filled' type='submit'>
+                            <Button size="small" sx={{ cursor: isImagesLoading && "pointer", backgroundColor: isImagesLoading ? "#aaa !important" : "#2e7d32 !important" }} variant='filled' type='submit'>
                                 <Typography fontSize={13} component="p">
                                     記録する
                                 </Typography>
@@ -436,9 +440,6 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
 
 
                     <Box sx={{ my: 3, px: 2 }}>
-                        {/* <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
-                            振り返り
-                        </Typography> */}
                         <Box sx={{ my: 2 }}>
                             <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ alignItems: "center", mb: 1 }}>
                                 <InputLabel sx={{ mx: 1, fontSize: 14, color: "#ff5e00", fontWeight: "bold" }}>良い点</InputLabel>
@@ -512,6 +513,20 @@ export default function GameForm({ contents, postData, onClose }: pageProps) {
                                 />
                             </FormControl>
                         </Box>
+                    </Box>
+
+                    <Divider />
+
+                    <Box sx={{ my: 3, px: 2 }}>
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }}>
+                            画像
+                        </Typography>
+                        <ImageSelectForm
+                            selectedFiles={selectedFiles}
+                            setSelectedFiles={setSelectedFiles}
+                            maxImages={5}
+                            isLoading={isImagesLoading}
+                        />
                     </Box>
 
                     <Divider />

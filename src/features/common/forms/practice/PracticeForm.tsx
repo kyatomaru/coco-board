@@ -26,6 +26,8 @@ import ConfirmCloseModal from '../../contents/modal/ConfirmModal';
 import { backTitle, backMs } from '@/constants/ModalMessage'
 import IconButton from '@mui/material/IconButton'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { ImageSelectForm } from '../Input/ImageSelectForm';
+import { useGetPracticeImages } from '@/hooks/practice/image/useGetPracticeImages';
 
 type pageProps = {
     contents: any,
@@ -38,13 +40,16 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
     const params = useParams()
     const [isConfirmCloseModal, setIsConfirmCloseModal] = React.useState<boolean>(false)
     const [waitFlag, setWaitFlag] = React.useState(false);
+    const [isImagesLoading, setIsImagesLoading] = React.useState(false)
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        const uid = await auth.currentUser?.uid;
-        if (uid) {
-            contents.uid = uid
-            postData(contents)
+        if (!isImagesLoading) {
+            event.preventDefault()
+            const uid = await auth.currentUser?.uid;
+            if (uid) {
+                contents.uid = uid
+                postData(contents, selectedFiles)
+            }
         }
     }
 
@@ -52,8 +57,11 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
     const [place, setPlace] = React.useState(contents.place);
     const [weather, setWeather] = React.useState(contents.weather);
     const [details, setDetails] = React.useState(contents.details);
+    const [goodPoints, setGoodPoints] = React.useState(contents.goodPoints ?? [new PracticeDetailsModel()]);
+    const [badPoints, setBadPoints] = React.useState(contents.badPoints ?? [new PracticeDetailsModel()]);
     const [next, setNext] = React.useState(contents.next);
     const [comment, setComment] = React.useState(contents.comment);
+    const [selectedFiles, setSelectedFiles] = useGetPracticeImages(contents.images ?? [], setIsImagesLoading)
 
     const AddDetails = () => {
         const input = []
@@ -96,6 +104,87 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
         contents.details = input
     }
 
+    const ChangeGoodPointsContext = (newValue: String, index) => {
+        const input = []
+        goodPoints.forEach((item) => {
+            input.push(item)
+        })
+        input[index].context = newValue
+        setGoodPoints(input)
+        contents.goodPoints = input
+    }
+
+    const ChangeGoodPointsType = (newValue: Number, index) => {
+        const input = []
+        goodPoints.forEach((item) => {
+            input.push(item)
+        })
+        input[index].type = newValue
+        setGoodPoints(input)
+        contents.goodPoints = input
+    }
+
+    const AddGoodPoints = () => {
+        const input = []
+        goodPoints.forEach((item) => {
+            input.push(item)
+        })
+        input.push(new PracticeDetailsModel())
+        setGoodPoints(input)
+        contents.goodPoints = input
+    }
+
+    const deleteGoodPoint = (index) => {
+        const input = []
+        goodPoints.map((item, itemIndex) => {
+            if (itemIndex != index) {
+                input.push(item)
+            }
+        })
+        setGoodPoints(input)
+        contents.goodPoints = input
+    }
+
+    const ChangeBadPointsContext = (newValue: String, index) => {
+        const input = []
+        badPoints.forEach((item) => {
+            input.push(item)
+        })
+        input[index].context = newValue
+        setBadPoints(input)
+        contents.badPoints = input
+    }
+
+    const ChangeBadPointsType = (newValue: Number, index) => {
+        const input = []
+        badPoints.forEach((item) => {
+            input.push(item)
+        })
+        input[index].type = newValue
+        setBadPoints(input)
+        contents.badPoints = input
+    }
+
+    const AddBadPoints = () => {
+        const input = []
+        badPoints.forEach((item) => {
+            input.push(item)
+        })
+        input.push(new PracticeDetailsModel())
+        setBadPoints(input)
+        contents.badPoints = input
+    }
+
+    const deleteBadPoint = (index) => {
+        const input = []
+        badPoints.map((item, itemIndex) => {
+            if (itemIndex != index) {
+                input.push(item)
+            }
+        })
+        setBadPoints(input)
+        contents.badPoints = input
+    }
 
     return (
         <>
@@ -122,7 +211,7 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                             </Button>
                         </Grid>
                         <Grid >
-                            <Button size="small" sx={{ backgroundColor: "#2e7d32 !important" }} variant='filled' type='submit'>
+                            <Button size="small" sx={{ cursor: isImagesLoading && "pointer", backgroundColor: isImagesLoading ? "#aaa !important" : "#2e7d32 !important" }} variant='filled' type='submit'>
                                 <Typography fontSize={13} component="p">
                                     記録する
                                 </Typography>
@@ -235,8 +324,65 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
 
                     <Divider />
 
-                    <Box sx={{ my: 3 }}>
-                        <Box sx={{ my: 2, px: 2 }}>
+                    <Box sx={{ my: 3, px: 2 }}>
+                        <Box sx={{ my: 2 }}>
+                            <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ alignItems: "center", mb: 1 }}>
+                                <InputLabel sx={{ mx: 1, fontSize: 14, color: "#ff5e00", fontWeight: "bold" }}>良い点</InputLabel>
+                                <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85 }} onClick={AddGoodPoints}>
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
+                                </Button>
+                            </Stack>
+                            {contents.goodPoints.map((input, index) => (
+                                <FormControl key={index} fullWidth sx={{ mb: 1, position: "relative" }}>
+                                    <OutlinedInput
+                                        multiline
+                                        minRows={2}
+                                        value={contents.goodPoints[index].context}
+                                        onChange={newValue => ChangeGoodPointsContext(newValue.target.value, index)}
+                                        sx={{ fontSize: 14 }}
+                                        placeholder={index == 0 && "良かったところや良かったプレーなど"}
+                                        startAdornment
+                                    />
+                                    {index != 0 && !contents.goodPoints[index].context &&
+                                        <IconButton onClick={() => deleteGoodPoint(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white !important" }}>
+                                            <HighlightOffIcon sx={{ width: "20px", height: "20px" }} />
+                                        </IconButton>
+                                    }
+                                </FormControl>
+                            ))}
+                        </Box>
+
+                        <Box sx={{ my: 2 }}>
+                            <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ alignItems: "center", mb: 1 }}>
+                                <InputLabel sx={{ mx: 1, fontSize: 14, color: "#007eff", fontWeight: "bold" }}>悪い点</InputLabel>
+                                <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85 }} onClick={AddBadPoints}>
+                                    <Typography fontSize={13} component="p">
+                                        追加
+                                    </Typography>
+                                </Button>
+                            </Stack>
+                            {contents.badPoints.map((input, index) => (
+                                <FormControl key={index} fullWidth sx={{ mb: 1 }}>
+                                    <OutlinedInput
+                                        multiline
+                                        minRows={2}
+                                        value={contents.badPoints[index].context}
+                                        onChange={newValue => ChangeBadPointsContext(newValue.target.value, index)}
+                                        sx={{ fontSize: 14 }}
+                                        placeholder={index == 0 && "悪かったところや悪かったプレーなど"}
+                                    />
+                                    {index != 0 && !contents.badPoints[index].context &&
+                                        <IconButton onClick={() => deleteBadPoint(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white !important" }}>
+                                            <HighlightOffIcon sx={{ width: "20px", height: "20px" }} />
+                                        </IconButton>
+                                    }
+                                </FormControl>
+                            ))}
+                        </Box>
+
+                        <Box sx={{ my: 2 }}>
                             <InputLabel sx={{ mb: 1, fontSize: 14, color: "#16b41e", fontWeight: "bold" }}>次に向けて</InputLabel>
                             <FormControl fullWidth sx={{ fontSize: 14 }} variant="outlined">
                                 <OutlinedInput
@@ -252,6 +398,20 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                                 />
                             </FormControl>
                         </Box>
+                    </Box>
+
+                    <Divider />
+
+                    <Box sx={{ my: 3, px: 2 }}>
+                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }}>
+                            画像
+                        </Typography>
+                        <ImageSelectForm
+                            selectedFiles={selectedFiles}
+                            setSelectedFiles={setSelectedFiles}
+                            maxImages={5}
+                            isLoading={isImagesLoading}
+                        />
                     </Box>
 
                     <Divider />

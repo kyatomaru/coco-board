@@ -20,18 +20,6 @@ import { BoardModel, BoardType } from '@/types/board/Board';
 import { FrameType } from '@/types/board/Frame';
 
 
-const containterStyle = {
-    // height: "auto",
-    // position: "absolute",
-    // zIndex: 90,
-    // top: "0",
-    borderRight: "solid 0.5px #b2b2b2",
-    borderLeft: "solid 0.5px #b2b2b2",
-    // bgcolor: "white",
-    // pb: "60px",
-    // minHeight: "100vh"
-}
-
 type pageProps = {
     setOpen: Function,
     board: BoardType,
@@ -134,6 +122,7 @@ export default function BoardInfoForm({ setOpen, board, onSubmit }: pageProps) {
                             <OutlinedInput
                                 sx={{ m: "0 !important", fontSize: 14, backgroundColor: "background.paper" }}
                                 multiline
+                                minRows={2}
                                 value={board.comment}
                                 onChange={newValue => {
                                     board.comment = newValue.target.value
