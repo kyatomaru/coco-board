@@ -91,9 +91,11 @@ export default function BoardCard({ allContents, contents, setContents }: PagePr
                                         <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                             コメント
                                         </Typography>
-                                        <Typography variant="body2" sx={{}}>
-                                            {String(contents.comment)}
-                                        </Typography>
+                                        {contents.comment &&
+                                            <Typography variant="body2">
+                                                {String(contents.comment)}
+                                            </Typography>
+                                        }
                                     </Box>
                                 </Stack>
                             </Box>

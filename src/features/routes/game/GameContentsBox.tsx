@@ -38,6 +38,9 @@ import { useUpdateGame } from '@/hooks/game/useUpdateGame';
 import GameForm from '@/features/common/forms/game/GameForm';
 import { LineShareButton, LineIcon } from "react-share";
 import { shareMessage } from '@/constants/ShareMessage';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import ImageGallery from '@/features/common/contents/imageViewer/ImageGallery';
 
 type PageProps = {
     user: any,
@@ -63,7 +66,6 @@ const DataFormat = (date: String) => {
     return useDateFormat(date)
 }
 
-
 export default function GameContentsBox({ user, contents, setContents }: PageProps) {
     const router = useRouter()
     const [isEditLoading, setIsEditLoading] = React.useState(false)
@@ -86,11 +88,11 @@ export default function GameContentsBox({ user, contents, setContents }: PagePro
         }
     }
 
-    const UpdateGameContents = async (contents) => {
+    const UpdateGameContents = async (contents, selectedFiles) => {
         setEditModalOpen(false)
         setIsEditLoading(true)
 
-        await useUpdateGame(contents).then((data) => {
+        await useUpdateGame(contents, selectedFiles).then((data) => {
             setContents(data)
             setIsEditLoading(false)
         })
@@ -343,6 +345,15 @@ export default function GameContentsBox({ user, contents, setContents }: PagePro
                         :
                         <Skeleton variant="rectangular" height={62} />
                     }
+
+                    {/* 画像 */}
+                    {contents != undefined && contents.images && contents.images.length > 0 &&
+                        <>
+                            <Divider />
+                            <ImageGallery images={contents.images.map(img => String(img).toString())} />
+                        </>
+                    }
+
 
                     {contents != undefined && contents.comment != undefined &&
                         <>

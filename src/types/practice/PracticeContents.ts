@@ -10,8 +10,11 @@ export interface PracticeContentsType {
     createDate: Date,
     contentsId: String,
     details: Array<PracticeDetailsType>,
+    goodPoints?: Array<PracticeDetailsType>,
+    badPoints?: Array<PracticeDetailsType>,
     next: String,
     comment: string,
+    images?: string[]
 }
 
 
@@ -20,6 +23,8 @@ export class PracticeContentsModel implements PracticeContentsType {
     updateDate: Date
     title: String
     details: Array<PracticeDetailsType>
+    goodPoints?: Array<PracticeDetailsType>
+    badPoints?: Array<PracticeDetailsType>
     uid: string
     weather: String
     place: String
@@ -27,6 +32,7 @@ export class PracticeContentsModel implements PracticeContentsType {
     contentsId: String
     next: String
     comment: string
+    images?: string[]
 
     constructor(date) {
         return {
@@ -39,8 +45,11 @@ export class PracticeContentsModel implements PracticeContentsType {
             details: [new PracticeDetailsModel()],
             weather: "",
             place: undefined,
+            goodPoints: [new PracticeDetailsModel()],
+            badPoints: [new PracticeDetailsModel()],
             next: undefined,
             comment: undefined,
+            images: []
         }
     }
 }

@@ -28,6 +28,7 @@ import PracticeForm from '@/features/common/forms/practice/PracticeForm';
 import { useUpdatePractice } from '@/hooks/practice/useUpdatePractice';
 import { LineShareButton, LineIcon } from "react-share";
 import { shareMessage } from '@/constants/ShareMessage';
+import ImageGallery from '@/features/common/contents/imageViewer/ImageGallery';
 
 type PageProps = {
     user: any,
@@ -75,11 +76,11 @@ export default function PracticeContentsBox({ user, contents, setContents }: Pag
         }
     }
 
-    const UpdatePracticeContents = async (contents) => {
+    const UpdatePracticeContents = async (contents, selectedFiles) => {
         setEditModalOpen(false)
         setIsEditLoading(true)
 
-        await useUpdatePractice(contents).then((data) => {
+        await useUpdatePractice(contents, selectedFiles).then((data) => {
             setContents(data)
             setIsEditLoading(false)
         })
@@ -195,6 +196,67 @@ export default function PracticeContentsBox({ user, contents, setContents }: Pag
 
                     {contents != undefined ?
                         <Box sx={{ px: 2, my: 2 }}>
+                            <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#ff5e00">
+                                良かったところ
+                            </Typography>
+                            {contents.goodPoints[0]?.context ?
+                                <List sx={{ px: 0, my: 1, py: 0 }}>
+                                    {contents.goodPoints.map((goodPoint, index) => (
+                                        <Box key={index}>
+                                            {
+                                                goodPoint.context != undefined &&
+                                                // <ListText primary={goodPoint.context} secondary={elementsCategories[Number(goodPoint.type)].title} />
+                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1, color: "black" }}>
+                                                    ・{goodPoint.context}
+                                                </Typography>
+                                            }
+                                        </Box>
+                                    ))
+                                    }
+                                </List >
+                                :
+                                <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14, color: "black" }}>
+                                    なし
+                                </Typography>
+                            }
+                        </Box>
+                        :
+                        <Skeleton variant="rectangular" height={62} />
+                    }
+
+
+                    {contents != undefined ?
+                        <Box sx={{ px: 2, my: 2 }}>
+                            <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#007eff">
+                                悪かった点
+                            </Typography>
+                            {contents.badPoints[0]?.context ?
+                                <List sx={{ px: 0, my: 1, py: 0 }}>
+                                    {contents.badPoints.map((badPoint, index) => (
+                                        <Box key={index}>
+                                            {
+                                                badPoint.context != undefined &&
+                                                // <ListText primary={badPoint.context} secondary={elementsCategories[Number(badPoint.type)].title} />
+                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1, color: "black" }}>
+                                                    ・{badPoint.context}
+                                                </Typography>
+                                            }
+                                        </Box>
+                                    ))
+                                    }
+                                </List >
+                                :
+                                <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14, color: "black" }}>
+                                    なし
+                                </Typography>
+                            }
+                        </Box>
+                        :
+                        <Skeleton variant="rectangular" height={62} />
+                    }
+
+                    {contents != undefined ?
+                        <Box sx={{ px: 2, my: 2 }}>
                             <Typography sx={{ fontSize: 14, mb: 1, fontWeight: "bold" }} color="#16b41e">
                                 次に向けて
                             </Typography>
@@ -212,10 +274,19 @@ export default function PracticeContentsBox({ user, contents, setContents }: Pag
                         <Skeleton variant="rectangular" height={62} />
                     }
 
-                    <Divider />
+
+
+                    {/* 画像 */}
+                    {contents != undefined && contents.images && contents.images.length > 0 &&
+                        <>
+                            <Divider />
+                            <ImageGallery images={contents.images.map(img => String(img).toString())} />
+                        </>
+                    }
 
                     {contents != undefined && contents.comment != undefined &&
                         <>
+                            <Divider />
                             <Box sx={{ px: 2, my: 1 }}>
                                 <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
                                     コメント
