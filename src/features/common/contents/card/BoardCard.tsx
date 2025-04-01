@@ -93,7 +93,18 @@ export default function BoardCard({ allContents, contents, setContents }: PagePr
                                         </Typography>
                                         {contents.comment &&
                                             <Typography variant="body2">
-                                                {String(contents.comment)}
+                                                {String(contents.comment).split('\n').map((line, index) => (
+                                                    <Typography
+                                                        key={index}
+                                                        variant="body2"
+                                                        sx={{
+                                                            fontSize: 14,
+                                                            color: "black"
+                                                        }}
+                                                    >
+                                                        {line}
+                                                    </Typography>
+                                                ))}
                                             </Typography>
                                         }
                                     </Box>

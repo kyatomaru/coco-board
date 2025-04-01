@@ -205,15 +205,23 @@ export default function PracticeContentsBox({ user, contents, setContents }: Pag
                                         <Box key={index}>
                                             {
                                                 goodPoint.context != undefined &&
-                                                // <ListText primary={goodPoint.context} secondary={elementsCategories[Number(goodPoint.type)].title} />
-                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1, color: "black" }}>
-                                                    ・{goodPoint.context}
-                                                </Typography>
+                                                goodPoint.context.split('\n').map((line, index) => (
+                                                    <Typography
+                                                        key={index}
+                                                        variant="body2"
+                                                        sx={{
+                                                            fontSize: 14,
+                                                            color: "black",
+                                                            ml: index === 0 ? 0 : 2
+                                                        }}
+                                                    >
+                                                        {index === 0 && "・"}{line}
+                                                    </Typography>
+                                                ))
                                             }
                                         </Box>
-                                    ))
-                                    }
-                                </List >
+                                    ))}
+                                </List>
                                 :
                                 <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14, color: "black" }}>
                                     なし
@@ -223,7 +231,6 @@ export default function PracticeContentsBox({ user, contents, setContents }: Pag
                         :
                         <Skeleton variant="rectangular" height={62} />
                     }
-
 
                     {contents != undefined ?
                         <Box sx={{ px: 2, my: 2 }}>
@@ -236,15 +243,23 @@ export default function PracticeContentsBox({ user, contents, setContents }: Pag
                                         <Box key={index}>
                                             {
                                                 badPoint.context != undefined &&
-                                                // <ListText primary={badPoint.context} secondary={elementsCategories[Number(badPoint.type)].title} />
-                                                <Typography variant="body2" sx={{ fontSize: 14, mb: 1, color: "black" }}>
-                                                    ・{badPoint.context}
-                                                </Typography>
+                                                badPoint.context.split('\n').map((line, index) => (
+                                                    <Typography
+                                                        key={index}
+                                                        variant="body2"
+                                                        sx={{
+                                                            fontSize: 14,
+                                                            color: "black",
+                                                            ml: index === 0 ? 0 : 2
+                                                        }}
+                                                    >
+                                                        {index === 0 && "・"}{line}
+                                                    </Typography>
+                                                ))
                                             }
                                         </Box>
-                                    ))
-                                    }
-                                </List >
+                                    ))}
+                                </List>
                                 :
                                 <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14, color: "black" }}>
                                     なし
@@ -262,7 +277,18 @@ export default function PracticeContentsBox({ user, contents, setContents }: Pag
                             </Typography>
                             {contents.next ?
                                 <Typography variant="body2" sx={{ fontSize: 14, color: "black" }}>
-                                    {contents.next}
+                                    {contents.next.split('\n').map((line, index) => (
+                                        <Typography
+                                            key={index}
+                                            variant="body2"
+                                            sx={{
+                                                fontSize: 14,
+                                                color: "black"
+                                            }}
+                                        >
+                                            {line}
+                                        </Typography>
+                                    ))}
                                 </Typography>
                                 :
                                 <Typography variant="body2" sx={{ px: 1, width: "100px", fontSize: 14, color: "black" }}>
@@ -292,7 +318,18 @@ export default function PracticeContentsBox({ user, contents, setContents }: Pag
                                     コメント
                                 </Typography>
                                 <Typography variant="body2" sx={{ pb: 1, color: "black" }}>
-                                    {contents.comment}
+                                    {contents.comment.split('\n').map((line, index) => (
+                                        <Typography
+                                            key={index}
+                                            variant="body2"
+                                            sx={{
+                                                fontSize: 14,
+                                                color: "black"
+                                            }}
+                                        >
+                                            {line}
+                                        </Typography>
+                                    ))}
                                 </Typography>
                             </Box>
                             <Divider />
