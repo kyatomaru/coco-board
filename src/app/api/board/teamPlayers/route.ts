@@ -4,6 +4,7 @@ import { FieldValue } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { NextRequest, NextResponse } from 'next/server';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { Timestamp } from 'firebase-admin/firestore';
 
 
 type Data = {
@@ -48,7 +49,7 @@ export async function PATCH(
     const contentsId = updateData.contentsId
 
     if (updateData && contentsId) {
-        updateData.updateDate = new Date()
+        updateData.updateDate = Timestamp.fromDate(new Date());
         const docRef = await db.collection(COLLECTION_NAME).doc(contentsId).update(updateData)
             .then((res) => {
                 console.log("Document successfully updated!");
@@ -67,8 +68,8 @@ export async function POST(
 ) {
     const insertData = await req.json()
 
-    insertData.createDate = new Date()
-    insertData.updateDate = new Date()
+    insertData.createDate = Timestamp.fromDate(new Date());
+    insertData.updateDate = Timestamp.fromDate(new Date());
 
     console.log(insertData)
 

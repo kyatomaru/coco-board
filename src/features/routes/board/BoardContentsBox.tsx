@@ -156,7 +156,10 @@ export default function BoardContentsBox({ user, contents, setContents }: pagePr
                 :
                 <Box>
                     {contents != undefined
-                        ? <NoteContentsBar title="ボード" contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
+                        ?
+                        <Box sx={{ borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }}>
+                            <NoteContentsBar title="ボード" contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
+                        </Box>
                         : <Skeleton variant="rectangular" height={30} />
                     }
                     {contents != undefined
@@ -198,7 +201,18 @@ export default function BoardContentsBox({ user, contents, setContents }: pagePr
                             {contents.comment != undefined &&
                                 <Box sx={{ px: 1, pb: 1 }}>
                                     <Typography variant="body2" sx={{ fontSize: 13, color: "black" }}>
-                                        {contents.comment}
+                                        {contents.comment.split('\n').map((line, index) => (
+                                            <Typography
+                                                key={index}
+                                                variant="body2"
+                                                sx={{
+                                                    fontSize: 14,
+                                                    color: "black"
+                                                }}
+                                            >
+                                                {line}
+                                            </Typography>
+                                        ))}
                                     </Typography>
                                 </Box>
                             }
