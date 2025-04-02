@@ -9,65 +9,90 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
+import IosShareIcon from '@mui/icons-material/IosShare';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
 const style = {
     position: 'absolute' as 'absolute',
-    top: '50%',
+    bottom: 0,
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
     boxShadow: 24,
     minWidth: 320,
     width: "400px",
     maxWidth: '100%',
-    zIndex: 2000,
+    zIndex: 1000,
     outline: "none",
 };
 
-export default function WelcomeModal() {
+export default function HomePageGuideModal() {
     const [open, setOpen] = React.useState(false)
     const [isDetailPage, setIsDetailPage] = React.useState(false)
 
+    React.useEffect(() => {
+        // ローカルストレージをチェック
+        const hideGuide = localStorage.getItem('hideHomePageGuide')
+        if (!hideGuide) {
+            setOpen(true)
+        }
+    }, [])
+
+    const handleHideGuide = () => {
+        // ローカルストレージに保存
+        localStorage.setItem('hideHomePageGuide', 'true')
+        setOpen(false)
+    }
+
     return (
         <>
-            {!isDetailPage ?
-                <Modal open={open} onClose={() => { }} >
-                    <Paper sx={style}>
-
+            {open && (
+                !isDetailPage ? (
+                    <Paper sx={{ backgroundColor: "black", color: "#2e7d32!important", ...style }}>
                         <Box>
                             <Box sx={{ textAlign: "center", p: 2 }}>
-                                <Typography variant="body1" sx={{ color: "black", fontSize: 15, py: 1 }}>
-                                    スマートフォンでご利用の場合は
+                                <Typography variant="body1" sx={{ fontSize: 15, py: 1, fontWeight: "bold" }}>
+                                    スマートフォンでご利用の場合は<br />
                                     アプリをホームスクリーンに追加することができます。
                                 </Typography>
                             </Box>
                             <Divider />
-                            <Stack direction="row" justifyContent="flex-end">
+                            <Stack direction="row" justifyContent="space-between" sx={{ px: 2 }}>
                                 <Button onClick={() => setIsDetailPage(true)}>
-                                    <Typography variant="button" sx={{ mx: "auto", fontWeight: "bold" }} >詳細</Typography>
+                                    <Typography variant="button" sx={{ fontWeight: "bold" }}>詳細</Typography>
                                 </Button>
                             </Stack>
                         </Box>
-
                     </Paper>
-                </Modal>
-                :
-                <Box>
-                    <Box sx={{ textAlign: "center", p: 2 }}>
-                        <Typography variant="body1" sx={{ color: "black", fontSize: 15, py: 1 }}>
-                            スマートフォンでご利用の場合は
-                            アプリをホームスクリーンに追加することができます。
-                        </Typography>
-                    </Box>
-                    <Divider />
-                    <Stack direction="row" justifyContent="flex-end">
-                        <Button onClick={() => setIsDetailPage(true)}>
-                            <Typography variant="button" sx={{ mx: "auto", fontWeight: "bold" }} >詳細</Typography>
-                        </Button>
-                    </Stack>
-                </Box>
-            }
+                ) : (
+                    <Modal open={open} onClose={() => setOpen(false)}>
+                        <Paper sx={style}>
+                            <Box sx={{ textAlign: "center", p: 3 }}>
+                                <Typography variant="body1" sx={{ color: "black", fontSize: 16, pb: 4 }}>
+                                    スマートフォン / タブレットでご利用の方は
+                                    <br />
+                                    以下の方法でcoco-boardをホーム画面に追加できます！
+                                </Typography>
+                                <Typography variant="body1" sx={{ color: "black", fontSize: 14, pb: 1 }}>
+                                    iOS:「{<IosShareIcon />}」から「ホーム画面に追加」
+                                </Typography>
+                                <Typography variant="body1" sx={{ color: "black", fontSize: 14, pb: 1 }}>
+                                    Android:「{<MoreVertIcon />}」から「ホーム画面に追加」
+                                </Typography>
+                            </Box>
+                            <Divider />
+                            <Stack direction="row" justifyContent="space-between" sx={{ px: 2 }}>
+                                <Button onClick={() => handleHideGuide()}>
+                                    <Typography variant="button" sx={{ mx: "auto", fontWeight: "bold" }}>今後表示しない</Typography>
+                                </Button>
+                                <Button onClick={() => setIsDetailPage(false)}>
+                                    <Typography variant="button" sx={{ mx: "auto", fontWeight: "bold" }}>閉じる</Typography>
+                                </Button>
+                            </Stack>
+                        </Paper>
+                    </Modal>
+                )
+            )}
         </>
     )
 }
