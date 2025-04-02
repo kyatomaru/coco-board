@@ -15,7 +15,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const style = {
     position: 'absolute' as 'absolute',
-    bottom: 0,
     left: '50%',
     transform: 'translate(-50%, -50%)',
     boxShadow: 24,
