@@ -65,7 +65,7 @@ export default function HomePageGuideModal() {
                     </Paper>
                 ) : (
                     <Modal open={open} onClose={() => setOpen(false)}>
-                        <Paper sx={style}>
+                        <Paper sx={{ top: '50%', ...style }}>
                             <Box sx={{ textAlign: "center", p: 3 }}>
                                 <Typography variant="body1" sx={{ color: "black", fontSize: 16, pb: 4 }}>
                                     スマートフォン / タブレットでご利用の方は
