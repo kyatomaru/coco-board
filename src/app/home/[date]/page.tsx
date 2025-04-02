@@ -19,6 +19,7 @@ import { useGetNote } from '@/hooks/note/useGetDateNote';
 import { useGetBoard } from '@/hooks/board/useGetDateBoard';
 import WelcomeModal from '@/features/routes/home/welcomeModal/WelcomeModal';
 import dayjs from 'dayjs';
+import HomePageGuideModal from '@/features/routes/home/homePageGuideModal/HomePageGuideModal';
 
 export default function Home() {
   const router = useRouter()
@@ -67,6 +68,7 @@ export default function Home() {
                 </Box>
               }
             </Container>
+            <HomePageGuideModal />
           </Box>
         </>
       }
