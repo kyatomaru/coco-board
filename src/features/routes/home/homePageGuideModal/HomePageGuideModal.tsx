@@ -15,7 +15,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const style = {
     position: 'absolute' as 'absolute',
-    bottom: 0,
     left: '50%',
     transform: 'translate(-50%, -50%)',
     boxShadow: 24,
@@ -48,7 +47,7 @@ export default function HomePageGuideModal() {
         <>
             {open && (
                 !isDetailPage ? (
-                    <Paper sx={{ backgroundColor: "black", color: "#2e7d32!important", ...style }}>
+                    <Paper sx={{ backgroundColor: "black", color: "#2e7d32!important", bottom: "100px", ...style }}>
                         <Box>
                             <Box sx={{ textAlign: "center", p: 2 }}>
                                 <Typography variant="body1" sx={{ fontSize: 15, py: 1, fontWeight: "bold" }}>
