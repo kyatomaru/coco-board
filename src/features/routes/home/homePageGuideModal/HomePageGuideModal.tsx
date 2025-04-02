@@ -47,7 +47,7 @@ export default function HomePageGuideModal() {
         <>
             {open && (
                 !isDetailPage ? (
-                    <Paper sx={{ backgroundColor: "black", color: "#2e7d32!important", bottom: "100px", ...style }}>
+                    <Paper sx={{ backgroundColor: "black", color: "#2e7d32!important", bottom: "250px", ...style }}>
                         <Box>
                             <Box sx={{ textAlign: "center", p: 2 }}>
                                 <Typography variant="body1" sx={{ fontSize: 15, py: 1, fontWeight: "bold" }}>
