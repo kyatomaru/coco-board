@@ -217,8 +217,11 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
     }
 
     const changeTeamSize = (e) => {
-        setTeamSize(e.target.value)
-        board.setting.teamSize = e.target.value
+        console.log(e.target.value)
+        const newTeamSize = e.target.value;
+        setTeamSize(newTeamSize);
+        setPutTeamSize(newTeamSize);  // putTeamSizeも同時に更新
+        board.setting.teamSize = newTeamSize;
 
         initPlayers()
 
