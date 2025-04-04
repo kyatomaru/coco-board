@@ -168,15 +168,15 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
     }
 
     const formationList = () => {
-        if (board.setting.teamSize == 11) {
+        if (putTeamSize == 11) {
             return FormationList11(verticalWidth, verticalHeight)[putFormation[team]]
         }
 
-        if (board.setting.teamSize == 8) {
+        if (putTeamSize == 8) {
             return FormationList8(verticalWidth, verticalHeight)[putFormation[team]]
         }
 
-        if (board.setting.teamSize == 5) {
+        if (putTeamSize == 5) {
             return FormationList5(verticalWidth, verticalHeight)[putFormation[team]]
         }
 
@@ -341,6 +341,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
         for (let frameIndex = 0; frameIndex < frameArray.length; frameIndex++) {
             for (let playerIndex = frameArray[frameIndex].players.length - 1; playerIndex >= 0; playerIndex--) {
                 if (frameArray[frameIndex].players[playerIndex].teamNumber == team) {
+                    console.log(frameArray[frameIndex].players[playerIndex].teamNumber)
                     frameArray[frameIndex].players.splice(playerIndex, 1)
                 }
             }
@@ -352,6 +353,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
                 const arrayIndex = frameArray[frameIndex].players.length - 1
                 const diameter = frameArray[frameIndex].players[arrayIndex].diameter
 
+                frameArray[frameIndex].players[arrayIndex].teamNumber = team
                 frameArray[frameIndex].players[arrayIndex].color = board.setting.color[team]
                 frameArray[frameIndex].players[arrayIndex].position = formationList().formation[playerIndex].position
 
