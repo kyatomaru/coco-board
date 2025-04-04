@@ -162,6 +162,9 @@ export default function PlayersSaveView({ isView, setPutDisabled, viewWidth, ver
             newPlayers[1] = teamPlayers[page].players
             setPutPlayers(newPlayers)
             setPutTeamSize(teamPlayers[page].teamSize)
+
+            console.log(teamPlayers[page].formation)
+
             setPutFormation([teamPlayers[page].formation, teamPlayers[page].formation])
 
             setPutDisabled(false)
