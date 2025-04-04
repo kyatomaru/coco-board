@@ -220,7 +220,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
         console.log(e.target.value)
         const newTeamSize = e.target.value;
         setTeamSize(newTeamSize);
-        setPutTeamSize(newTeamSize);  // putTeamSizeも同時に更新
+        setPutTeamSize(newTeamSize);
         board.setting.teamSize = newTeamSize;
 
         initPlayers()
@@ -234,6 +234,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
         const newFormation = formation.concat()
         newFormation[team] = event.target.value
         setFormation(newFormation)
+        setPutFormation(newFormation)
     }
 
     const handleItemClick = (index: number) => {
@@ -318,9 +319,11 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
                             />
                         </Stack>
 
+                        {formationList()?.formation[index] &&
                         <Box sx={{ width: '5ch', lineHeight: "40px", color: "black", mx: 1, textAlign: "center" }}>
                             {formationList()?.formation[index].position}
                         </Box>
+                        }
                     </Stack>
                 ))}
             </Box>
