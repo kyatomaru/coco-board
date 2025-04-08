@@ -66,23 +66,37 @@ export default function WelcomePage() {
                 </Box>
             </Box>
             <Box sx={{ zIndex: 1200, background: "white", width: "100%", mt: 5 }} >
-                <Box sx={{ textAlign: "center", py: 10, maxWidth: 450, margin: "auto" }}>
-                    <Typography sx={{ fontSize: 25, mb: 3, px: 3, fontWeight: 600, color: mainColor }}>coco-boardとは？</Typography>
-                    <Typography sx={{ px: 3 }}>
-                        coco-boardはサッカー選手が練習や試合の内容をスマホひとつで記録できるWebアプリケーションです。
-                        サッカー選手なら一度は紙のノートで練習や試合の記録を取ったことがあると思います。
-                        このアプリを使えば、紙のノートではできなかった記録の共有ができたり、いつでもどこでもサッカーについて記録することができます。
-                    </Typography>
+                <Box sx={{ width: "100%", backgroundColor: "#f2f2f2" }}>
+                    <Box sx={{ textAlign: "center", py: 10, maxWidth: 450, margin: "auto" }}>
+                        <Typography sx={{ fontSize: 23, mb: 3, mx: 3, fontWeight: 500, color: mainColor }}>フォーマットに沿って簡単に記録</Typography>
+                        <Typography sx={{ px: 2, color: "#666", fontWeight: 600 }}>
+                            フォーマットに沿って入力するだけで、短時間で効率よく記録が残せます。
+                        </Typography>
+                        <Stack direction="row" spacing={1} sx={{ mx: 1, mt: 3 }}>
+                            <Box sx={{ maxWidth: 210, mx: "auto" }}>
+                                <CardMedia
+                                    component='img'
+                                    image="/images/welcomePage/note1.jpg"
+                                    sx={{}}
+                                />
+                                <Typography sx={{ fontSize: 13, mt: 1 }}>入力ページ</Typography>
+                            </Box>
+                            <Box sx={{ maxWidth: 210, mx: "auto" }}>
+                                <CardMedia
+                                    component='img'
+                                    image="/images/welcomePage/note2.jpg"
+                                    sx={{}}
+                                />
+                                <Typography sx={{ fontSize: 13, mt: 1 }}>閲覧ページ</Typography>
+                            </Box>
+                        </Stack>
+                    </Box>
                 </Box>
 
-                <Box sx={{ textAlign: "center", py: 7, margin: "auto" }}>
-                    <Typography sx={{ fontSize: 25, px: 3 }}>coco-boardの機能</Typography>
-
                     <Box sx={{ textAlign: "center", py: 10, maxWidth: 450, margin: "auto" }}>
-                        <Typography sx={{ fontSize: 25, mb: 3, mx: 3, fontWeight: 600, color: mainColor }}>戦術ボードでアニメーション作成</Typography>
-                        <Typography sx={{ px: 3 }}>
-                            誰でも簡単にアニメーションを作成することができます。
-                            戦術やフォーメーションを記録する際には最適です。
+                        <Typography sx={{ fontSize: 25, mb: 3, mx: 3, fontWeight: 400, color: mainColor }}>戦術ボードでアニメーション作成</Typography>
+                        <Typography sx={{ px: 3, color: "#666", fontWeight: 600 }}>
+                            戦術やフォーメーションを、誰でも簡単にアニメーションで記録できます。
                         </Typography>
                         <Box sx={{ mx: 3, maxWidth: 400 }}>
                             <CardMedia
@@ -96,38 +110,12 @@ export default function WelcomePage() {
                             />
                         </Box>
                     </Box>
+                   
 
-                    <Box sx={{ width: "100%", backgroundColor: "#f2f2f2" }}>
-                        <Box sx={{ textAlign: "center", py: 10, maxWidth: 450, margin: "auto" }}>
-                            <Typography sx={{ fontSize: 25, mb: 3, mx: 3, fontWeight: 600, color: mainColor }}>フォーマットに沿って試合・練習の内容を記録</Typography>
-                            <Typography sx={{ px: 2 }}>
-                                coco-boardには試合と練習を記録するためのフォーマットが用意されています。
-                                フォーマットに沿って入力することで短時間で試合と練習について記録できます。
-                            </Typography>
-                            <Stack direction="row" spacing={1} sx={{ mx: 1, mt: 3 }}>
-                                <Box sx={{ maxWidth: 210, mx: "auto" }}>
-                                    <CardMedia
-                                        component='img'
-                                        image="/images/welcomePage/note1.jpg"
-                                        sx={{}}
-                                    />
-                                    <Typography sx={{ fontSize: 13, mt: 1 }}>入力ページ</Typography>
-                                </Box>
-                                <Box sx={{ maxWidth: 210, mx: "auto" }}>
-                                    <CardMedia
-                                        component='img'
-                                        image="/images/welcomePage/note2.jpg"
-                                        sx={{}}
-                                    />
-                                    <Typography sx={{ fontSize: 13, mt: 1 }}>閲覧ページ</Typography>
-                                </Box>
-                            </Stack>
-                        </Box>
-                    </Box>
                     <Box sx={{ textAlign: "center", py: 10, maxWidth: 450, margin: "auto" }}>
-                        <Typography sx={{ fontSize: 25, mb: 3, mx: 3, fontWeight: 600, color: mainColor }}>LINEで記録を共有</Typography>
-                        <Typography sx={{ px: 2 }}>
-                            coco-boardで取った記録はLINEで共有できます。チームメイトやコーチ、家族とノートを共有することで成長に繋がります。
+                        <Typography sx={{ fontSize: 25, mb: 3, mx: 3, fontWeight: 400, color: mainColor }}>LINEで記録を共有</Typography>
+                        <Typography sx={{ px: 3, color: "#666", fontWeight: 600 }}>
+                            記録はLINEで共有できます。チームや家族と共有すれば、みんなで成長を実感できます。
                         </Typography>
                         <Stack direction="row" spacing={1} sx={{ mx: 4, mt: 3, maxWidth: 360 }}>
                             <Box sx={{ maxWidth: 180, width: "100%", mx: "auto" }}>
@@ -149,7 +137,6 @@ export default function WelcomePage() {
                             </Box>
                         </Stack>
                     </Box>
-                </Box>
             </Box>
             <Box sx={{ height: { xs: 450, md: 500 } }}>
                 <Box sx={{ p: "0 20px", textAlign: "center" }}>
