@@ -28,13 +28,13 @@ export class BoardModel implements BoardType {
 
     constructor(date) {
         return {
-            contentsId: undefined,
+            contentsId: null,
             createDate: new Date(),
             updateDate: new Date(),
-            uid: undefined,
+            uid: null,
             date: date,
-            title: undefined,
-            comment: undefined,
+            title: null,
+            comment: null,
             courtId: 0,
             frame: [],
             setting: new SettingModel()
