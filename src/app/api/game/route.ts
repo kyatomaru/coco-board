@@ -50,6 +50,19 @@ export async function GET(
                     const ob = doc.data();
                     ob.contentsId = doc.id;
                     ob.collection = COLLECTION_NAME;
+
+                    // 改行を復元
+                    ob.goodPoints = ob.goodPoints.map((point: any) => ({
+                        ...point,
+                        context: unescapeNewlines(point.context)
+                    }));
+                    ob.badPoints = ob.badPoints.map((point: any) => ({
+                        ...point,
+                        context: unescapeNewlines(point.context)
+                    }));
+                    ob.next = unescapeNewlines(ob.next);
+                    ob.comment = unescapeNewlines(ob.comment);
+
                     data.push(ob);
                 });
                 return data;
@@ -79,17 +92,30 @@ export async function GET(
             })
             .catch((error) => {
                 console.log("Error getting documents: ", error);
-                return NextResponse.json(null, { status: 500 });
+                return null;
             });
         return NextResponse.json(docRef, { status: 200 });
     } else {
-        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('date', 'desc').orderBy('updateDate', 'desc').get()
+        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('updateDate', 'desc').get()
             .then(snapshot => {
                 const data = Array();
                 snapshot.forEach((doc) => {
                     const ob = doc.data();
                     ob.contentsId = doc.id;
                     ob.collection = COLLECTION_NAME;
+
+                    // 改行を復元
+                    ob.goodPoints = ob.goodPoints.map((point: any) => ({
+                        ...point,
+                        context: unescapeNewlines(point.context)
+                    }));
+                    ob.badPoints = ob.badPoints.map((point: any) => ({
+                        ...point,
+                        context: unescapeNewlines(point.context)
+                    }));
+                    ob.next = unescapeNewlines(ob.next);
+                    ob.comment = unescapeNewlines(ob.comment);
+
                     data.push(ob);
                 });
                 return data;
@@ -223,17 +249,17 @@ export async function POST(
         insertData.updateDate = Timestamp.fromDate(new Date());
         insertData.images = imageUrls;
 
-        const docId = await db.collection(COLLECTION_NAME).add(insertData)
+        // docRefを生成
+        const docRef = db.collection(COLLECTION_NAME).doc()
+        insertData.contentsId = docRef.id
+        docRef.set(insertData)
             .then((res) => {
                 console.log("Document successfully created!");
-                return res.id;
             })
             .catch((error) => {
                 console.log("Error getting documents: ", error);
                 throw error;
             });
-
-        insertData.contentsId = docId;
 
         // レスポンスを返す前に改行を復元
         insertData.goodPoints = insertData.goodPoints.map((point: any) => ({

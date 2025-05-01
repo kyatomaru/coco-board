@@ -84,13 +84,13 @@ export async function GET(
             })
             .catch((error) => {
                 console.log("Error getting documents: ", error);
-                return NextResponse.json(null, { status: 500 })
+                return null;
             });
 
         return NextResponse.json(docRef, { status: 200 })
     }
     else {
-        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('date', 'desc').orderBy('updateDate', 'desc').get()
+        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('updateDate', 'desc').get()
             .then(snapshot => {
                 const data = Array()
                 snapshot.forEach((doc) => {
@@ -231,18 +231,17 @@ export async function POST(
         insertData.updateDate = Timestamp.fromDate(new Date());
         insertData.images = imageUrls;
 
-        if (insertData) {
-            const docId = await db.collection(COLLECTION_NAME).add(insertData)
-                .then((res) => {
-                    console.log("Document successfully created!");
-                    return res.id
-                })
-                .catch((error) => {
-                    console.log("Error getting documents: ", error);
-                });
+        // docRefを生成
+        const docRef = db.collection(COLLECTION_NAME).doc()
+        insertData.contentsId = docRef.id
 
-            insertData.contentsId = docId
-        }
+        docRef.set(insertData)
+            .then((res) => {
+                console.log("Document successfully created!");
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
 
         return NextResponse.json(insertData, { status: 200 })
     } catch (error) {

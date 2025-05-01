@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from 'react';
-import HelpPage from '@/components/docs/help/HelpPage';
+import HelpPage from '@/features/routes/docs/help/HelpPage';
 
 export default function Home() {
   return (

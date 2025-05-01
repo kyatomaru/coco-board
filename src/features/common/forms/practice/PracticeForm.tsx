@@ -28,14 +28,25 @@ import IconButton from '@mui/material/IconButton'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { ImageSelectForm } from '../Input/ImageSelectForm';
 import { useGetPracticeImages } from '@/hooks/practice/image/useGetPracticeImages';
+import { BoardType } from '@/types/board/Board';
+import BoardSelectForm from '../Input/BoardSelectForm';
+import MenuSelectBox from '../../create/MenuSelectBox';
+import TextField from '@mui/material/TextField';
+import { ClearIcon } from '@mui/x-date-pickers/icons';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { mainColor } from '@/constants/Color';
 
 type pageProps = {
     contents: any,
     postData: any,
-    onClose: any
+    onClose: any,
+    boards: any[],
+    isCreate: boolean,
+    menu: number,
+    setMenu: Function
 }
 
-export default function PracticeForm({ contents, postData, onClose }: pageProps) {
+export default function PracticeForm({ contents, postData, onClose, boards, isCreate, menu, setMenu }: pageProps) {
     const router = useRouter()
     const params = useParams()
     const [isConfirmCloseModal, setIsConfirmCloseModal] = React.useState<boolean>(false)
@@ -62,6 +73,13 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
     const [next, setNext] = React.useState(contents.next);
     const [comment, setComment] = React.useState(contents.comment);
     const [selectedFiles, setSelectedFiles] = useGetPracticeImages(contents.images ?? [], setIsImagesLoading)
+    const [selectedBoardIds, setSelectedBoardIds] = React.useState<string[]>(contents.boardIds || []);
+
+    const onBoardSelect = (boardIds: string[]) => {
+        setSelectedBoardIds(boardIds);
+        contents.boardIds = boardIds;
+    };
+
 
     const AddDetails = () => {
         const input = []
@@ -194,121 +212,111 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                 onSubmit={onSubmit}
                 sx={{
                     '& .MuiTextField-root': { m: 1 },
-                    marginBottom: "30px",
-                    minHeight: "100vh"
+                    paddingBottom: { xs: "148px", md: "90px" },
+                    minHeight: "100vh",
+                    backgroundColor: "white",
+                    borderRight: "solid 0.5px #b2b2b2",
+                    borderLeft: "solid 0.5px #b2b2b2"
                 }}
                 noValidate
                 autoComplete="off"
                 method='POST'
             >
-                <Box sx={{ position: 'sticky', top: 0, backgroundColor: "white", zIndex: 100 }} >
-                    <Grid sx={{ px: 1, height: "50px" }} container direction="row" alignItems="center" justifyContent="space-between">
-                        <Grid >
-                            <Button size="small" sx={{ color: 'black' }} variant='text' onClick={() => setIsConfirmCloseModal(true)}>
-                                <Typography fontSize={13} component="p">
-                                    キャンセル
-                                </Typography>
-                            </Button>
-                        </Grid>
-                        <Grid >
-                            <Button size="small" sx={{ cursor: isImagesLoading && "pointer", backgroundColor: isImagesLoading ? "#aaa !important" : "#2e7d32 !important" }} variant='filled' type='submit'>
-                                <Typography fontSize={13} component="p">
-                                    記録する
-                                </Typography>
-                            </Button>
-                        </Grid>
-                    </Grid>
+                {!isCreate &&
+                    <Box>
+                        <Stack direction="row" sx={{ px: 2, height: "36px" }} alignContent="center" justifyContent="flex-start">
+                            <IconButton size="small" sx={{ width: "30px", height: "30px", my: "auto !important" }} onClick={() => setIsConfirmCloseModal(true)}>
+                                <ClearIcon sx={{ fontSize: "1.25rem" }} />
+                            </IconButton>
+                        </Stack>
 
-                    <Divider />
-                </Box>
+                        <Divider />
+                    </Box>
+                }
 
                 <Box>
-                    <Box sx={{ mx: "auto", px: 2 }}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
-                            <DemoContainer components={['DatePicker']}>
-                                <DatePicker sx={{ mx: "0 !important", width: "auto !important", backgroundColor: "background.paper" }} format='yyyy年MM月dd日'
-                                    value={new Date(String(contents.date))}
-                                    disableFuture
-                                    onChange={(newValue) => { contents.date = dayjs(String(newValue)).format('YYYY-MM-DD') }} />
-                            </DemoContainer>
-                        </LocalizationProvider>
-                    </Box>
-
-                    <Box sx={{ my: 3 }}>
-                        <Box sx={{ my: 2, px: 2 }}>
-                            <InputLabel sx={{ mb: 1, fontSize: 14, color: "black" }} >タイトル</InputLabel>
-                            <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
-                                <OutlinedInput
-                                    required
-                                    name="title"
-                                    value={contents.title}
-                                    onChange={newValue => {
-                                        setTitle(newValue.target.value)
-                                        contents.title = newValue.target.value
-                                    }}
-                                    sx={{ fontSize: 14, backgroundColor: "background.paper" }}
-                                />
-                            </FormControl>
+                    {isCreate &&
+                        <Box sx={{ px: 2 }}>
+                            <MenuSelectBox alignment={menu} setAlignment={setMenu} />
                         </Box>
+                    }
 
-                        <Box sx={{ my: 2, px: 2 }}>
-                            <InputLabel sx={{ mb: 1, fontSize: 14, color: "black" }} >場所</InputLabel>
-                            <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
-                                <OutlinedInput
-                                    sx={{ fontSize: 14, backgroundColor: "background.paper" }}
-                                    name="place"
-                                    value={contents.place}
-                                    onChange={newValue => {
-                                        setPlace(newValue.target.value)
-                                        contents.place = newValue.target.value
-                                    }}
-                                />
-                            </FormControl>
-                        </Box>
+                    <Divider />
 
-                        <Box sx={{ my: 2, px: 2 }}>
-                            <InputLabel sx={{ mb: 1, fontSize: 14, color: "black" }} >天気</InputLabel>
-                            <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
-                                <Select
-                                    sx={{ fontSize: 14, backgroundColor: "background.paper" }}
-                                    name="weather"
-                                    value={contents.weather}
-                                    onChange={newValue => {
-                                        setWeather(newValue.target.value)
-                                        contents.weather = newValue.target.value
-                                    }}
-                                >
-                                    <MenuItem sx={{ fontSize: 14 }} value="晴れ">晴れ</MenuItem>
-                                    <MenuItem sx={{ fontSize: 14 }} value="曇り">曇り</MenuItem>
-                                    <MenuItem sx={{ fontSize: 14 }} value="雨">雨</MenuItem>
-                                    <MenuItem sx={{ fontSize: 14 }} value="雪">雪</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Box>
+                    <Box sx={{ my: 1 }}>
+                        <Stack sx={{ mb: 1, px: 2 }} direction="row" spacing={0} alignItems="center">
+                            <InputLabel sx={{ fontSize: 13, width: "90px", color: "black" }} >タイトル</InputLabel>
+                            <TextField
+                                required
+                                fullWidth
+                                size="small"
+                                variant="standard"
+                                name="title"
+                                value={contents.title}
+                                onChange={newValue => {
+                                    setTitle(newValue.target.value)
+                                    contents.title = newValue.target.value
+                                }}
+                                inputProps={{style: {fontSize: 13}}}
+                            />
+                        </Stack>
+
+                        <Stack sx={{ mb: 1, px: 2 }} direction="row" spacing={0} alignItems="center">
+                            <InputLabel sx={{ fontSize: 13, width: "90px", color: "black" }} >場所</InputLabel>
+                            <TextField
+                                inputProps={{style: {fontSize: 13}}}
+                                fullWidth
+                                variant="standard"
+                                size="small"
+                                name="place"
+                                value={contents.place}
+                                onChange={newValue => {
+                                    setPlace(newValue.target.value)
+                                    contents.place = newValue.target.value
+                                }}
+                            />
+                        </Stack>
+
+                        <Stack sx={{ mb: 1, px: 2 }} direction="row" spacing={0} alignItems="center">
+                            <InputLabel sx={{ fontSize: 13, width: "90px", color: "black" }} >天気</InputLabel>
+                            <Select
+                                sx={{ fontSize: 13, backgroundColor: "background.paper", mx: 1 }}
+                                variant="standard"
+                                name="weather"
+                                size="small"
+                                fullWidth
+                                value={contents.weather}
+                                onChange={newValue => {
+                                    setWeather(newValue.target.value)
+                                    contents.weather = newValue.target.value
+                                }}
+                            >
+                                <MenuItem sx={{ fontSize: 13 }} value="晴れ">晴れ</MenuItem>
+                                <MenuItem sx={{ fontSize: 13 }} value="曇り">曇り</MenuItem>
+                                <MenuItem sx={{ fontSize: 13 }} value="雨">雨</MenuItem>
+                                <MenuItem sx={{ fontSize: 13 }} value="雪">雪</MenuItem>
+                            </Select>
+                        </Stack>
                     </Box>
 
                     <Divider />
 
-                    <Box sx={{ my: 3, px: 2 }}>
+                    <Box sx={{ my: 2, px: 2 }}>
                         <Box sx={{ mb: 1 }}>
                             <Stack sx={{ mb: 1 }} spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-                                <Typography variant="h6" sx={{ fontSize: 14, color: "black" }} >
-                                    練習内容
-                                </Typography>
-                                <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85 }} onClick={AddDetails}>
-                                    <Typography fontSize={13} component="p">
-                                        追加
-                                    </Typography>
-                                </Button>
+                                <InputLabel sx={{ mb: 1, fontSize: 13, color: "black" }} >練習内容</InputLabel>
+                                <IconButton size="small" sx={{ color: mainColor }} onClick={AddDetails}>
+                                    <AddCircleOutlineIcon sx={{ width: "20px", height: "20px"  }} /> 
+                                </IconButton>
                             </Stack>
                             {contents.details.map((input, index) => (
                                 <FormControl key={index} fullWidth sx={{ mb: 1 }}>
                                     <OutlinedInput
                                         multiline
-                                        minRows={2}
+                                        minRows={1}
                                         value={contents.details[index].context}
                                         onChange={newValue => ChangeDetailsContext(newValue.target.value, index)}
-                                        sx={{ fontSize: 14 }}
+                                        sx={{ fontSize: 13, py: "9px" }}
                                     />
                                     {index != 0 && !contents.details[index].context &&
                                         <IconButton onClick={() => deleteDetail(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white !important" }}>
@@ -324,24 +332,22 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
 
                     <Divider />
 
-                    <Box sx={{ my: 3, px: 2 }}>
-                        <Box sx={{ my: 2 }}>
+                    <Box sx={{ my: 2, px: 2 }}>
+                        <Box sx={{ my: 1 }}>
                             <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ alignItems: "center", mb: 1 }}>
-                                <InputLabel sx={{ mx: 1, fontSize: 14, color: "#ff5e00", fontWeight: "bold" }}>良い点</InputLabel>
-                                <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85 }} onClick={AddGoodPoints}>
-                                    <Typography fontSize={13} component="p">
-                                        追加
-                                    </Typography>
-                                </Button>
+                                <InputLabel sx={{ mx: 1, fontSize: 13, color: "#ff5e00", fontWeight: "bold" }}>良い点</InputLabel>
+                                <IconButton size="small" sx={{ color: mainColor }} onClick={AddGoodPoints}>
+                                    <AddCircleOutlineIcon sx={{ width: "20px", height: "20px"  }} /> 
+                                </IconButton>
                             </Stack>
                             {contents.goodPoints.map((input, index) => (
                                 <FormControl key={index} fullWidth sx={{ mb: 1, position: "relative" }}>
                                     <OutlinedInput
                                         multiline
-                                        minRows={2}
+                                        minRows={1}
                                         value={contents.goodPoints[index].context}
                                         onChange={newValue => ChangeGoodPointsContext(newValue.target.value, index)}
-                                        sx={{ fontSize: 14 }}
+                                        sx={{ fontSize: 13, py: "9px" }}
                                         placeholder={index == 0 && "良かったところや良かったプレーなど"}
                                         startAdornment
                                     />
@@ -354,23 +360,21 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                             ))}
                         </Box>
 
-                        <Box sx={{ my: 2 }}>
+                        <Box sx={{ my: 1 }}>
                             <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ alignItems: "center", mb: 1 }}>
-                                <InputLabel sx={{ mx: 1, fontSize: 14, color: "#007eff", fontWeight: "bold" }}>悪い点</InputLabel>
-                                <Button size="small" color='secondary' sx={{ fontSize: 13, minWidth: 85 }} onClick={AddBadPoints}>
-                                    <Typography fontSize={13} component="p">
-                                        追加
-                                    </Typography>
-                                </Button>
+                                <InputLabel sx={{ mx: 1, fontSize: 13, color: "#007eff", fontWeight: "bold" }}>悪い点</InputLabel>
+                                <IconButton size="small" sx={{ color: mainColor }} onClick={AddBadPoints}>
+                                    <AddCircleOutlineIcon sx={{ width: "20px", height: "20px"  }} /> 
+                                </IconButton>
                             </Stack>
                             {contents.badPoints.map((input, index) => (
                                 <FormControl key={index} fullWidth sx={{ mb: 1 }}>
                                     <OutlinedInput
                                         multiline
-                                        minRows={2}
+                                        minRows={1}
                                         value={contents.badPoints[index].context}
                                         onChange={newValue => ChangeBadPointsContext(newValue.target.value, index)}
-                                        sx={{ fontSize: 14 }}
+                                        sx={{ fontSize: 13, py: "9px" }}
                                         placeholder={index == 0 && "悪かったところや悪かったプレーなど"}
                                     />
                                     {index != 0 && !contents.badPoints[index].context &&
@@ -382,13 +386,13 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                             ))}
                         </Box>
 
-                        <Box sx={{ my: 2 }}>
-                            <InputLabel sx={{ mb: 1, fontSize: 14, color: "#16b41e", fontWeight: "bold" }}>次に向けて</InputLabel>
-                            <FormControl fullWidth sx={{ fontSize: 14 }} variant="outlined">
+                        <Box sx={{ my: 1 }}>
+                            <InputLabel sx={{ mb: 1, fontSize: 13, color: "#16b41e", fontWeight: "bold" }}>次に向けて</InputLabel>
+                            <FormControl fullWidth sx={{ fontSize: 13 }} variant="outlined">
                                 <OutlinedInput
-                                    sx={{ m: "0 !important", fontSize: 14, backgroundColor: "background.paper" }}
+                                    sx={{ m: "0 !important", fontSize: 13, py: "9px" }}
                                     multiline
-                                    minRows={2}
+                                    minRows={1}
                                     value={contents.next}
                                     onChange={newValue => {
                                         setNext(newValue.target.value)
@@ -402,8 +406,24 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
 
                     <Divider />
 
-                    <Box sx={{ my: 3, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }}>
+                    <Box sx={{ my: 2, px: 2 }}>
+                        <Typography variant="h6" sx={{ fontSize: 13, mb: 0.5, color: "black" }}>
+                            ボード
+                        </Typography>
+                        <Typography variant="h6" sx={{ fontSize: 12, mb: 1, color: "#888" }}>
+                            記録日のボードを選択することができます
+                        </Typography>
+                        <BoardSelectForm
+                            boards={boards}
+                            selectedBoards={selectedBoardIds}
+                            onBoardSelect={onBoardSelect}
+                        />
+                    </Box>
+
+                    <Divider />
+
+                    <Box sx={{ my: 2, px: 2 }}>
+                        <Typography variant="h6" sx={{ fontSize: 13, mb: 1, color: "black" }}>
                             画像
                         </Typography>
                         <ImageSelectForm
@@ -416,15 +436,15 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
 
                     <Divider />
 
-                    <Box sx={{ my: 3, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 2, color: "black" }} component="div">
+                    <Box sx={{ my: 2, px: 2 }}>
+                        <Typography variant="h6" sx={{ fontSize: 13, mb: 1, color: "black" }} component="div">
                             コメント
                         </Typography>
-                        <FormControl fullWidth sx={{ fontSize: 14 }} variant="outlined">
+                        <FormControl fullWidth sx={{ fontSize: 13 }} variant="outlined">
                             <OutlinedInput
-                                sx={{ m: "0 !important", fontSize: 14, backgroundColor: "background.paper" }}
+                                sx={{ fontSize: 13, py: "9px" }}
                                 multiline
-                                minRows={2}
+                                minRows={1}
                                 value={contents.comment}
                                 onChange={newValue => {
                                     setComment(newValue.target.value)
@@ -435,7 +455,17 @@ export default function PracticeForm({ contents, postData, onClose }: pageProps)
                         </FormControl>
                     </Box>
                 </Box >
-                {/* <MenuSelectBox date={dayjs(String(dateValue)).format('YYYY-MM-DD')} /> */}
+
+                <Box sx={{ position: 'sticky', bottom: { xs: "135px", md: "80px" }, left: 0, right: 0, backgroundColor: "white", zIndex: 100 }}>
+                    <Divider />
+                    <Stack justifyContent="center" alignItems="center" sx={{ height: "50px" }} >
+                        <Button size="small" fullWidth sx={{ width: "90%", borderRadius: "10px", cursor: isImagesLoading && "pointer", backgroundColor: isImagesLoading ? "#aaa !important" : "#2e7d32 !important" }} variant='filled' type='submit'>
+                            <Typography fontSize={13} component="p">
+                                記録する
+                            </Typography>
+                        </Button>
+                    </Stack>
+                </Box>
             </Box >
         </>
     )

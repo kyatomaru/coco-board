@@ -1,25 +1,50 @@
 import * as React from 'react';
 
-export const useGetPractice = (user, contentsId) => {
+export const useGetPractice = (contentsId) => {
     const [contents, setContents] = React.useState<any>(undefined);
+    const [boards, setBoards] = React.useState<any>([]);
 
     React.useEffect(() => {
         const init = async () => {
-            const getParams = { uid: user?.uid, contentsId: contentsId };
+            const getParams = { contentsId: contentsId };
             const query = new URLSearchParams(getParams);
 
-            setContents(await fetchPracticeContents(query))
+            const practice = await fetchPracticeContents(query)
+
+            setContents(practice)
+
+
+            if (practice.boardIds) {
+                const getBoardParams = { uid: practice.uid, date: practice.date };
+                const boardQuery = new URLSearchParams(getBoardParams);
+
+                const boardData = await fetchBoardContents(boardQuery)
+
+                setBoards(boardData)
+
+                if (boardData != undefined) {
+                    if (boardData.length > 0) {
+                        setBoards(await fetchBoardImage(boardData))
+                    }
+                }
+            }
         }
         init()
-    }, [user, contentsId])
+    }, [contentsId])
+
+    React.useEffect(() => {
+        if (boards != undefined) {
+            setBoards(boards)
+        }
+    }, [boards])
 
     const getContents = async () => {
-        const getParams = { uid: user.uid, contentsId: contentsId };
+        const getParams = { contentsId: contentsId };
         const query = new URLSearchParams(getParams);
         setContents(await fetchPracticeContents(query))
     }
 
-    return [contents, setContents]
+    return [contents, setContents, boards, setBoards]
 }
 
 const fetchPracticeContents = async (query) => {
@@ -32,6 +57,29 @@ const fetchPracticeContents = async (query) => {
     return practiceData
 }
 
-function descTimeSort(a, b) {
-    return a < b ? 1 : -1;
+const fetchBoardContents = async (query) => {
+    const boardData = await fetch(`/api/board/?${query}`)
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+
+    return boardData
+}
+
+const fetchBoardImage = async (boardData) => {
+    const resultData = JSON.parse(JSON.stringify(boardData))
+
+    for (let index = 0; index < resultData.length; index++) {
+        const getImageParams = { id: resultData[index].contentsId };
+        const imageQuery = new URLSearchParams(getImageParams);
+
+        await fetch(`/api/board/image?${imageQuery}`)
+            .then((imageResponse) => imageResponse.json())
+            .then((imageData) => {
+                resultData[index].imagePath = imageData
+            });
+    }
+
+    return resultData
 }

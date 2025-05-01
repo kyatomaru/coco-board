@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from 'react';
-import WelcomePage from '@/components/routes/welcome/WelcomePage';
+import WelcomePage from '@/features/routes/welcome/WelcomePage';
 
 export default function Home() {
   return (

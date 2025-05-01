@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from 'react';
-import ContactPage from '@/components/docs/contact/ContactPage';
+import ContactPage from '@/features/routes/docs/contact/ContactPage';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import Footer from '@/components/docs/Footer';
+import Footer from '@/features/routes/docs/Footer';
 
 export default function Home() {
   return (

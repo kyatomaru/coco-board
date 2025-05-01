@@ -17,12 +17,12 @@ export default function MoreHorizButton({ menuHandleClick }: PageProps) {
             aria-haspopup="true"
             onClick={menuHandleClick}
             sx={{
-                right: "10px", top: "7px",
+                right: "10px", top: "0px",
                 position: "absolute",
-                zIndex: 1000, width: "35px", height: "35px", m: "auto"
+                zIndex: 1000, width: "30px", height: "30px", m: "auto"
             }}
         >
-            <MoreHorizIcon />
+            <MoreHorizIcon fontSize="small" />
         </IconButton>
     )
 }

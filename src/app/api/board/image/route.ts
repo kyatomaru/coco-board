@@ -25,12 +25,14 @@ export async function GET(
 ) {
     const id = req.nextUrl.searchParams.get("id")
 
-    const image = await getDownloadURL(ref(storage, id + ".png"))
+    const image = await getDownloadURL(ref(storage, "board/" + id + ".png"))
         .then((url) => {
             return url
         })
         .catch((error) => {
             // Handle any errors
+            console.log(error)
+            return NextResponse.json(null, { status: 500 })
         })
 
     return NextResponse.json(image, { status: 200 })
@@ -44,7 +46,7 @@ export async function PATCH(
     const image = insertData.image
     const id = insertData.id
 
-    const storageRef = ref(storage, id + ".png");
+    const storageRef = ref(storage, "board/" + id + ".png");
 
     deleteObject(storageRef).then(() => {
         console.log('File deleted successfully')
@@ -73,7 +75,7 @@ export async function POST(
     const image = insertData.image
     const id = insertData.id
 
-    const storageRef = ref(storage, id + ".png");
+    const storageRef = ref(storage, "board/" + id + ".png");
 
     const buffer = new Uint8Array(image.length);
     for (let i = 0; i < image.length; i++) {
@@ -83,7 +85,7 @@ export async function POST(
     const url = await uploadBytes(storageRef, buffer).then((snapshot) => {
         console.log('Uploaded a blob or file!');
     }).then(async (res) => {
-        return await getDownloadURL(ref(storage, id + ".png"))
+        return await getDownloadURL(ref(storage, "board/" + id + ".png"))
             .then((url) => {
                 return url
             })
@@ -101,7 +103,7 @@ export async function DELETE(
 ) {
     const id = req.nextUrl.searchParams.get("contentsId")
 
-    const storageRef = ref(storage, id + ".png");
+    const storageRef = ref(storage, "board/" + id + ".png");
 
     // Delete the file
     deleteObject(storageRef).then(() => {

@@ -14,7 +14,8 @@ export interface PracticeContentsType {
     badPoints?: Array<PracticeDetailsType>,
     next: String,
     comment: string,
-    images?: string[]
+    images?: string[],
+    boardIds?: string[]
 }
 
 
@@ -33,23 +34,24 @@ export class PracticeContentsModel implements PracticeContentsType {
     next: String
     comment: string
     images?: string[]
-
+    boardIds?: string[]
     constructor(date) {
         return {
-            uid: undefined,
-            contentsId: undefined,
+            uid: null,
+            contentsId: null,
             createDate: new Date(),
             updateDate: new Date(),
-            title: undefined,
+            title: null,
             date: date,
             details: [new PracticeDetailsModel()],
             weather: "",
-            place: undefined,
+            place: null,
             goodPoints: [new PracticeDetailsModel()],
             badPoints: [new PracticeDetailsModel()],
-            next: undefined,
-            comment: undefined,
-            images: []
+            next: null,
+            comment: null,
+            images: [],
+            boardIds: []
         }
     }
 }

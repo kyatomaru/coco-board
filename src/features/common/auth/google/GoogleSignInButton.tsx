@@ -11,18 +11,9 @@ import Image from "next/image"
 import { useRouter } from 'next/navigation'
 
 type PageProps = {
-    setIsLoading: any
+    setIsLoading: any,
+    setError: any
 }
-
-// const config = {
-//     activeStyle: { background: "#EFF0EE" },
-//     icon: Icon,
-//     style: { background: "white", color: "black", height: "40px", fontSize: "13px", justifyContent: "center" },
-//     text: "Googleでログイン",
-//     onclick: { GoogleSignIn },
-//     align: "center",
-//     size: "50px"
-// };
 
 const loginBtnStyle = {
     background: "white",
@@ -39,9 +30,8 @@ const loginBtnStyle = {
     cursor: "pointer"
 }
 
-export default function GoogleSignInButton({ setIsLoading }: PageProps) {
+export default function GoogleSignInButton({ setIsLoading, setError }: PageProps) {
     const router = useRouter()
-    const [error, setError] = React.useState(false)
 
     const GoogleSignIn = async () => {
         const GoogleProvider = new GoogleAuthProvider();
@@ -56,7 +46,6 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
                 localStorage.setItem('isNewUser', "true");
                 localStorage.setItem('isNewCreateBoard', "true");
             }
-            router.push("/home");
         } catch (error) {
             console.error(error);
             setError(true);
@@ -64,25 +53,12 @@ export default function GoogleSignInButton({ setIsLoading }: PageProps) {
     }
 
     return (
-        <Box>
-            <Button onClick={() => { GoogleSignIn() }} style={loginBtnStyle}>
-                <span className="icon" style={{ marginRight: "10px" }}><Icon /></span>
-                <Typography variant="body1" sx={{ fontSize: 14, fontWeight: 600, color: "#7F7F7F", textTransform: "capitalize" }}>
-                    Googleでログイン
-                </Typography>
-            </Button>
-
-            {error &&
-                <Box sx={{ mb: "5px" }}>
-                    <Typography variant="body1" sx={{ fontSize: 12, color: "red" }}>
-                        ログインに失敗しました。
-                    </Typography>
-                    <Typography variant="body1" sx={{ fontSize: 12, color: "red" }}>
-                        ブラウザをリロードして再度ログインしてください。
-                    </Typography>
-                </Box>
-            }
-        </Box>
+        <Button onClick={() => { GoogleSignIn() }} style={loginBtnStyle}>
+            <span className="icon" style={{ marginRight: "10px", marginBottom: 2 }}><Icon /></span>
+            <Typography variant="body1" sx={{ fontSize: 14, fontWeight: 600, color: "#7F7F7F", textTransform: "capitalize" }}>
+                Googleではじめる
+            </Typography>
+        </Button>
     );
 }
 

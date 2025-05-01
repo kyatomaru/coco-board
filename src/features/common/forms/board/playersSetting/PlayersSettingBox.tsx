@@ -21,7 +21,7 @@ import { MuiColorInput } from 'mui-color-input'
 import { PlayerColor } from '@/types/board/Setting';
 import { CourtRatio, setRatio } from '@/constants/board/CourtRatio';
 import { setBesideCoordinate } from '@/hooks/board/courtSetting/CourtSetting';
-import AllowPartialScrolling from '@/components/common/AllowPartialScrolling';
+import AllowPartialScrolling from '@/components/AllowPartialScrolling';
 import Player from '@/features/common/board/item/Player';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';

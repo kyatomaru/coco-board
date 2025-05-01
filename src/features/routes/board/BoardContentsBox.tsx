@@ -19,7 +19,7 @@ import DeleteConfirmModal from '@/features/common/contents/modal/ConfirmModal';
 import { boardModalTitle } from '@/constants/ModalMessage';
 import { deleteNoteMs } from '@/constants/ModalMessage';
 import { useDeleteBoard } from '@/hooks/board/useDeleteBoard';
-import NoteContentsBar from '@/features/common/contents/bar/NoteContentsBar';
+import BoardContentsBar from '@/features/common/contents/bar/BoardContentsBar';
 import dayjs from 'dayjs';
 import BoardViewForm from '@/features/common/forms/board/BoardViewForm';
 import { useUpdateBoard } from '@/hooks/board/useUpdateBoard';
@@ -117,7 +117,7 @@ export default function BoardContentsBox({ user, contents, setContents }: pagePr
     const DeleteBoardContents = async () => {
         const res = await useDeleteBoard(contents.contentsId)
         if (res.ok) {
-            router.replace(`/home/${dayjs(String(contents.date)).format('YYYY-MM-DD')}`)
+            router.replace(`/note/`)
         }
     }
 
@@ -158,7 +158,7 @@ export default function BoardContentsBox({ user, contents, setContents }: pagePr
                     {contents != undefined
                         ?
                         <Box sx={{ borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2" }}>
-                            <NoteContentsBar title="ボード" contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
+                            <BoardContentsBar title="ボード" contents={contents} EditButtonClick={EditButtonClick} DeleteButtonClick={DeleteButtonClick} />
                         </Box>
                         : <Skeleton variant="rectangular" height={30} />
                     }

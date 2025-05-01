@@ -70,20 +70,8 @@ export default function BoardInfoForm({ setOpen, board, onSubmit }: pageProps) {
                 </Box>
 
                 <Box>
-                    <Box sx={{ mx: "auto", px: 2 }}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
-                            <DemoContainer components={['DatePicker']}>
-                                <DatePicker
-                                    sx={{ mx: "0 !important", width: "auto !important", backgroundColor: "background.paper" }} format='yyyy年MM月dd日'
-                                    value={new Date(String(board.date))}
-                                    disableFuture
-                                    onChange={(newValue) => { board.date = dayjs(String(newValue)).format('YYYY-MM-DD') }} />
-                            </DemoContainer>
-                        </LocalizationProvider>
-                    </Box>
-
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 1, color: "black" }} component="div">
+                        <Typography variant="h6" sx={{ fontSize: 13, mb: 0.5, color: "black" }} component="div">
                             タイトル
                         </Typography>
                         <FormControl fullWidth sx={{ mb: 2 }} variant="outlined">
@@ -94,16 +82,15 @@ export default function BoardInfoForm({ setOpen, board, onSubmit }: pageProps) {
                                 id="outlined-adornment-title"
                                 name="title"
                                 aria-describedby="outlined-title-helper-text"
-                                // label="タイトル"
                                 value={board.title}
                                 error={titleError}
-                                // helperText="入力してください。"
                                 onSelect={() => { setTitleError(false) }}
                                 onChange={newValue => {
                                     board.title = newValue.target.value
                                     setTitle(newValue.target.value)
                                 }}
-                                sx={{ fontSize: 14, backgroundColor: "background.paper" }}
+                                inputProps={{ style: { fontSize: 13 } }}
+                                size="small"
                                 notched={title != undefined}
                             />
                             {!!titleError && (
@@ -115,22 +102,24 @@ export default function BoardInfoForm({ setOpen, board, onSubmit }: pageProps) {
                     </Box>
 
                     <Box sx={{ my: 1, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 14, mb: 1, color: "black" }} component="div">
-                            コメント
+                        <Typography variant="h6" sx={{ fontSize: 13, mb: 0.5, color: "black" }} component="div">
+                            ボードの説明
                         </Typography>
-                        <FormControl fullWidth sx={{ fontSize: 14 }} variant="outlined">
-                            <OutlinedInput
-                                sx={{ m: "0 !important", fontSize: 14, backgroundColor: "background.paper" }}
-                                multiline
-                                minRows={2}
-                                value={board.comment}
-                                onChange={newValue => {
-                                    board.comment = newValue.target.value
-                                    setComment(newValue.target.value)
-                                }}
-                                notched={comment != ""}
-                            />
-                        </FormControl>
+                        <Typography variant="h6" sx={{ fontSize: 12, mb: 1, color: "#666" }} component="div">
+                            フォーメーションの説明やシーンの説明など
+                        </Typography>
+                        <OutlinedInput
+                            inputProps={{ style: { fontSize: 13 } }}
+                            multiline
+                            minRows={1}
+                            value={board.comment}
+                            onChange={newValue => {
+                                board.comment = newValue.target.value
+                                setComment(newValue.target.value)
+                            }}
+                            size="small"
+                            fullWidth
+                        />
                     </Box>
                 </Box>
             </Box>

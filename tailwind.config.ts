@@ -13,6 +13,9 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        sans: ['"Untitled Sans"', '"Yu Gothic Medium"', '"游ゴシック Medium"', 'YuGothic', '"游ゴシック体"', '"hiragino-kaku-gothic-pron"', '"Hiragino Kaku Gothic ProN"', '"ヒラギノ角ゴ ProN"', '"Noto Sans JP"', 'Meiryo', 'sans-serif'],
+      },
     },
   },
   plugins: [],

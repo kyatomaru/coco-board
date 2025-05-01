@@ -1,16 +1,16 @@
 export interface GameFeedbackType {
-    type: Number,
+    type: number,
     context: string
 }
 
 export class GameFeedbackModel implements GameFeedbackType {
-    type: Number
+    type: number
     context: string
 
     constructor() {
         return {
             type: 0,
-            context: undefined
+            context: ""
         }
     }
 }
