@@ -252,7 +252,7 @@ export default function GameNote({ user, allContents, content, setContents, boar
                                                             <Typography
                                                                 key={index}
                                                                 variant="body2"
-                                                                sx={{
+                                                                sx={{ 
                                                                     fontSize: 14,
                                                                     color: "black",
                                                                     ml: index === 0 ? 0 : 2
