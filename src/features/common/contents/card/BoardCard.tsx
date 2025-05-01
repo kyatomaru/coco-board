@@ -59,27 +59,23 @@ export default function BoardCard({ allContents, contents, setContents }: PagePr
         <>
             <DeleteConfirmModal open={deleteModalOpen} setOpen={setDeleteModalOpen} title={boardModalTitle} message={deleteNoteMs} confirmText="削除" onSubmit={DeleteBoardContents} />
             <ContentsMenuModal open={menuModalOpen} setOpen={setMenuModalOpen} Delete={DeleteButtonClick} Edit={EditButtonClick} View={ViewButtonClick} />
-            <Card sx={{ minWidth: 275 }}>
+            <Card elevation={0}>
                 <Box sx={{ width: '100%', bgcolor: 'background.paper', position: "relative" }}>
                     <Box sx={{ position: "relative" }}>
                         <MoreHorizButton menuHandleClick={menuHandleClick} />
 
                         <CardActionArea onClick={() => ViewButtonClick()} >
-                            <Stack direction="row" sx={{ p: 1, mx: 1 }} >
-                                <Box sx={{ width: "100%", alignItems: "center" }} >
-                                    <Typography variant="h6" sx={{ fontSize: 16 }} component="div">
-                                        {String(contents.title)}
-                                    </Typography>
-                                    <Chip label="ボード" color="warning" size="small" sx={{ fontSize: 9 }} />
-                                </Box>
+                            <Stack direction="row" sx={{ pt: 1, px: 1 }} >
+                                <Typography variant="h6" sx={{ fontSize: 14}} component="h5">
+                                    {contents.title || "無題のボード"}
+                                </Typography>
                             </Stack>
 
-                            <Divider />
-                            <Box sx={{ width: "100%" }}>
-                                <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} justifyContent="space-between"  >
-                                    <Box sx={{ width: "100%", px: 2, my: 1 }}>
+                            <Box sx={{ width: "100%", pb: 1 }}>
+                                <Stack direction="row" justifyContent="space-between"  >
+                                    <Box sx={{ width: "100%", pl: 1, my: 1 }}>
                                         {!contents.imagePath ?
-                                            <Skeleton variant="rectangular" width="100%" height={Math.min(window.innerWidth / 2, window.innerHeight / 2)} sx={{ m: 0 }} />
+                                            <Skeleton variant="rectangular" width="100%" height={100} sx={{ m: 0 }} />
                                             : <CardMedia
                                                 component="img"
                                                 // height="194"
@@ -87,18 +83,15 @@ export default function BoardCard({ allContents, contents, setContents }: PagePr
                                             />
                                         }
                                     </Box>
-                                    <Box sx={{ width: "100%", px: 2, my: 1 }}>
-                                        <Typography sx={{ fontSize: 14, mb: 1 }} color="text.secondary">
-                                            コメント
-                                        </Typography>
+                                    <Box sx={{ width: "100%", px: 1, my: 1 }}>
                                         {contents.comment &&
                                             <Typography variant="body2">
-                                                {String(contents.comment).split('\n').map((line, index) => (
+                                                {String(contents.comment).split('\\n').map((line, index) => (
                                                     <Typography
                                                         key={index}
                                                         variant="body2"
                                                         sx={{
-                                                            fontSize: 14,
+                                                            fontSize: 12,
                                                             color: "black"
                                                         }}
                                                     >

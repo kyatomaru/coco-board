@@ -1,122 +1,51 @@
-import { getAuth, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { auth } from '@/app/firebase';
 import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/app/firebase-admin';
+import { UserModel } from '@/types/auth/User';
+
+const COLLECTION_NAME = "user"
 
 export async function GET(
     req: NextRequest,
     res: NextResponse
 ) {
-    // Get the action to complete.
-    const mode = req.nextUrl.searchParams.get('mode');
-    // Get the one-time code from the query parameter.
-    const actionCode = req.nextUrl.searchParams.get('oobCode');
-    // (Optional) Get the continue URL from the query parameter if available.
-    const continueUrl = req.nextUrl.searchParams.get('continueUrl');
-    // (Optional) Get the language code if available.
-    const lang = req.nextUrl.searchParams.get('lang') || 'en';
+    const userId = req.nextUrl.searchParams.get('userId')
 
-    // Configure the Firebase SDK.
-    // This is the minimum configuration required for the API to be used.
-    // const config = {
-    //     'apiKey': "YOU_API_KEY" // Copy this key from the web initialization
-    //     // snippet found in the Firebase console.
-    // };
-    // const app = initializeApp(config);
-    // const auth = getAuth(app);
+    try {
+        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", userId).get()
 
-    // Handle the user management action.
-    switch (mode) {
-        case 'resetPassword':
-            // Display reset password handler and UI.
-            console.log("test")
-            if (verifyPasswordResetCode(auth, actionCode).then((email) => {
-                return true
-            }).catch(() => {
-                return false
-            }))
-                return NextResponse.redirect(new URL(`/accounts/password/reset/${actionCode}`, req.url))
-        // handleResetPassword(auth, actionCode, continueUrl, lang);
+        if (docRef.docs.length === 0) {
+            return NextResponse.json({ status: 404 })
+        }
 
-        case 'recoverEmail':
-            // Display email recovery handler and UI.
-            // handleRecoverEmail(auth, actionCode, lang);
-            // break;
-            console.log("aa")
-        case 'verifyEmail':
-            console.log('verifyEmail')
-            // Display email verification handler and UI.
-            // return NextResponse.redirect(`/accounts/verifyemail/${actionCode}`)
-            if (handleVerifyEmail(auth, actionCode, continueUrl, lang))
-                // return NextResponse.redirect(new URL(`/accounts/verifyemail/${actionCode}`, req.url))
-                return NextResponse.redirect(new URL(`/home`, req.url))
-            else
-                return NextResponse.redirect(new URL(`/accounts/verifyemail/error`, req.url))
-        default:
-            return NextResponse.redirect(new URL(`/accounts/login`, req.url))
-        // Error: invalid mode.
+        return NextResponse.json(docRef.docs[0].data(), { status: 200 })
+    } catch (error) {
+        console.error(error)
+        return NextResponse.json({ status: 500 })
     }
-    return NextResponse.redirect(new URL(`/home`, req.url))
 }
 
-import { verifyPasswordResetCode, confirmPasswordReset, applyActionCode } from "firebase/auth";
+export async function POST(
+    req: NextRequest,
+    res: NextResponse
+) {
+    const insertData = await req.json();
 
-function handleResetPassword(auth, actionCode, continueUrl, lang) {
-    // Localize the UI to the selected language as determined by the lang
-    // parameter.
+    // docRefを生成
+    const docRef = db.collection(COLLECTION_NAME).doc()
 
-    // Verify the password reset code is valid.
-    verifyPasswordResetCode(auth, actionCode).then((email) => {
-        const accountEmail = email;
+    const newUser = new UserModel(insertData.uid, insertData.email)
 
-        // TODO: Show the reset screen with the user's email and ask the user for
-        // the new password.
-        const newPassword = "...";
+    console.log(newUser)
 
-        // Save the new password.
-        confirmPasswordReset(auth, actionCode, newPassword).then((resp) => {
-            // Password reset has been confirmed and new password updated.
+    if (insertData) {
+        docRef.set(newUser)
+            .then(() => {
+                console.log("Document successfully created!");
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+    }
 
-            // TODO: Display a link back to the app, or sign-in the user directly
-            // if the page belongs to the same domain as the app:
-            // auth.signInWithEmailAndPassword(accountEmail, newPassword);
-
-            // TODO: If a continue URL is available, display a button which on
-            // click redirects the user back to the app via continueUrl with
-            // additional state determined from that URL's parameters.
-        }).catch((error) => {
-            // Error occurred during confirmation. The code might have expired or the
-            // password is too weak.
-        });
-    }).catch((error) => {
-        // Invalid or expired action code. Ask user to try to reset the password
-        // again.
-    });
-}
-
-
-const handleVerifyEmail = async (auth, actionCode, continueUrl, lang) => {
-    // Localize the UI to the selected language as determined by the lang
-    // parameter.
-    // Try to apply the email verification code.
-    const res = await applyActionCode(auth, actionCode).then((resp) => {
-        // Email address has been verified.
-
-        // TODO: Display a confirmation message to the user.
-        // You could also provide the user with a link back to the app.
-
-        // TODO: If a continue URL is available, display a button which on
-        // click redirects the user back to the app via continueUrl with
-        // additional state determined from that URL's parameters.
-        return true
-    }).catch((error) => {
-        // Code is invalid or expired. Ask the user to verify their email address
-        // again.
-        console.log(error)
-        return false
-    });
-
-    console.log(res)
-
-    return res
+    return NextResponse.json({ status: 200 })
 }

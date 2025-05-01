@@ -61,8 +61,6 @@ export async function GET(
                 return NextResponse.json(null, { status: 500 })
             });
 
-        console.log(docRef)
-
         return NextResponse.json(docRef, { status: 200 })
     }
     else if (contentsId) {
@@ -80,12 +78,11 @@ export async function GET(
                 console.log("Error getting documents: ", error);
                 return NextResponse.json(null, { status: 500 })
             });
-        console.log(docRef)
 
         return NextResponse.json(docRef, { status: 200 })
     }
     else {
-        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('date', 'desc').orderBy('updateDate', 'desc').get()
+        const docRef = await db.collection(COLLECTION_NAME).where("uid", "==", uid).orderBy('updateDate', 'desc').get()
             .then(snapshot => {
                 const data = Array()
                 snapshot.forEach((doc) => {
@@ -145,17 +142,18 @@ export async function POST(
     insertData.createDate = Timestamp.fromDate(new Date());
     insertData.updateDate = Timestamp.fromDate(new Date());
 
-    const docId = await db.collection(COLLECTION_NAME).add(insertData)
+    // docRefを生成
+    const docRef = db.collection(COLLECTION_NAME).doc()
+    insertData.contentsId = docRef.id
+
+    docRef.set(insertData)
         .then((res) => {
             console.log("Document successfully created!");
-            return res.id
         })
         .catch((error) => {
             console.log("Error getting documents: ", error);
         });
-
-    insertData.contentsId = docId
-
+        
     // レスポンスを返す前に改行を復元
     insertData.comment = unescapeNewlines(insertData.comment);
 

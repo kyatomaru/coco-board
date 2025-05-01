@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'coco board',
-  description: 'soccer note app',
+  description: 'サッカーノートアプリ - 戦術・試合・練習をスマホで記録 -',
 }
 
 export default function RootLayout({

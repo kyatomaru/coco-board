@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from 'react';
-import TermsPage from '@/components/docs/terms/TermsPage';
+import TermsPage from '@/features/routes/docs/terms/TermsPage';
 
 export default function Home() {
   return (

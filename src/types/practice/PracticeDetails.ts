@@ -1,16 +1,16 @@
 export interface PracticeDetailsType {
-    type: Number,
+    type: number,
     context: string
 }
 
 export class PracticeDetailsModel implements PracticeDetailsType {
-    type: Number
+    type: number
     context: string
 
     constructor() {
         return {
             type: 0,
-            context: undefined
+            context: ""
         }
     }
 }

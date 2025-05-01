@@ -48,7 +48,7 @@ export default function ConfirmModal({ open, setOpen, title, message, confirmTex
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
-            sx={{ zIndex: 2000 }}
+            sx={{ zIndex: 2600 }}
         >
             <Paper sx={style} >
                 <Box sx={{ textAlign: "center", p: 3 }}>

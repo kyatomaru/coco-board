@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, IconButton, Stack, Typography, CircularProgress } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { mainColor } from '@/constants/Color';
 
 interface ImageSelectFormProps {
     selectedFiles: any;
@@ -29,10 +30,6 @@ export const ImageSelectForm: React.FC<ImageSelectFormProps> = ({
             fileInputRef.current.value = '';
         }
     };
-
-    React.useEffect(() => {
-        console.log(selectedFiles)
-    }, [selectedFiles])
 
     return (
         <Box>
@@ -63,10 +60,10 @@ export const ImageSelectForm: React.FC<ImageSelectFormProps> = ({
                                         width: "100%",
                                         height: "200px",
                                         borderRadius: 5,
-                                        background: "rgba(25, 118, 210, 0.08) !important",
-                                        color: "#1976d2",
+                                        background: "rgba(17, 119, 52, 0.08) !important",
+                                        color: mainColor,
                                         '&:hover': {
-                                            background: "rgba(25, 118, 210, 0.12) !important",
+                                            background: "rgba(17, 119, 52, 0.12) !important", 
                                         }
                                     }}
                                 >

@@ -15,7 +15,7 @@ import { MuiColorInput } from 'mui-color-input'
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import AllowPartialScrolling from '@/components/common/AllowPartialScrolling';
+import AllowPartialScrolling from '@/components/AllowPartialScrolling';
 
 type PageProps = {
     frame: any,

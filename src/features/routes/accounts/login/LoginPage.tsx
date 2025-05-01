@@ -1,15 +1,10 @@
 "use client"
 
 import * as React from 'react';
-import LoadingPage from '@/components/common/AuthLoadingPage';
+import LoadingPage from '@/components/AuthLoadingPage';
 import GoogleSignInButton from '../../../common/auth/google/GoogleSignInButton';
-// import LineSignInButton from '../../../components/auths/line/LineSignInButton';
-// import XSignInButton from '../../../components/auths/x/XSignInButton';
-import GoogleSignOutButton from '../../../common/auth/google/GoogleSignOutButton';
-import { useRouter } from 'next/navigation'
-import { onAuthStateChanged, getAuth } from "firebase/auth"
-import { auth } from '@/app/firebase';
-import type { User } from "firebase/auth"
+import AppleSignInButton from '../../../common/auth/apple/AppleSignInButton';
+import LineSignInButton from '@/features/common/auth/line/LineSignInButton';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -18,58 +13,89 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import CardMedia from '@mui/material/CardMedia';
-import LoginBox from './LoginBox';
-
+import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
 
 export default function LoginPage() {
-    const router = useRouter()
+    const [isInstagramWebBrowser, setIsInstagramWebBrowser] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(false)
+    const [error, setError] = React.useState(false)
+
+    React.useEffect(() => {
+        setIsInstagramWebBrowser(checkInstagramWebBrowser())
+    }, [])
+
+    const checkInstagramWebBrowser = () => {
+        /** User Agent 文字列 */
+        const userAgent = window.navigator.userAgent
+        /** Instagram という文字列が含まれているかどうか? を判定する */
+        const isInstagramWebOpen = /Instagram/i.test(userAgent)
+        // console.log('Insta 判定', isInstagramWebOpen)
+        return isInstagramWebOpen
+    };
 
     return (
-        <Container maxWidth="xs" fixed sx={{ mt: { xs: "30px", md: "70px" }, mb: "30px" }}>
-            <Box sx={{ alignItems: "center", px: "25px", pt: "30px", pb: "15px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
-                <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="center"
-                    spacing={2}
-                    sx={{ mb: "40px" }}>
-                    <CardMedia
-                        component="img"
-                        sx={{ width: 50, height: 50 }}
-                        image="/images/icon.png"
-                    />
-                    <Typography sx={{
-                        fontSize: { xs: 25, md: 30 },
-                        fontWeight: "bold",
-                        color: "black"
-                    }}>
-                        coco-board
-                    </Typography>
-                </Stack>
-                <LoginBox />
-                <Divider>
-                    <Typography variant="body1" sx={{ fontSize: 13 }}>
-                        または
-                    </Typography>
-                </Divider>
-                <GoogleSignInButton setIsLoading={setIsLoading} />
-                <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
-                    ※ Googleでログインする場合はSafariもしくはChromeからアプリをご利用ください。
-                </Typography>
-                {/* <LineSignInButton /> */}
-                {/* <XSignInButton /> */}
-            </Box>
-            <Box sx={{ mt: "12px", p: "20px 20px 10px", textAlign: "center", border: "solid 0.5px #b2b2b2" }}>
-                <Typography variant="h5" sx={{ fontSize: 13, color: "black" }}>
-                    アカウントをお持ちでない場合
-                </Typography>
-                <Typography>
-                    <Button href='/accounts/signup' size="medium" sx={{ height: "30px", fontSize: 13 }} >
-                        登録する
-                    </Button>
-                </Typography>
-            </Box>
-        </Container>
+        <>
+            {isLoading ?
+                <LoadingPage />
+                : 
+                <Box  sx={{
+                    width: '100%', zIndex: 2500, backgroundColor: "white"
+                }}>
+                    <Container maxWidth="xs" fixed sx={{ px: 0,position: "relative", height: "100vh" }}>
+                        <Box sx={{ px: 3, alignItems: "center", pt: "30px", pb: "15px", textAlign: "center" }}>
+                            <Stack
+                                direction="row"
+                                alignItems="center"
+                                justifyContent="center"
+                                spacing={2}
+                                sx={{ mb: "40px" }}>
+                                <CardMedia
+                                    component="img"
+                                    sx={{ width: 50, height: 50 }}
+                                    image="/images/icon.png"
+                                />
+                                <Typography sx={{
+                                    fontSize: { xs: 25, md: 30 },
+                                    fontWeight: "bold",
+                                    color: "black"
+                                }}>
+                                    coco-board
+                                </Typography>
+                            </Stack>
+                            {isInstagramWebBrowser
+                                ? <DefaultBrowserModal />
+                                : <Box>
+                                    <Box sx={{ mb: 3 }}>
+                                        <Typography variant="h5" sx={{ textAlign: "center", fontSize: "20px", fontWeight: 400, color: "black" }}>
+                                            coco-boardでサッカーの記録を始めましょう。
+                                        </Typography>
+                                    </Box>
+                                    <GoogleSignInButton setIsLoading={setIsLoading} setError={setError} />
+                                    <AppleSignInButton setIsLoading={setIsLoading} setError={setError} />
+                                    <LineSignInButton setIsLoading={setIsLoading} setError={setError} /> 
+
+                                    {error &&
+                                        <Box sx={{ mb: "5px" }}>
+                                            <Typography variant="body1" sx={{ fontSize: 12, color: "red" }}>
+                                                ログインに失敗しました。
+                                            </Typography>
+                                            <Typography variant="body1" sx={{ fontSize: 12, color: "red" }}>
+                                                ブラウザをリロードして再度ログインしてください。
+                                            </Typography>
+                                        </Box>
+                                    }
+
+                                    <Box sx={{ mt: "30px" }}>
+                                        <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
+                                            続行すると、利用規約とプライバシーポリシーに同意したことになります。
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            }
+                        </Box>
+                    </Container >
+                </Box>
+            }
+        </>
     );
 }

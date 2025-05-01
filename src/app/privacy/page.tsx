@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from 'react';
-import PrivacyPage from '@/components/docs/privacy/PrivacyPage';
+import PrivacyPage from '@/features/routes/docs/privacy/PrivacyPage';
 
 export default function Home() {
   return (

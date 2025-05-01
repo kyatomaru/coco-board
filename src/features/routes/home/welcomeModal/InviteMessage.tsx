@@ -8,8 +8,6 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
-import MenuList from '@mui/material/MenuList'
-import MenuItem from '@mui/material/MenuItem'
 import IosShareIcon from '@mui/icons-material/IosShare';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Stack from '@mui/material/Stack';
@@ -37,7 +35,7 @@ export default function InviteMessage({ previousPage, nextPage }: PageProps) {
     return (
         <Box>
             <Box sx={{ textAlign: "center", p: 3 }}>
-                <Typography variant="body1" sx={{ color: "black", fontSize: 16, pb: 4 }}>
+                <Typography variant="body1" sx={{ color: "black", fontSize: 16, pb: 3 }}>
                     スマートフォン / タブレットでご利用の方は
                     <br />
                     以下の方法でcoco-boardをホーム画面に追加できます！

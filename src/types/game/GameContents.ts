@@ -1,75 +1,79 @@
 import { type GameFeedbackType, GameFeedbackModel } from "./GameFeedback"
+import { type GameTeamType, GameTeamModel } from "./GameTeam"
+import { type BoardType } from "../board/Board"
 
 export interface GameContentsType {
-    contentsId: String,
+    contentsId: string,
     createDate: Date,
     updateDate: Date,
-    uid: String,
-    date: String,
-    title: String,
-    weather: String,
-    place: String,
-    injury: String,
-    condition: Number,
-    fatigue: Number,
-    name1: String,
-    score1: String,
-    name2: String,
-    score2: String,
-    position: String,
+    uid: string,
+    date: string,
+    title: string,
+    weather: string,
+    place: string,
+    injury: string,
+    condition: number,
+    fatigue: number,
+    teams: Array<GameTeamType>,
+    name1?: string,
+    score1?: string,
+    name2?: string,
+    score2?: string,
+    position: string,
     goodPoints: Array<GameFeedbackType>,
     badPoints: Array<GameFeedbackType>,
-    next: String,
-    comment: String,
-    images?: string[]
+    next: string,
+    comment: string,
+    images?: string[],
+    boardIds?: string[]
 }
 
 export class GameContentsModel implements GameContentsType {
-    contentsId: String
+    contentsId: string
     createDate: Date
     updateDate: Date
     uid: string
-    date: String
-    title: String
-    weather: String
-    place: String
+    date: string
+    title: string
+    weather: string
+    place: string
     injury: string
-    condition: Number
-    fatigue: Number
-    name1: String
-    score1: String
-    name2: String
-    score2: String
-    position: String
+    condition: number
+    fatigue: number
+    teams: Array<GameTeamType>
+    name1?: string
+    score1?: string
+    name2?: string
+    score2?: string
+    position: string
     goodPoints: Array<GameFeedbackType>
     badPoints: Array<GameFeedbackType>
-    next: String
-    comment: String
+    next: string
+    comment: string
     images?: string[]
+    boardIds?: string[]
 
-    constructor(date) {
+    constructor(date: string) {
         return {
-            contentsId: undefined,
+            contentsId: null,
             createDate: new Date(),
             updateDate: new Date(),
-            uid: undefined,
+            uid: "",
             date: date,
-            title: undefined,
+            title: "",
             weather: "",
-            place: undefined,
-            injury: undefined,
+            place: "",
+            injury: "",
             condition: 0,
             fatigue: 0,
-            name1: undefined,
-            score1: undefined,
-            name2: undefined,
-            score2: undefined,
-            position: undefined,
+            teams: [new GameTeamModel()],
+            position: "",
             goodPoints: [new GameFeedbackModel()],
             badPoints: [new GameFeedbackModel()],
-            next: undefined,
-            comment: undefined,
-            images: []
+            next: "",
+            comment: "",
+            images: [],
+            boardIds: []
         }
     }
 }

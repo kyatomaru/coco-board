@@ -2,11 +2,11 @@
 
 import * as React from 'react';
 import { useRouter, useParams } from 'next/navigation'
-import LoadingPage from '@/components/common/AuthLoadingPage';
+import LoadingPage from '@/components/AuthLoadingPage';
 import { useIsAuth } from '@/hooks/auth/useIsAuth';
 import { auth } from '@/app/firebase';
 import Container from '@mui/material/Container';
-import Footer from "@/components/common/Footer";
+import Footer from "@/components/Footer";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import type { User } from 'firebase/auth';
 import TaskBox from '@/features/routes/task/TaskBox';
