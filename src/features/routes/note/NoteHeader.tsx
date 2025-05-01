@@ -49,6 +49,10 @@ const IsToday = (date) => {
     return useIsToday(date)
 }
 
+const DataFormat = (date: String) => {
+    return useDateFormat(date)
+}
+
 
 export default function NoteHeader({ date, setDate, displayMenu, setDisplayMenu, showCalendar, setShowCalendar }: PageProps) {
     const currentMonth = startOfMonth(new Date());
@@ -102,7 +106,7 @@ export default function NoteHeader({ date, setDate, displayMenu, setDisplayMenu,
                         </Typography>
                         :
                         <Typography component="h2" fontSize={15}>
-                            {useDateFormat(String(date))}
+                            {DataFormat(String(date))}
                         </Typography>
                     }
                 </Stack>

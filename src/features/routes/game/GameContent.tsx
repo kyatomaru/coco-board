@@ -20,19 +20,9 @@ type PageProps = {
     boards: BoardType[]
 }
 
-const modalStyle = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    minWidth: 320,
-    width: "400px",
-    maxWidth: '100%',
-    zIndex: 2200,
-    outline: "none",
-};
+const DataFormat = (date: String) => {
+    return useDateFormat(date)
+}
 
 
 export default function GameContent({ content, boards }: PageProps) {
@@ -47,7 +37,7 @@ export default function GameContent({ content, boards }: PageProps) {
                             {content.title || "無題のノート"}
                         </Typography>
                         <Typography variant="h6" sx={{ fontSize: 13, color: "black" }} component="div">
-                            {useDateFormat(content.date)}
+                            {DataFormat(content.date)}
                         </Typography>
                     </Box>
                     <Stack direction="row" alignItems="center" sx={{ p: 1, mx: 1 }} spacing={1}>
@@ -90,7 +80,7 @@ export default function GameContent({ content, boards }: PageProps) {
                 content.teams && content.teams[0]?.team &&
                     <List sx={{ mx: 2 }}>
                         {content.teams.map((team, index) => (
-                        <Stack direction="row" justifyContent="space-between" sx={{ my: 1 }}>
+                        <Stack key={index} direction="row" justifyContent="space-between" sx={{ my: 1 }}>
                                 <Stack direction="row" alignItems="center" >
                                 <Typography variant="body2" color="text.secondary" sx={{ fontSize: 12, mr: 1 }}>
                                     VS

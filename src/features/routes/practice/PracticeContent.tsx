@@ -41,19 +41,9 @@ type PageProps = {
     boards: any[]
 }
 
-const modalStyle = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    minWidth: 320,
-    width: "400px",
-    maxWidth: '100%',
-    zIndex: 2200,
-    outline: "none",
-};
+const DataFormat = (date: String) => {
+    return useDateFormat(date)
+}
 
 export default function PracticeContent({ content, boards }: PageProps) {
     const router = useRouter()
@@ -67,6 +57,9 @@ export default function PracticeContent({ content, boards }: PageProps) {
                             <Box sx={{ width: "100%", alignItems: "center", p: 1, mx: 1  }} >
                                 <Typography variant="h6" sx={{ fontSize: 16, color: "black" }} component="div">
                                     {content.title || "無題のノート"}
+                                </Typography>
+                                <Typography variant="h6" sx={{ fontSize: 13, color: "black" }} component="div">
+                                    {DataFormat(content.date)}
                                 </Typography>
                             </Box>
                             <Stack direction="row" alignItems="center" sx={{ p: 1, mx: 1 }} spacing={1}>

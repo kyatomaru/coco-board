@@ -207,7 +207,7 @@ export default function GameNote({ user, allContents, content, setContents, boar
                                 content.teams && content.teams[0]?.team &&
                                     <List sx={{ mx: 2 }}>
                                         {content.teams.map((team, index) => (
-                                        <Stack direction="row" justifyContent="space-between" sx={{ my: 1 }}>
+                                        <Stack key={index} direction="row" justifyContent="space-between" sx={{ my: 1 }}>
                                              <Stack direction="row" alignItems="center" >
                                                 <Typography variant="body2" color="text.secondary" sx={{ fontSize: 12, mr: 1 }}>
                                                     VS
