@@ -31,6 +31,7 @@ type PageProps = {
 }
 
 export default function InviteHomeScreenView({tutorialStep, setTutorialStep}: PageProps) {
+    const router = useRouter()
 
     return (
         <Box 
@@ -98,7 +99,10 @@ export default function InviteHomeScreenView({tutorialStep, setTutorialStep}: Pa
                 </Box>
                 <BottomBar>
                     <Button
-                        onClick={() => {setTutorialStep(tutorialStep + 1)}}
+                        onClick={() => {
+                            localStorage.removeItem('isNewUser')
+                            router.push('/note')}
+                        }
                         variant="contained"
                         sx={{
                             backgroundColor: '#2e7d32 !important',

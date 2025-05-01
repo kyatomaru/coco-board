@@ -35,13 +35,14 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
         {tutorialStep == 0 ? (
           <LoginPage />
-        ) : tutorialStep == 1 ? (
+        ) : tutorialStep == 1 && (
           <InviteHomeScreenView tutorialStep={tutorialStep} setTutorialStep={setTutorialStep} />
-        ) : (
-          <PlanPage user={user} backPage={() => {
-            localStorage.removeItem('isNewUser')
-            router.push('/note')
-          }} />
+        // ) : (
+        //   <PlanPage user={user} backPage={() => {
+        //     localStorage.removeItem('isNewUser')
+        //     router.push('/note')
+        //   }} />
+        // )
         )}
     </main >
   )

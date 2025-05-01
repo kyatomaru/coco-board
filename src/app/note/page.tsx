@@ -90,7 +90,7 @@ export default function Home() {
                 </Box>
                   :
                 <Box>
-                  <CreateButton onClick={() => { (!isSubscriptionValid && allBoard.length >= 10) ? (router.push('/plan')) : (window.scrollTo(0, 0), setIsBoardCreateModal(true)) }} />
+                  <CreateButton onClick={() => { (false && !isSubscriptionValid && allBoard.length >= 10) ? (router.push('/plan')) : (window.scrollTo(0, 0), setIsBoardCreateModal(true)) }} />
                   <BoardCardBox user={user} contents={board} setContents={setBoard} date={date} menu={isBoardCreateModal} setMenu={setIsBoardCreateModal} />
                 </Box>
               }
