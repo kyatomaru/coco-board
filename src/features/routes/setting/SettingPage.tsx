@@ -35,7 +35,7 @@ export default function SettingPage({ isSubscriptionValid }: PageProps) {
             <LogoutConfirmModal open={logoutModalOpen} setOpen={setLogoutModalOpen} />
             <Box sx={{ width: '100%', maxWidth: 600, mx: 'auto' }}>
                 <List sx={{ px: 2}}>
-                    <Card sx={{ borderRadius: "10px", boxShadow: "none" }}>
+                    {/* <Card sx={{ borderRadius: "10px", boxShadow: "none" }}>
                         <ListItem disablePadding>
                             <ListItemButton component="a" href="/plan">
                                 <ListItemIcon sx={{ minWidth: 40 }}>
@@ -48,7 +48,7 @@ export default function SettingPage({ isSubscriptionValid }: PageProps) {
                             </ListItemButton>
                         </ListItem>
                     </Card>
-                    <Divider />
+                    <Divider /> */}
                     <Card sx={{ borderRadius: "10px", boxShadow: "none" }}>
                         <ListItem disablePadding>
                             <ListItemButton component="a" href="/contact" target='_blank'>

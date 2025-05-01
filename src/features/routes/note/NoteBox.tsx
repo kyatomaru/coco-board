@@ -170,7 +170,7 @@ export default function NoteCardBox({ user, contents, setContents, boards, date,
                 </Tabs>
             </Box>
 
-            {isLimited && !isSubscriptionValid ?
+            {(false && isLimited && !isSubscriptionValid) ?
                 <CustomTabPanel value={tabValue} index={0}>
                     <InviteSubscribe /> 
                 </CustomTabPanel>
