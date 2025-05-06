@@ -8,15 +8,11 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import BoardCardBox from '@/features/routes/board/BoardCardBox';
 import NoteBox from '@/features/routes/note/NoteBox';
-import type { User } from 'firebase/auth';
-import { auth } from '../firebase';
-import { onAuthStateChanged, getAuth } from "firebase/auth"
 import LeftBar from '@/components/LeftBar';
 import NoteHeader from '@/features/routes/note/NoteHeader';
 import CreateButton from '@/features/common/button/CreateButton';
 import { useGetAllNote } from '@/hooks/note/useGetAllNote';
 import { useGetAllBoard } from '@/hooks/board/useGetAllBoard';
-
 import { useGetNote } from '@/hooks/note/useGetDateNote';
 import { useGetBoard } from '@/hooks/board/useGetDateBoard';
 import WelcomeModal from '@/features/routes/home/welcomeModal/WelcomeModal';

@@ -14,15 +14,6 @@ import BoardViewForm from '@/features/common/forms/board/BoardViewForm';
 import { BoardModel } from '@/types/board/Board';
 import { useInsertBoard } from '@/hooks/board/useInsertBoard';
 import GameForm from '@/features/common/forms/game/GameForm';
-import { GameContentsModel } from '@/types/game/GameContents';
-import { useInsertGame } from '@/hooks/game/useInsertGame';
-import PracticeForm from '@/features/common/forms/practice/PracticeForm';
-import { PracticeContentsModel } from '@/types/practice/PracticeContents';
-import { useInsertPractice } from '@/hooks/practice/useInsertPractice'
-import TaskForm from '@/features/common/forms/task/TaskForm';
-import { TaskModel } from '@/types/task/Task';
-import { useInsertTask } from '@/hooks/task/useInsertTask';
-import LeftBar from '@/components/LeftBar';
 import dayjs from 'dayjs';
 import LoadingPage from '@/components/LoadingPage';
 
