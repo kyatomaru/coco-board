@@ -176,7 +176,7 @@ export default function Player({ board, beforeCourtId, courtWidth, courtHeight, 
             bounds={{ left: -getDiameter(), top: -getDiameter(), right: courtWidth - getDiameter(), bottom: courtHeight - getDiameter() }}
             position={{ x: isDrag ? getX(currentFrame) : getX(currentFrame) + getDiameter() / 4, y: isDrag ? getY(currentFrame) : getY(currentFrame) + getDiameter() / 4 }}
             onStart={onDragStart} onStop={onDragEnd}>
-            <Box sx={{ position: "relative", zIndex: 200 }} className={`player${index}`}>
+            <Box sx={{ position: "relative", zIndex: 200, cursor: "pointer" }} className={`player${index}`}>
                 <Box sx={circleStyle(isDrag ? getDiameter() + 10 : getDiameter(), getX(currentFrame), getY(currentFrame), courtWidth - getDiameter(), courtHeight - getDiameter(), isSelect(), isPlay)}>
                     <Box sx={playerStyle(isDrag ? getDiameter() + 10 : getDiameter(), getX(currentFrame), getY(currentFrame), courtWidth - getDiameter(), courtHeight - getDiameter(), frame[currentFrame].players[index].color)} >
                         <Typography sx={{ display: "block", fontSize: board.setting.isSeeNumber ? 10 : 8, fontWeight: "bold", lineHeight: 0 }}>
