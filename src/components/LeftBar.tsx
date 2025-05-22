@@ -83,7 +83,7 @@ export default function LeftBar(props) {
                                 />
                             </IconButton>
                             <Typography variant="h6" component="h2" sx={{ display: { md: "none", lg: "block" }, pl: 2 }}>
-                                coco-board
+                                CocoBoard
                             </Typography>
                         </Stack>
 

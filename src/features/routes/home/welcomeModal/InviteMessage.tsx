@@ -35,15 +35,15 @@ export default function InviteMessage({ previousPage, nextPage }: PageProps) {
     return (
         <Box>
             <Box sx={{ textAlign: "center", p: 3 }}>
-                <Typography variant="body1" sx={{ color: "black", fontSize: 16, pb: 3 }}>
+                <Typography variant="body1" sx={{ color: "black", fontSize: 16, pb: 3, textAlign: "left" }}>
                     スマートフォン / タブレットでご利用の方は
                     <br />
-                    以下の方法でcoco-boardをホーム画面に追加できます！
+                    以下の方法でCocoBoardをホーム画面に追加できます！
                 </Typography>
-                <Typography variant="body1" sx={{ color: "black", fontSize: 14, pb: 1 }}>
+                <Typography variant="body1" sx={{ color: "black", fontSize: 14, pb: 1, textAlign: "left" }}>
                     iOS:「{<IosShareIcon />}」から「ホーム画面に追加」
                 </Typography>
-                <Typography variant="body1" sx={{ color: "black", fontSize: 14, pb: 1 }}>
+                <Typography variant="body1" sx={{ color: "black", fontSize: 14, pb: 1, textAlign: "left" }}>
                     Android:「{<MoreVertIcon />}」から「ホーム画面に追加」
                 </Typography>
             </Box>

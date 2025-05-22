@@ -17,7 +17,7 @@ export default function TermsPage() {
                         利用規約
                     </Typography>
                     <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                        発行日: 2025年3月1日
+                        発行日: 2025年5月23日
                     </Typography>
                 </Box>
 
@@ -25,14 +25,14 @@ export default function TermsPage() {
                     <Box sx={{ py: 4 }}>
                         <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>1. はじめに</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            本利用規約（以下「本規約」）は、coco-board（以下「本アプリ」）の利用に関する条件を定めるものです。本アプリを利用することにより、ユーザーは本規約に同意したものとみなされます。                        </Typography>
+                            本利用規約（以下「本規約」）は、CocoBoard（以下「本アプリ」）の利用に関する条件を定めるものです。本アプリを利用することにより、ユーザーは本規約に同意したものとみなされます。                        </Typography>
                         <Divider sx={{ my: 4 }} />
                     </Box>
 
                     <Box sx={{ py: 4 }}>
                         <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>2. 定義</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            ・本アプリとはcoco-boardのことを指し、サッカーの戦術・試合・練習の記録を行うためのWebアプリケーションを意味します。
+                            ・本アプリとはCocoBoardのことを指し、サッカーの戦術ボードを作成するためのWebアプリケーションを意味します。
                         </Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
                             ・ユーザーとは本アプリを利用するすべての個人を指します。
@@ -43,7 +43,7 @@ export default function TermsPage() {
                     <Box sx={{ py: 4 }}>
                         <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>3. アカウントの作成と管理</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            ユーザーは、正確かつ最新の情報を提供してアカウントを作成する必要があります。アカウント作成に必要な情報はメールアドレスのみです。Googleでログインする場合は、Googleの認証システムを利用します。アカウント情報の機密性を保持し、不正利用を防止する責任はユーザーにあります。
+                            ユーザーは、正確かつ最新の情報を提供してアカウントを作成する必要があります。アカウント作成に必要な情報はメールアドレスのみです。Google認証, Apple認証, LINE認証を通じてアカウントを作成します。アカウント情報の機密性を保持し、不正利用を防止する責任はユーザーにあります。
                         </Typography>
                         <Divider sx={{ my: 4 }} />
                     </Box>
@@ -59,7 +59,7 @@ export default function TermsPage() {
                     <Box sx={{ py: 4 }}>
                         <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>5. 収集する情報</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            本アプリは、ユーザーのメールアドレスを収集します。また、Google認証を利用する場合は、Googleから提供される情報も取得しますが、これらの情報は直接使用しません。詳細はプライバシーポリシーをご参照ください。収集した情報は、ユーザーの識別とメール配信のために利用します。
+                            本アプリは、ユーザーのメールアドレスを収集します。また、Google認証, Apple認証, LINE認証を利用する場合は、Google, Apple, LINEから提供される情報も取得しますが、これらの情報は直接使用しません。詳細はプライバシーポリシーをご参照ください。収集した情報は、ユーザーの識別とメール配信のために利用します。
                         </Typography>
                         <Divider sx={{ my: 4 }} />
                     </Box>
@@ -74,7 +74,7 @@ export default function TermsPage() {
                     <Box sx={{ py: 4 }}>
                         <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>7. 禁止事項</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            法律や公序良俗に反する行為は一切禁止します。特に禁止する行為については今のところありませんが、今後追加される可能性があります。                        </Typography>
+                            法律や公序良俗に反する行為は一切禁止します。特に禁止する行為については今のところありませんが、今後追加される可能性があります。</Typography>
                         <Divider sx={{ my: 4 }} />
                     </Box>
 

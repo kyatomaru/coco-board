@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import CardMedia from '@mui/material/CardMedia';
 import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
+import InfoFooter from '@/components/InfoFooter';
 
 export default function LoginPage() {
     const [isInstagramWebBrowser, setIsInstagramWebBrowser] = React.useState(false)
@@ -85,10 +86,20 @@ export default function LoginPage() {
                                         </Box>
                                     }
 
+                                    <Typography variant="body1" sx={{ fontSize: 14, color: "red" }}>
+                                        X(旧Twitter)で開いている方はSafariかChromeで開いてください。
+                                    </Typography>
+
+
                                     <Box sx={{ mt: "30px" }}>
                                         <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
                                             続行すると、利用規約とプライバシーポリシーに同意したことになります。
                                         </Typography>
+                                        <Box sx={{ mt: 3,display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: 1 }}>
+                                            <Button size='small' target='_blank' href='/privacy' sx={{ fontSize: 12, color: "gray", width: "150px" }}>プライバシー</Button>
+                                        
+                                            <Button size='small' target='_blank' href='/terms' sx={{ fontSize: 12, color: "gray", width: "150px" }}>利用規約</Button>
+                                        </Box>
                                     </Box>
                                 </Box>
                             }

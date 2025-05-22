@@ -9,9 +9,10 @@ export const useIsAuth = async (router) => {
         onAuthStateChanged(auth, (user) => {
             if (user == undefined) {
                 router.replace('/accounts/login')
-            } else {
-                if (localStorage.getItem("isNewUser") === "true") router.replace('/welcome')
-            }
+            } 
+            // else {
+            //     if (localStorage.getItem("isNewUser") === "true") router.replace('/welcome')
+            // }
         })
     }, []);
 }
