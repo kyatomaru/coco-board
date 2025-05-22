@@ -24,11 +24,11 @@ export default function WelcomeMessage({ nextPage }: PageProps) {
         <Box>
             <Box sx={{ textAlign: "center", p: 2 }}>
                 <Typography variant="h5" sx={{ color: "black", pb: 1 }}>
-                    ようこそcoco-boardへ！
+                    ようこそCocoBoardへ！
                 </Typography>
-                <Typography variant="body1" sx={{ color: "black", fontSize: 15, py: 1 }}>
-                    coco-boardは戦術・試合・練習の記録ができるアプリです。
-                    サッカーの振り返りにご活用いただけますと幸いです。
+                <Typography variant="body1" sx={{ color: "black", fontSize: 15, py: 1, textAlign: "left" }}>
+                    CocoBoardはサッカーの戦術ボードアプリです。<br />
+                    戦術の振り返りにご活用いただけますと幸いです。
                 </Typography>
             </Box>
             <Divider />

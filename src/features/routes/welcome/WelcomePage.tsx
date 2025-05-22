@@ -49,7 +49,7 @@ export default function WelcomePage() {
             <Box sx={mainImageStyle} />
             <Box sx={{ backgroundColor: "rgba(0, 0, 0, 0.4)", position: "absolute", top: 0, right: 0, width: "100%", height: "100%" }} />
                 <Box sx={{ height: { xs: 460, md: 500, lg: 540 }, ml: { md: 10, lg: 30 }, zIndex: 1300, position: "relative" }}>
-                    <Box sx={{ pl: { xs: "20px", md: "30px" }, pr: { xs: "10px", md: "20px" }, textAlign: { xs: "center", md: "unset" } }}>
+                    <Box sx={{ px: { xs: "10px", md: "20px" }, textAlign: { xs: "center", md: "unset" } }}>
                         <Box sx={{ pt: { xs: "200px", md: "150px" }, }}>
                             <Box sx={{ mb: 2, display: "flex", flexDirection: { xs: "column", md: "row" } }}>
                                 <Typography variant="h1" sx={{
@@ -72,7 +72,7 @@ export default function WelcomePage() {
                         </Box>
                     </Box>
                 </Box>
-                <Box sx={{ position: "relative", zIndex: 1200, background: "white", width: "100%", mt: 5, pl: { xs: "20px", md: "30px" }, pr: { xs: "10px", md: "20px" } }} >
+                <Box sx={{ position: "relative", zIndex: 1200, background: "white", width: "100%", mt: 5, px: { xs: "10px", md: "20px" } }} >
                     <Box sx={{ textAlign: "center", py: 7, margin: "auto", display: "flex", flexDirection: { xs: "column", md: "row-reverse" }, alignItems: { xs: "center", md: "flex-start" }, justifyContent: "center", gap: { xs: 0, md: 4 }}}>
                         <Box sx={{ mt: { xs: 0, md: 20 }}}>
                             <Typography sx={{ fontSize: { xs: 20, md: 30 }, mb: 2, mx: 3, fontWeight: 500, color: mainColor }}>CocoBoard</Typography>

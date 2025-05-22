@@ -57,7 +57,7 @@ export default function Footer() {
                     <Button size='small' target='_blank' href='/privacy' sx={{ fontSize: 12, color: "gray" }}>プライバシー</Button>
                     <Button size='small' target='_blank' href='/terms' sx={{ fontSize: 12, color: "gray" }}>利用規約</Button>
                     <Button size='small' target='_blank' href='/contact' sx={{ fontSize: 12, color: "gray" }}>お問い合わせ</Button>
-                    <Button size='small' target='_blank' href='https://www.instagram.com/coco_board/' sx={{ fontSize: 12, color: "gray" }}>Instagram</Button>
+                    <Button size='small' target='_blank' href='https://www.instagram.com/coco_board/' sx={{ fontSize: 12, color: "gray", textTransform: "lowercase" }}>Instagram</Button>
                 </Stack>
             </Stack>
             <Box sx={{ display: { xs: 'block', sm: 'none' }, py: 1 }}>
@@ -70,7 +70,7 @@ export default function Footer() {
                     <Button size='small' target='_blank' href='/privacy' sx={{ fontSize: 11, color: "gray" }}>プライバシー</Button>
                     <Button size='small' target='_blank' href='/terms' sx={{ fontSize: 11, color: "gray" }}>利用規約</Button>
                     <Button size='small' target='_blank' href='/contact' sx={{ fontSize: 11, color: "gray" }}>お問い合わせ</Button>
-                    <Button size='small' target='_blank' href='https://www.instagram.com/coco_board/' sx={{ fontSize: 11, color: "gray" }}>Instagram</Button>
+                    <Button size='small' target='_blank' href='https://www.instagram.com/coco_board/' sx={{ fontSize: 11, color: "gray", textTransform: "lowercase" }}>Instagram</Button>
                 </Stack>
                 <Box sx={{ width: "100%", height: 30, display: "inline-flex", alignItems: "center" }}>
                     <Typography sx={{ fontSize: 11, color: "gray", mx: "auto", alignItems: "center", letterSpacing: 0.8 }}>© 2024 coco-board</Typography>

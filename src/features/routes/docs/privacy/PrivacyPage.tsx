@@ -17,7 +17,7 @@ export default function PrivacyPage() {
                         プライバシーポリシー
                     </Typography>
                     <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                        発行日: 2024年6月17日
+                        発行日: 2025年5月23日
                     </Typography>
                 </Box>
 
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
                     <Box sx={{ py: 4 }}>
                         <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>1. はじめに</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            coco-board（以下「本アプリ」）は、ユーザーのプライバシーを尊重し、ユーザーの個人情報を保護することをお約束します。本プライバシーポリシーは、本アプリにおいて収集する個人情報の種類、その利用方法、およびユーザーの権利について説明します。
+                            CocoBoard（以下「本アプリ」）は、ユーザーのプライバシーを尊重し、ユーザーの個人情報を保護することをお約束します。本プライバシーポリシーは、本アプリにおいて収集する個人情報の種類、その利用方法、およびユーザーの権利について説明します。
                         </Typography>
                         <Divider sx={{ my: 4 }} />
                     </Box>
@@ -36,10 +36,10 @@ export default function PrivacyPage() {
                             本アプリは、以下の情報を収集します：
                         </Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            ・メールアドレス（独自のメールアドレス認証およびGoogle認証を通じて収集）
+                            ・メールアドレス（Google認証, Apple認証, LINE認証を通じて収集）
                         </Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            ・Google認証の場合、以下の情報がGoogleから提供されますが、直接使用することはありません:
+                            ・以下の情報がGoogle, Apple, LINEから提供されますが、直接使用することはありません:
                         </Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786", pl: 2 }}>
                             ・ユーザー数とセッション数 <br />
@@ -58,10 +58,7 @@ export default function PrivacyPage() {
                     <Box sx={{ py: 4 }}>
                         <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>3. 情報の収集方法</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            ・メールアドレス認証の場合、メールアドレスとパスワードをユーザーから入力してもらいます。
-                        </Typography>
-                        <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            ・Google認証はFirebaseで提供されるGoogle認証を使用しています。
+                            ・Google認証, Apple認証, LINE認証はFirebaseで提供される認証を使用しています。
                         </Typography>
                         <Divider sx={{ my: 4 }} />
                     </Box>
@@ -129,7 +126,7 @@ export default function PrivacyPage() {
                     <Box sx={{ py: 4 }}>
                         <Typography variant="h2" sx={{ fontSize: "1.9rem", fontWeight: 700, mb: "24px", color: "black" }}>10. お問い合わせ</Typography>
                         <Typography variant="body1" sx={{ fontSize: "1rem", color: "#657786" }}>
-                            プライバシーポリシーについてのご質問やご意見がある場合は、「cocoboard125@gmail.com」の連絡先までお問い合わせください
+                            プライバシーポリシーについてのご質問やご意見がある場合は、「coco.board.official@gmail.com」の連絡先までお問い合わせください
                         </Typography>
                     </Box>
                 </Box>
