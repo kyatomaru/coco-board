@@ -98,58 +98,52 @@ export default function WelcomePage() {
                         </Box>
                     </Box>
 
-                    <Box sx={{ textAlign: "center", py: 7, margin: "auto", display: "flex", flexDirection: { xs: "column", md: "row" }, alignItems: { xs: "center", md: "flex-start" }, justifyContent: "center", gap: { xs: 0, md: 4 }}}>
-                        <Box sx={{ mt: { xs: 0, md: 20 }}}>
-                            <Typography sx={{ fontSize: { xs: 20, md: 30 }, mb: 2, mx: 3, fontWeight: 500, color: mainColor }}>アニメーション作成</Typography>
-                            <Typography sx={{ px: 2, color: "#666", fontWeight: 600, fontSize: { xs: 14, md: 18 } }}>
-                                誰でも簡単にアニメーションを作成することができます
-                            </Typography>
-                            <Typography sx={{ px: 2, color: "#666", fontWeight: 600, fontSize: { xs: 14, md: 18 } }}>
-                                大切な1シーンを保存しましょう
-                            </Typography>
-                        </Box>
-                        <Box sx={{ position: "relative", mt: { xs: 2, md: 0 } }}>
-                            <Box sx={{ position: "absolute", zIndex: 500, top: 0, left: -23, width: 300, height: 600, backgroundImage: "url(/images/welcomePage/smart-phone.png)", backgroundSize: "cover" }} />
+                    <Box sx={{  py: 7, px: { xs: 0, md: 3 }, maxWidth: 1000, margin: "auto"}}>
+                        <Typography sx={{ fontSize: { xs: 20, md: 30 }, mb: 3, color: mainColor, textAlign: "center" }}>利用の流れ</Typography>
+                        <Box sx={{ display: "flex", justifyContent: "flex-start", flexDirection: { xs: "column", md: "row" }, gap: { xs: "100px", md: 2 }}}>
+                            <Box sx={{ width: { xs: "100%", md: 380}, textAlign: "center", mx: "auto", display: "flex", flexDirection: { xs: "column" }, alignItems: { xs: "center", md: "flex-start" }, justifyContent: "flex-start", gap: { xs: 0, md: 2 }}}>
+                                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", mx: { xs: 2, md: "auto" }}}>
+                                    <Typography sx={{ fontSize: { xs: 14, md: 20 }, mb: 2, fontWeight: 600, color: mainColor }}>STEP1. アニメーション作成</Typography>
+                                    <Typography sx={{ color: "#666", fontWeight: 600, fontSize: { xs: 12, md: 14 }, textAlign: "left" }}>
+                                        監督やキャプテンは共有したい戦術シーンのアニメーションを作成します
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ position: "relative", mt: { xs: 2, md: 0 }, mx: "auto" }}>
+                                    <Box sx={{ position: "absolute", zIndex: 500, top: 0, left: -23, width: 300, height: 600, backgroundImage: "url(/images/welcomePage/smart-phone.png)", backgroundSize: "cover" }} />
 
-                            <CardMedia
-                                component='video'
-                                autoPlay
-                                playsInline
-                                muted
-                                loop
-                                image="/videos/video2.mp4"
-                                sx={{ margin: "auto", mt: 3, width: 255, position: "relative", zIndex: 1000, borderRadius: 10 }}
-                            />
-                        </Box>
-                    </Box>
+                                    <CardMedia
+                                        component='video'
+                                        autoPlay
+                                        playsInline
+                                        muted
+                                        loop
+                                        image="/videos/video2.mp4"
+                                        sx={{ margin: "auto", mt: 3, width: 255, position: "relative", zIndex: 1000, borderRadius: 10 }}
+                                    />
+                                </Box>
+                            </Box>
                    
 
-                    <Box sx={{ textAlign: "center", py: 7, maxWidth: 450, margin: "auto" }}>
-                        <Box sx={{ mt: { xs: 0, md: 20 }}}>
-                            <Typography sx={{ fontSize: { xs: 20, md: 30 }, mb: 2, mx: 3, fontWeight: 500, color: mainColor }}>LINEで共有</Typography>
-                            <Typography sx={{ px: 2, color: "#666", fontWeight: 600, fontSize: { xs: 14, md: 18 } }}>
-                                アプリの記録はチームメイトや家族と共有できます。
-                            </Typography>
+                            <Box sx={{ width: { xs: "unset", md: 380}, textAlign: "center", mx: "auto", display: "flex", flexDirection: { xs: "column" }, alignItems: { xs: "center", md: "flex-start" }, justifyContent: "flex-start", gap: { xs: 0, md: 2 }}}>
+                                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", mx: { xs: 2, md: "auto" }}}>
+                                    <Typography sx={{ fontSize: { xs: 14, md: 20 }, mb: 2, fontWeight: 600, color: mainColor }}>STEP2. LINEで共有</Typography>
+                                    <Typography sx={{ color: "#666", fontWeight: 600, fontSize: { xs: 12, md: 14 }, textAlign: "left"  }}>
+                                        作成したアニメーションをLINEで共有します
+                                    </Typography>
+                                    <Typography sx={{ color: "#666", fontWeight: 600, fontSize: { xs: 12, md: 14 }, textAlign: "left"  }}>
+                                        試合の振り返りや戦術を選手と共有することができます
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ height: "550px", margin: "auto", position: "relative", px: 1, mt: 1  }}>
+                                    <Box sx={{ position: "absolute", top: 0, left: 0, height: "550px", width: "100%", borderRadius: 10, border: "3px solid #ccc" }} />
+                                    <CardMedia
+                                        component='img'
+                                        image="/images/welcomePage/share.png"
+                                        sx={{ borderRadius: 10, posision: "absolute", height: "550px", margin: "auto", width: "330px" }}
+                                    />
+                                </Box>
+                            </Box>
                         </Box>
-                        <Stack direction="row" spacing={1} sx={{ mx: 4, mt: 3, maxWidth: 360 }}>
-                            <Box sx={{ maxWidth: 180, width: "100%", mx: "auto" }}>
-                                <CardMedia
-                                    component='img'
-                                    image="/images/icon.png"
-                                    sx={{}}
-                                />
-                            </Box>
-                            <Stack justifyContent="center" alignContent="center" sx={{ width: "100%" }}>
-                                <RepeatIcon sx={{ width: "70%", height: "70%", m: "auto", color: "#555" }} />
-                            </Stack>
-                            <Box sx={{ maxWidth: 180, width: "100%", mx: "auto" }}>
-                                <CardMedia
-                                    component='img'
-                                    image="/images/welcomePage/LINE-icon.png"
-                                    sx={{}}
-                                />
-                            </Box>
-                        </Stack>
                     </Box>
                 </Box>
                 <Box sx={{ height: { xs: 450, md: 500 }, zIndex: 1300, position: "relative" }}>
