@@ -34,66 +34,68 @@ export default function Home() {
   const [isBoardCreateModal, setIsBoardCreateModal] = React.useState(false)
   const [showCalendar, setShowCalendar] = React.useState(false)
 
-  const [board, setBoard, getBoard, isBoardLoading] = useGetBoard(user, dayjs(date).format('YYYY-MM-DD'))
-  const [note, setNote, getNote, isNoteLoading] = useGetNote(user, dayjs(date).format('YYYY-MM-DD'))
+  // const [board, setBoard, getBoard, isBoardLoading] = useGetBoard(user, dayjs(date).format('YYYY-MM-DD'))
+  // const [note, setNote, getNote, isNoteLoading] = useGetNote(user, dayjs(date).format('YYYY-MM-DD'))
 
-  const [allNote, setAllNote, getAllNote, isAllNoteLoading] = useGetAllNote(user)
+  // const [allNote, setAllNote, getAllNote, isAllNoteLoading] = useGetAllNote(user)
   const [allBoard, setAllBoard, getAllBoard, isAllBoardLoading] = useGetAllBoard(user)
 
   const [isNoteLimited, setIsNoteLimited] = React.useState(false)
 
   useIsAuth(router)
 
-  React.useEffect(() => {
-    if (allNote && allNote.length > 0) {
-      // dateの週の個数が5個以上あればisNoteLimitedをtrueにする
-      const weekNotes = allNote.filter(note => {
-        const noteDate = dayjs(note.date)
-        const startOfWeek = dayjs(date).startOf('week')
-        const endOfWeek = dayjs(date).endOf('week')
+  // React.useEffect(() => {
+  //   if (allNote && allNote.length > 0) {
+  //     // dateの週の個数が5個以上あればisNoteLimitedをtrueにする
+  //     const weekNotes = allNote.filter(note => {
+  //       const noteDate = dayjs(note.date)
+  //       const startOfWeek = dayjs(date).startOf('week')
+  //       const endOfWeek = dayjs(date).endOf('week')
 
-        return noteDate.isAfter(startOfWeek) && noteDate.isBefore(endOfWeek)
-      })
-      if (weekNotes.length >= 5) setIsNoteLimited(true)
-      else setIsNoteLimited(false)
-    }
-  }, [allNote, date])
+  //       return noteDate.isAfter(startOfWeek) && noteDate.isBefore(endOfWeek)
+  //     })
+  //     if (weekNotes.length >= 5) setIsNoteLimited(true)
+  //     else setIsNoteLimited(false)
+  //   }
+  // }, [allNote, date])
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white" style={{ overflow: "hidden", position: "relative" }}>
+          <WelcomeModal />
+          
           <LeftBar />
           <NoteHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} showCalendar={showCalendar} setShowCalendar={setShowCalendar} />
           <Box sx={{ background: "white", overflowY: "scroll", overflowX: "hidden", position: "fixed", zIndex: 1000, width: "100%", height: "100vh" }}>
-            <Container maxWidth="md" sx={{ position: "relative", pt: "80px", px: 0, pl: { md: "120px", lg: "250px" } , pb: {xs: "56px", md: "0px"}}}>
+            <Container maxWidth="md" sx={{ position: "relative", pt: { xs: "120px", md: "60px" }, px: 0, pl: { md: "120px", lg: "250px" }, pb: "10px" }}>
               {showCalendar ?
-                displayMenu == 0 ?
-                  <NoteCalendar user={user} selectedDate={date} setSelectedDate={setDate} contents={allNote} setShowCalendar={setShowCalendar} />
-                  :
+                // displayMenu == 0 ?
+                //   <NoteCalendar user={user} selectedDate={date} setSelectedDate={setDate} contents={allNote} setShowCalendar={setShowCalendar} />
+                //   :
                   <NoteCalendar user={user} selectedDate={date} setSelectedDate={setDate} contents={allBoard} setShowCalendar={setShowCalendar} />
                 
               :
-              displayMenu == 0 ?  
-                (isNoteLoading || !note) ?
-                <Box sx={{ width: "100%", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                  <LoadingPage />
-                </Box>
-                  :
-                  <NoteBox user={user} contents={note} setContents={setNote} boards={board} date={date} isLimited={isNoteLimited} isSubscriptionValid={isSubscriptionValid} />
-              :
-                (isBoardLoading || !board) ?
+              // displayMenu == 0 ?  
+              //   (isNoteLoading || !note) ?
+              //   <Box sx={{ width: "100%", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+              //     <LoadingPage />
+              //   </Box>
+              //     :
+              //     <NoteBox user={user} contents={note} setContents={setNote} boards={board} date={date} isLimited={isNoteLimited} isSubscriptionValid={isSubscriptionValid} />
+              // :
+                (isAllBoardLoading || !allBoard) ?
                 <Box sx={{ width: "100%", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
                   <LoadingPage />
                 </Box>
                   :
                 <Box>
                   <CreateButton onClick={() => { (false && !isSubscriptionValid && allBoard.length >= 10) ? (router.push('/plan')) : (window.scrollTo(0, 0), setIsBoardCreateModal(true)) }} />
-                  <BoardCardBox user={user} contents={board} setContents={setBoard} date={date} menu={isBoardCreateModal} setMenu={setIsBoardCreateModal} />
+                  <BoardCardBox user={user} contents={allBoard.filter(board => board.date === dayjs(date).format('YYYY-MM-DD'))} setContents={setAllBoard} date={date} menu={isBoardCreateModal} setMenu={setIsBoardCreateModal} />
                 </Box>
               }
             </Container>
           </Box>
 
-          <Footer />
+          {/* <Footer /> */}
     </main >
   )
 }

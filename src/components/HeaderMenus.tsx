@@ -102,22 +102,22 @@ export default function HeaderMenus() {
                     ヘルプ
                 </MenuItem> */}
                 <Link target='_blank' href='/privacy' underline="none" color="black">
-                    <MenuItem sx={{ fontSize: 14 }} disableRipple>
+                    <MenuItem sx={{ fontSize: 12,minHeight: 34 }} disableRipple>
                         プライバシー
                     </MenuItem>
                 </Link>
                 <Link target='_blank' href='/terms' underline="none" color="black">
-                    <MenuItem sx={{ fontSize: 14 }} disableRipple>
+                    <MenuItem sx={{ fontSize: 12, minHeight: 34 }} disableRipple>
                         利用規約
                     </MenuItem>
                 </Link>
                 <Link target='_blank' href='/contact' underline="none" color="black">
-                    <MenuItem sx={{ fontSize: 14 }} disableRipple>
+                    <MenuItem sx={{ fontSize: 12, minHeight: 34 }} disableRipple>
                         お問い合わせ
                     </MenuItem>
                 </Link>
                 <Divider />
-                <MenuItem sx={{ fontSize: 14 }} onClick={ClickLogoutButton} disableRipple>
+                <MenuItem sx={{ fontSize: 12, color: "red", minHeight: 34 }} onClick={ClickLogoutButton} disableRipple>
                     ログアウト
                 </MenuItem>
             </StyledMenu>

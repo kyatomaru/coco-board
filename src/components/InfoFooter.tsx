@@ -18,7 +18,7 @@ import XIcon from '@mui/icons-material/X';
 
 export default function InfoFooter() {
     return (
-        <Box>
+        <Box sx={{ zIndex: 1200, position: "relative" }} >
             <Stack
                 direction="row"
                 justifyContent="center"

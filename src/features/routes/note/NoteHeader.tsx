@@ -20,6 +20,7 @@ import ClearIcon from '@mui/icons-material/Clear'
 import CardMedia from '@mui/material/CardMedia';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, subMonths, addMonths, isSameDay, isSameMonth, isToday, format } from 'date-fns';
 import { mainColor } from '@/constants/Color';
+import router from 'next/router';
 
 const barStyle = {
     bgcolor: 'background.paper',
@@ -84,6 +85,24 @@ export default function NoteHeader({ date, setDate, displayMenu, setDisplayMenu,
     
     return (
         <AppBar sx={barStyle} position="static">
+            <Toolbar sx={{ display: { xs: "flex", md: "none" }, height: { xs: 30, sm: 40 } }}>
+                <Stack
+                    direction="row"
+                    alignItems="center"
+                    sx={{ height: { xs: 30, sm: 40 }, background: "white", width: "100%" }}>
+                    <IconButton sx={{ p: "0" }} onClick={(event) => { router.push('/home') }}>
+                        <CardMedia
+                            component="img"
+                            sx={{ width: 35, height: 35 }}
+                            image="/images/icon.png"
+                        />
+                    </IconButton>
+                    <Typography variant="h6" component="h2" sx={{ display: { xs: "none", sm: "block" }, pl: 2 }}>
+                        coco-board
+                    </Typography>
+                </Stack>
+                <HeaderMenus />
+            </Toolbar>
             <Stack sx={{ height: 45, px: 1, width: "100%", maxWidth: "550px", mx: "auto" }} direction="row" justifyContent="space-between" alignItems="center" >
                 <IconButton size='large'
                     onClick={() => { showCalendar ? previousMonth() : previousDate() }}
@@ -117,10 +136,10 @@ export default function NoteHeader({ date, setDate, displayMenu, setDisplayMenu,
                     <ArrowRightIcon />
                 </IconButton>
             </Stack>
-            <StyledTabs value={displayMenu} sx={{ mx: "auto" }} onChange={(event, newValue) => { setDisplayMenu(newValue) }}>
+            {/* <StyledTabs value={displayMenu} sx={{ mx: "auto" }} onChange={(event, newValue) => { setDisplayMenu(newValue) }}>
                 <StyledTab label="ノート" sx={{ height: 25, m: "auto", fontSize: 12, fontWeight: 600, color: mainColor }} />
                 <StyledTab label="ボード" sx={{ height: 25, m: "auto", fontSize: 12, fontWeight: 600, color: mainColor }} />
-            </StyledTabs>
+            </StyledTabs> */}
         </AppBar >
     );
 }
