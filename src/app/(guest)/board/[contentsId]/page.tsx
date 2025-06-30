@@ -3,11 +3,11 @@
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation'
 import LoadingPage from '@/components/LoadingPage';
-import { auth } from '@/app/firebase';
+import { useAuth, useRequireAuth } from '@/context/auth/AuthContext';
 import Container from '@mui/material/Container';
-import { onAuthStateChanged } from 'firebase/auth';
-import type { User } from 'firebase/auth';
+import Footer from "@/components/Footer";
 import BoardContentsBox from '@/features/routes/board/BoardContentsBox';
+import { BoardType, BoardModel } from '@/types/board/Board';
 import { useGetBoard } from '@/hooks/board/useGetBoard';
 import NotPage from '@/components/NotPage';
 
@@ -18,19 +18,12 @@ const containterStyle = {
 
 export default function Home() {
   const params = useParams()
-  const [user, setUser] = React.useState<User | undefined>(null);
+  const router = useRouter()
+  const { user } = useAuth()
 
   const [contents, setContents] = useGetBoard(user, params.contentsId)
 
-  // useIsAuth(router)
-
-  React.useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(auth.currentUser)
-      }
-    })
-  }, [])
+  useRequireAuth()
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">
@@ -45,4 +38,4 @@ export default function Home() {
         )}
     </main >
   )
-}
+} 
