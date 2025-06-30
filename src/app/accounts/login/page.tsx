@@ -14,7 +14,7 @@ import { useAuth } from '@/context/auth/AuthContext';
 
 export default function Home() {
   const router = useRouter()
-  const { user, setUser, isSubscriptionValid, isLoading } = useAuth()
+  const { user, isLoading } = useAuth()
 
   React.useEffect(() => {
     if (user) {
