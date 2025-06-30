@@ -6,24 +6,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import LogoutConfirmModal from '@/features/common/auth/LogoutConfirmModal';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/app/firebase';
-import { User } from 'firebase/auth';
 import Card from '@mui/material/Card';
-import PaymentIcon from '@mui/icons-material/Payment';
 import GavelIcon from '@mui/icons-material/Gavel';
 import SecurityIcon from '@mui/icons-material/Security';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-type PageProps = {
-    isSubscriptionValid: boolean
-}
-
-export default function SettingPage({ isSubscriptionValid }: PageProps) {
+export default function SettingPage() {
     const [logoutModalOpen, setLogoutModalOpen] = React.useState<boolean>(false)
 
     const ClickLogoutButton = () => {
@@ -35,20 +25,6 @@ export default function SettingPage({ isSubscriptionValid }: PageProps) {
             <LogoutConfirmModal open={logoutModalOpen} setOpen={setLogoutModalOpen} />
             <Box sx={{ width: '100%', maxWidth: 600, mx: 'auto' }}>
                 <List sx={{ px: 2}}>
-                    {/* <Card sx={{ borderRadius: "10px", boxShadow: "none" }}>
-                        <ListItem disablePadding>
-                            <ListItemButton component="a" href="/plan">
-                                <ListItemIcon sx={{ minWidth: 40 }}>
-                                    <PaymentIcon />
-                                </ListItemIcon>
-                                <ListItemText 
-                                    primary="プラン"
-                                    sx={{ span: { fontSize: 14 } }}
-                                />
-                            </ListItemButton>
-                        </ListItem>
-                    </Card>
-                    <Divider /> */}
                     <Card sx={{ borderRadius: "10px", boxShadow: "none" }}>
                         <ListItem disablePadding>
                             <ListItemButton component="a" href="/contact" target='_blank'>

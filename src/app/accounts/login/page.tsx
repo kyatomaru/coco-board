@@ -10,11 +10,11 @@ import LoginPage from '@/features/routes/accounts/login/LoginPage';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import InfoFooter from '@/components/InfoFooter';
-import { useGetUser } from '@/hooks/auth/useGetUser';
+import { useAuth } from '@/context/auth/AuthContext';
 
 export default function Home() {
   const router = useRouter()
-  const [user, setUser, isSubscriptionValid, isLoading] = useGetUser()
+  const { user, setUser, isSubscriptionValid, isLoading } = useAuth()
 
   React.useEffect(() => {
     if (user) {
