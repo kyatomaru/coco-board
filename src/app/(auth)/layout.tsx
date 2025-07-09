@@ -86,7 +86,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className={robotoMono.className}>
-        {children}
+        <AuthProvider>  
+          {children}
+        </AuthProvider>
 
         {/* GA は body 終端で OK。環境変数が無いときは描画しない */}
         {GA_TAG_ID && <GoogleAnalytics gaId={GA_TAG_ID} />}
