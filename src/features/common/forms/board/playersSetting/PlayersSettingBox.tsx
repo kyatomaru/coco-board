@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from 'react';
-import { useParams, useRouter } from 'next/navigation'
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Tabs from '@mui/material/Tabs';
@@ -11,28 +10,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
-import { PositionList } from '@/constants/board/PositionList';
 import { FormationList11 } from '@/constants/board/formation/FormationList11';
 import { FormationList8 } from '@/constants/board/formation/FormationList8';
 import { FormationList5 } from '@/constants/board/formation/FormationList5';
-import { TeamArray } from '@/constants/board/TeamArray';
-import { MuiColorInput } from 'mui-color-input'
-import { PlayerColor } from '@/types/board/Setting';
-import { CourtRatio, setRatio } from '@/constants/board/CourtRatio';
+import { setRatio } from '@/constants/board/CourtRatio';
 import { setBesideCoordinate } from '@/hooks/board/courtSetting/CourtSetting';
-import AllowPartialScrolling from '@/components/AllowPartialScrolling';
-import Player from '@/features/common/board/item/Player';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { styled } from '@mui/material/styles';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import { PlayerModel } from '@/types/board/Player';
-import SyncIcon from '@mui/icons-material/Sync';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import PlayersSaveView from './PlayersSaveView';
 
@@ -75,26 +59,35 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
     const initPlayers = () => {
         const prevPlayers = [[], []]
 
-        for (let index = 0; index < frame[0].players.length; index++) {
-            prevPlayers[frame[0].players[index].teamNumber].push({
-                index: index,
-                player: frame[0].players[index]
-            })
-        }
-
+        // 各チーム用の選手データを独立して作成
         for (let teamIndex = 0; teamIndex < 2; teamIndex++) {
-            const remainingPlayers = 11 - prevPlayers[teamIndex].length;
+            const teamPlayers = []
+            
+            // 既存の選手データを取得
+            for (let index = 0; index < frame[0].players.length; index++) {
+                if (frame[0].players[index].teamNumber === teamIndex) {
+                    teamPlayers.push({
+                        index: index,
+                        player: frame[0].players[index]
+                    })
+                }
+            }
+
+            // 不足している選手を追加
+            const remainingPlayers = 11 - teamPlayers.length;
             for (let index = 0; index < remainingPlayers; index++) {
-                prevPlayers[teamIndex].push({
-                    index: prevPlayers[teamIndex].length,
+                teamPlayers.push({
+                    index: teamPlayers.length,
                     player: new PlayerModel(
                         teamIndex,
-                        prevPlayers[teamIndex].length + 1,
-                        `player${prevPlayers[teamIndex].length + 1}`,
+                        teamPlayers.length + 1,
+                        `player${teamPlayers.length + 1}`,
                         board.setting.color[teamIndex]
                     )
                 })
             }
+            
+            prevPlayers[teamIndex] = teamPlayers
         }
 
         setPlayers(prevPlayers)
@@ -135,6 +128,8 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
 
     const changeTeam = (event: React.SyntheticEvent, newValue: number) => {
         setTeam(newValue);
+        // チーム切り替え時にputPlayersを最新のplayersで更新
+        setPutPlayers(JSON.parse(JSON.stringify(players)));
     };
 
     const formationMenus = () => {
@@ -183,37 +178,38 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
         return FormationList11(verticalWidth, verticalHeight)[putFormation[team]]
     }
 
-    const changeName = (name, index) => {
-        if (frame[0].players[index]) {
-            const frameArray = []
+    const changeName = (name, playerIndex, teamNumber) => {
+        // 指定されたチームの選手のみを更新
+        const frameArray = []
+        frame.forEach((item) => {
+            frameArray.push(item)
+        })
 
-            frame.forEach((item) => {
-                frameArray.push(item)
-            })
+        frameArray.forEach((item) => {
+            const targetPlayer = item.players.find(p => p.teamNumber === teamNumber && p.index === playerIndex)
+            if (targetPlayer) {
+                targetPlayer.name = name
+            }
+        })
 
-            frameArray.forEach((item) => {
-                item.players[index].name = name
-            })
-
-            setFrame(frameArray)
-        }
+        setFrame(frameArray)
     }
 
-    const changeNumber = (backNumber, index) => {
-        if (frame[0].players[index]) {
-            const frameArray = []
+    const changeNumber = (backNumber, playerIndex, teamNumber) => {
+        // 指定されたチームの選手のみを更新
+        const frameArray = []
+        frame.forEach((item) => {
+            frameArray.push(item)
+        })
 
-            frame.forEach((item) => {
-                frameArray.push(item)
-            })
+        frameArray.forEach((item) => {
+            const targetPlayer = item.players.find(p => p.teamNumber === teamNumber && p.index === playerIndex)
+            if (targetPlayer) {
+                targetPlayer.backNumber = backNumber
+            }
+        })
 
-            frameArray.forEach((item) => {
-                item.players[index].backNumber = backNumber
-            })
-
-            setFrame(frameArray)
-        }
-
+        setFrame(frameArray)
     }
 
     const changeTeamSize = (e) => {
@@ -242,11 +238,18 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
             setSelectedIndex(index);
         } else {
             if (index !== selectedIndex) {
-                const newPlayers = players.concat();
+                const newPlayers = JSON.parse(JSON.stringify(players)); // Deep copy
                 const temp = newPlayers[team][selectedIndex];
                 newPlayers[team][selectedIndex] = newPlayers[team][index];
                 newPlayers[team][index] = temp;
                 setPlayers(newPlayers);
+                
+                // putPlayersも更新
+                const newPutPlayers = JSON.parse(JSON.stringify(putPlayers)); // Deep copy
+                const putTemp = newPutPlayers[team][selectedIndex];
+                newPutPlayers[team][selectedIndex] = newPutPlayers[team][index];
+                newPutPlayers[team][index] = putTemp;
+                setPutPlayers(newPutPlayers);
             }
             setSelectedIndex(null);
         }
@@ -258,7 +261,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
                 {players[team]?.map((playerData, index) => (
                     teamSize > index &&
                     <Stack
-                        key={playerData.index}
+                        key={`${team}-${playerData.index}`}
                         direction="row"
                         justifyContent="flex-start"
                         alignItems='center'
@@ -295,10 +298,16 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
                                     onClick: (e) => e.stopPropagation()
                                 }}
                                 onChange={(event) => {
-                                    const playersArray = players.concat();
+                                    const playersArray = JSON.parse(JSON.stringify(players)); // Deep copy
                                     playersArray[team][index].player.name = event.target.value;
                                     setPlayers(playersArray);
-                                    changeName(event.target.value, playerData.index);
+                                    
+                                    // putPlayersも更新
+                                    const putPlayersArray = JSON.parse(JSON.stringify(putPlayers));
+                                    putPlayersArray[team][index].player.name = event.target.value;
+                                    setPutPlayers(putPlayersArray);
+                                    
+                                    changeName(event.target.value, playerData.index, team);
                                 }}
                             />
                             <TextField
@@ -311,10 +320,16 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
                                     onClick: (e) => e.stopPropagation()
                                 }}
                                 onChange={(event) => {
-                                    const playersArray = players.concat();
+                                    const playersArray = JSON.parse(JSON.stringify(players)); // Deep copy
                                     playersArray[team][index].player.backNumber = event.target.value;
                                     setPlayers(playersArray);
-                                    changeNumber(event.target.value, playerData.index);
+                                    
+                                    // putPlayersも更新
+                                    const putPlayersArray = JSON.parse(JSON.stringify(putPlayers));
+                                    putPlayersArray[team][index].player.backNumber = event.target.value;
+                                    setPutPlayers(putPlayersArray);
+                                    
+                                    changeNumber(event.target.value, playerData.index, team);
                                 }}
                             />
                         </Stack>
@@ -428,7 +443,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
                             <Stack direction="row" justifyContent="flex-start" spacing={1}>
                                 <Select
                                     value={board.setting.teamSize ?? 11}
-                                    onChange={(e) => changeTeamSize(e)}
+                                    onChange={changeTeamSize}
                                     sx={{ height: 30, width: 100, fontSize: 14 }}
                                 >
                                     <MenuItem value={11} key={0} sx={{ minHeight: 25, fontSize: 14 }} divider={true}>11人制</MenuItem>
@@ -438,7 +453,7 @@ export default function PlayersSettingBox({ frame, setFrame, board, setMenu }: P
 
                                 <Select
                                     value={formation[team]}
-                                    onChange={(e) => changeFormation(e)}
+                                    onChange={changeFormation}
                                     sx={{ height: 30, width: 100 }}
                                 >
                                     {formationMenus()}

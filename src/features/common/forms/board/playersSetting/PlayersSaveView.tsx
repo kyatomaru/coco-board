@@ -1,39 +1,17 @@
 "use client"
 
 import * as React from 'react';
-import { useParams, useRouter } from 'next/navigation'
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { PositionList } from '@/constants/board/PositionList';
 import { FormationList11 } from '@/constants/board/formation/FormationList11';
 import { FormationList8 } from '@/constants/board/formation/FormationList8';
 import { FormationList5 } from '@/constants/board/formation/FormationList5';
-import { TeamArray } from '@/constants/board/TeamArray';
-import { MuiColorInput } from 'mui-color-input'
-import { PlayerColor } from '@/types/board/Setting';
-import { CourtRatio, setRatio } from '@/constants/board/CourtRatio';
-import { setBesideCoordinate } from '@/hooks/board/courtSetting/CourtSetting';
-import AllowPartialScrolling from '@/components/AllowPartialScrolling';
-import Player from '@/features/common/board/item/Player';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import { PlayerModel } from '@/types/board/Player';
 import { auth } from '@/app/firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import type { User } from 'firebase/auth';
@@ -45,9 +23,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { PlayersModel } from '@/types/board/Players';
 import { useInsertTeamPlayers } from '@/hooks/board/players/useInsertTeamPlayers';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
-import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ClearIcon from '@mui/icons-material/Clear';
 import DeleteConfirmModal from '@/features/common/contents/modal/ConfirmModal';
 import { teamPlayersModalTitle, deleteTeamPlayersMs } from '@/constants/ModalMessage';
 
@@ -157,9 +133,13 @@ export default function PlayersSaveView({ isView, setPutDisabled, viewWidth, ver
 
     const setTeamData = (page) => {
         if (teamPlayers[page]) {
+            // 各チーム用に独立したデータを作成
             const newPlayers = [[], []]
-            newPlayers[0] = teamPlayers[page].players
-            newPlayers[1] = teamPlayers[page].players
+            
+            // 保存されたデータを両方のチームにコピー（独立したオブジェクトとして）
+            newPlayers[0] = JSON.parse(JSON.stringify(teamPlayers[page].players))
+            newPlayers[1] = JSON.parse(JSON.stringify(teamPlayers[page].players))
+            
             setPutPlayers(newPlayers)
             setPutTeamSize(teamPlayers[page].teamSize)
 
