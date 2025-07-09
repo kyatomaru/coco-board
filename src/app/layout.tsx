@@ -3,6 +3,7 @@ import { Inter, Roboto_Mono } from 'next/font/google'
 import '@/app/globals.css'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { GA_TAG_ID } from '@/libs/gtag'
+import { AuthProvider } from '@/context/auth/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 const robot_mono = Roboto_Mono({ subsets: ['latin'] })
@@ -28,7 +29,11 @@ export default function RootLayout({
     <html lang="ja">
       <meta name="google-adsense-account" content="ca-pub-2002981317413430" />
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID ?? null} />
-      <body className={robot_mono.className}>{children}</body>
+      <body className={robot_mono.className}>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html >
   )
 }

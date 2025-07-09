@@ -14,13 +14,10 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
-import GameCard from '@/features/common/contents/card/GameCard';
-import PracticeCard from '@/features/common/contents/card/PracticeCard';
 import BoardCard from '@/features/common/contents/card/BoardCard';
 import Modal from '@mui/material/Modal';
 import CreateBoardFormBox from '@/features/routes/board/CreateBoardFormBox';
 import LinearProgress from '@mui/material/LinearProgress';
-import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 
 type PageProps = {

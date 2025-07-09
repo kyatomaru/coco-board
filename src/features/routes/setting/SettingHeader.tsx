@@ -2,8 +2,6 @@
 
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
@@ -14,10 +12,8 @@ const barStyle = {
     position: 'fixed',
     zIndex: "1010",
     width: "100%",
-    // height: { sx: 30, md: 50 },
     boxShadow: "none",
     borderBottom: "solid 1px rgb(219, 219, 219)",
-    // display: { sm: "none", md: "block" },
     pl: { md: "120px", lg: "250px" },
     touchAction: "none"
 }
