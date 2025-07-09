@@ -8,31 +8,13 @@ import LineSignInButton from '@/features/common/auth/line/LineSignInButton';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import CardMedia from '@mui/material/CardMedia';
-import DefaultBrowserModal from '@/features/common/auth/DefaultBrowserModal';
-import InfoFooter from '@/components/InfoFooter';
 
 export default function LoginPage() {
-    const [isInstagramWebBrowser, setIsInstagramWebBrowser] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(false)
     const [error, setError] = React.useState(false)
-
-    React.useEffect(() => {
-        setIsInstagramWebBrowser(checkInstagramWebBrowser())
-    }, [])
-
-    const checkInstagramWebBrowser = () => {
-        /** User Agent 文字列 */
-        const userAgent = window.navigator.userAgent
-        /** Instagram という文字列が含まれているかどうか? を判定する */
-        const isInstagramWebOpen = /Instagram/i.test(userAgent)
-        // console.log('Insta 判定', isInstagramWebOpen)
-        return isInstagramWebOpen
-    };
 
     return (
         <>
@@ -63,9 +45,7 @@ export default function LoginPage() {
                                     coco-board
                                 </Typography>
                             </Stack>
-                            {isInstagramWebBrowser
-                                ? <DefaultBrowserModal />
-                                : <Box>
+                                <Box>
                                     <Box sx={{ mb: 3 }}>
                                         <Typography variant="h5" sx={{ textAlign: "center", fontSize: "20px", fontWeight: 400, color: "black" }}>
                                             coco-boardでサッカーの記録を始めましょう。
@@ -86,11 +66,6 @@ export default function LoginPage() {
                                         </Box>
                                     }
 
-                                    <Typography variant="body1" sx={{ fontSize: 14, color: "red" }}>
-                                        X(旧Twitter)で開いている方はSafariかChromeで開いてください。
-                                    </Typography>
-
-
                                     <Box sx={{ mt: "30px" }}>
                                         <Typography variant="body1" sx={{ fontSize: 12, color: "#555" }}>
                                             続行すると、利用規約とプライバシーポリシーに同意したことになります。
@@ -102,7 +77,6 @@ export default function LoginPage() {
                                         </Box>
                                     </Box>
                                 </Box>
-                            }
                         </Box>
                     </Container >
                 </Box>
